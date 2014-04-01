@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title АйЖКХ - Доступный платежный сервис
+    = stylesheet_link_tag "profile", media: "all", debug: false
+    = csrf_meta_tags
+  body
+    = render 'shared/header'
+    = render 'shared/navbar'
+    .content.clear
+      = yield
+    = include_jquery
+    = javascript_include_tag 'profile'
+    = yield(:javascripts)
+    = render 'shared/footer'

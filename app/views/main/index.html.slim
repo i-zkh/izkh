@@ -1,0 +1,79 @@
+#city-panorama.header.white
+  .container
+    .logo.center
+      #logotype.center
+      p Доступный платежный сервис
+    /! SERVICE BENEFITS
+    .row
+      .center
+        h3 Самый удобный способ оплатить счета
+        p ЖКХ, интернет, домофон и многое другое
+      .col-lg-4.col-md-4.col-sm-4
+        #all-in-one.rounded.center.bordered
+        p.center Все платежи в одном месте
+      .col-lg-4.col-md-4.col-sm-4
+        #pay-form.rounded.center.bordered
+        p.center Удобная форма оплаты
+      .col-lg-4.col-md-4.col-sm-4
+        #no-hidden-commission.rounded.center.bordered
+        p.center Нет скрытых комиссий
+      #start-service.col-lg-12.col-md-12.col-sm-12
+        hr
+          .center
+            h3 Начните пользоваться сервисом
+            = link_to "Зарегистрируйтесь", new_user_registration_path, :class => "register-link btn btn-lg btn-success"
+          p.center
+            | или 
+            = link_to "войдите", new_user_session_path
+            |  в свой кабинет
+.how-to-use.white
+  .container
+    .row
+      .center
+        h3.title Как пользоваться?
+        p.center.sub-title Все предельно просто
+      .col-lg-4.col-md-4.col-sm-4
+        #how-register.center.rounded
+        p.center.important Зарегистрируйтесь
+      .col-lg-4.col-md-4.col-sm-4
+        #how-services.center.rounded
+        p.center.important Подключайте услуги
+      .col-lg-4.col-md-4.col-sm-4
+        #how-pay.center.rounded
+        p.center.important Оплачивайте счета
+.why.white
+  .container
+    .row
+      .center
+        h3.title Почему мы?
+      .col-lg-12
+        p.important.center
+          | Нам доверяют жильцы
+          span 12195
+          | домов и сотрудничают
+          span 122
+          | организации.
+      .why-list
+        ul.margined
+          .col-lg-6.col-md-6
+            li Круглосуточная, надежная оплата без очередей
+            li Оплата картами любого банка
+            li Удобная передача показаний счетчиков
+          .col-lg-6.col-md-6
+            li Уведомление о ваших задолженностях
+            li Статистика Ваших расходов
+            li Связь с ТСЖ
+.footer.white
+  .container
+    .row
+      .col-lg-6.col-md-12.col-sm-12.col-xs-12.copyright
+        p &copy; 2014, ООО "АйЖКХ"
+      .col-lg-6.col-md-12.col-sm-12.col-xs-12.social
+        a.inline href="#" 
+          #social-vk
+        a.inline href="#" 
+          #social-fb
+        a.inline href="#" 
+          #social-tw
+        .inline
+          p.social-text Рассказать о нас в социальных сетях

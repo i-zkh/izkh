@@ -1,0 +1,13 @@
+.navbar.white
+  =link_to "Профиль", "#", :class => "inline left white navbar-link"
+  =link_to "Аналитика", "#", :class => "inline left white navbar-link"
+  =link_to "Сервисы", "#", :class => "inline left white navbar-link"
+  =link_to "Уведомления", "#", :class => "inline left white navbar-link"
+  
+  - if current_user 
+    =link_to "Выход", destroy_user_session_path, :class => "inline right white userblock"
+    =link_to "Настройки", "#", :class => "inline right white userblock"
+    =link_to current_user.first_name, "#", :class => "inline right white userblock", :id => "username"
+    p.inline.white.right.userblock Рады видеть Вас,
+  - else
+    =link_to "Войти", new_user_session_path, :class => "inline right white userblock"

@@ -1,0 +1,182 @@
+body {
+    background-color: rgb(210,50,98);
+    min-height: 5000px;
+}
+
+.bordered {
+  border: 1px solid white;
+}
+
+.center {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+p, h3 {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
+}
+
+span {
+  font-weight: 200;
+}
+
+.title {
+  font-weight: 200;
+  font-size: 32px;
+}
+
+.white {
+  color: white;
+}
+
+#logotype {
+  width: 120px;
+  height: 120px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-image: url(../assets/logo.png);
+  background-position: center;
+  background-size: 120px 120px;
+}
+
+#all-in-one, #no-hidden-commission, #pay-form {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: white;
+}
+
+#all-in-one {
+  background-image: url(../assets/all-in-one.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#pay-form {
+  background-image: url(../assets/pay-form.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#no-hidden-commission {
+  background-image: url(../assets/no-hidden-commission.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#how-register, #how-services, #how-pay {
+  font-size: 120px;
+  margin-bottom: 10px;
+  background-image: url(http://readwrite.com/files/styles/630_0su/public/fields/startup.jpg);
+  margin-top: 20px;
+  width: 180px;
+  height: 180px;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.important {
+  font-size: 22px;
+  width: 80%;
+}
+
+#city-panorama {
+  /*background-image: url(../assets/city.png);*/
+  background-height: 700px;
+}
+
+#start-service {
+  margin-top: 40px;
+}
+
+.sub-title {
+  font-size: 18px;
+}
+
+.header {
+  min-height: 700px;
+  padding-bottom: 20px;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-weight: 100;
+}
+
+.how-to-use {
+  min-height: 350px;
+  /*background: -webkit-linear-gradient(top, #5AD427 0%,#A4E786 100%);*/
+  /*background-color: #70a5bb;*/
+  padding-bottom: 30px;
+}
+
+.why {
+  min-height: 300px;
+  padding-bottom: 20px;
+  /*background-image: url(../assets/geometry.png);*/
+  font-weight: 200;
+  font-size: 14px;
+}
+
+.why-list {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.why-list li {
+  font-size: 18px;
+  margin-bottom: 10px;
+  list-style-type: none;
+  border-bottom: 1px dashed grey;
+}
+
+
+.margined {
+  margin-top: 60px;
+}
+
+.footer {
+  /*background-color: rgb(40,57,77);*/
+  min-height: 80px;
+  opacity: 0.8;
+}
+
+.copyright {
+  margin-top: 30px;
+}
+
+.social {
+  margin-top: 22px;
+}
+
+.social-text {
+  padding-top: 7px;
+}
+
+#social-vk, #social-fb, #social-tw {
+  height: 32px;
+  width: 32px;
+  margin-left: 10px;
+}
+
+#social-vk {
+  background-image: url(../assets/vk.png);
+}
+
+#social-tw {
+  background-image: url(../assets/tw.png);  
+}
+
+#social-fb {
+  background-image: url(../assets/fb.png);  
+}
+
+.inline {
+  display: inline;
+  float: right;
+}

@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title АйЖКХ - Доступный платежный сервис
+    = stylesheet_link_tag "main", media: "all", debug: false
+    = csrf_meta_tags
+  body
+    = yield
+    = include_jquery
+    = javascript_include_tag 'main'
+    = yield(:javascripts)
+    script src="http://code.jquery.com/color/jquery.color-2.1.0.js"

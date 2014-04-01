@@ -1,0 +1,52 @@
+ru:
+  will_paginate:
+    previous_label: "&laquo;"
+    next_label: "&raquo;"
+    page_gap: "&hellip;"
+  simple_form:
+    required:
+      text: 'required'
+      mark: ''
+    labels:
+      user:
+        first_name: Имя
+        last_name: Фамилия
+        phone: Телефон
+        email: Почта
+        password: Пароль
+        city_id: Город
+        city: Город
+        gender: Пол
+  activerecord:
+    models:
+      city: Города
+      user: Пользователи
+      idea: Идеи
+      project: Проекты
+      master: Мастера
+      tag: Теги
+      section: Разделы
+    symbolizes:
+      user:
+        gender:
+          m: Мужской
+          f: Женский
+      section:
+        site_part:
+          ideas: Идеи
+          projects: Проекты
+          masters: Мастера
+  helpers:
+    submit:
+      create: "Создать"
+      update: "Сохранить"
+
+  date:
+    order:
+      ["day", "month", "year"]
+    month_names: [~, "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+    formats:
+      default: '%d.%m.%y'
+  time:
+    formats:
+      default: '%d.%m.%y %I:%M%p'
