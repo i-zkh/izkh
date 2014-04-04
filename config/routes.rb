@@ -3,4 +3,6 @@ Iz::Application.routes.draw do
   root to: 'main#index'
 
   resources :dashboard, only: :index
+  resources :places
+  resources :services
   end

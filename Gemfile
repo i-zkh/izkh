@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem 'devise-russian'
 gem 'symbolize'
+gem 'settingslogic'
 
 gem 'slim'
 gem 'simple_form'

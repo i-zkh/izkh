@@ -28,4 +28,5 @@ Iz::Application.configure do
   config.assets.debug = true
 
   config.reload_classes_only_on_change = false
+  config.assets.initialize_on_precompile = false
 end
