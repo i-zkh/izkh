@@ -13,6 +13,7 @@ gem 'devise'
 gem 'devise-russian'
 gem 'symbolize'
 gem 'mandrill-api'
+gem 'settingslogic'
 
 gem 'slim'
 gem 'simple_form'

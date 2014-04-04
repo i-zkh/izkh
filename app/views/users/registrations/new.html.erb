@@ -1,18 +1,373 @@
-<h2>Регистрация</h2>
+<div class="row">
+  <div class="col-md-8"  >
+    <ul class="navigation">
+      <li>
+        <span id="reg-step-one-info" class="active">Зарегистрируйтесь</a>
+        <span>&gt;</span>
+      </li>
+      <li>
+        <span id="reg-step-two-info">Добавьте объект</span>
+        <span>&gt;</span>
+      </li>
+      <li>
+        <span id="reg-step-three-info">Выберите поставщика услуг</span>
+        <span>&gt;</span>
+      </li>
+      <li>
+        <span id="reg-step-four-info">Оплатите</span>
+      </li>
+    </ul>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
 
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :first_name, required: true %>
-    <%= f.input :password, required: true %>
-    <%= f.input :phone, required: true %>
-    <%= f.input :city, required: true%>
-    <%= f.input :gender, required: true %>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Регистрация" %>
+  <div class="reg-step-1">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="title">Регистрация</h2>
+      <div class="info">
+        Мы гарантируем конфиденциальность Ваших данных
+      </div>
+    </div>
   </div>
-<% end %>
 
-<%= render "users/shared/links" %>
+  <%= form_tag user_registration_path, remote: true, id: "reg-step-one-form" do %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group-margin">
+        <div class="col-lg-12">
+          <label>Email *</label> 
+          <input type="email" placeholder="Адрес Вашей эл. почты" name="user[email]" id="input-email" class="form-control">
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="form-group-margin">
+        <div class="col-lg-12">
+          <label>Имя *</label>
+          <input type="text" placeholder="Введите Ваше имя" name="user[first_name]" id="input-name" class="form-control">
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="form-group-margin">
+        <div class="col-lg-12">
+          <label>Город *</label>
+          <input type="text" placeholder="Выберите город" name="user[city]" id="input-city" class="form-control">
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+  <div class="col-md-6">
+    <div class="form-group-margin">
+      <div class="col-lg-12">
+        <label class="overflow">
+          <div class="float_left" >Пароль *</div>
+          <div  class="float_right">
+            <span class="niceCheck">
+              <input type="checkbox" id="show-pass">
+            </span>
+            <label for="show-pass">Показать</label>
+            
+          </div>
+        </label>
+        <input type="password" placeholder="Придумайте пароль" name="user[password]" id="input-password" class="form-control">
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group-margin">
+      <div class="col-lg-12">
+        <label>Номер телефона *</label>
+        <input type="text" placeholder="+7 (123) 456 78 90" name="user[phone]" id="input-phone" class="form-control">
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    
+    <div class="form-group-margin">
+      <div class="col-lg-12">
+        Пол
+        <div>
+          <span>
+            <input type="radio" name="user[gender]" id="option1" value="m">
+            <label for="option1">Мужской</label>
+          </span>
+          <span class="right_padding">
+            <input type="radio" name="user[gender]" id="option2" value="f">
+            <label for="option2">Женский</label>
+          </span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <div class="row" style="clear: both">
+
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <div class="checkbox">
+          <span class="niceCheck">
+            <input type="checkbox" id="offer-confirm">
+          </span>
+          <label for="offer-confirm">я принимаю условия</label>
+          <a href="#">публичной оферты</a>
+        </div>
+        <input class="btn btn-default btn-block" id="reg-step-one-submit" type="submit" value="Продолжить" onclick="return false;">
+      </div>
+    </div>
+  </div>
+  </div>
+  <% end %>
+  </div>
+
+  <div class="reg-step-2" style="display: none;">
+  <div class="row">
+            <div class="col-md-12">
+              <h2 class="title">
+                Добавление объекта
+              </h2>
+              <div class="info">
+              Добавьте свою квартиру, дом или другую форму недвижимости
+              </div>
+            </div>
+  </div>
+  <%= form_tag places_path, remote: true, id: "reg-step-two-form" do %>
+    <div class="row">
+            <div class="col-md-6">
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>
+                    Название *</label> <input type="text" placeholder="Введите название объекта" id="input-place-title" name="place[title]" class="form-control">
+                </div>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label for="typs">
+                    Тип объекта *
+                  </label>
+                  <select name="place[place_type]" class="nova" prompt="Выберите тип объекта">
+                    <option value="Дом">Дом</option>
+                    <option value="Квартира">Квартира</option>
+                    <option value="Гараж">Гараж</option>
+                  </select>
+                </div>
+                  <div class="clearfix"></div>
+              </div>
+
+                    <div class="form-group-margin">
+                      <div class="col-lg-12">
+                        <label>Город *</label>
+                        <input type="text" placeholder="Выберите город" name="place[city]" id="input-place-city" class="form-control">
+                    </div>
+                    <div class="clearfix"></div>
+                    </div>
+
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>
+                    Адрес  *
+                  </label><input type="text" placeholder="Улица, дом" id="input-place-address" name="place[address]" class="form-control">
+                </div>
+                  <div class="clearfix"></div>
+              </div> 
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>
+                    Квартира *
+                  </label><input type="text" placeholder="Введите номер Вашей квартиры" id="input-place-address" name="place[apartment]" class="form-control">
+                </div>
+                  <div class="clearfix"></div>
+              </div> 
+            </div>
+            </div>
+
+            
+            <div class="row" style="clear: both">
+              <div class="col-md-6">
+                <div class="col-md-12">
+                  <input class="btn btn-default btn-block" id="reg-step-two-submit" type="submit" onclick="return false;" value="Продолжить">
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+          <div class="reg-step-3" style="display: none;">
+            <div class="row">
+            <div class="col-md-12">
+
+
+              <h2 class="title">
+                Выберите поставщика услуг
+              </h2>
+              <div class="info">
+            Выберите поставщика услуг и введите необходимые данные
+              </div>
+
+
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+
+
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>
+                    Название *
+                  </label> <input type="text" placeholder="Введите название услуги" id="input-service-title" name="service[title]" class="form-control">
+                </div>
+                  <div class="clearfix"></div>
+              </div>
+              
+              <%= form_tag services_path, remote: true, id: "reg-step-three-form" do %>
+                <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label for="typs">Тип услуги *</label>
+                  <select name="service[service_type_id]" class="nova-2">
+                    <option value="1">Водоснабжение</option>
+                    <option value="2">Коммунальные услуги</option>
+                    <option value="3">Интернет</option>
+                    <option value="4">Охрана</option>
+                  </select>
+                </div>
+                  <div class="clearfix"></div>
+              </div>
+                <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>Поставщик *</label>
+                  <select name="service[vendor_id]" class="nova-3">
+                    <option value="1">Самарские коммунальные системы</option>
+                    <option value="2">Самара Лан</option>
+                    <option value="3">Дельта-Самара</option>
+                    <option value="4">Цифрал-Сервис</option>
+                  </select>
+                </div>
+                  <div class="clearfix"></div>
+              </div>
+              
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>Лицевой счет *</label>
+                  <input type="text" placeholder="Введите номер договора или лицевого счета" id="input-service-user-account" name="service[user_account]" class="form-control">
+                </div>
+                  <div class="clearfix"></div>
+              </div> 
+            </div>
+            <div class="row" style="clear: both">
+
+              <div class="col-md-6">
+                <div class="col-md-12">
+                  <input class="btn btn-default btn-block" id="reg-step-three-submit" type="submit" onclick="return false;" value="Продолжить">
+                </div>
+              </div>
+
+
+
+            </div>
+
+
+
+          </div>
+          <% end %>
+      </div>
+      <div class="reg-step-4" style="display: none;">
+        <div class="row">
+            <div class="col-md-12">
+
+
+              <h2 class="title">
+              Оплата услуги
+              </h2>
+              <div class="info">
+        Введите сумму платежа и нажмите кнопку “Оплатить”
+              </div>
+
+
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+
+
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>
+                  Сумма * 
+                  </label>
+                  
+                  
+                  
+                  <div class="row">
+  <div class="col-md-4"><input  type="email" placeholder="" id="inputEmail1" class="form-control">руб. </div>
+  <div class="col-md-4"><input  type="email" placeholder="" id="inputEmail1" class="form-control">коп. </div>
+</div>
+                  
+        
+                
+                
+                </div>
+                  <div class="clearfix"></div>
+              </div>
+              
+           
+              
+              <div class="form-group-margin">
+                <div class="col-lg-12">
+                  <label>
+                Способ оплаты *
+                  </label> 
+                   <p></p>
+                  
+                      <p >
+                      <input class="" type="radio" name="check1" />
+                      <label for="check1">
+                        Банковская карта
+                      </label>
+                    </p>
+                      <p >
+                      <input class="" type="radio" name="check1" />
+                      <label for="check1">
+                      Яндекс.Деньги
+                      </label>
+                    </p>
+                      <p >
+                      <input class="" type="radio" name="check1" />
+                      <label for="check1">
+                        WebMoney
+                      </label>
+                    </p>
+                    
+                      <p >
+                      <input class="" type="radio" name="check1" />
+                      <label for="check1">
+                      Robokassa
+                      </label>
+                    </p>
+                </div>
+                  <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="row" style="clear: both">
+              <div class="col-md-6">
+                <div class="col-md-12">
+                 <p class="sum">Комиссия сервиса:  <span>20 руб. 30 коп.</span></p>
+                 <p class="sum">Итого к оплате:  <span>1220 руб. 30 коп.</span></p>
+                  <button class="btn btn-default " type="button" id="reg-step-four-submit" onclick="return false;">Оплатить</button>
+                   <p class="sum" style="font-size: 12px">Безопасность проведения платежа гарантирована сервисом АйЖКХ</p>
+                   <p class="sum" id="wip"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+</div>

@@ -24,7 +24,8 @@
             = link_to "Зарегистрируйтесь", new_user_registration_path, :class => "register-link btn btn-lg btn-success"
           p.center
             | или 
-            = link_to "войдите", new_user_session_path
+            a data-toggle="modal" href="#myModal" 
+              | войдите
             |  в свой кабинет
 .how-to-use.white
   .container

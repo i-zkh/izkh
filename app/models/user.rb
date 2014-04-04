@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   symbolize :gender, in: [:m, :f], allow_blank: true, allow_nil: true
+
+  has_many :places, class_name: "Place"
+  has_many :services, class_name: "Service"
+  has_many :transactions, class_name: "Transaction"
 end

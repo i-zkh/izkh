@@ -5,11 +5,49 @@ html
     = stylesheet_link_tag "profile", media: "all", debug: false
     = csrf_meta_tags
   body
-    = render 'shared/header'
-    = render 'shared/navbar'
-    .content.clear
-      = yield
+    .wrapper
+      = render 'shared/header'
+      .container
+        = yield
+    = render 'shared/footer'
+    #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+      .modal-dialog.forma_enter
+        .modal-content
+          .modal-header
+            button.close aria-hidden="true" data-dismiss="modal" type="button" 
+              | &times;
+            .row
+              .col-md-12
+                h2.title
+                  | Вход
+                .info
+                  | Мы рады видеть Вас!
+            .form-group-margin
+              .col-lg-12
+                label
+                  | Email *
+                input#inputEmail1.form-control placeholder="" type="email" 
+              .clearfix
+            .form-group-margin
+              .col-lg-12
+                label.overflow
+                  .float_left
+                    | Пароль
+                  .float_right
+                    input type="checkbox" 
+                      | Показать
+                input#inputEmail1.form-control placeholder="" type="email" 
+              .clearfix
+            button.btn.btn-default.btn-block type="button" 
+              | Войти
+            a href="" 
+              | Зарегистрируйтесь прямо сейчас!
+            p
+              a href="" 
+                | Забыли пароль?
+
     = include_jquery
     = javascript_include_tag 'profile'
     = yield(:javascripts)
-    = render 'shared/footer'
+
+    

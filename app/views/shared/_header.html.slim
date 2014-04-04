@@ -1,6 +1,71 @@
-.header
-  p#logo-profile.inline.left АйЖКХ
-  p#slogan.inline.left Доступный платежный сервис
-  =link_to "О проекте", "#", :class => "inline left header-link"
-  =link_to "Помощь", "#", :class => "inline left header-link"
-  p.inline.right#header-phone Самара: (846) 373-64-10
+.navbar.navbar-default.navbar-static-top role="navigation" 
+  .container
+    .row
+      .col-md-12.hidden-xs
+        a.navbar-brand href="#" 
+          | АйЖКХ
+        p style=("padding-top: 15px;") 
+          | Доступный платежный сервис
+          a.right_padding href="" 
+            | О проекте
+          a href="" 
+            | Помощь
+          span.left_padding
+            | Самара: (846) 336 54 34
+    .navbar-header
+      button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button" 
+        span.sr-only
+          | Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand.visible-xs href="#" 
+        | АйЖКХ
+    .row
+      .navbar-collapse.collapse
+        ul.nav.navbar-nav.head_menu
+          li
+            a href="#" 
+              | Профиль
+          li
+            a href="#about" 
+              | Аналитика
+          li
+            a href="#contact" 
+              | Сервисы
+          li.dropdown
+            a.dropdown-toggle data-toggle="dropdown" href="#" 
+              | Уведомления
+              span.badge.green
+                span 3
+            ul.dropdown-menu
+              li
+                a href="#" 
+                  | Текст
+              li
+                a href="#" 
+                  | Текст
+              li
+                a href="#" 
+                  | Текст
+        unless controller_name == 'registrations'
+          ul.nav.navbar-nav.navbar-right.head_menu
+            - if current_user
+              li.hidden-xs style=("padding-top: 12px; color: #777;margin-right: -10px") 
+                | Рады вас видеть,
+              li.dropdown
+                a.dropdown-toggle data-toggle="dropdown" href="#" 
+                  = current_user.first_name
+                  b.caret
+                ul.dropdown-menu
+                  li
+                    a href="#" 
+                      | Настройки
+                  li
+                    a href="#" 
+                      | Статистика
+              li
+                = link_to destroy_user_session_path
+                  | Выйти
+            
+    /! /.nav-collapse
