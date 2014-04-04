@@ -76,6 +76,10 @@ ActiveRecord::Schema.define(version: 20140403222633) do
     t.string   "gender"
     t.boolean  "admin",                  default: false, null: false
     t.string   "city"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
