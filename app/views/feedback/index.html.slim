@@ -1,0 +1,9 @@
+h2 Обратная связь
+br
+.row#feedback-container
+  = form_for(:feedback, class: "col-md-6", remote: true) do |f|
+   = f.text_field(:subject)
+   = f.text_field(:message)
+   =f.submit("Отправить", class: "btn btn-default")
+  
+

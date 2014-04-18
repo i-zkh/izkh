@@ -19,13 +19,13 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand.visible-xs href="#" 
+      a.navbar-brand.visible-xs href="" 
         | АйЖКХ
     .row
       .navbar-collapse.collapse
         ul.nav.navbar-nav.head_menu
           li
-            a href="#" 
+            a href="" 
               | Профиль
           li
             a href="#about" 
@@ -34,19 +34,19 @@
             a href="#contact" 
               | Сервисы
           li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="#" 
+            a.dropdown-toggle data-toggle="dropdown" href="" 
               | Уведомления
               span.badge.green
                 span 3
             ul.dropdown-menu
               li
-                a href="#" 
+                a href="" 
                   | Текст
               li
-                a href="#" 
+                a href="" 
                   | Текст
               li
-                a href="#" 
+                a href="" 
                   | Текст
         unless controller_name == 'registrations'
           ul.nav.navbar-nav.navbar-right.head_menu
@@ -54,15 +54,15 @@
               li.hidden-xs style=("padding-top: 12px; color: #777;margin-right: -10px") 
                 | Рады вас видеть,
               li.dropdown
-                a.dropdown-toggle data-toggle="dropdown" href="#" 
+                a.dropdown-toggle data-toggle="dropdown" href="" 
                   = current_user.first_name
                   b.caret
-                ul.dropdown-menu
+                ul.dropdown-menu 
                   li
-                    a href="#" 
+                    a href="" 
                       | Настройки
                   li
-                    a href="#" 
+                    a href="" 
                       | Статистика
               li
                 = link_to destroy_user_session_path

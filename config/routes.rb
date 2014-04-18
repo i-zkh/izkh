@@ -1,4 +1,5 @@
 Iz::Application.routes.draw do
+ 
   devise_for :users
   root to: 'main#index'
 
@@ -6,4 +7,6 @@ Iz::Application.routes.draw do
   resources :places
   resources :services
   resources :transactions
+  resources :about, only: :index
+  resources :feedback
   end

@@ -78,7 +78,10 @@
 
       </div>
         </label>
-        <input type="password" placeholder="Придумайте пароль" name="user[password]" id="input-password" class="form-control">
+        <input type="password" placeholder="Придумайте пароль" name="user[password]" id="input-password" class="form-control click_tooltips">
+   <div class="tooltips">
+  Бла бла бла
+   </div> 
       </div>
       <div class="clearfix"></div>
     </div>
@@ -86,7 +89,10 @@
     <div class="form-group-margin">
       <div class="col-lg-12">
         <label>Номер телефона *</label>
-        <input type="text" placeholder="+7 (123) 456 78 90" name="user[phone]" id="input-phone" class="form-control">
+        <input type="text" placeholder="+7 (123) 456 78 90"  name="user[phone]" id="input-phone" class="form-control click_tooltips">
+               <div class="tooltips">
+     Бла блалалалаававава
+   </div>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -117,7 +123,8 @@
  
 
         </div>
-      </div>
+
+       </div>
       <div class="clearfix"></div>
     </div>
   </div>
@@ -243,8 +250,22 @@
                     Название *
                   </label> <input type="text" placeholder="Введите название услуги" id="input-service-title" name="service[title]" class="form-control">
                 </div>
+                                   <div class="tutorial">
+     
+    <div class="next_tutorial">следующий</div>
+    <div class="close_tutorial"></div>
+
+   <div class="custom">
+<input id="hide_tut" type="checkbox">
+<label for="hide_tut">Больше не показывать</label>
+</div>
+
+
+   </div>
+            
                   <div class="clearfix"></div>
-              </div>
+
+    </div>
               
               <%= form_tag services_path, remote: true, id: "reg-step-three-form" do %>
                 <div class="form-group-margin">
@@ -270,6 +291,11 @@
                   </select>
                 </div>
                   <div class="clearfix"></div>
+                     <div class="tutorial">
+    
+    <div class="next_tutorial">следующий</div>
+    <div class="close_tutorial"></div>
+   </div>
               </div>
               
               <div class="form-group-margin">

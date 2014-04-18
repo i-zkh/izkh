@@ -4,7 +4,7 @@
 //= require dashboard
 //= require chekbox
 //= require kladr
-//= require 'jquery.selectbox-0.2'
+//= require jquery.selectbox-0.2
 //= require main
 //= require 'jquery-ui-1.10.4.custom'
 $(document).ready ->   
@@ -12,7 +12,7 @@ $(document).ready ->
   
 $('#reg-step-one-submit').on "click", ->
   $.ajax
-    url: '/users'
+    url: '#{users_path}'
     type: 'POST'
     dataType: 'json'
     data: $('#reg-step-one-form').serialize()
@@ -51,3 +51,7 @@ $('#reg-step-three-submit').on "click", ->
 $('#reg-step-four-submit').on "click", ->
   $('#wip').html('Оплата будет доступна в ближайшее время')
 
+
+
+
+ 

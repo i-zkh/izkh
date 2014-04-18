@@ -1,21 +1,102 @@
-.sbHolder { display: inline-block; height: 20px;   margin-bottom: 15px; font-size: 12px !important; background-color: #FFF; display: inline-block; width: 100%;   margin-bottom: 0px; line-height: 20px; color: #333; font-weight: normal; vertical-align: middle; position: relative;border-bottom: 1px solid #59585a; }
-.sbHolder:focus .sbSelector { }
-.sbSelector { display: block; line-height: 16px; outline: none; color: #303030;    top: 0; }
-.sbSelector:link, .sbSelector:visited, .sbSelector:hover { outline: none; text-decoration: none; }
-.sbToggle { width: 10px; height: 9px; display: block; background: url(/assets/arrow-down.png) no-repeat; outline: none; position: absolute; right: 0px; top: 0px; }
+.sbHolder {
+    display: inline-block;
+    height: 20px;
+    margin-bottom: 15px;
+    font-size: 12px !important;
+    background-color: #FFF;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0px;
+    line-height: 20px;
+    color: #333;
+    font-weight: normal;
+    vertical-align: middle;
+    position: relative;
+    border-bottom: 1px solid #59585a;
+}
+.sbHolder:focus .sbSelector {
+}
+.sbSelector {
+    display: block;
+    line-height: 16px;
+    outline: none;
+    color: #303030;
+    top: 0;
+}
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover {
+    outline: none;
+    text-decoration: none;
+}
+.sbToggle {
+    width: 10px;
+    height: 9px;
+    display: block;
+    background: url(/assets/arrow-down.png) no-repeat;
+    outline: none;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
 /*.sbToggle:hover { background: url(/skins/dolina/images/arrow-down-hover.png) no-repeat; }
 .sbToggleOpen { background: url(/skins/dolina/images/arrow-down-hover.png) no-repeat; }*/
-.sbToggleOpen:hover { }
-.sbHolderDisabled { border: solid 1px #515151; }
-.sbHolderDisabled .sbHolder { background: url(/skins/dolina/images/arrow-down-hover.png) no-repeat; }
-.sbHolderDisabled .sbToggle { background: url(/skins/dolina/images/arrow-down-hover.png) no-repeat; }
-.sbOptions { background-color: #FFF; list-style: none; left: 0px; margin: 0; border: 1px solid #59585a; padding-top: 10px; padding-bottom: 10px; position: absolute; top: 19px !important; width: 100%; z-index: 1; overflow-y: auto; padding-left:10px !important; }
-.sbOptions li { background: none !important; padding: 0 0 0 0px !important; margin-right:10px; border-bottom:1px solid #ccc }
-.sbOptions a { display: block; text-decoration: underline; padding-left: 0; color: #555555 !important; text-decoration: none; }
-.sbOptions a:link, .sbOptions a:visited { text-decoration: none; }
-.sbOptions a:hover, .sbOptions a:focus, .sbOptions a.sbFocus { } 
-.sbOptions li.last a { border-bottom: none; }
-.sbOptions .sbDisabled { border-bottom: dotted 1px #515151; color: #999; display: block;  }
-.sbOptions .sbGroup { border-bottom: dotted 1px #515151; color: #EBB52D; display: block; font-weight: bold;   }
-.sbOptions .sbSub { padding-left: 17px; }
- 
+ .sbToggleOpen:hover {
+}
+.sbHolderDisabled {
+    border: solid 1px #515151;
+}
+.sbHolderDisabled .sbHolder {
+    background: url(/skins/dolina/images/arrow-down-hover.png) no-repeat;
+}
+.sbHolderDisabled .sbToggle {
+    background: url(/skins/dolina/images/arrow-down-hover.png) no-repeat;
+}
+.sbOptions {
+    background-color: #FFF;
+    list-style: none;
+    left: 0px;
+    margin: 0;
+    border: 1px solid #59585a;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 19px !important;
+    width: 100%;
+    z-index: 1;
+    overflow-y: auto;
+    padding-left:10px !important;
+}
+.sbOptions li {
+    background: none !important;
+    padding: 0 0 0 0px !important;
+    margin-right:10px;
+    border-bottom:1px solid #ccc
+}
+.sbOptions a {
+    display: block;
+    text-decoration: underline;
+    padding-left: 0;
+    color: #555555 !important;
+    text-decoration: none;
+}
+.sbOptions a:link, .sbOptions a:visited {
+    text-decoration: none;
+}
+.sbOptions a:hover, .sbOptions a:focus, .sbOptions a.sbFocus {
+}
+.sbOptions li.last a {
+    border-bottom: none;
+}
+.sbOptions .sbDisabled {
+    border-bottom: dotted 1px #515151;
+    color: #999;
+    display: block;
+}
+.sbOptions .sbGroup {
+    border-bottom: dotted 1px #515151;
+    color: #EBB52D;
+    display: block;
+    font-weight: bold;
+}
+.sbOptions .sbSub {
+    padding-left: 17px;
+}
