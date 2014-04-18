@@ -5,10 +5,11 @@
 //= require chekbox
 //= require kladr
 //= require 'jquery.selectbox-0.2'
-
+//= require main
+//= require 'jquery-ui-1.10.4.custom'
 $(document).ready ->   
-  $(".nova").selectbox({effect: "fade"})
-
+    
+  
 $('#reg-step-one-submit').on "click", ->
   $.ajax
     url: '/users'

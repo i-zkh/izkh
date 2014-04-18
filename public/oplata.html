@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+		<title>
+			Static Top Navbar Example for Bootstrap
+		</title>  
+ 
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap.css" rel="stylesheet">
+		<link href="/assets/stylesheets/style.css" rel="stylesheet">
+		<link href="jquery.selectbox.css" rel="stylesheet">
+		<link href="jquery-ui-1.10.4.custom.css" rel="stylesheet">
+		
+		<!-- Just for debugging purposes. Don't actually copy this line! -->
+		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+		</script>
+		<script src="bootstrap.js">
+		</script>
+		<script src="chekbox.js">
+		</script>
+		<script src="jquery.selectbox-0.2.js">
+		</script>
+		<script src="jquery-ui-1.10.4.custom.js">
+		</script>
+		<script src="main.js">
+		</script>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<!-- Static navbar -->
+			<div class="navbar navbar-default navbar-static-top" role="navigation">
+				<div class="container">
+
+
+					<div class="row">
+						<div class="col-md-12 hidden-xs"  >
+							<a class="navbar-brand"  href="index.html">
+								Ай ЖКХ
+							</a>
+							<p style="padding-top: 15px;">
+								Доступный платежный сервис
+								<a href="" class="right_padding">
+									О проекте
+								</a>
+								<a href=""  >
+									Помощь
+								</a>
+								<span class="left_padding">
+									Самара: (846) 336 54 34
+								</span>
+							</p>
+						</div>
+					</div>
+
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">
+								Toggle navigation
+							</span>
+							<span class="icon-bar">
+							</span>
+							<span class="icon-bar">
+							</span>
+							<span class="icon-bar">
+							</span>
+						</button>
+						<a class="navbar-brand visible-xs" href="index.html">
+							Ай ЖКХ
+						</a>
+					</div>
+					<div class="row">
+						<div class="navbar-collapse collapse">
+							<ul class="nav navbar-nav head_menu">
+								<li>
+									<a href="#">
+										Профиль
+									</a>
+								</li>
+								<li>
+									<a href="#about">
+										Аналитика
+									</a>
+								</li>
+								<li>
+									<a href="#contact">
+										Сервисы
+									</a>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										Уведомления
+										<span class="badge green"><span>3</span></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">
+												Текст
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												Текст
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												Текст
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												Separated link
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												One more separated link
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right head_menu">
+
+
+								<li class="hidden-xs" style="padding-top: 12px; color: #777;margin-right: -10px">
+									Рады вас видеть,
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										Александр
+										<b class="caret">
+										</b>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">
+												Текст
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												Текст
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												Текст
+											</a>
+										</li>
+
+									</ul>
+								</li>
+								<li>
+									<a data-toggle="modal" href="#myModal" >
+										Выйти
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+
+
+			<div class="container">
+
+				<!-- Main component for a primary marketing message or call to action -->
+
+				<div class="row">
+					<div class="col-md-9"  >
+
+						<div class="t-table main_ob">
+				 	
+							<div class="t-cell tops" style="width: 250px">
+								<div class="title_main_ob"><span>Мои объекты</span> <a data-toggle="modal" class="click_plus" href="#myModal"><img src="images/plus.png" /></a> </div>
+								<div class="accordion_main_ob">
+									<h3>Дом, милый дом</h3>
+									<div>
+										<p>Тип: Квартира</p>
+										<p>Город: Самара</p>
+										Адрес: Партизанская, 102
+										<p>Квартира: 23</p>
+										<p><a href="">Редактировать</a></p>
+									</div>
+									<h3>Квартира родителей</h3>
+									<div>
+										<p>Тип: Квартира</p>
+										<p>Город: Самара</p>
+										Адрес: Партизанская, 102
+										<p>Квартира: 23</p>
+										<p><a href="">Редактировать</a></p>
+									</div>
+									<h3>Мой гараж</h3>
+									<div>
+										<p>Тип: Квартира</p>
+										<p>Город: Самара</p>
+										Адрес: Партизанская, 102
+										<p>Квартира: 23</p>
+										<p><a href="">Редактировать</a></p>
+									</div>
+								</div></div>	
+							<div class="t-cell tops line_blue" style="width: 150px">
+				
+								<div class="title_main_ob"><span>Услуги</span> <a  data-toggle="modal" class="click_plus" href="#myModal"><img src="images/plus.png" /></a>  </div>
+								<div class="accordion_main_ob2">
+									<h3>Свет</h3>
+									<div>
+					 
+									</div>
+									<h3>Газ</h3>
+									<div>
+									 
+									</div>
+									<h3>Вода</h3>
+									<div>
+										 
+									</div>
+								</div>
+				
+				
+							</div>	
+							<div class="t-cell tops">
+				            <div  class="title_main_ob"> 
+							 <div class="menu_other">Вода  <a href="">Отправка показаний</a> <a href="">Тарифы</a></div>
+						    </div>
+				
+				<div>
+				
+								<div class="form-group-margin">
+									<div class="edit_services_sum">
+							 			 
+						 		 <div class="t-table">
+  
+  											<div class="t-cell title_q"><label>Тип услуги</label></div>
+											<div class="t-cell"> <div class="col-md-12"><input  type="email" placeholder="Водоснабжение" id="inputEmail1" class="form-control"></div></div>
+     </div>
+
+										<div class="t-table">
+  
+  
+											<div class="t-cell title_q"><label>Поставщик</label></div>
+											<div class="t-cell"> <div class="col-md-12"><input  type="email" placeholder="Самарский Водоканал" id="inputEmail1" class="form-control"></div></div>
+ 
+
+										</div>
+
+										<div class="t-table">
+  
+  
+											<div class="t-cell title_q"><label>Лицевой счет</label></div>
+											<div class="t-cell"> <div class="col-md-12"><input  type="email" placeholder="А20-100-34" id="inputEmail1" class="form-control"></div></div>
+ 
+										</div>
+
+ 
+										<div class="t-table_w">
+  
+  
+											<div class="t-cell"><a href="">Редактировать</a></div>
+ 
+
+										</div>
+
+									
+									</div>
+									<div class="clearfix"></div>
+								</div>
+ 
+<div class="padding payment_box">
+								<div class="form-group-margin">
+									<div>
+									 
+										<h3> Оплата </h3>
+						 	
+										<div class="t-table_w">
+  
+  
+											<div class="t-cell" style="width: 100px"><label>Сумма к оплате</label></div>
+											<div class="t-cell"> <div class="col-md-12"><input  type="email" placeholder="" id="inputEmail1" class="form-control"></div></div>
+											<div class="t-cell">руб.</div>
+											<div class="t-cell">  <div class="col-md-12"><input  type="email" placeholder="" id="inputEmail1" class="form-control"></div></div>
+											<div class="t-cell">коп.</div>
+   
+										</div>
+									
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							
+					 
+							
+								<div class="form-group-margin">
+								 <div class="t-table_w">
+								 
+								  <div class="t-cell tops" style="width: 120px"> Способ оплаты</div>
+										<div class="t-cell">													<p >
+																																							<div class="custom two">
+<input id="i13" type="radio" name="radio">
+<label for="i13">Банковская карта</label>
+ 
+</div>
+										</p>
+											<p >
+																																									<div class="custom two">
+<input id="i14" type="radio" name="radio">
+<label for="i14">Web Money</label>
+ 
+</div>
+										</p>
+											<p >
+																																									<div class="custom two">
+<input id="i15" type="radio" name="radio">
+<label for="i15">Яндекс деньги</label>
+ 
+</div>
+										</p>
+										
+											<p >
+																																									<div class="custom two">
+<input id="i16" type="radio" name="radio">
+<label for="i16">Робокасса</label>
+ 
+</div>
+										</p></div>
+									
+									</div>
+									
+													
+					 	
+									
+									<div class="clearfix"></div>
+								</div>
+  
+								<div   class="clearfix">
+
+						 
+									<p class="sum">Комиссия сервиса:  <span>20 руб. 30 коп.</span></p>
+									<p class="sum">Итого к оплате:  <span>1220 руб. 30 коп.</span></p>
+									<button class="btn btn-default btn_green" type="button">
+										Оплатить
+									</button>
+	
+
+								</div>
+				</div>
+			 	</div>
+							</div>	
+						</div>
+					</div>
+			 
+				</div>
+
+
+			</div> <!-- /container -->
+
+	 
+ 
+
+		</div>
+	 
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog forma_enter">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<div class="row">
+							<div class="col-md-12">
+
+
+								<h2 class="title">
+									Вход
+								</h2>
+								<div class="info">
+									Мы рады видеть Вас!
+								</div>
+
+
+							</div>
+						</div>
+						<div class="form-group-margin">
+							<div class="col-lg-12">
+
+
+
+								<label class="overflow">
+
+									<div class="float_left" >
+										Пароль
+									</div>
+									<div  class="float_right">
+										<input  type="checkbox"> Показать
+									</div>
+
+								</label>
+
+								<input type="email" placeholder="" id="inputEmail1" class="form-control">
+
+
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="form-group-margin">
+							<div class="col-lg-12">
+								<label>
+									Email *
+								</label><input type="email" placeholder="" id="inputEmail1" class="form-control">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<button class="btn btn-default btn-block" type="button">
+							Войти
+						</button>
+						<a href="">
+							Зарегистрируйтесь прямо сейчас!
+						</a>
+						<p>
+							<a href="">
+								Забыли пароль?
+							</a>
+						</p>
+					</div>
+
+
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+ 
+    <style>
+/*
+  /*.....................................................................................................
+ * добавленные стили
+ *****************************************************.............................................*****/
+ 
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+@import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+</style>
+	</body>
+</html>

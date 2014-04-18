@@ -1,20 +1,26 @@
+
+    <style>
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+@import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+</style>
+
 <div class="row">
-  <div class="col-md-8"  >
+  <div class="col-md-8">
     <ul class="navigation">
       <li>
-        <span id="reg-step-one-info" class="active">Зарегистрируйтесь</a>
+        <a id="reg-step-one-info" class="active">Зарегистрируйтесь</a>
         <span>&gt;</span>
       </li>
       <li>
-        <span id="reg-step-two-info">Добавьте объект</span>
+        <a id="reg-step-two-info">Добавьте объект</a>
         <span>&gt;</span>
       </li>
       <li>
-        <span id="reg-step-three-info">Выберите поставщика услуг</span>
+        <a id="reg-step-three-info">Выберите поставщика услуг</a>
         <span>&gt;</span>
       </li>
       <li>
-        <span id="reg-step-four-info">Оплатите</span>
+        <a id="reg-step-four-info">Оплатите</a>
       </li>
     </ul>
 
@@ -63,12 +69,14 @@
         <label class="overflow">
           <div class="float_left" >Пароль *</div>
           <div  class="float_right">
-            <span class="niceCheck">
-              <input type="checkbox" id="show-pass">
-            </span>
-            <label for="show-pass">Показать</label>
             
-          </div>
+
+<div class="custom">
+<input id="show-pass" type="checkbox">
+<label for="show-pass">Показать</label>
+</div>
+
+      </div>
         </label>
         <input type="password" placeholder="Придумайте пароль" name="user[password]" id="input-password" class="form-control">
       </div>
@@ -87,14 +95,27 @@
       <div class="col-lg-12">
         Пол
         <div>
-          <span>
-            <input type="radio" name="user[gender]" id="option1" value="m">
+          
+
+    <span >
+                    <div class="custom">
+  <input type="radio" name="user[gender]" id="option1" value="m">
             <label for="option1">Мужской</label>
-          </span>
-          <span class="right_padding">
-            <input type="radio" name="user[gender]" id="option2" value="f">
+</div>
+                    </span>
+
+
+
+
+                    <span class="right_padding">
+                    <div class="custom">
+<input type="radio" name="user[gender]" id="option2" value="f">
             <label for="option2">Женский</label>
-          </span>
+</div>
+                    </span>
+
+ 
+
         </div>
       </div>
       <div class="clearfix"></div>
@@ -106,13 +127,13 @@
     <div class="col-md-6">
       <div class="col-md-12">
         <div class="checkbox">
-          <span class="niceCheck">
-            <input type="checkbox" id="offer-confirm">
-          </span>
-          <label for="offer-confirm">я принимаю условия</label>
-          <a href="#">публичной оферты</a>
-        </div>
-        <input class="btn btn-default btn-block" id="reg-step-one-submit" type="submit" value="Продолжить" onclick="return false;">
+                                                  <div class="custom">
+<input id="offer-confirm" type="checkbox" name="radio">
+<label for="offer-confirm">Я принимаю условия</label>
+<a data-toggle="modal" href="#myModaloffer">публичной оферты</a>
+</div>
+   </div>
+        <input class="btn btn-default" id="reg-step-one-submit" type="submit" value="Продолжить" onclick="return false;">
       </div>
     </div>
   </div>
@@ -120,7 +141,7 @@
   <% end %>
   </div>
 
-  <div class="reg-step-2" style="display: none;">
+  <div class="reg-step-2" style="display:;">
   <div class="row">
             <div class="col-md-12">
               <h2 class="title">
@@ -137,7 +158,8 @@
               <div class="form-group-margin">
                 <div class="col-lg-12">
                   <label>
-                    Название *</label> <input type="text" placeholder="Введите название объекта" id="input-place-title" name="place[title]" class="form-control">
+                    Название *</label> 
+                    <input type="text" placeholder="Введите название объекта" id="input-place-title" name="place[title]" class="form-control">
                 </div>
                   <div class="clearfix"></div>
               </div>
@@ -147,7 +169,7 @@
                   <label for="typs">
                     Тип объекта *
                   </label>
-                  <select name="place[place_type]" class="nova" prompt="Выберите тип объекта">
+                  <select name="place[place_type]" class="" prompt="Выберите тип объекта">
                     <option value="Дом">Дом</option>
                     <option value="Квартира">Квартира</option>
                     <option value="Гараж">Гараж</option>
@@ -186,15 +208,15 @@
             
             <div class="row" style="clear: both">
               <div class="col-md-6">
-                <div class="col-md-12">
-                  <input class="btn btn-default btn-block" id="reg-step-two-submit" type="submit" onclick="return false;" value="Продолжить">
+                <div class="">
+                  <input class="btn btn-default" id="reg-step-two-submit" type="submit" onclick="return false;" value="Продолжить">
                 </div>
               </div>
             </div>
             <% end %>
           </div>
 
-          <div class="reg-step-3" style="display: none;">
+          <div class="reg-step-3" style="display: ;">
             <div class="row">
             <div class="col-md-12">
 
@@ -209,7 +231,7 @@
 
             </div>
           </div>
-
+ 
 
           <div class="row">
             <div class="col-md-6">
@@ -228,7 +250,7 @@
                 <div class="form-group-margin">
                 <div class="col-lg-12">
                   <label for="typs">Тип услуги *</label>
-                  <select name="service[service_type_id]" class="nova-2">
+                  <select name="service[service_type_id]" class="nova">
                     <option value="1">Водоснабжение</option>
                     <option value="2">Коммунальные услуги</option>
                     <option value="3">Интернет</option>
@@ -240,7 +262,7 @@
                 <div class="form-group-margin">
                 <div class="col-lg-12">
                   <label>Поставщик *</label>
-                  <select name="service[vendor_id]" class="nova-3">
+                  <select name="service[vendor_id]" class="nova">
                     <option value="1">Самарские коммунальные системы</option>
                     <option value="2">Самара Лан</option>
                     <option value="3">Дельта-Самара</option>
@@ -262,7 +284,7 @@
 
               <div class="col-md-6">
                 <div class="col-md-12">
-                  <input class="btn btn-default btn-block" id="reg-step-three-submit" type="submit" onclick="return false;" value="Продолжить">
+                  <input class="btn btn-default" id="reg-step-three-submit" type="submit" onclick="return false;" value="Продолжить">
                 </div>
               </div>
 
@@ -275,7 +297,7 @@
           </div>
           <% end %>
       </div>
-      <div class="reg-step-4" style="display: none;">
+      <div class="reg-step-4" style="display:;">
         <div class="row">
             <div class="col-md-12">
 
@@ -293,7 +315,7 @@
 
 
           <div class="row">
-            <div class="col-md-6">
+                      <div class="col-md-6">
 
 
               <div class="form-group-margin">
@@ -305,8 +327,16 @@
                   
                   
                   <div class="row">
-  <div class="col-md-4"><input  type="email" placeholder="" id="inputEmail1" class="form-control">руб. </div>
-  <div class="col-md-4"><input  type="email" placeholder="" id="inputEmail1" class="form-control">коп. </div>
+  <div class="t-table_w">
+  
+  
+             
+                      <div class="t-cell"> <div class="col-md-12"><input  type="email" placeholder="" id="inputEmail1" class="form-control"></div></div>
+                      <div class="t-cell">руб.</div>
+                      <div class="t-cell">  <div class="col-md-12"><input  type="email" placeholder="" id="inputEmail1" class="form-control"></div></div>
+                      <div class="t-cell">коп.</div>
+   
+                    </div>
 </div>
                   
         
@@ -326,33 +356,48 @@
                    <p></p>
                   
                       <p >
-                      <input class="" type="radio" name="check1" />
-                      <label for="check1">
-                        Банковская карта
-                      </label>
+                                  <div class="custom">
+<input id="i13" type="radio" name="radio">
+<label for="i13">Банковская карта</label>
+ 
+</div>
                     </p>
                       <p >
-                      <input class="" type="radio" name="check1" />
-                      <label for="check1">
-                      Яндекс.Деньги
-                      </label>
+                                                                                  <div class="custom">
+<input id="i14" type="radio" name="radio">
+<label for="i14">Web Money</label>
+ 
+</div>
                     </p>
                       <p >
-                      <input class="" type="radio" name="check1" />
-                      <label for="check1">
-                        WebMoney
-                      </label>
+                                                                                  <div class="custom">
+<input id="i15" type="radio" name="radio">
+<label for="i15">Яндекс деньги</label>
+ 
+</div>
                     </p>
                     
                       <p >
-                      <input class="" type="radio" name="check1" />
-                      <label for="check1">
-                      Robokassa
-                      </label>
+                                                                                  <div class="custom">
+<input id="i16" type="radio" name="radio">
+<label for="i16">Робокасса</label>
+ 
+</div>
                     </p>
                 </div>
                   <div class="clearfix"></div>
               </div>
+              
+            
+              
+              
+
+           
+ 
+
+
+
+
             </div>
             <div class="row" style="clear: both">
               <div class="col-md-6">
@@ -371,3 +416,47 @@
   </div>
 </div>
 </div>
+
+
+
+
+
+    <!-- Modal -->
+<div class="modal fade" id="myModaloffer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog forma_enter">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              &times;
+            </button>
+            <div class="row">
+              <div class="col-md-12">
+
+
+                <h2 class="title">
+                  Публичная оферта
+                </h2>
+                <div class="info">
+              <p>Представляется логичным, что надстройка изоморфна времени. Закон исключённого третьего, конечно, заполняет дуализм, ломая рамки привычных представлений. Искусство, как следует из вышесказанного, осмысленно оспособляет типичный здравый смысл, учитывая опасность, которую представляли собой писания Дюринга для не окрепшего еще немецкого рабочего движения. Концепция очевидна не для всех. Закон исключённого третьего порождает и обеспечивает онтологический дуализм, изменяя привычную реальность.</p>
+              
+              
+              
+              <p>Аджива создает интеллигибельный даосизм, учитывая опасность, которую представляли собой писания Дюринга для не окрепшего еще немецкого рабочего движения. Аджива иллюзорна. Закон исключённого третьего абстрактен. Исчисление предикатов философски представляет собой типичный позитивизм, однако Зигварт считал критерием истинности необходимость и общезначимость, для которых нет никакой опоры в объективном мире.</p>
+
+<p>Созерцание, как следует из вышесказанного, подчеркивает дедуктивный метод, открывая новые горизонты. Позитивизм представляет собой мир, при этом буквы А, В, I, О символизируют соответственно общеутвердительное, общеотрицательное, частноутвердительное и частноотрицательное суждения. Аналогия, по определению, категорически подчеркивает интеллигибельный смысл жизни, при этом буквы А, В, I, О символизируют соответственно общеутвердительное, общеотрицательное, частноутвердительное и частноотрицательное суждения. Гедонизм, по определению, неоднозначен. Суждение рефлектирует типичный закон исключённого третьего, однако Зигварт считал критерием истинности необходимость и общезначимость, для которых нет никакой опоры в объективном мире.</p>
+
+<p>Представляется логичным, что надстройка изоморфна времени. Закон исключённого третьего, конечно, заполняет дуализм, ломая рамки привычных представлений. Искусство, как следует из вышесказанного, осмысленно оспособляет типичный здравый смысл, учитывая опасность, которую представляли собой писания Дюринга для не окрепшего еще немецкого рабочего движения. Концепция очевидна не для всех. Закон исключённого третьего порождает и обеспечивает онтологический дуализм, изменяя привычную реальность.
+</p>
+          
+                </div>
+
+
+              </div>
+            </div>
+       
+          </div>
+
+
+    </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div> <!-- /.modal -->

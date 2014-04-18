@@ -1,8 +1,7 @@
-
 .row
   .col-md-9
     .t-table.main_ob
-      .t-cell.tops.shadow_right style=("width: 250px") 
+      .t-cell.tops style=("width: 250px") 
         .title_main_ob
           span Мои объекты
           a.click_plus data-toggle="modal" href="#myModalobject" 
@@ -31,97 +30,116 @@
             | Адрес: Партизанская, 102
             p Квартира: 23
             p
-              a href=""  Редактировать
-      .t-cell.tops.line_blue style=("width: 150px") 
-        .title_main_ob
-          span Услуги
-          a.click_plus data-toggle="modal" href="#myModalservices"
-            =image_tag("plus.png")
-        .accordion_main_ob2
-          h3 Свет
-          div
-          h3 Газ
-          div
-          h3 Вода
-          div
-      .t-cell.tops
+              a href=""  Редактировать  
+  
+      .t-cell.tops.left_blue
         .title_main_ob
           .menu_other
-            | Вода
-            a href=""  Отправка показаний
-            a href=""  Тарифы
-        div
-          .form-group-margin
-            .edit_services_sum
-              .t-table
-                .t-cell.title_q
-                  label Тип услуги
-                .t-cell
-                  .col-md-12
-                    input#inputEmail1.form-control placeholder="Водоснабжение" type="email" /
-              .t-table
-                .t-cell.title_q
-                  label Поставщик
-                .t-cell
-                  .col-md-12
-                    input#inputEmail1.form-control placeholder=("Самарский Водоканал") type="email" /
-              .t-table
-                .t-cell.title_q
-                  label Лицевой счет
-                .t-cell
-                  .col-md-12
-                    input#inputEmail1.form-control placeholder="А20-100-34" type="email" /
-              .t-table_w
-                .t-cell
-                  a href=""  Редактировать
-            .clearfix
-          .padding.payment_box
-            .form-group-margin
-              div
-                h3 Оплата
-                .t-table_w
-                  .t-cell style=("width: 100px") 
-                    label Сумма к оплате
-                  .t-cell
-                    .col-md-12
-                      input#inputEmail1.form-control placeholder="" type="email" /
-                  .t-cell руб.
-                  .t-cell
-                    .col-md-12
-                      input#inputEmail1.form-control placeholder="" type="email" /
-                  .t-cell коп.
-              .clearfix
-            .form-group-margin
-              .t-table_w
-                .t-cell.tops style=("width: 120px")  Способ оплаты
-                .t-cell
+            | Расходы
+            a.obj_click  График
+            a.obj_click  Таблица
+        table.table_analitic
+         tr
+          th
+           |2014 год
+          th.left_blue
+             a href=""  29 февраля 2014 -
+             a href=""  15 марта 2014   
+         tr
+          td
                   p
-                    .custom.two
-                      input#i13 name="radio" type="radio" 
-                        label for="i13"  Банковская карта
+                    .custom
+                      input#i13 name="" type="checkbox" 
+                        label for="i13"  Квартплата
                   p
-                    .custom.two
-                      input#i14 name="radio" type="radio" 
-                        label for="i14"  Web Money
+                    .custom
+                      input#i14 name="" type="checkbox" 
+                        label for="i14"  Газ
                   p
-                    .custom.two
-                      input#i15 name="radio" type="radio" 
-                        label for="i15"  Яндекс деньги
+                    .custom
+                      input#i15 name="" type="checkbox" 
+                        label for="i15"  Свет
                   p
-                    .custom.two
-                      input#i16 name="radio" type="radio" 
-                        label for="i16"  Робокасса
-              .clearfix
-            .clearfix
-              p.sum
-                | Комиссия сервиса:
-                span 20 руб. 30 коп.
-              p.sum
-                | Итого к оплате:
-                span 1220 руб. 30 коп.
-              button.btn.btn-default.btn_green type="button" 
-                | Оплатить
+                    .custom
+                      input#i16 name="" type="checkbox" 
+                        label for="i16"  Другое
+ 
+          td.left_blue
+            =image_tag("test_img.jpg", class:'img_ob_test') 
+        table.table_analitic
+         tr
+          th
+           |2014 год
+          th.left_blue
+             p
+              | Март
+              span.pre Предыдущий
+         
+          th
+             p
+              | Апрель
+              span.pre Предыдущий
+          th
+             p
+              | Май
+              span.pre Предыдущий
 
+         tr
+          td
+                  p
+                   b Квартплата
+ 
+          td.left_blue
+            p 5604,30            
+
+          td.left_blue
+            p 5604,30   
+
+
+          td.left_blue
+            p 5604,30    
+         tr
+          td
+                  p
+                   b Интернет
+ 
+          td.left_blue
+            p 5604,30            
+
+          td.left_blue
+            p 5604,30   
+
+
+          td.left_blue
+            p 5604,30   
+         tr
+          td
+                  p
+                   b  Другое
+ 
+          td.left_blue
+            p 5604,30            
+
+          td.left_blue
+            p 5604,30   
+
+
+          td.left_blue
+            p 5604,30  
+         tr.top_blue
+          td
+                  p
+                   b  Итого
+ 
+          td.left_blue
+            p 5604,30            
+
+          td.left_blue
+            p 5604,30   
+
+
+          td.left_blue
+            p 5604,30               
 .black_over
   .container
     .tutorial.one

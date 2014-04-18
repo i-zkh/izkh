@@ -24,7 +24,7 @@
             = link_to "Зарегистрируйтесь", new_user_registration_path, :class => "register-link btn btn-lg btn-success"
           p.center
             | или 
-            a data-toggle="modal" href="#myModal" 
+            a data-toggle="modal" href="#myModal_ent" 
               | войдите
             |  в свой кабинет
 .how-to-use.white
@@ -78,3 +78,97 @@
           #social-tw
         .inline
           p.social-text Рассказать о нас в социальных сетях
+
+
+/! Modal <<<<>>>>><><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+          /! Modal
+#myModal_ent.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button" 
+          | &times;
+        .row
+          .col-md-12
+            h2.title
+              | Вход
+            .info
+              | Мы рады видеть Вас!
+        .form-group-margin
+          .col-lg-12
+            .overflow
+              .float_left
+                | Пароль
+              .float_right
+                .custom
+                  input#i12 name="radio" type="checkbox" 
+                    label for="i12"  показать
+            input#inputEmail1.form-control placeholder="" type="email" 
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label
+              | Email *
+            input#inputEmail1.form-control placeholder="" type="email" 
+          .clearfix
+        button.btn.btn-default.btn-block type="button" 
+          | Войти
+        p
+        a href="" 
+          | Зарегистрируйтесь прямо сейчас!
+        br/
+        a data-toggle="modal" class="close_ent" href="#myModal_rec" 
+          | Забыли пароль?
+    /! /.modal-content
+  /! /.modal-dialog
+/! /.modal
+
+
+/! Modal <<<<>>>>><><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+          /! Modal
+#myModal_rec.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button" 
+          | &times;
+        .row
+          .col-md-12
+            h2.title
+              | Восстановления пароля
+            .info
+              | Забыли пароль? Не беда!
+            .info.size_s
+              | Введите адрес эл. почты, указанный при регистрации, и мы вышлем Вам инструкции по восстановлению.            
+ 
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label
+              | Email *
+            input#inputEmail1.form-control placeholder="" type="email" 
+          .clearfix
+        button.btn.btn-default.btn-block type="button" 
+          | Восстановить
+
+ 
+ 
+    /! /.modal-content
+  /! /.modal-dialog
+/! /.modal
+
+
+
+
+
+
+
+
+
+
+
+css:
+  | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+  | @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");

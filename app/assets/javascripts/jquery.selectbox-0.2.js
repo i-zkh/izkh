@@ -16,6 +16,10 @@
 	 * Settings for (groups of) select boxes are maintained in an instance object,
 	 * allowing multiple different settings on the same page
 	 */
+
+
+
+
 	function Selectbox() {
 		this._state = [];
 		this._defaults = { // Global defaults for all the select box instances

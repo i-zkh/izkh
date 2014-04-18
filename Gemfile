@@ -16,6 +16,7 @@ gem 'mandrill-api'
 gem 'settingslogic'
 
 gem 'slim'
+gem 'html2slim'
 gem 'simple_form'
 
 gem 'jquery-cdn', '1.10.2' # Use jQuery 1.10.2

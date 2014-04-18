@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  skip_before_filter :require_current_user
   def success
     # TODO: Write a callback for successful transactions
   end
@@ -6,7 +7,9 @@ class TransactionsController < ApplicationController
   def fail
     # TODO: Write a callback for failed transactions
   end
-
+  def index
+    
+  end
   protected
 
   def transaction_params

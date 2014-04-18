@@ -5,4 +5,5 @@ Iz::Application.routes.draw do
   resources :dashboard, only: :index
   resources :places
   resources :services
+  resources :transactions
   end
