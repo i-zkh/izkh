@@ -4,7 +4,7 @@
 //= require dashboard
 //= require chekbox
 //= require kladr
-//= require jquery.selectbox-0.2
+//= require 'jquery.selectbox-0.2'
 //= require main
 //= require 'jquery-ui-1.10.4.custom'
 $(document).ready ->   

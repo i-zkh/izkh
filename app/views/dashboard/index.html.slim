@@ -47,9 +47,9 @@
       .t-cell.tops
         .title_main_ob
           .menu_other
-            | Вода
-            a href=""  Отправка показаний
-            a href=""  Тарифы
+            a.testimony__view Вода
+            a.shipping Отправка показаний
+             
         div
           .form-group-margin
             .edit_services_sum
@@ -121,7 +121,100 @@
                 span 1220 руб. 30 коп.
               button.btn.btn-default.btn_green type="button" 
                 | Оплатить
+            br
+            = form_tag("/", method: "get", class: "form-group-margin metrics_box_history", remote: true) do
+             table.upper-metrics  border="0" cellpadding="0" cellspacing="0" 
+              tr
+               td.metrics__first 
+                | Тип счетчика:  
+                p Холодная вода
+               td 
+                table border="0" cellpadding="0" cellspacing="0" width="100%"  
+                 tr
+                  td.padding__none
+                    
+                   .t-table_w
+                    .t-cell style=("width: 20px") 
+                      label Было
+                    .t-cell
+                      .col-md-12
+                        input#inputWas.form-control placeholder="203,15" type="text" /
+                    .t-cell style=("width: 20px") 
+                      label Стало
+                    .t-cell
+                      .col-md-12
+                        input#inputBecame.form-control placeholder="" type="text" / 
+                    .t-cell style=("width: 20px") 
+                      label Дата
+                    .t-cell
+                      .col-md-12.last-child
+                        input#inputBecame.form-control placeholder="12.04.14" type="text" / 
+                
+                      
+                 tr
+                  td.padding__none
+                   .t-table  
+                     .t-cell
+                       span.metrics__more подробнее         
+                     .t-cell
+                       span.metrics__append добавить  
 
+
+               table.history-metrics  border="0" cellpadding="0" cellspacing="0" width="100%" 
+                tr
+                 th
+                  b История
+                  p Дата
+                 th
+                  |&nbsp; 
+                  p Показания
+                 th
+                  |&nbsp; 
+                  p Статус           
+                tr
+                 td
+                  p 12.03.2014
+                 td
+                  p 203,15
+                 td
+                  p Ожидает обработки    
+                tr
+                 td
+                  p 12.03.2014
+                 td
+                  p 203,15
+                 td
+                  p.metrics__received Принято   
+                tr
+                 td
+                  p 12.03.2014
+                 td
+                  p 203,15
+                 td
+                  p.metrics__received Принято  
+               table.dell-and-close  border="0" cellpadding="0" cellspacing="0" width="100%"                  
+                tr
+                 td.metrics__last
+                       span.metrics__del удалить счетчик  
+                       span.metrics__close закрыть 
+ 
+            = form_tag("/", method: "get", class: "form-group-margin metrics_box_add", remote: true) do
+              button.btn.btn-block.btn_green.add type="button" 
+                | Добавить
+            = form_tag("/", method: "get", class: "form-group-margin metrics_box_type", remote: true) do
+              table.type-select-metrics  border="0" cellpadding="0" cellspacing="0" width="100%"
+               tr
+                td 
+                  label for="typs__testimony" 
+                  | Выберите тип счетчика
+                td.select__type 
+                 select name="typs__testimony" 
+                  option value="Дом"  Дом
+                  option value="Квартира"  Квартира
+                  option value="Гараж"  Гараж
+
+                td 
+                 span.metrics__add Добавить           
 .black_over
   .container
     .tutorial.one

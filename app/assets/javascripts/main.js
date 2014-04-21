@@ -15,19 +15,19 @@ $(document).ready(function() {
     function_zoom();
 
 
-     $(".accordion_main_ob").accordion({
-         heightStyle: "content"
+    $(".accordion_main_ob").accordion({
+        heightStyle: "content"
 
-     });
+    });
 
-     $('#input-phone').focusout(function(){
-  $(".tutorial").stop().fadeOut()
-});
+    $('#input-phone').focusout(function() {
+        $(".tutorial").stop().fadeOut()
+    });
 
 
-    $('#input-phone').focusin(function(){
-  $('.tutorial').stop().fadeIn()
-});
+    $('#input-phone').focusin(function() {
+        $('.tutorial').stop().fadeIn()
+    });
 
     $("#none_tut").click(function() {
         $(".tutorial").remove();
@@ -86,6 +86,31 @@ $(document).ready(function() {
 
     $("select").selectBox();
 
+    $(".metrics_box_add").on("click", function() {
+        $('.metrics_box_type').stop().fadeIn()
+        $(this).stop().hide()
+    });
+
+    $(".metrics__more").on("click", function() {
+        $('.history-metrics, .dell-and-close').stop().fadeIn()
+
+    });
+
+    $(".metrics__close").on("click", function() {
+        $('.history-metrics, .dell-and-close').stop().hide()
+
+    });
+
+    $(".metrics__del").on("click", function() {
+        if (confirm("Вы уверены что хотите удалить счетчик?")) {
+            $('.metrics_box_history').stop().hide()
+        } else {
+
+        }
+
+    });
+
+
     $('.table_analitic:not(.table_analitic:eq(0))').hide();
     $('.obj_click:first').addClass('active2');
 
@@ -141,8 +166,6 @@ $(document).ready(function() {
         // chart.
         labels: ['квартплата', 'газ', 'свет', 'другое']
     });
-
-
 
 
 

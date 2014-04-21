@@ -1099,3 +1099,48 @@
     resize: none; height: 200px !important;
 }
 
+.upper-metrics{
+  width: 440px; font-size: 11px; border: 1px solid #5cb3df;
+}
+.upper-metrics input{
+ font-size: 11px;
+}
+
+.upper-metrics td{padding: 10px !important; vertical-align: middle;}
+ .upper-metrics td.metrics__first{border-right: 1px solid #5cb3df; width: 120px;}
+  .upper-metrics td.metrics__first p{ font-size: 12px; margin-bottom: 0}
+   .upper-metrics td.padding__none{ padding: 0 !important;}
+ 
+    .upper-metrics .col-md-12.last-child{ padding-right: 0}
+    .history-metrics{border: 1px solid #5cb3df; padding: 0px !important; display: none;}
+
+       .history-metrics p{margin-bottom: 0;}
+      .history-metrics td,th{padding: 10px !important; width: 33%; font-weight: normal; }
+     .history-metrics p.metrics__received{ color: #67be61;}  
+      .metrics__del{ color: #ef4136;text-align: right;  padding-right: 10px;cursor: pointer;   }  
+     .metrics__close{ color: #34aadb;text-align: right; cursor: pointer;   }  
+.dell-and-close td.metrics__last{ width: 100%;  text-align: right; } 
+.metrics__view{ font-size: 23px !important; color: #428BCA;}
+.metrics__view.current{color: #000; }
+
+
+.metrics__more, .metrics__append{ color: #34aadb; font-size: 12px; cursor: pointer; display: block; margin-top: 10px;}
+
+.metrics__append{text-align: right;  }
+ 
+.dell-and-close{
+  border: 1px solid #5cb3df; display: none;
+}
+.dell-and-close td{padding: 10px !important; }
+
+
+.type-select-metrics{
+ padding: 0px !important; width: 440px; border: 1px solid #5cb3df;
+}
+.type-select-metrics td{padding:10px; }
+.type-select-metrics td.select__type{width: 43%;}
+ .metrics__add{ color: #34aadb; cursor: pointer;}
+
+ .metrics_box_type{
+  display: none;
+ }
