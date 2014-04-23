@@ -7,6 +7,10 @@
 //= require 'jquery.selectbox-0.2'
 //= require main
 //= require 'jquery-ui-1.10.4.custom'
+//= require 'jquery.maskedinput.min'
+
+
+
 $(document).ready ->   
     
   

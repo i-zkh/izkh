@@ -8,4 +8,9 @@
 //= require 'jquery.selectBox.js'
 //= require 'morris.js'
 //= require 'raphael-min.js'
+//= require 'jquery.maskedinput.min'
+ 
+//= require 'jquery.validationEngine.js'
+//= require 'jquery.validationEngine-en.js'
+
  

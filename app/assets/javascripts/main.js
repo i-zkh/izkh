@@ -4,7 +4,48 @@
 //= require 'jquery.selectBox'
 //= require 'jquery-ui-1.10.4.custom'
 //= require 'morris'
+//= require 'jquery.maskedinput.min'
 $(document).ready(function() {
+
+/*$('#reg-step-one-form').validate({
+  rules: {
+    
+    email:{
+    email:true,
+    required: true
+    },
+
+    okay:{
+    required: true
+    },
+    first_name:{
+    required: true,
+     minlength: 4
+    }
+
+ 
+  },
+  messages: {
+    email:{
+    required: "Пожалуйста введите ваш email"
+    },
+       okay:{
+    required:"Проверьте правильность заполнения"
+    },
+
+  first_name:{
+   
+     minlength: "Логин должен быть минимум 4 символа"
+    }
+ 
+
+  }
+});*/
+
+ 
+
+    $("#reg-step-one-form").validationEngine();
+
 
     function function_zoom() {
 
@@ -19,6 +60,10 @@ $(document).ready(function() {
         heightStyle: "content"
 
     });
+
+
+
+
 
     $('#input-phone').focusout(function() {
         $(".tutorial").stop().fadeOut()
@@ -107,8 +152,26 @@ $(document).ready(function() {
         } else {
 
         }
+    });
+    $(".js__phone").mask("+7 (999) 999-99-99");
+
+
+    $('input#show-pass[type="checkbox"]').change(function() {
+
+        if (this.checked) {
+            $('input#input-password[type="password"]').attr('type', 'text');
+        } else {
+            $('input#input-password[type="text"]').attr('type', 'password');
+        }
 
     });
+
+
+
+
+
+
+
 
 
     $('.table_analitic:not(.table_analitic:eq(0))').hide();
