@@ -20,16 +20,16 @@ tboby
     tr
       td
         p
-          b service.title
+          b = service[:title]
 
       td.left_blue
-        p service.prev_sum 
+        p = service[:prev_sum]
 
       td.left_blue
-        p service.curr_sum
+        p = service[:curr_sum]
 
       td.left_blue
-        p service.next_sum
+        p = service[:next_sum]
 
   tr#total.top_blue
     td

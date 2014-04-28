@@ -40,7 +40,7 @@ $(document).ready ->
         $('#reg-step-one-info').removeClass('active')
         $('#reg-step-two-info').addClass('active')
         $('.reg-head').append(data)
-
+        $("select").select2()
         $("#reg-step-two-form").validationEngine()
 
         $('#input-place-city').kladr({
@@ -127,12 +127,10 @@ $(document).ready ->
   $(".click_tooltips").focusout ->
     $(this).siblings('.tooltips').stop().fadeOut(200)
 
-# Custom select
-  $("select").select2()
-
 
 # Validation
-  $("#reg-step-one-form").validationEngine()
+  if $('#reg-step-one-form').attr('id')
+    $("#reg-step-one-form").validationEngine()
   
 # Activating KLADR for the 1st step
   $('#input-city').kladr({
@@ -310,6 +308,7 @@ $(document).ready ->
         $modalContainer.empty()
         $modalContainer.html(data)
         $modalContainer.find('.modal').modal('show')
+        $("select").select2()
         $("#js-container").removeClass('loading')
         
 # Edit service event
@@ -322,6 +321,7 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
+        $("select").select2()
         $modalContainer.find('.modal').modal('show')
         $("#js-container").removeClass('loading')
         
