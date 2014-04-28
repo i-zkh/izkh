@@ -1,7 +1,3 @@
-/*
- *= profile
-*/
-
   .head_menu {
       font-size: 17px
   }
@@ -1237,65 +1233,6 @@ input{position: relative;}
   color: white;
 }
 
-/*Виджеты*/
-#widget-container{
-  max-height: 555px;
-  overflow: scroll;
-  border: 1px solid #83c0e4;
-  width: 100%;
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  padding: 7%;
-}
-.widget h4{
-  border-bottom: 1px solid #4FB0DE;
-}
-.widget{
-  margin-top: 5%;
-}
-.widget p{
-  font-size: 12px;
-  line-height: 1.2;
-  text-align: justify
-}
-.sender:before{
-  content: "от ";
-}
-.widget .date{
-  font-size: 10px;
-}
-#remove-widget{
-  float:right;
-  font-size: 11px;
-  cursor:pointer;
-}
-.button-field{
-  float:left;
-  display:inline-block;
-}
-.loading{
-  opacity: .3;
-}
-.loading:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    width: 40px;
-    height: 40px;
-    background-color: #333;
-    border-radius: 100%;
-    animation: scaleout 1.0s infinite ease-in-out;
-}
-
-@keyframes scaleout 
-{
-0%   {transform: scale(0.0);}
-100% {transform: scale(1.0);}
 /* Error handling */
 .error-text {
   color: #FF3B30;
@@ -1371,12 +1308,14 @@ input{position: relative;}
   }
 }
 
-  .view-third .span{position: absolute; color: #333; text-align: center; width: 180px; height: 180px; border-radius: 500px;}
- .view-third {
- overflow: hidden;
- position: relative;
- width: 180px; height: 180px; border-radius: 500px;
- }
+.view-third .span{position: absolute; color: #333; text-align: center; width: 180px; height: 180px; border-radius: 500px;}
+.view-third {
+  overflow: hidden;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 500px;
+}
 
 .view-third img {
  transition: all 0.2s ease-in;
@@ -2218,3 +2157,4 @@ html[dir="rtl"] .select2-search-choice-close {
         background-position: 100% -21px !important;
     }
 }
+>>>>>>> e2862e5f87fb6c1807636d21f3e2c3f1a491a49b
