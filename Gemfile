@@ -14,12 +14,15 @@ gem 'devise-russian'
 gem 'symbolize'
 gem 'mandrill-api'
 gem 'settingslogic'
-gem 'sprockets'
+gem 'rvm-capistrano'
+gem 'httparty'
+gem 'sidekiq', '2.17.7'
+gem "capistrano-sidekiq"
 
 gem 'slim'
 gem 'html2slim'
 gem 'simple_form'
-
+gem 'rabl'
 gem 'jquery-cdn', '1.10.2' # Use jQuery 1.10.2
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427192429) do
+ActiveRecord::Schema.define(version: 20140428063752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,26 @@ ActiveRecord::Schema.define(version: 20140427192429) do
     t.string   "user_account"
     t.integer  "place_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tariff_templates", force: true do |t|
+    t.string   "title"
+    t.integer  "service_type_id"
+    t.boolean  "has_reading"
+    t.integer  "vendor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "terminal_payments", force: true do |t|
+    t.float    "total"
+    t.float    "amount"
+    t.float    "commission"
+    t.string   "user_account"
+    t.integer  "vendor_id"
+    t.integer  "tariff_template_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,6 +118,22 @@ ActiveRecord::Schema.define(version: 20140427192429) do
     t.datetime "updated_at"
     t.float    "commission_yandex"
     t.float    "commission_web_money"
+  end
+
+  create_table "widgetables", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "widget_id"
+    t.boolean  "status",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "widgets", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "sender"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

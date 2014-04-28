@@ -40,6 +40,11 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    capistrano-sidekiq (0.2.7)
+      capistrano
+      sidekiq
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -49,6 +54,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     columnize (0.3.6)
+    connection_pool (2.0.0)
     daemons (1.1.9)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
@@ -81,6 +87,9 @@ GEM
     hpricot (0.8.6)
     html2slim (0.0.5)
       hpricot
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -107,6 +116,7 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.9.2)
+    multi_xml (0.5.5)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -119,6 +129,8 @@ GEM
     polyglot (0.3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
+    rabl (0.9.3)
+      activesupport (>= 2.3.14)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -138,6 +150,9 @@ GEM
     rake (10.2.1)
     rdoc (4.1.1)
       json (~> 1.4)
+    redis (3.0.7)
+    redis-namespace (1.4.1)
+      redis (~> 3.0.4)
     ref (1.0.5)
     right_aws (3.1.0)
       right_http_connection (>= 1.2.5)
@@ -163,6 +178,8 @@ GEM
       rspec-mocks (~> 2.14.0)
     russian (0.6.0)
       i18n (>= 0.5.0)
+    rvm-capistrano (1.5.1)
+      capistrano (~> 2.15.4)
     sass (3.2.18)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
@@ -179,6 +196,12 @@ GEM
     shoulda-context (1.1.6)
     shoulda-matchers (2.5.0)
       activesupport (>= 3.0.0)
+    sidekiq (2.17.7)
+      celluloid (>= 0.15.2)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0.6)
+      redis-namespace (>= 1.3.1)
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
@@ -211,6 +234,7 @@ GEM
     thread_safe (0.3.1)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
+    timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -229,6 +253,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  capistrano-sidekiq
   coffee-rails (~> 4.0.0)
   database_cleaner
   debugger
@@ -236,6 +261,7 @@ DEPENDENCIES
   devise-russian
   factory_girl_rails
   html2slim
+  httparty
   jbuilder (~> 1.2)
   jquery-cdn (= 1.10.2)
   jquery-rails
@@ -245,18 +271,20 @@ DEPENDENCIES
   minitest
   pg
   quiet_assets
+  rabl
   rails (= 4.0.2)
   rspec
   rspec-rails
   russian
+  rvm-capistrano
   sass-rails (~> 4.0.0)
   sdoc
   settingslogic
   shoulda
+  sidekiq (= 2.17.7)
   simple_form
   slim
   spring
-  sprockets
   symbolize
   test_after_commit
   therubyracer
