@@ -1,0 +1,8 @@
+- widgets.each do |widget|
+  .widget id="notification-#{widget.id}"
+    #remove-widget= link_to "Прочитано", widget_path(widget), method: :put, remote: :true
+    h4=widget.title
+    p=widget.description
+    h6.sender=widget.sender
+    .date=widget.created_at.strftime("%Y-%m-%d %H:%M")  
+

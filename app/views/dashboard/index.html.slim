@@ -28,7 +28,14 @@
           .form-group-margin
             .edit_services_sum
               | Здесь будет показана информация о выбранной Вами услуге.
-
+  
+  .col-md-3.5
+    #widget-container
+      - unless @widgets.empty?
+        = render "shared/widget/widget", widgets: @widgets
+      - else
+        p#no-place Нет новых уведомлений.
+        
 .modal-container
 
 css:

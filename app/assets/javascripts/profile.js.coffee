@@ -29,6 +29,7 @@ $(document).ready ->
 
 # Ajax'ing registration      
   $('body').on 'click', '#reg-step-one-submit', ->
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/users'
       type: 'POST'
@@ -56,11 +57,14 @@ $(document).ready ->
           type: $.kladr.type.street,
           parentType: $.kladr.type.city
         })
+        $("#js-container").removeClass('loading')
       error: (data) ->
         $('.error-container').empty()
         $('.error-container').append(data.responseText)
+        $("#js-container").removeClass('loading')
     
   $('body').on 'click', '#reg-step-two-submit', ->
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/reg_create'
       type: 'POST'
@@ -73,11 +77,14 @@ $(document).ready ->
         $('.reg-head').append(data)
         $("select").select2()
         $("#reg-step-three-form").validationEngine()
+        $("#js-container").removeClass('loading')
       error: (data) ->
         $('.error-container').empty()
         $('.error-container').append(data.responseText)
+        $("#js-container").removeClass('loading')
 
   $('body').on 'click', '#reg-step-three-submit', ->
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/reg_create'
       type: 'POST'
@@ -89,9 +96,12 @@ $(document).ready ->
         $('#reg-step-four-info').addClass('active')
         $('.reg-head').append(data)
         $("#reg-step-four-form").validationEngine()
+        commissionCalc()
+        $("#js-container").removeClass('loading')
       error: (data) ->
         $('.error-container').empty()
         $('.error-container').append(data.responseText)
+        $("#js-container").removeClass('loading')
 
   $('body').on 'click', '#reg-step-four-submit', ->
     $('#wip').html('Оплата будет доступна в ближайшее время')
@@ -133,6 +143,7 @@ $(document).ready ->
 
 # Add place event
   $('#dashboard-add-place').on 'click', ->
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/new'
       type: 'GET'
@@ -156,9 +167,11 @@ $(document).ready ->
           type: $.kladr.type.street,
           parentType: $.kladr.type.city
         })
+        $("#js-container").removeClass('loading')
 
 # Add serivce event
   $('#dashboard-add-service').on 'click', ->
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/new'
       type: 'GET'
@@ -167,9 +180,11 @@ $(document).ready ->
         $modalContainer.html(data)
         $("select").select2()
         $modalContainer.find('.modal').modal('show')
+        $("#js-container").removeClass('loading')
 
 # Create place event
   $('body').on 'click', '#submit-create-place', ->
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/places'
       type: 'POST'
@@ -178,14 +193,16 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-place').remove()
         $('#place-accordion').append(data)
+        $("#js-container").removeClass('loading')
       error: (data) ->
         $('.error-container').empty()
         $('.error-container').append(data.responseText)
-
+        $("#js-container").removeClass('loading')
 
 # Create service event
   $('body').on 'click', '#submit-create-service', ->
     $('#new_service').find('#service-place-id').val(activePlaceId)
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/services'
       type: 'POST'
@@ -194,9 +211,11 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-service').remove()
         $('#service-accordion').append(data)
+        $("#js-container").removeClass('loading')
       error: (data) ->
         $('.error-container').empty()
         $('.error-container').append(data.responseText)
+        $("#js-container").removeClass('loading')
 
 # Place accordion click 
   $('#place-accordion').on 'click', '.panel-heading', ->
@@ -210,7 +229,7 @@ $(document).ready ->
         .not(this)
         .removeClass('active-accordion-item')
       $('#dashboard-add-service').show()
-
+      $("#js-container").addClass('loading')
       $.ajax
         url: '/services/' + activePlaceId + '/by_place'
         type: 'GET'
@@ -218,6 +237,7 @@ $(document).ready ->
           $('#no-service').remove()
           $('#service-accordion').html(data)
           $('#service-add').show()
+          $("#js-container").removeClass('loading')
     else
       false
 
@@ -232,12 +252,14 @@ $(document).ready ->
         .not(this)
         .removeClass('active-accordion-item')
       id = $(this).data('id')
+      $("#js-container").addClass('loading')
       $.ajax
         url: '/services/' + id
         type: 'GET'
         success: (data) ->
           $('#service-detailed').html(data)
           commissionCalc()
+          $("#js-container").removeClass('loading')
     else
       false
 
@@ -245,6 +267,7 @@ $(document).ready ->
   $('body').on 'click', '.place-delete', ->
     if confirm 'Действительно удалить?'
       id = $(this).data('id')
+      $("#js-container").addClass('loading')
       $.ajax
         url: '/places/' + id
         dataType: 'json'
@@ -259,11 +282,12 @@ $(document).ready ->
           $('.menu_other').html('Выберите услугу')
           $('.edit_services_sum').html(emptyDetailedService)
           $('.payment_box').remove()
-
+          $("#js-container").removeClass('loading')
 # Delete service event
   $('body').on 'click', '.service-delete', ->
     if confirm 'Действительно удалить?'
       id = $(this).data('id')
+      $("#js-container").addClass('loading')
       $.ajax
         url: '/services/' + id
         dataType: 'json'
@@ -273,10 +297,12 @@ $(document).ready ->
           $('.menu_other').html('Выберите услугу')
           $('.edit_services_sum').html(emptyDetailedService)
           $('.payment_box').remove()
+          $("#js-container").removeClass('loading')
 
 # Edit place event
   $('body').on 'click', '.place-edit', ->
     id = $(this).data('id')
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/' + id + '/edit'
       type: 'GET'
@@ -284,10 +310,12 @@ $(document).ready ->
         $modalContainer.empty()
         $modalContainer.html(data)
         $modalContainer.find('.modal').modal('show')
+        $("#js-container").removeClass('loading')
         
 # Edit service event
   $('body').on 'click', '.service-edit', ->
     id = $(this).data('id')
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/' + id + '/edit'
       type: 'GET'
@@ -295,10 +323,12 @@ $(document).ready ->
         $modalContainer.empty()
         $modalContainer.html(data)
         $modalContainer.find('.modal').modal('show')
+        $("#js-container").removeClass('loading')
         
 # Update place event
   $('body').on 'click', '#submit-update-place', ->
     id = $(this).data('id')
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/' + id
       type: 'PUT'
@@ -312,13 +342,16 @@ $(document).ready ->
         $place.find('.place-address').html('Адрес: ' + $form.find('#input-place-address').val() + ', ' + $form.find('#input-place-building').val())
         $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
+        $("#js-container").removeClass('loading')
       error: (data) ->
         $('.error-container').empty()
         $('.error-container').append(data.responseText)
+        $("#js-container").removeClass('loading')
 
 # Update service event
   $('body').on 'click', '#submit-update-service', ->
     id = $(this).data('id')
+    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/' + id
       type: 'PUT'
@@ -331,9 +364,11 @@ $(document).ready ->
         $service.find('.user-account').html($form.find('#input-service-user-account').val())
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
+        $("#js-container").removeClass('loading')
       error: (data) ->
         $('.error-container').empty()
         $('.error-container').append(data.responseText)
+        $("#js-container").removeClass('loading')
 
 # Commission calculation
 # TODO: Refactor to the bone
@@ -392,6 +427,15 @@ $(document).ready ->
       total = commission + amount
       $("#total").html " " + total + " руб."
 
+  # Long Polling for widgets
+  updateWidgets = ->
+    $.getScript "/widgets.js"
+    setTimeout updateWidgets, 30000
+    return
+  $ ->
+    setTimeout updateWidgets, 30000  if document.getElementById("widget-container")?
+    return
+
 # Tabs in transactions
 # TODO: Move to bootstrap tabs
 
@@ -422,7 +466,6 @@ $(document).ready ->
           $('#table-analytic').append(data)
     else
       false
-    
 
 # Main animation
 

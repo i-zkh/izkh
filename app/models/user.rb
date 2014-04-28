@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
   has_many :places, class_name: "Place"
   has_many :services, class_name: "Service"
   has_many :transactions, class_name: "Transaction"
+  has_many :widgetables
+  has_many :widgets, through: :widgetables
 end
