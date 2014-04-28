@@ -70,7 +70,7 @@ span {
 #how-register, #how-services, #how-pay {
   font-size: 120px;
   margin-bottom: 10px;
-  background-image: url(http://readwrite.com/files/styles/630_0su/public/fields/startup.jpg);
+  background: #fff;
   margin-top: 20px;
   width: 180px;
   height: 180px;
@@ -159,8 +159,8 @@ span {
 }
 
 #social-vk, #social-fb, #social-tw {
-  height: 32px;
-  width: 32px;
+  height: 54px;
+  width: 55px;
   margin-left: 10px;
 }
 

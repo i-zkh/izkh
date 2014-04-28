@@ -22,6 +22,41 @@ $(document).ready(function() {
 });
 
 
+    $(window).on('scroll',function() {
+        var tops = $(window).scrollTop();
+        if (tops > 100) {
+
+            $('.hover_circle.zr .mask,.hover_circle.zr .mask_box,.hover_circle.zr .info_t').addClass('scrolling')
+
+            setTimeout(function() {
+                $('.hover_circle.on .mask,.hover_circle.on .mask_box,.hover_circle.on .info_t').addClass('scrolling')
+            }, 600);
+
+
+            setTimeout(function() {
+                $('.hover_circle.two .mask,.hover_circle.two .mask_box,.hover_circle.two .info_t').addClass('scrolling')
+            }, 1200);
+        } else {
+
+            $('.hover_circle.zr .mask,.hover_circle.zr .mask_box,.hover_circle.zr .info_t').removeClass('scrolling')
+
+
+            setTimeout(function() {
+                $('.hover_circle.on .mask,.hover_circle.on .mask_box,.hover_circle.on .info_t').removeClass('scrolling')
+            }, 600);
+
+            setTimeout(function() {
+                $('.hover_circle.two .mask,.hover_circle.two .mask_box,.hover_circle.two .info_t').removeClass('scrolling')
+            }, 1200);
+
+        }
+ 
+
+    });
+
+
+
+
 
 
 
@@ -89,7 +124,7 @@ $(document).ready(function() {
 
     });
 
-    $("select").selectBox();
+  
 
     $(".metrics_box_add").on("click", function() {
         $('.metrics_box_type').stop().fadeIn()
