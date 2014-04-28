@@ -1,10 +1,5 @@
-//= require jquery_ujs
-//= require turbolinks
-//= require bootstrap.min
-//= require 'jquery.selectBox'
-//= require 'jquery-ui-1.10.4.custom'
-//= require 'morris'
-//= require 'jquery.maskedinput.min'
+//= require 'profile'
+
 $(document).ready(function() {
 
     function function_zoom() {
