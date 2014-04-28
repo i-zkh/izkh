@@ -2,7 +2,7 @@ class WidgetsController < ApplicationController
 
   def index
     @widgets = []
-    current_user.widgets.each { |widget| @widgets << widget if widget.created_at > Time.now - 10}
+    current_user.widgets.each { |widget| @widgets << widget if widget.created_at > Time.now - 30 }
   end
 
   def create

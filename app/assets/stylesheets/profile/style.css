@@ -1,3 +1,7 @@
+/*
+ *= profile
+*/
+
   .head_menu {
       font-size: 17px
   }
@@ -1231,4 +1235,65 @@ input{position: relative;}
 .active-accordion-item {
   background-color: #67be61;
   color: white;
+}
+
+/*Виджеты*/
+#widget-container{
+  max-height: 555px;
+  overflow: scroll;
+  border: 1px solid #83c0e4;
+  width: 100%;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  padding: 7%;
+}
+.widget h4{
+  border-bottom: 1px solid #4FB0DE;
+}
+.widget{
+  margin-top: 5%;
+}
+.widget p{
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: justify
+}
+.sender:before{
+  content: "от ";
+}
+.widget .date{
+  font-size: 10px;
+}
+#remove-widget{
+  float:right;
+  font-size: 11px;
+  cursor:pointer;
+}
+.button-field{
+  float:left;
+  display:inline-block;
+}
+.loading{
+  opacity: .3;
+}
+.loading:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border-radius: 100%;
+    animation: scaleout 1.0s infinite ease-in-out;
+}
+
+@keyframes scaleout 
+{
+0%   {transform: scale(0.0);}
+100% {transform: scale(1.0);}
 }

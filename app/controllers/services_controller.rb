@@ -31,7 +31,7 @@ class ServicesController < ApplicationController
   end
 
   def reg_create
-    Service.create!(service_params.merge!(user_id: current_user.id))
+    @service = Service.create!(service_params.merge!(user_id: current_user.id))
     render partial: "users/shared/registrations/step_four"
   end
 

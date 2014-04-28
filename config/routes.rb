@@ -20,6 +20,7 @@ Iz::Application.routes.draw do
   end
   resources :widgets, only: [:create, :update, :index]
 
+  post 'tutorial/off' => 'tutorial#off'
   get 'update_db' => 'update_table#update_db'
 
   # Callback for PO
@@ -36,4 +37,9 @@ Iz::Application.routes.draw do
   post 'api/1.0/invoice_confirmation' => 'transactions#invoice_confirmation'
   get 'api/1.0/failed_payment' => 'transactions#failed_payment'
   post 'api/1.0/payment_notification' => 'transactions#payment_notification'
-  end
+
+  # Api for terminals
+  get 'api/1.0/terminal/vendors' => 'terminal#vendors'
+  post 'api/1.0/terminal/payment/success' => 'terminal#success'
+
+end
