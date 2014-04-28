@@ -466,29 +466,3 @@ $(document).ready ->
           $('#table-analytic').append(data)
     else
       false
-
-# Main animation
-
-$(window).on "scroll", ->
-  tops = $(window).scrollTop()
-  if tops > 100
-    $(".hover_circle.zr .mask,.hover_circle.zr .mask_box,.hover_circle.zr .info_t").addClass "scrolling"
-    setTimeout (->
-      $(".hover_circle.on .mask,.hover_circle.on .mask_box,.hover_circle.on .info_t").addClass "scrolling"
-      return
-    ), 600
-    setTimeout (->
-      $(".hover_circle.two .mask,.hover_circle.two .mask_box,.hover_circle.two .info_t").addClass "scrolling"
-      return
-    ), 1200
-  else
-    $(".hover_circle.zr .mask,.hover_circle.zr .mask_box,.hover_circle.zr .info_t").removeClass "scrolling"
-    setTimeout (->
-      $(".hover_circle.on .mask,.hover_circle.on .mask_box,.hover_circle.on .info_t").removeClass "scrolling"
-      return
-    ), 600
-    setTimeout (->
-      $(".hover_circle.two .mask,.hover_circle.two .mask_box,.hover_circle.two .info_t").removeClass "scrolling"
-      return
-    ), 1200
-  return
