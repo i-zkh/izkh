@@ -7,46 +7,6 @@
 //= require 'jquery.maskedinput.min'
 $(document).ready(function() {
 
-/*$('#reg-step-one-form').validate({
-  rules: {
-    
-    email:{
-    email:true,
-    required: true
-    },
-
-    okay:{
-    required: true
-    },
-    first_name:{
-    required: true,
-     minlength: 4
-    }
-
- 
-  },
-  messages: {
-    email:{
-    required: "Пожалуйста введите ваш email"
-    },
-       okay:{
-    required:"Проверьте правильность заполнения"
-    },
-
-  first_name:{
-   
-     minlength: "Логин должен быть минимум 4 символа"
-    }
- 
-
-  }
-});*/
-
- 
-
-    $("#reg-step-one-form").validationEngine();
-
-
     function function_zoom() {
 
         setTimeout(function() {
@@ -59,7 +19,7 @@ $(document).ready(function() {
     $(".accordion_main_ob").accordion({
         heightStyle: "content"
 
-    });
+});
 
 
 
@@ -187,48 +147,48 @@ $(document).ready(function() {
     });
 
 
-    new Morris.Line({
-        // ID of the element in which to draw the chart.
-        element: 'myfirstchart',
-        // Chart data records -- each entry in this array corresponds to a point on
-        // the chart.
-        data: [{
-                ye: '2012 Q0',
-                value: 100,
-                value2: 900,
-                value3: 700,
-                value4: 200
-            }, {
-                ye: '2012 Q1',
-                value: 300,
-                value2: 1300,
-                value3: 800,
-                value4: 400
-            }, {
-                ye: '2012 Q2',
-                value: 600,
-                value2: 1400,
-                value3: 900,
-                value4: 900
-            }, {
-                ye: '2012 Q3',
-                value: 900,
-                value2: 1500,
-                value3: 1000,
-                value4: 1500
-            }
+    // new Morris.Line({
+    //     // ID of the element in which to draw the chart.
+    //     element: 'myfirstchart',
+    //     // Chart data records -- each entry in this array corresponds to a point on
+    //     // the chart.
+    //     data: [{
+    //             ye: '2012 Q0',
+    //             value: 100,
+    //             value2: 900,
+    //             value3: 700,
+    //             value4: 200
+    //         }, {
+    //             ye: '2012 Q1',
+    //             value: 300,
+    //             value2: 1300,
+    //             value3: 800,
+    //             value4: 400
+    //         }, {
+    //             ye: '2012 Q2',
+    //             value: 600,
+    //             value2: 1400,
+    //             value3: 900,
+    //             value4: 900
+    //         }, {
+    //             ye: '2012 Q3',
+    //             value: 900,
+    //             value2: 1500,
+    //             value3: 1000,
+    //             value4: 1500
+    //         }
 
-        ],
-        xLabels: "",
-        lineColors: ['#000', '#ed1653', 'green', '#006ba5'],
-        // The name of the data record attribute that contains x-values.
-        xkey: ['ye'],
-        // A list of names of data record attributes that contain y-values.
-        ykeys: ['value', 'value2', 'value3', 'value4'],
-        // Labels for the ykeys -- will be displayed when you hover over the
-        // chart.
-        labels: ['квартплата', 'газ', 'свет', 'другое']
-    });
+    //     ],
+    //     xLabels: "",
+    //     lineColors: ['#000', '#ed1653', 'green', '#006ba5'],
+    //     // The name of the data record attribute that contains x-values.
+    //     xkey: ['ye'],
+    //     // A list of names of data record attributes that contain y-values.
+    //     ykeys: ['value', 'value2', 'value3', 'value4'],
+    //     // Labels for the ykeys -- will be displayed when you hover over the
+    //     // chart.
+    //     labels: ['квартплата', 'газ', 'свет', 'другое']
+    // });
 
 
 

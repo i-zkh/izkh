@@ -1,0 +1,23 @@
+#myModal_rec.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"
+          | &times;
+        .row
+          .col-md-12
+            h2.title
+              | Восстановления пароля
+            .info
+              | Забыли пароль? Не беда!
+            .info.size_s
+              | Введите адрес эл. почты, указанный при регистрации, и мы вышлем Вам инструкции по восстановлению.
+          .clearfix
+          = form_for(:user, url: user_password_path) do |f|
+            .form-group-margin
+              .col-lg-12
+                label
+                  | Email *
+                =f.email_field :email, id: "inputEmail1", class: "form-control"
+              .clearfix
+            = f.submit "Восстановить", class: "btn btn-default btn-block"

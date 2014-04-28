@@ -1,6 +1,7 @@
   .head_menu {
       font-size: 17px
   }
+
   .badge.green {
       background-color: #86bd6e
   }
@@ -123,7 +124,7 @@
       height: 17px;
       display: inline-block;
       cursor: pointer;
-      background: url(../assets/checkbox.png);
+      background: url(../images/checkbox.png);
   }
   .niceCheck input {
       display: none;
@@ -1222,5 +1223,12 @@ input{position: relative;}
 }
 
 .tooltip_logo{ margin-left: 50px;}
- 
- 
+
+.width-limiter {
+  width: 80%;
+}
+
+.active-accordion-item {
+  background-color: #67be61;
+  color: white;
+}

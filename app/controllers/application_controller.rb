@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
   before_filter :update_sanitized_params, if: :devise_controller?
   before_filter :require_current_user, unless: :devise_controller?
 
+  def after_sign_in_path_for(resource)
+    dashboard_index_path
+  end
+
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    dashboard_index_path
+  end
+
   def require_current_user
     redirect_to new_user_session_path unless current_user
   end

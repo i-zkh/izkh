@@ -1,49 +1,23 @@
-
-css:
-  | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-  | @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
-
-
 .row
   .col-md-9
     .t-table.main_ob
       .t-cell.tops.shadow_right style=("width: 250px") 
         .title_main_ob
           span Мои объекты
-          a.click_plus data-toggle="modal" href="#myModalobject" 
-            =image_tag("plus.png")
-        .accordion_main_ob
-          h3 Дом, милый дом
-          div
-            p Тип: Квартира
-            p Город: Самара
-            | Адрес: Партизанская, 102
-            p Квартира: 23
-            p
-              a href=""  Редактировать
-          h3 Квартира родителей
-          div
-            p Тип: Квартира
-            p Город: Самара
-            | Адрес: Партизанская, 102
-            p Квартира: 23
-            p
-              a href=""  Редактировать
-          h3 Мой гараж
-          div
-            p Тип: Квартира
-            p Город: Самара
-            | Адрес: Партизанская, 102
-            p Квартира: 23
-            p
-              a href=""  Редактировать  
+        .panel-group#place-accordion
+          - unless @places.empty?
+              - @places.each do |place|
+                = render "shared/places/card", place: place
+          - else
+            p#no-place Вы еще не создавали объекты.
+
   
       .t-cell.tops.left_blue
         .title_main_ob
           .menu_other
             | Расходы
-            a.obj_click График
-            a.obj_click Таблица
+            a.obj_click  График
+            a.obj_click  Таблица
         table.table_analitic
          tr
           th
@@ -56,23 +30,10 @@ css:
                   p
                     .custom
                       input#i13 name="" type="checkbox" 
-                        label for="i13"  Квартплата
-                  p
-                    .custom
-                      input#i14 name="" type="checkbox" 
-                        label for="i14"  Газ
-                  p
-                    .custom
-                      input#i15 name="" type="checkbox" 
-                        label for="i15"  Свет
-                  p
-                    .custom
-                      input#i16 name="" type="checkbox" 
-                        label for="i16"  Другое
+                        label for="i13"  #{@trans.first.service}
  
           td.left_blue
-            #myfirstchart style=("height: 250px;") 
-          
+            =image_tag("test_img.jpg", class:'img_ob_test') 
         table.table_analitic
          tr
           th
@@ -85,151 +46,42 @@ css:
           th
              p
               | Апрель
-              span.pre 
-               b Текущий
+              span.pre Текущий
           th
              p
               | Май
-              span.pre Предыдущий
+              span.pre Прогноз
 
          tr
           td
                   p
-                   | Квартплата
+                   b #{@trans.first.service}
  
           td.left_blue
-            p 5604,30            
+            p -
 
           td.left_blue
-            p 
-               b 5604,30   
-
-
-          td.left_blue
-            p 5604,30    
-         tr
-          td
-                  p
-                   | Интернет
- 
-          td.left_blue
-            p 5604,30            
-
-          td.left_blue
-            p 
-             b 5604,30   
+            p.sum #{@summ}
 
 
           td.left_blue
-            p 5604,30   
-         tr
-          td
-                  p
-                   |  Другое
- 
-          td.left_blue
-            p 5604,30            
-
-          td.left_blue
-            p 
-             b 5604,30   
-
-
-          td.left_blue
-            p 5604,30  
+            p -
+         
          tr.top_blue
           td
                   p
                    b  Итого
  
           td.left_blue
-            p 5604,30            
+            p -            
 
           td.left_blue
-            p 
-             b 5604,30   
+            p.sum #{@summ}   
 
 
           td.left_blue
-            p 5604,30               
-.black_over
-  .container
-    .tutorial.one
-      .next_tutorial next
-      .close_tutorial close
-    .tutorial.two
-      .next_tutorial next
-      .close_tutorial close
-    .tutorial.three
-      .next_tutorial next
-      .close_tutorial close
+            p -               
 
- 
-
-
-/! Modal <<<<>>>>><><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-          /! Modal
-#myModalobject.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
-  .modal-dialog.forma_enter
-    .modal-content
-      .modal-header
-        button.close aria-hidden="true" data-dismiss="modal" type="button" 
-          | 
-        .row
-          .col-md-12
-            h2.title
-              | Добавление объекта
-            .info.size_s
-              | Добавьте свою квартиру, дом или другую форму недвижимости
-      
-        .form-group-margin
-          .col-lg-12
-            label
-              | Название *
-            input.form-control placeholder="" type="" 
-          .clearfix
-        .form-group-margin
-          .col-lg-12
-            label
-              | Тип объекта *
-            select name="" 
-              option value="1"  Самарские коммунальные системы
-              option value="2"  Самара Лан
-              option value="3"  Дельта-Самара
-              option value="4"  Цифрал-Сервис
-          .clearfix
-        .form-group-margin
-          .col-lg-12
-            label
-              | Город *
-            input.form-control placeholder="" type="" 
-          .clearfix     
-        .form-group-margin
-          .col-lg-12
-            label
-              | Улица *
-            input.form-control placeholder="" type="" 
-          .clearfix       
-        .t-table 
-         .t-cell
-           
-           label
-            | Дом *
-           input.form-control placeholder="" type="" 
-         .t-cell.padding_d
-         .t-cell
-            
-           label
-            | Квартира * 
-           input.form-control placeholder="" type="" 
-        .form-group-margin
-        p
-        button.btn.btn-default.btn-block type="button" 
-         | Создать
-
-    
-    /! /.modal-content
-  /! /.modal-dialog
-/! /.modal
-
+css:
+  | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+  | @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");

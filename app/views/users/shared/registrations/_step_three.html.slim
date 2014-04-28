@@ -1,0 +1,57 @@
+.reg-step-3
+  .row
+    .col-md-12
+      h2.title
+        | Выберите поставщика услуг
+      .info
+        | Выберите поставщика услуг и введите необходимые данные
+
+  = form_tag services_path, remote: true, id: "reg-step-three-form" do
+    input name="service[place_id]" type="hidden" value="#{@place.id}" 
+    .row.width-limiter
+      .col-md-6
+        .form-group-margin
+          .col-lg-12
+            label Название *
+            input#input-service-title.form-control.click_tooltips name="service[title]" placeholder="Введите название услуги" type="text" 
+              .tooltips
+                | Назовите Вашу первую услугу.Например "Свет"
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label for="typs"  Тип услуги *
+            select name="service[service_type_id]" 
+              option value="1"  Водоснабжение
+              option value="2"  Коммунальные услуги
+              option value="3"  Интернет
+              option value="4"  Охрана
+          .tutorial
+            .next_tutorial следующий
+            .close_tutorial
+            .custom
+              input#hide_tut type="checkbox" 
+                label for="hide_tut"  Больше не показывать
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label Поставщик *
+            select name="service[vendor_id]" 
+              option value="1"  Самарские коммунальные системы
+              option value="2"  Самара Лан
+              option value="3"  Дельта-Самара
+              option value="4"  Цифрал-Сервис
+          .clearfix
+          .tutorial
+            .next_tutorial следующий
+            .close_tutorial
+        .form-group-margin
+          .col-lg-12
+            label Лицевой счет *
+            input#input-service-user-account.form-control.click_tooltips name="service[user_account]" placeholder=("Введите номер договора или лицевого счета") type="text" 
+              .tooltips
+                img.tooltip_logo src="../assets/logo-blue.png" width="80" 
+          .clearfix
+    .row style=("clear: both") 
+      .col-md-6
+        .col-md-12
+          input#reg-step-three-submit.btn.btn-default onclick=("return false;") type="submit" value="Продолжить" 

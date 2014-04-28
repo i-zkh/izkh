@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403222633) do
+ActiveRecord::Schema.define(version: 20140427192429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,11 @@ ActiveRecord::Schema.define(version: 20140403222633) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "apartment"
+    t.string   "building"
   end
 
   create_table "service_types", force: true do |t|
-    t.integer  "title"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,15 +48,17 @@ ActiveRecord::Schema.define(version: 20140403222633) do
   create_table "transactions", force: true do |t|
     t.float    "amount"
     t.float    "commission"
-    t.integer  "status",                default: 0
+    t.integer  "status",                          default: 0
     t.text     "error"
     t.string   "place"
     t.string   "service"
     t.integer  "user_id"
     t.boolean  "multiple"
-    t.integer  "included_transactions", default: [], array: true
+    t.integer  "included_transactions",           default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "payment_type",                    default: 1
+    t.integer  "order_id",              limit: 8
   end
 
   create_table "users", force: true do |t|
@@ -80,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140403222633) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -88,10 +92,12 @@ ActiveRecord::Schema.define(version: 20140403222633) do
   create_table "vendors", force: true do |t|
     t.string   "title"
     t.integer  "service_type_id"
-    t.boolean  "send_metrics",    default: false
+    t.boolean  "send_metrics",         default: false
     t.float    "commission"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "commission_yandex"
+    t.float    "commission_web_money"
   end
 
 end

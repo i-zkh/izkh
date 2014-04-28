@@ -1,0 +1,5 @@
+- unless services.empty?
+  - services.each do |service|
+    = render "shared/services/card", service: service
+- else
+  p#no-service Для этого объекта не создано ни одной услуги.

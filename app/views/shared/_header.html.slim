@@ -2,9 +2,8 @@
   .container
     .row
       .col-md-12.hidden-xs
-        a.navbar-brand href="#" 
-          | АйЖКХ
-        p style=("padding-top: 15px;") 
+        = link_to "АйЖКХ", root_path, class: "navbar-brand" 
+        p style="padding-top: 15px;"
           | Доступный платежный сервис
           a.right_padding href="" 
             | О проекте

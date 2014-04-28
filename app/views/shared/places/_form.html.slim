@@ -1,0 +1,55 @@
+#places-modal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button" 
+          | &times;
+        .row
+          .col-md-12
+            h2.title
+              | Добавление объекта
+            .info.size_s
+              | Добавьте свою квартиру, дом или другую форму недвижимости
+        
+        =form_for(@place, remote: true) do |f|
+          .form-group-margin
+            .col-lg-12
+              label
+                | Название *
+              =f.text_field(:title, id: "input-place-title", class: "form-control")
+            .clearfix
+          .form-group-margin
+            .col-lg-12
+              label
+                | Тип объекта *
+              =f.select(:place_type, [["Дом", "Дом"], ["Квартира", "Квартира"], ["Гараж", "Гараж"]])
+            .clearfix
+          .form-group-margin
+            .col-lg-12
+              label
+                | Город *
+              =f.text_field(:city, id: "input-place-city", class: "form-control") 
+            .clearfix     
+          .form-group-margin
+            .col-lg-12
+              label
+                | Улица *
+              =f.text_field(:address, id: "input-place-address", class: "form-control") 
+            .clearfix       
+          .t-table 
+           .t-cell
+             label
+              | Дом *
+             =f.text_field(:building, id: "input-place-building", class: "form-control") 
+           .t-cell.padding_d
+           .t-cell
+              
+             label
+              | Квартира *
+             =f.text_field(:apartment, id: "input-place-apartment", class: "form-control") 
+          .form-group-margin
+          p
+          - if @place.id
+            input#submit-update-place.btn.btn-default.btn-block.click-off type="submit" value="Сохранить" data-id="#{@place.id}"
+          - else
+            input#submit-create-place.btn.btn-default.btn-block.click-off type="submit" value="Создать" 

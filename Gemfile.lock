@@ -256,6 +256,7 @@ DEPENDENCIES
   simple_form
   slim
   spring
+  sprockets
   symbolize
   test_after_commit
   therubyracer

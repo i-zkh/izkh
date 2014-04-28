@@ -1,0 +1,54 @@
+.reg-step-2 
+  .row
+    .col-md-12
+      h2.title
+        | Добавление объекта
+      .info
+        | Добавьте свою квартиру, дом или другую форму недвижимости
+  = form_tag reg_create_places_path, remote: true, id: "reg-step-two-form" do
+    .row.width-limiter
+      .col-md-6
+        .form-group-margin
+          .col-lg-12
+            label
+              | Название *
+            input#input-place-title.form-control.click_tooltips name="place[title]" placeholder=("Введите название объекта") type="text" 
+              .tooltips
+                | Назовите Ваш первый объект. Например,"Мой дом".
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label for="typs" 
+              | Тип объекта *
+            select name="place[place_type]"
+              option value="Дом"  Дом
+              option value="Квартира"  Квартира
+              option value="Гараж"  Гараж
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label Город *
+            input#input-place-city.form-control name="place[city]" placeholder=("Выберите город") type="text" 
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label
+              | Улица *
+            input#input-place-address.form-control name="place[address]" placeholder="Улица" type="text" 
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label
+              | Дом, строение *
+            input#input-place-address.form-control name="place[building]" placeholder="Дом, строение" type="text" 
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label
+              | Квартира *
+            input#input-place-address.form-control name="place[apartment]" placeholder=("Введите номер Вашей квартиры") type="text" 
+          .clearfix
+    .row style="clear: both"
+      .col-md-6
+        div
+          input#reg-step-two-submit.btn.btn-default onclick="return false" type="submit" value="Продолжить" 

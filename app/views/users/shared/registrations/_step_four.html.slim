@@ -1,0 +1,53 @@
+.reg-step-4
+  .row
+    .col-md-12
+      h2.title
+        | Оплата услуги
+      .info
+        | Введите сумму платежа и нажмите кнопку “Оплатить”
+  .row.width-limiter
+    .col-md-6
+      .form-group-margin
+        .col-lg-12
+          label
+            | Сумма *
+          .row
+            .t-table_w
+              .t-cell
+                .col-md-12
+                  input#inputEmail1.form-control placeholder="" type="email" /
+              .t-cell руб.
+              .t-cell
+                .col-md-12
+                  input#inputEmail1.form-control placeholder="" type="email" /
+              .t-cell коп.
+        .clearfix
+      .form-group-margin
+        .col-lg-12
+          label
+            | Способ оплаты *
+          p
+          p
+            .custom
+              input#i13 name="radio" type="radio" 
+                label for="i13"  Банковская карта
+          p
+            .custom
+              input#i14 name="radio" type="radio" 
+                label for="i14"  Web Money
+          p
+            .custom
+              input#i15 name="radio" type="radio" 
+                label for="i15"  Яндекс.Деньги
+        .clearfix
+    .row style=("clear: both") 
+      .col-md-6
+        .col-md-12
+          p.sum
+            | Комиссия сервиса:
+            span 20 руб. 30 коп.
+          p.sum
+            | Итого к оплате:
+            span 1220 руб. 30 коп.
+          button#reg-step-four-submit.btn.btn-default onclick=("return false;") type="button"  Оплатить
+          p.sum style=("font-size: 12px")  Безопасность проведения платежа гарантирована сервисом АйЖКХ

@@ -14,6 +14,7 @@ gem 'devise-russian'
 gem 'symbolize'
 gem 'mandrill-api'
 gem 'settingslogic'
+gem 'sprockets'
 
 gem 'slim'
 gem 'html2slim'
