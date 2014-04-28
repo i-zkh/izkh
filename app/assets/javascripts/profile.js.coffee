@@ -3,7 +3,7 @@
 //= require bootstrap.min
 //= require jquery.kladr.min
 //= require 'jquery-ui-1.10.4.custom'
-//= require 'jquery.selectBox.js'
+//= require 'select2.js'
 //= require 'morris.js'
 //= require 'raphael-min.js'
 //= require 'jquery.maskedinput.min'
@@ -73,7 +73,7 @@ $(document).ready ->
         $('#reg-step-three-info').addClass('active')
         $('.reg-head').append(data)
 
-        $("select").selectBox()
+        $("select").select2()
         $("#reg-step-three-form").validationEngine()
       error: (error, qwe, er) ->
         console.log(er)
@@ -118,7 +118,7 @@ $(document).ready ->
     $(this).siblings('.tooltips').stop().fadeOut(200)
 
 # Custom select
-  $("select").selectBox()
+  $("select").select2()
 
 # Validation
   $("#reg-step-one-form").validationEngine()
@@ -138,7 +138,7 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
+        $("select").select2()
         $modalContainer.find('.modal').modal('show')
 
         $('#input-place-city').kladr({
@@ -164,7 +164,7 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
+        $("select").select2()
         $modalContainer.find('.modal').modal('show')
 
 # Create place event
@@ -380,3 +380,29 @@ $(document).ready ->
       total = commission + amount
       $("#total").html " " + total + " руб."
 
+#Красивости на главной,ховер 
+  
+
+$(window).on "scroll", ->
+  tops = $(window).scrollTop()
+  if tops > 100
+    $(".hover_circle.zr .mask,.hover_circle.zr .mask_box,.hover_circle.zr .info_t").addClass "scrolling"
+    setTimeout (->
+      $(".hover_circle.on .mask,.hover_circle.on .mask_box,.hover_circle.on .info_t").addClass "scrolling"
+      return
+    ), 600
+    setTimeout (->
+      $(".hover_circle.two .mask,.hover_circle.two .mask_box,.hover_circle.two .info_t").addClass "scrolling"
+      return
+    ), 1200
+  else
+    $(".hover_circle.zr .mask,.hover_circle.zr .mask_box,.hover_circle.zr .info_t").removeClass "scrolling"
+    setTimeout (->
+      $(".hover_circle.on .mask,.hover_circle.on .mask_box,.hover_circle.on .info_t").removeClass "scrolling"
+      return
+    ), 600
+    setTimeout (->
+      $(".hover_circle.two .mask,.hover_circle.two .mask_box,.hover_circle.two .info_t").removeClass "scrolling"
+      return
+    ), 1200
+  return
