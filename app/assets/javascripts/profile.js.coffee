@@ -3,7 +3,7 @@
 //= require bootstrap.min
 //= require jquery.kladr.min
 //= require 'jquery-ui-1.10.4.custom'
-//= require 'select2.js'
+//= require 'jquery.selectBox.js'
 //= require 'morris.js'
 //= require 'raphael-min.js'
 //= require 'jquery.maskedinput.min'
@@ -29,10 +29,11 @@ $(document).ready ->
 
 # Ajax'ing registration      
   $('body').on 'click', '#reg-step-one-submit', ->
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/users'
       type: 'POST'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       dataType: 'html'
       data: $('#reg-step-one-form').serialize()
       success: (data) ->
@@ -41,6 +42,7 @@ $(document).ready ->
         $('#reg-step-two-info').addClass('active')
         $('.reg-head').append(data)
 
+        $("select").selectBox()
         $("#reg-step-two-form").validationEngine()
 
         $('#input-place-city').kladr({
@@ -58,16 +60,17 @@ $(document).ready ->
           parentType: $.kladr.type.city
         })
         $("#js-container").removeClass('loading')
-      error: (data) ->
-        $('.error-container').empty()
-        $('.error-container').append(data.responseText)
+
+      error: (error, qwe, er) ->
+        console.log(er)
         $("#js-container").removeClass('loading')
     
   $('body').on 'click', '#reg-step-two-submit', ->
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/reg_create'
       type: 'POST'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       dataType: 'html'
       data: $('#reg-step-two-form').serialize()
       success: (data) ->
@@ -75,20 +78,21 @@ $(document).ready ->
         $('#reg-step-two-info').removeClass('active')
         $('#reg-step-three-info').addClass('active')
         $('.reg-head').append(data)
-        $("select").select2()
+
+        $("select").selectBox()
         $("#reg-step-three-form").validationEngine()
         $("#js-container").removeClass('loading')
-      error: (data) ->
-        $('.error-container').empty()
-        $('.error-container').append(data.responseText)
+      error: (error, qwe, er) ->
+        console.log(er)
         $("#js-container").removeClass('loading')
 
   $('body').on 'click', '#reg-step-three-submit', ->
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/reg_create'
       type: 'POST'
       dataType: 'html'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       data: $('#reg-step-three-form').serialize()
       success: (data) ->
         $('.reg-step-3').remove()
@@ -98,9 +102,8 @@ $(document).ready ->
         $("#reg-step-four-form").validationEngine()
         commissionCalc()
         $("#js-container").removeClass('loading')
-      error: (data) ->
-        $('.error-container').empty()
-        $('.error-container').append(data.responseText)
+      error: (error) ->
+        console.log(error)
         $("#js-container").removeClass('loading')
 
   $('body').on 'click', '#reg-step-four-submit', ->
@@ -128,8 +131,7 @@ $(document).ready ->
     $(this).siblings('.tooltips').stop().fadeOut(200)
 
 # Custom select
-  $("select").select2()
-
+  $("select").selectBox()
 
 # Validation
   $("#reg-step-one-form").validationEngine()
@@ -143,14 +145,15 @@ $(document).ready ->
 
 # Add place event
   $('#dashboard-add-place').on 'click', ->
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/new'
       type: 'GET'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").select2()
+        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
 
         $('#input-place-city').kladr({
@@ -171,50 +174,45 @@ $(document).ready ->
 
 # Add serivce event
   $('#dashboard-add-service').on 'click', ->
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/new'
       type: 'GET'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").select2()
+        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
         $("#js-container").removeClass('loading')
 
 # Create place event
   $('body').on 'click', '#submit-create-place', ->
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/places'
       type: 'POST'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       data: $('#new_place').serialize()
       success: (data) ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-place').remove()
         $('#place-accordion').append(data)
         $("#js-container").removeClass('loading')
-      error: (data) ->
-        $('.error-container').empty()
-        $('.error-container').append(data.responseText)
-        $("#js-container").removeClass('loading')
 
 # Create service event
   $('body').on 'click', '#submit-create-service', ->
     $('#new_service').find('#service-place-id').val(activePlaceId)
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/services'
       type: 'POST'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       data: $('#new_service').serialize()
       success: (data) ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-service').remove()
         $('#service-accordion').append(data)
-        $("#js-container").removeClass('loading')
-      error: (data) ->
-        $('.error-container').empty()
-        $('.error-container').append(data.responseText)
         $("#js-container").removeClass('loading')
 
 # Place accordion click 
@@ -229,10 +227,11 @@ $(document).ready ->
         .not(this)
         .removeClass('active-accordion-item')
       $('#dashboard-add-service').show()
-      $("#js-container").addClass('loading')
       $.ajax
         url: '/services/' + activePlaceId + '/by_place'
         type: 'GET'
+        beforeSend: ->
+          $("#js-container").addClass('loading')
         success: (data) ->
           $('#no-service').remove()
           $('#service-accordion').html(data)
@@ -252,10 +251,11 @@ $(document).ready ->
         .not(this)
         .removeClass('active-accordion-item')
       id = $(this).data('id')
-      $("#js-container").addClass('loading')
       $.ajax
         url: '/services/' + id
         type: 'GET'
+        beforeSend: ->
+          $("#js-container").addClass('loading')
         success: (data) ->
           $('#service-detailed').html(data)
           commissionCalc()
@@ -265,74 +265,81 @@ $(document).ready ->
 
 # Delete place event
   $('body').on 'click', '.place-delete', ->
-    if confirm 'Действительно удалить?'
-      id = $(this).data('id')
-      $("#js-container").addClass('loading')
-      $.ajax
-        url: '/places/' + id
-        dataType: 'json'
-        type: 'DELETE'
-        success: (data) ->
-          $('#container-' + id).slideUp()
-          $('#service-accordion').empty();
-          $('#service-accordion').append('<p id="no-service">Выберите объект</p>');
-          
-          $('#dashboard-add-service').hide()
+    id = $(this).data('id')
+    $.ajax
+      url: '/places/' + id
+      dataType: 'json'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      type: 'DELETE'
+      success: (data) ->
+        $('#container-' + id).slideUp()
+        $('#service-accordion').empty();
+        $('#service-accordion').append('<p id="no-service">Выберите объект</p>');
+        
+        $('#dashboard-add-service').hide()
 
-          $('.menu_other').html('Выберите услугу')
-          $('.edit_services_sum').html(emptyDetailedService)
-          $('.payment_box').remove()
-          $("#js-container").removeClass('loading')
+        $('.menu_other').html('Выберите услугу')
+        $('.edit_services_sum').html(emptyDetailedService)
+        $('.payment_box').remove()
+        $("#js-container").removeClass('loading')
+
 # Delete service event
   $('body').on 'click', '.service-delete', ->
-    if confirm 'Действительно удалить?'
-      id = $(this).data('id')
-      $("#js-container").addClass('loading')
-      $.ajax
-        url: '/services/' + id
-        dataType: 'json'
-        type: 'DELETE'
-        success: (data) ->
-          $('#service-container-' + id).slideUp()
-          $('.menu_other').html('Выберите услугу')
-          $('.edit_services_sum').html(emptyDetailedService)
-          $('.payment_box').remove()
-          $("#js-container").removeClass('loading')
+    id = $(this).data('id')
+    $.ajax
+      url: '/services/' + id
+      dataType: 'json'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      type: 'DELETE'
+      success: (data) ->
+        $('#service-container-' + id).slideUp()
+        $('.menu_other').html('Выберите услугу')
+        $('.edit_services_sum').html(emptyDetailedService)
+        $('.payment_box').remove()
+        $("#js-container").removeClass('loading')
 
 # Edit place event
   $('body').on 'click', '.place-edit', ->
     id = $(this).data('id')
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/' + id + '/edit'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       type: 'GET'
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
+        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
         $("#js-container").removeClass('loading')
         
 # Edit service event
   $('body').on 'click', '.service-edit', ->
     id = $(this).data('id')
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/' + id + '/edit'
       type: 'GET'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
+        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
         $("#js-container").removeClass('loading')
         
 # Update place event
   $('body').on 'click', '#submit-update-place', ->
     id = $(this).data('id')
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/places/' + id
       type: 'PUT'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       data: $('.edit_place').serialize()
+      dataType: 'json'
       success: (data) ->
         $place = $('#place-' + id)
         $form = $('.edit_place')
@@ -343,19 +350,17 @@ $(document).ready ->
         $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
-      error: (data) ->
-        $('.error-container').empty()
-        $('.error-container').append(data.responseText)
-        $("#js-container").removeClass('loading')
 
 # Update service event
   $('body').on 'click', '#submit-update-service', ->
     id = $(this).data('id')
-    $("#js-container").addClass('loading')
     $.ajax
       url: '/services/' + id
       type: 'PUT'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
       data: $('.edit_service').serialize()
+      dataType: 'json'
       success: (data) ->
         $service = $('#service-detailed')
         $form = $('.edit_service')
@@ -364,10 +369,6 @@ $(document).ready ->
         $service.find('.user-account').html($form.find('#input-service-user-account').val())
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
-        $("#js-container").removeClass('loading')
-      error: (data) ->
-        $('.error-container').empty()
-        $('.error-container').append(data.responseText)
         $("#js-container").removeClass('loading')
 
 # Commission calculation
@@ -435,34 +436,3 @@ $(document).ready ->
   $ ->
     setTimeout updateWidgets, 30000  if document.getElementById("widget-container")?
     return
-
-# Tabs in transactions
-# TODO: Move to bootstrap tabs
-
-  $('.table_analitic:not(.table_analitic:eq(0))').hide()
-  $('.obj_click:first').addClass('active2')
-
-  $('.obj_click').on 'click', ->
-    $('.obj_click').removeClass('active2')
-    $('.table_analitic').stop().hide()
-    index = $(this).addClass('active2').index()
-    $('.table_analitic').eq(index).stop().fadeIn()
-
-  $('#transaction-place-accordion').on 'click', '.panel', ->
-    if !$(this).hasClass('active-accordion-item')
-      activePlaceId = $(this).data('id')
-      $(this).addClass('active-accordion-item')
-      $('#transaction-place-accordion')
-        .find('.panel')
-        .not(this)
-        .removeClass('active-accordion-item')
-      $('#dashboard-add-service').show()
-
-      $.ajax
-        url: '/transactions/' + activePlaceId + '/table_show'
-        type: 'get'
-        success: (data) ->
-          $('#table-analytic').empty()
-          $('#table-analytic').append(data)
-    else
-      false
