@@ -3,12 +3,54 @@ class TransactionsController < ApplicationController
   skip_before_filter :require_current_user
 
   def index
-    @trans = current_user.transactions
     @places = current_user.places
-    @summ = 0
-    @trans.each do |t|
-      @summ += t.amount.to_f
+  end
+
+  def table_show
+    @month_data = {}
+    @services_data = []
+    prev = Date.today.month - 1
+    curr = Date.today.month
+    nxt = Date.today.month + 1
+    year = Date.today.year
+
+    @month_data[:prev_month] = I18n.t('date.month_names')[prev]
+    @month_data[:curr_month] = I18n.t('date.month_names')[curr]
+    @month_data[:next_month] = I18n.t('date.month_names')[nxt]
+    @month_data[:prev_month_sum] = 0
+    @month_data[:curr_month_sum] = 0
+    @month_data[:next_month_sum] = 0
+
+    place = Place.find(params[:id])
+
+    prev_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', prev, year, place.title)
+    prev_trans.each do |pt|
+      @month_data[:prev_month_sum] += pt.amount
     end
+
+    curr_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', curr, year, place.title)
+    curr_trans.each do |ct|
+      @month_data[:curr_month_sum] += ct.amount
+    end
+
+    @month_data[:prev_month_sum] += (@month_data[:curr_month_sum] + @month_data[:prev_month_sum]) / 2
+    
+    services = place.services
+
+    services.each do |service|
+      prev_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', prev, year, place.title, service.title)
+      curr_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', curr, year, place.title, service.title)
+      
+      prev_sum = 0
+      curr_sum = 0
+      next_sum = 0
+
+      prev_service_trans.each {|st| prev_sum += st.amount}
+      curr_service_trans.each {|ct| curr_sum += ct.amount}
+      next_sum += (prev_sum + curr_sum) / 2
+      @services_data << {title: service.title, prev_sum: prev_sum, curr_sum: curr_sum, next_sum: next_sum}
+    end
+    render partial: 'shared/transactions/services/index', status: :ok 
   end
 
   def pay

@@ -38,6 +38,7 @@
               =f.text_field(:user_account, id: "input-service-user-account", class: "form-control")
             .clearfix       
           p
+            .error-container
           - if @service.id
             input#submit-update-service.btn.btn-default.btn-block.click-off type="submit" value="Сохранить" data-id="#{@service.id}"
           - else

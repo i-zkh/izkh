@@ -1,8 +1,8 @@
 .navbar.white
-  =link_to "Профиль", "#", :class => "inline left white navbar-link"
-  =link_to "Аналитика", "#", :class => "inline left white navbar-link"
-  =link_to "Сервисы", "#", :class => "inline left white navbar-link"
-  =link_to "Уведомления", "#", :class => "inline left white navbar-link"
+  =link_to "Профиль", dashboard_index_path, :class => "inline left white navbar-link"
+  =link_to "Аналитика", transactions_path, :class => "inline left white navbar-link"
+  /=link_to "Сервисы", "#", :class => "inline left white navbar-link"
+  /=link_to "Уведомления", "#", :class => "inline left white navbar-link"
   
   - if current_user 
     =link_to "Выход", destroy_user_session_path, :class => "inline right white userblock"

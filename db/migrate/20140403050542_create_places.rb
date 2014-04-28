@@ -6,6 +6,7 @@ class CreatePlaces < ActiveRecord::Migration
       t.string :address
       t.string :city
       t.string :place_type
+      t.string :building
 
       t.timestamps
     end

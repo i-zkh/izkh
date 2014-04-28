@@ -21,18 +21,30 @@ class ServicesController < ApplicationController
   end
 
   def update
-    @service = Service.find(params[:id]).update!(service_params)
-    render json: {}, status: :ok
+    @service = Service.find(params[:id])
+    if @service.update(service_params)
+      render json: {}, status: :ok
+    else
+      render partial: 'shared/errors', locals: { object: @service }, status: :error
+    end
   end
 
   def create
-    @service = Service.create!(service_params.merge!(user_id: current_user.id))
-    render partial: 'shared/services/card', locals: {service: @service}, status: :ok
+    @service = Service.new(service_params.merge!(user_id: current_user.id))
+    if @service.save      
+      render partial: 'shared/services/card', locals: {service: @service}, status: :ok
+    else
+      render partial: 'shared/errors', locals: { object: @service }, status: :error
+    end
   end
 
   def reg_create
-    Service.create!(service_params.merge!(user_id: current_user.id))
-    render partial: "users/shared/registrations/step_four"
+    @service = Service.new(service_params.merge!(user_id: current_user.id))
+    if @service.save      
+      render partial: "users/shared/registrations/step_four"
+    else
+      render partial: 'shared/errors', locals: { object: @service }, status: :error
+    end
   end
 
   def destroy

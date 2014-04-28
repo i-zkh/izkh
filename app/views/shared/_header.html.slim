@@ -24,45 +24,20 @@
       .navbar-collapse.collapse
         ul.nav.navbar-nav.head_menu
           li
-            a href="" 
-              | Профиль
+            = link_to "Профиль", dashboard_index_path
           li
-            a href="#about" 
-              | Аналитика
-          li
-            a href="#contact" 
-              | Сервисы
-          li.dropdown
-            a.dropdown-toggle data-toggle="dropdown" href="" 
-              | Уведомления
-              span.badge.green
-                span 3
-            ul.dropdown-menu
-              li
-                a href="" 
-                  | Текст
-              li
-                a href="" 
-                  | Текст
-              li
-                a href="" 
-                  | Текст
+            = link_to "Аналитика", transactions_path
+          / li
+          /   a href="#contact" 
+          /     | Сервисы
         unless controller_name == 'registrations'
           ul.nav.navbar-nav.navbar-right.head_menu
             - if current_user
               li.hidden-xs style=("padding-top: 12px; color: #777;margin-right: -10px") 
                 | Рады вас видеть,
-              li.dropdown
+              li
                 a.dropdown-toggle data-toggle="dropdown" href="" 
-                  = current_user.first_name
-                  b.caret
-                ul.dropdown-menu 
-                  li
-                    a href="" 
-                      | Настройки
-                  li
-                    a href="" 
-                      | Статистика
+                  = current_user.first_name                
               li
                 = link_to destroy_user_session_path
                   | Выйти

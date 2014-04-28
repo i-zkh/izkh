@@ -40,7 +40,6 @@ $(document).ready ->
         $('#reg-step-two-info').addClass('active')
         $('.reg-head').append(data)
 
-        $("select").selectBox()
         $("#reg-step-two-form").validationEngine()
 
         $('#input-place-city').kladr({
@@ -57,9 +56,9 @@ $(document).ready ->
           type: $.kladr.type.street,
           parentType: $.kladr.type.city
         })
-
-      error: (error, qwe, er) ->
-        console.log(er)
+      error: (data) ->
+        $('.error-container').empty()
+        $('.error-container').append(data.responseText)
     
   $('body').on 'click', '#reg-step-two-submit', ->
     $.ajax
@@ -73,10 +72,10 @@ $(document).ready ->
         $('#reg-step-three-info').addClass('active')
         $('.reg-head').append(data)
 
-        $("select").selectBox()
         $("#reg-step-three-form").validationEngine()
-      error: (error, qwe, er) ->
-        console.log(er)
+      error: (data) ->
+        $('.error-container').empty()
+        $('.error-container').append(data.responseText)
 
   $('body').on 'click', '#reg-step-three-submit', ->
     $.ajax
@@ -90,8 +89,9 @@ $(document).ready ->
         $('#reg-step-four-info').addClass('active')
         $('.reg-head').append(data)
         $("#reg-step-four-form").validationEngine()
-      error: (error) ->
-        console.log(error)
+      error: (data) ->
+        $('.error-container').empty()
+        $('.error-container').append(data.responseText)
 
   $('body').on 'click', '#reg-step-four-submit', ->
     $('#wip').html('Оплата будет доступна в ближайшее время')
@@ -118,7 +118,7 @@ $(document).ready ->
     $(this).siblings('.tooltips').stop().fadeOut(200)
 
 # Custom select
-  $("select").selectBox()
+# TODO: Implement plugin  
 
 # Validation
   $("#reg-step-one-form").validationEngine()
@@ -138,7 +138,6 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
 
         $('#input-place-city').kladr({
@@ -164,7 +163,6 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
 
 # Create place event
@@ -177,6 +175,10 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-place').remove()
         $('#place-accordion').append(data)
+      error: (data) ->
+        $('.error-container').empty()
+        $('.error-container').append(data.responseText)
+
 
 # Create service event
   $('body').on 'click', '#submit-create-service', ->
@@ -189,6 +191,9 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-service').remove()
         $('#service-accordion').append(data)
+      error: (data) ->
+        $('.error-container').empty()
+        $('.error-container').append(data.responseText)
 
 # Place accordion click 
   $('#place-accordion').on 'click', '.panel-heading', ->
@@ -235,34 +240,36 @@ $(document).ready ->
 
 # Delete place event
   $('body').on 'click', '.place-delete', ->
-    id = $(this).data('id')
-    $.ajax
-      url: '/places/' + id
-      dataType: 'json'
-      type: 'DELETE'
-      success: (data) ->
-        $('#container-' + id).slideUp()
-        $('#service-accordion').empty();
-        $('#service-accordion').append('<p id="no-service">Выберите объект</p>');
-        
-        $('#dashboard-add-service').hide()
+    if confirm 'Действительно удалить?'
+      id = $(this).data('id')
+      $.ajax
+        url: '/places/' + id
+        dataType: 'json'
+        type: 'DELETE'
+        success: (data) ->
+          $('#container-' + id).slideUp()
+          $('#service-accordion').empty();
+          $('#service-accordion').append('<p id="no-service">Выберите объект</p>');
+          
+          $('#dashboard-add-service').hide()
 
-        $('.menu_other').html('Выберите услугу')
-        $('.edit_services_sum').html(emptyDetailedService)
-        $('.payment_box').remove()
+          $('.menu_other').html('Выберите услугу')
+          $('.edit_services_sum').html(emptyDetailedService)
+          $('.payment_box').remove()
 
 # Delete service event
   $('body').on 'click', '.service-delete', ->
-    id = $(this).data('id')
-    $.ajax
-      url: '/services/' + id
-      dataType: 'json'
-      type: 'DELETE'
-      success: (data) ->
-        $('#service-container-' + id).slideUp()
-        $('.menu_other').html('Выберите услугу')
-        $('.edit_services_sum').html(emptyDetailedService)
-        $('.payment_box').remove()
+    if confirm 'Действительно удалить?'
+      id = $(this).data('id')
+      $.ajax
+        url: '/services/' + id
+        dataType: 'json'
+        type: 'DELETE'
+        success: (data) ->
+          $('#service-container-' + id).slideUp()
+          $('.menu_other').html('Выберите услугу')
+          $('.edit_services_sum').html(emptyDetailedService)
+          $('.payment_box').remove()
 
 # Edit place event
   $('body').on 'click', '.place-edit', ->
@@ -273,7 +280,6 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
         
 # Edit service event
@@ -285,7 +291,6 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
         $modalContainer.find('.modal').modal('show')
         
 # Update place event
@@ -295,7 +300,6 @@ $(document).ready ->
       url: '/places/' + id
       type: 'PUT'
       data: $('.edit_place').serialize()
-      dataType: 'json'
       success: (data) ->
         $place = $('#place-' + id)
         $form = $('.edit_place')
@@ -305,6 +309,9 @@ $(document).ready ->
         $place.find('.place-address').html('Адрес: ' + $form.find('#input-place-address').val() + ', ' + $form.find('#input-place-building').val())
         $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
+      error: (data) ->
+        $('.error-container').empty()
+        $('.error-container').append(data.responseText)
 
 # Update service event
   $('body').on 'click', '#submit-update-service', ->
@@ -313,7 +320,6 @@ $(document).ready ->
       url: '/services/' + id
       type: 'PUT'
       data: $('.edit_service').serialize()
-      dataType: 'json'
       success: (data) ->
         $service = $('#service-detailed')
         $form = $('.edit_service')
@@ -322,6 +328,9 @@ $(document).ready ->
         $service.find('.user-account').html($form.find('#input-service-user-account').val())
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
+      error: (data) ->
+        $('.error-container').empty()
+        $('.error-container').append(data.responseText)
 
 # Commission calculation
 # TODO: Refactor to the bone
@@ -379,4 +388,36 @@ $(document).ready ->
       $("#commission").html " " + commission + " руб."
       total = commission + amount
       $("#total").html " " + total + " руб."
+
+# Tabs in transactions
+# TODO: Move to bootstrap tabs
+
+  $('.table_analitic:not(.table_analitic:eq(0))').hide()
+  $('.obj_click:first').addClass('active2')
+
+  $('.obj_click').on 'click', ->
+    $('.obj_click').removeClass('active2')
+    $('.table_analitic').stop().hide()
+    index = $(this).addClass('active2').index()
+    $('.table_analitic').eq(index).stop().fadeIn()
+
+  $('#transaction-place-accordion').on 'click', '.panel', ->
+    if !$(this).hasClass('active-accordion-item')
+      activePlaceId = $(this).data('id')
+      $(this).addClass('active-accordion-item')
+      $('#transaction-place-accordion')
+        .find('.panel')
+        .not(this)
+        .removeClass('active-accordion-item')
+      $('#dashboard-add-service').show()
+
+      $.ajax
+        url: '/transactions/' + activePlaceId + '/table_show'
+        type: 'get'
+        success: (data) ->
+          $('#table-analytic').empty()
+          $('#table-analytic').append(data)
+    else
+      false
+    
 

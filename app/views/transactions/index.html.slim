@@ -4,10 +4,10 @@
       .t-cell.tops.shadow_right style=("width: 250px") 
         .title_main_ob
           span Мои объекты
-        .panel-group#place-accordion
+        .panel-group#transaction-place-accordion
           - unless @places.empty?
               - @places.each do |place|
-                = render "shared/places/card", place: place
+                = render "shared/transactions/places/card", place: place
           - else
             p#no-place Вы еще не создавали объекты.
 
@@ -30,57 +30,11 @@
                   p
                     .custom
                       input#i13 name="" type="checkbox" 
-                        label for="i13"  #{@trans.first.service}
+                        label for="i13"  service_title
  
           td.left_blue
             =image_tag("test_img.jpg", class:'img_ob_test') 
-        table.table_analitic
-         tr
-          th
-           |2014 год
-          th.left_blue
-             p
-              | Март
-              span.pre Предыдущий
-         
-          th
-             p
-              | Апрель
-              span.pre Текущий
-          th
-             p
-              | Май
-              span.pre Прогноз
-
-         tr
-          td
-                  p
-                   b #{@trans.first.service}
- 
-          td.left_blue
-            p -
-
-          td.left_blue
-            p.sum #{@summ}
-
-
-          td.left_blue
-            p -
-         
-         tr.top_blue
-          td
-                  p
-                   b  Итого
- 
-          td.left_blue
-            p -            
-
-          td.left_blue
-            p.sum #{@summ}   
-
-
-          td.left_blue
-            p -               
+        table.table_analitic#table-analytic
 
 css:
   | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");

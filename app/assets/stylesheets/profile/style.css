@@ -1232,3 +1232,8 @@ input{position: relative;}
   background-color: #67be61;
   color: white;
 }
+
+/* Error handling */
+.error-text {
+  color: #FF3B30;
+}
