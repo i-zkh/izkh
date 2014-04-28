@@ -6,8 +6,8 @@ class UpdateTableController < ApplicationController
     UpdateTable.vendors
     UpdateTable.places
     UpdateTable.services
-    UpdateTable.users
     UpdateTable.tariff_templates
+    UpdateTable.users
     render json: true
   end
 end
