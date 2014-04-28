@@ -21,7 +21,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
-      respond_with resource
+      render partial: 'shared/errors', locals: { object: resource }, status: :error
     end
   end
 end

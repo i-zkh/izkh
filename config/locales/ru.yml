@@ -1,52 +1,37 @@
 ru:
-  will_paginate:
-    previous_label: "&laquo;"
-    next_label: "&raquo;"
-    page_gap: "&hellip;"
-  simple_form:
-    required:
-      text: 'required'
-      mark: ''
-    labels:
-      user:
-        first_name: Имя
-        last_name: Фамилия
-        phone: Телефон
-        email: Почта
-        password: Пароль
-        city_id: Город
-        city: Город
-        gender: Пол
   activerecord:
     models:
-      city: Города
-      user: Пользователи
-      idea: Идеи
-      project: Проекты
-      master: Мастера
-      tag: Теги
-      section: Разделы
-    symbolizes:
+      user: Пользователь
+      place: Объект
+      service: Услуга
+      service_type: Тип услуги
+      vendor: Поставщик услуг
+      transaction: Транзакции
+      widget: Виджет
+    attributes:
       user:
-        gender:
-          m: Мужской
-          f: Женский
-      section:
-        site_part:
-          ideas: Идеи
-          projects: Проекты
-          masters: Мастера
-  helpers:
-    submit:
-      create: "Создать"
-      update: "Сохранить"
-
+        first_name: имя
+        password: пароль
+        email: email
+        phone: телефон
+        gender: пол
+        city: город
+      place:
+        title: название
+        place_type: тип
+        address: улица
+        building: дом
+        apartment: квартира
+      service:
+        title: название
+        vendor_id: поставщик услуг
+        service_type_id: тип услуги
+        user_account: номер договора или лицевого счета
+      vendor:
+        title: название
+        service_type_id: тип услуги
+        commission: комиссия Pay Online
+        commissiom_yandex: комиссия Яндекс Деньги
+        commission_web_money: комиссия Web Money
   date:
-    order:
-      ["day", "month", "year"]
-    month_names: [~, "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
-    formats:
-      default: '%d.%m.%y'
-  time:
-    formats:
-      default: '%d.%m.%y %I:%M%p'
+    month_names: [~, 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']

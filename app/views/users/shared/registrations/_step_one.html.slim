@@ -64,7 +64,10 @@
                 input#offer-confirm.checkbox class="validate[required]" name="okay" type="checkbox" 
                   label for="offer-confirm"  Я принимаю условия
                   a data-toggle="modal" href="#myModaloffer"  публичной оферты
-            input#reg-step-one-submit.btn.btn-default.submit onclick="return false" name="enter" type="submit" value="Продолжить"
+
+            .error-container
+            
+            input#reg-step-one-submit.btn.btn-default.submit.click-off name="enter" type="submit" value="Продолжить"
 
 #myModaloffer.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
   .modal-dialog.forma_enter

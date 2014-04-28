@@ -1296,4 +1296,7 @@ input{position: relative;}
 {
 0%   {transform: scale(0.0);}
 100% {transform: scale(1.0);}
+/* Error handling */
+.error-text {
+  color: #FF3B30;
 }

@@ -49,6 +49,7 @@
              =f.text_field(:apartment, id: "input-place-apartment", class: "form-control") 
           .form-group-margin
           p
+            .error-container
           - if @place.id
             input#submit-update-place.btn.btn-default.btn-block.click-off type="submit" value="Сохранить" data-id="#{@place.id}"
           - else

@@ -1,0 +1,47 @@
+thead
+  tr
+    th
+      | 2014 год
+    th.left_blue
+      p
+        | #{@month_data[:prev_month]}
+        span.pre Предыдущий
+    th
+      p
+        | #{@month_data[:curr_month]}
+        span.pre Текущий
+    th
+      p
+        | #{@month_data[:next_month]}
+        span.pre Прогноз
+tboby
+
+  - @services_data.each do |service|
+    tr
+      td
+        p
+          b service.title
+
+      td.left_blue
+        p service.prev_sum 
+
+      td.left_blue
+        p service.curr_sum
+
+      td.left_blue
+        p service.next_sum
+
+  tr#total.top_blue
+    td
+      p
+        b  Итого
+
+    td.left_blue
+      p = @month_data[:prev_month_sum]
+
+    td.left_blue
+      p = @month_data[:curr_month_sum]
+
+
+    td.left_blue
+      p = @month_data[:next_month_sum]

@@ -17,6 +17,7 @@ Iz::Application.routes.draw do
 
   resources :transactions do
     post 'pay', on: :collection
+    get :table_show, on: :member
   end
   resources :widgets, only: [:create, :update, :index]
 

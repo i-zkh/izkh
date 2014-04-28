@@ -13,18 +13,30 @@ class PlacesController < ApplicationController
   end
 
   def reg_create
-    @place = Place.create!(place_params.merge!(user_id: current_user.id))
-    render partial: "users/shared/registrations/step_three"
+    @place = Place.new(place_params.merge!(user_id: current_user.id))
+    if @place.save
+      render partial: "users/shared/registrations/step_three"
+    else
+      render partial: 'shared/errors', locals: { object: @place }, status: :error
+    end
   end
 
   def create
-    @place = Place.create!(place_params.merge!(user_id: current_user.id))
-    render partial: 'shared/places/card', locals: { place: @place }, status: :ok
+    @place = Place.new(place_params.merge!(user_id: current_user.id))
+    if @place.save
+      render partial: 'shared/places/card', locals: { place: @place }, status: :ok
+    else
+      render partial: 'shared/errors', locals: { object: @place }, status: :error
+    end
   end
 
   def update
-    @place = Place.find(params[:id]).update!(place_params)
-    render json: {}, status: :ok
+    @place = Place.find(params[:id])
+    if @place.update(place_params)
+      render text: "", status: :ok
+    else
+      render partial: 'shared/errors', locals: { object: @place }, status: :error
+    end
   end
 
   def edit
