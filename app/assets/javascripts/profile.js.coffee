@@ -148,8 +148,8 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").select2()
         $modalContainer.find('.modal').modal('show')
+        $("select").select2()
 
         $('#input-place-city').kladr({
           token: kladrToken,
@@ -176,8 +176,8 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").select2()
         $modalContainer.find('.modal').modal('show')
+        $("select").select2()
         $("#js-container").removeClass('loading')
 
 # Create place event
@@ -321,8 +321,8 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").select2()
         $modalContainer.find('.modal').modal('show')
+        $("select").select2()
         $("#js-container").removeClass('loading')
         
 # Update place event
@@ -359,10 +359,11 @@ $(document).ready ->
       success: (data) ->
         $service = $('#service-detailed')
         $form = $('.edit_service')
-        $service.find('.service-type').html($form.find('#service_service_type').val())
-        $service.find('.vendor').html($form.find('#service_vendor').val())
+        $service.find('.service-type').html($form.find('#service_service_type_id').find('option[selected]').text())
+        $service.find('.vendor').html($form.find('#service_vendor_id').find('option[selected]').text())
         $service.find('.user-account').html($form.find('#input-service-user-account').val())
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
+        $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
       error: (data) ->
