@@ -3,7 +3,7 @@
 //= require bootstrap.min
 //= require jquery.kladr.min
 //= require 'jquery-ui-1.10.4.custom'
-//= require 'jquery.selectBox.js'
+//= require 'select2.js'
 //= require 'morris.js'
 //= require 'raphael-min.js'
 //= require 'jquery.maskedinput.min'
