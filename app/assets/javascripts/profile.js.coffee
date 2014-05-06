@@ -360,7 +360,6 @@ $(document).ready ->
       type: 'PUT'
       beforeSend: ->
         $("#js-container").addClass('loading')
-      data: $('.edit_service').serialize()
       dataType: 'json'
       success: (data) ->
         $service = $('#service-detailed')
@@ -371,6 +370,23 @@ $(document).ready ->
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
         $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
+        $("#js-container").removeClass('loading')
+
+  # Send options to select box
+  $('body').on 'change', '#service_service_type_id', ->
+    $.ajax
+      url: '/by_service_type'
+      type: 'GET'
+      dataType: 'html'
+      data: {service_type_id: $("#service_service_type_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#service_vendor_id').find("option").remove()
+        $('#service_vendor_id').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
         $("#js-container").removeClass('loading')
 
 # Commission calculation

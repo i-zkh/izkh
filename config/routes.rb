@@ -22,6 +22,7 @@ Iz::Application.routes.draw do
 
   post 'tutorial/off' => 'tutorial#off'
   get 'update_db' => 'update_table#update_db'
+  get 'by_service_type' => 'vendors#by_service_type'
 
   # Callback for PO
   post 'api/1.0/payment_success' => 'transactions#success'
