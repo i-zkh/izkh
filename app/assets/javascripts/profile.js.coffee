@@ -449,17 +449,6 @@ $(document).ready ->
 
   map = new ymaps.Map("map", {center: [53.25, 50.26], zoom: 12, controls: []})
 
-  ymaps.geolocation.get().then (res) ->
-  
-    $container = $('YMapsID'),
-        bounds = res.geoObjects.get(0).properties.get('boundedBy'),
-        mapState = ymaps.util.bounds.getCenterAndZoom(
-            bounds,
-            [$container.width(), $container.height()]
-        ),
-        map = new ymaps.Map('YMapsID', mapState);
-  , (e) ->
-    console.log(e);
 
   # Long Polling for widgets
   updateWidgets = ->

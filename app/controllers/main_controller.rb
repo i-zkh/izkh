@@ -1,7 +1,6 @@
 class MainController < ApplicationController
   skip_before_filter :require_current_user
-  layout 'main'
-  
+  layout 'application'
   def index
     # TODO: Values should be fetched from database
     @counter = {}
