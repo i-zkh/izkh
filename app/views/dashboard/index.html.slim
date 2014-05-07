@@ -34,36 +34,3 @@
 /         p#no-place Нет новых уведомлений.
         
 .modal-container
-
-/ css:
-  / | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-
-/   .block
-/   .title_main_ob style=("width: 250px") 
-/     span Мои объекты
-/     a#dashboard-add-place.click_plus.click-off href="#"
-/       =image_tag("plus.png")
-/   .panel-group#place-accordion
-/     - unless @places.empty?
-/         - @places.each do |place|
-/           = render "shared/places/card", place: place
-/     - else
-/       p#no-place Вы еще не создавали объекты.
-
-/ .service
-/   .block
-/     .tops
-/       .title_main_ob
-/         span Услуги
-/         a#dashboard-add-service.click_plus.click-off href="#" style="display: none"
-/           =image_tag("plus.png")
-/       .panel-group#service-accordion
-/         p#no-service Выберите объект
-/     .tops#service-detailed
-/       .title_main_ob
-/         .menu_other
-/           | Выберите услугу
-/       div style="min-height: 510px"
-/         .form-group-margin
-/           .edit_services_sum
-/             | Здесь будет показана информация о выбранной Вами услуге.

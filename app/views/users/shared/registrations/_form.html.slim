@@ -5,14 +5,14 @@
       .form-inputs
         .form-group-margin
           label Эл. почта
-          input.form-control-reg name="user[email]" placeholder=("Адрес Вашей эл. почты") type="email"
+          input#input-email.form-control-reg class="validate[required,custom[email]]" name="user[email]" placeholder=("Адрес Вашей эл. почты") type="email" 
         .form-group-margin
           label Пароль
           input.form-control-reg name="user[password]" placeholder=("Придумайте пароль") type="password"
         .form-group-margin
           label Телефон
-          input.form-control-reg name="user[phone]" placeholder=("Введите ваш номер")
+          input#input-phone.form-control-reg.click_tooltips.js__phone name="user[phone]" placeholder="" type="text" 
         .form-group-margin
           label Город
-          input.form-control-reg name="user[city]" placeholder=("Выберите город")
+          input.form-control-reg#input-city name="user[city]" placeholder=("Выберите город") type="text" 
       = submit_tag "Зарегистрироваться", class: "green-btn"

@@ -1,6 +1,6 @@
 Iz::Application.routes.draw do
  
-  devise_for :users, controllers: { registrations: "app" }
+  devise_for :users, controllers: { registrations: "registrations" }
   root to: 'main#index'
 
   resources :dashboard, only: :index
