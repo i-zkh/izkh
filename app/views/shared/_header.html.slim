@@ -41,5 +41,8 @@
               li
                 = link_to destroy_user_session_path
                   | Выйти
+            - else
+              = link_to new_user_session_path
+                | Войти
             
     /! /.nav-collapse
