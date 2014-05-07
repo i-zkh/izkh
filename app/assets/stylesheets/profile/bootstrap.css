@@ -3824,6 +3824,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: left !important;
   }
   .navbar-right {
+    margin-top: 15px;
     float: right !important;
   }
 }
@@ -3929,8 +3930,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
- 
-  border-color:#34aadb;
+  border: none;
+  box-shadow: 0 3px 10px -1px gray;
 }
 .navbar-default .navbar-brand {
   color: #777777;
@@ -4918,9 +4919,7 @@ a.list-group-item-danger.active:focus {
   border: 0;
   margin-bottom: 0;
 }
-.panel-group {
-  margin-bottom: 20px;
-}
+
 .panel-group .panel {
   margin-bottom: 0;
   border-radius: 4px;

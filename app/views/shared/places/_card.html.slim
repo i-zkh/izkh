@@ -1,15 +1,22 @@
 div.panel{id="container-#{place.id}" style="border-radius: 0; border: 0; margin: 0; position: relative;"}
-  .panel-heading data-toggle="collapse" data-parent="#place-accordion" data-id="#{place.id}" href="#place-#{place.id}" style="height: 40px; border-radius: 0; padding: 0; border-bottom: 1px solid #4FB0DE"
+  .panel-heading data-toggle="collapse" data-parent="#place-accordion" data-id="#{place.id}" href="#place-#{place.id}" style="height: 40px; border-radius: 0; padding: 0; border-bottom: 2px solid #34aadb"
     h4.panel-title.place-title style="float:left;display: inline-block;padding-top: 10px;padding-left: 10px;"
-      | #{place.title} 
-  a.place-delete.delete-link.click-off data-id="#{place.id}" style="position: absolute;right: 10px;top: 5px; display: none;"
-    =image_tag("close_smail.png", class: 'delete-icon')
-  div{id="place-#{place.id}" class="panel-collapse collapse" style="border-bottom: 1px solid #4FB0DE"}
+      | #{place.title}
+  
+  div{id="place-#{place.id}" class="panel-collapse collapse" style="border-bottom: 1px solid #34aadb; border-top: 1px solid #34aadb"}
     .panel-body
-      p.place-type Тип: #{place.place_type}
-      p.place-city Город: #{place.city}
-      p.place-address Адрес: #{place.address}, #{place.building}
-      p.place-apartment Квартира: #{place.apartment}
-      p 
+      h4 #{place.title}
+      label Тип:
+      p #{place.place_type}
+      label Город:
+      p #{place.city}
+      label Адрес:
+      p #{place.address}, #{place.building}
+      label Квартира:
+      p #{place.apartment}
+      br
         a.place-edit.click-off data-id="#{place.id}"
           | Редактировать
+        br
+        a.place-delete.delete-link.click-off data-id="#{place.id}" 
+          | Удалить
