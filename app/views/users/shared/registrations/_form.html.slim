@@ -49,21 +49,6 @@ css:
                 option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-web-money="#{v.commission_web_money}"
                   = "#{v.title}"
             .clearfix
-          /               select :service_type_id
-          /     - ServiceType.all.each do |st| 
-          /       option value="#{st.id}" 
-          /         = "#{st.title}"
-          /   .clearfix
-          / .form-group-margin
-          /   label
-          /     | Поставщик *
-          /   select id="vendor_id"
-          /     - Vendor.where(service_type_id: 1).each do |v| 
-          /       option value="#{v.id}" 
-          /         = "#{v.title}"
-              / input#pay-commission name="pay[commission]" value="#{Vendor.find(params[:vendor_id]).commission}" type="hidden"
-              /input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
-              /input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
           .form-group-margin
             label
               | Лицевой счет *

@@ -242,6 +242,29 @@ $(document).ready ->
     else
       false
 
+  # Analitics 
+  $('#transaction-place-accordion').on 'click', '.panel-heading', ->
+    if !$(this).hasClass('active-accordion-item')
+      $('#place-accordion .panel-heading').not(this).siblings('.delete-link').hide();
+      $(this).siblings('.delete-link').show();
+      $(this).addClass('active-accordion-item')
+      $('#transaction-place-accordion')
+        .find('.panel-heading')
+        .not(this)
+        .removeClass('active-accordion-item')
+      $.ajax
+        url: '/table_show'
+        type: 'GET'
+        data: { id: $(this).data('id')}
+        beforeSend: ->
+          $("#js-container").addClass('loading')
+        success: (data) -> 
+          $('.analytics-block').html(data)
+          $("#js-container").removeClass('loading')
+    else
+      false
+
+
 # Service accordion click 
   $('#service-accordion').on 'click', '.panel-heading', ->
     if !$(this).hasClass('active-accordion-item')
@@ -567,33 +590,33 @@ $(document).ready ->
         amountOne = 0
       else
         amountOne = $(".pay-amount-one").val()
+
       if document.getElementById("i15").checked
         percent = $("#pay-commission-yandex").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
+
       $("#commission").html " " + commission + " руб."
       total = commission + amount
-      $("#total").html " " + total + " руб."
+      $("#total").html(" " + total + " руб.")
 
     $("input:radio[name=\"pay[payment_type]\"]").change ->
       if $(".pay-amount-one").val() is ""
         amountOne = 0
       else
         amountOne = $(".pay-amount-one").val()
+
       if $(this).attr("id") is "i15"
         percent = $("#pay-commission-yandex").val()
-      else if $(this).attr("id") is "i14"
-        percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
       $("#commission").html " " + commission + " руб."
       total = commission + amount
-      $("#total").html " " + total + " руб."
-
+      $("#total").html(" " + total + " руб.")
 
   map = new ymaps.Map("map", {center: [53.25, 50.26], zoom: 12, controls: []})
 

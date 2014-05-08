@@ -1,17 +1,19 @@
 .block#analytics
-  .header-block
-    =link_to "График", '#', class: 'show-graph click-off active'
-    =link_to "Таблица", '#', class: 'show-table click-off active'
   .places-block
-    span Мои объекты
+    .title_main_ob
+      span Мои объекты
     .panel-group#transaction-place-accordion
       - unless @places.empty?
         - @places.each do |place|
           = render "shared/transactions/places/card", place: place
       - else
         p#no-place Вы еще не создавали объекты.
+  .header-block
+    =link_to "График ", '#', class: 'show-graph click-off active'
+    =link_to "Таблица", '/table_show', class: 'show-table click-off active'
   .analytics-block
-
+    p
+      | Выберете объект
 
 
 css:
