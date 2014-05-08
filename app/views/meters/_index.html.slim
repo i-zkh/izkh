@@ -1,0 +1,15 @@
+.block#meter-index{style="width: 800px; margin-left: 13%;"}
+  .meter-container
+    .meter-header
+      span Отправка показаний счетчиков
+      = link_to "Назад к оплате", '#', class: 'click-off back-to-service'
+    - unless meters.empty?
+      .meters
+        - meters.each do |meter|
+          = render 'shared/meters/meter', meter: meter
+    - else
+      p.no-meter Не создано ни одного счетчика
+    .meter-form
+    = link_to "Добавить", '#', class: "green-btn click-off show-meter-form"
+
+  

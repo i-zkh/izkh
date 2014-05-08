@@ -1,0 +1,33 @@
+p#status{style="display: none"}
+  | Показания приняты
+.meter data-id="#{meter.id}"
+  .meter-type
+    p Тип счетчика
+    p = meter.meter_type
+  .metrics-form
+    = form_for Metric.new, remote: true do |f|
+      .form-element
+        p Было
+        - if meter.last_metric
+          p.last-metric data-id="#{meter.id}" = meter.last_metric.metric
+        - else
+          p.last-metric.red Нет введенных показаний
+
+      .form-element
+        p Стало
+        = f.text_field :metric
+        = f.hidden_field :meter_id, value: "#{meter.id}"
+      .form-submit
+        = f.submit "Отправить", class: "metric-submit click-off", "data-meter-id" => "#{meter.id}"
+
+  .meter-controls
+    = link_to "Подробнее", '#', class: "click-off show-history", "data-id" => "#{meter.id}"
+  .metrics-history style="display: none;" data-id="#{meter.id}"
+    -if meter.last_metric
+      = render 'shared/metrics/index', meter: meter
+    - else
+      p Нет введенных показаний
+    hr
+      = link_to "Удалить счетчик", '#', class: 'red delete-meter click-off', "data-id" => "#{meter.id}"
+    .pull-right
+      = link_to "Свернуть", '#', class: 'hide-history click-off', "data-id" => "#{meter.id}", "style" => "margin-left: 10px"

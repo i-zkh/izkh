@@ -11,6 +11,9 @@ Iz::Application.routes.draw do
     post :reg_create, on: :collection
     get :by_place, on: :member
   end
+
+  resources :meters, only: [:create, :destroy, :index, :new]
+  resources :metrics, only: [:create, :destroy, :new]
   
   resources :about, only: :index
   resources :feedback

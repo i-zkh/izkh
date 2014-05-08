@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140508104137) do
+=======
+ActiveRecord::Schema.define(version: 20140508092224) do
+>>>>>>> ad428976108179d7cc6373f2871e0b8570780dfe
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "meters", force: true do |t|
+    t.integer  "user_id"
+    t.string   "meter_type"
+    t.integer  "vendor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "service_id"
+  end
+
+  create_table "metrics", force: true do |t|
+    t.integer  "meter_id"
+    t.float    "metric"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "places", force: true do |t|
     t.string   "title"
