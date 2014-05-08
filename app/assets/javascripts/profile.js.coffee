@@ -541,37 +541,16 @@ $(document).ready ->
 
 # Commission calculation
 # TODO: Refactor to the bone
-  $('body').on "change", "#vendor_id", ->
-    if $(".pay-amount-one").val() is ""
-      amountOne = 0
-    else
-      amountOne = $(".pay-amount-one").val()
-    if document.getElementById("i15").checked
-      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
-    else
-      percent = $("#vendor_id").find("option:selected").data('commission')
-    amount = parseFloat(amountOne)
-    commission = Math.round(amount * percent) / 100
-    $("#commission").html " " + commission + " руб."
-    total = commission + amount
-    $("#total").html " " + total + " руб."
+  $('#pay').on "change", "#vendor_id", ->
+    commissionQuickPay()
 
-  $('body').on "keyup", ".pay-amount-one", ->
-    if $(".pay-amount-one").val() is ""
-      amountOne = 0
-    else
-      amountOne = $(".pay-amount-one").val()
-    if document.getElementById("i15").checked
-      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
-    else
-      percent = $("#vendor_id").find("option:selected").data('commission')
-    amount = parseFloat(amountOne)
-    commission = Math.round(amount * percent) / 100
-    $("#commission").html " " + commission + " руб."
-    total = commission + amount
-    $("#total").html " " + total + " руб."
+  $('#pay').on "keyup", ".pay-amount-one", ->
+    commissionQuickPay()
 
-  $('body').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
+  $('#pay').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
+    commissionQuickPay()
+
+  commissionQuickPay = () =>
     if $(".pay-amount-one").val() is ""
       amountOne = 0
     else
@@ -584,8 +563,7 @@ $(document).ready ->
     commission = Math.round(amount * percent) / 100
     $("#commission").html " " + commission + " руб."
     total = commission + amount
-    $("#total").html " " + total + " руб."
-
+    $("#total").html " " + total + " руб."  
 
   commissionCalc = () ->
     $(".pay-amount-one").keyup ->
@@ -621,9 +599,6 @@ $(document).ready ->
       total = commission + amount
       $("#total").html(" " + total + " руб.")
 
-  map = new ymaps.Map("map", {center: [53.25, 50.26], zoom: 12, controls: []})
-
-
   # Long Polling for widgets
   updateWidgets = ->
     $.getScript "/widgets.js"
@@ -633,4 +608,6 @@ $(document).ready ->
     setTimeout updateWidgets, 30000  if document.getElementById("widget-container")?
     return
 
+
   $("body").removeClass('loading')
+  map = new ymaps.Map("map", {center: [53.25, 50.26], zoom: 12, controls: []})
