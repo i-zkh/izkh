@@ -1,0 +1,20 @@
+.block
+  .registration-container
+    h2.title Войти в АйЖКХ
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-inputs
+        .form-group-margin
+          label Эл. почта
+          input.form-control-reg name="user[email]" placeholder=("Адрес Вашей эл. почты") type="email"
+        .form-group-margin
+          label Пароль
+          input.form-control-reg name="user[password]" placeholder=("Пароль") type="email"
+      = f.button :submit, "Войти", class: "green-btn"
+      p
+      = link_to new_user_registration_path
+        | Зарегистрируйтесь прямо сейчас!
+      br/
+      a data-toggle="modal" class="close_ent" href="#myModal_rec"
+      | Забыли пароль?
+
+

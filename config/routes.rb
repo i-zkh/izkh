@@ -23,6 +23,7 @@ Iz::Application.routes.draw do
   end
   resources :widgets, only: [:create, :update, :index]
 
+  get 'app' => 'app#index'
   post 'tutorial/off' => 'tutorial#off'
   get 'update_db' => 'update_table#update_db'
   get 'by_service_type' => 'vendors#by_service_type'

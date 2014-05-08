@@ -218,7 +218,8 @@ $(document).ready ->
   $('#place-accordion').on 'click', '.panel-heading', ->
     if !$(this).hasClass('active-accordion-item')
       activePlaceId = $(this).data('id')
-      $(this).addClass('active-accordion-item')
+      $('.panel-heading').show()
+      $(this).hide()
       $('#place-accordion .panel-heading').not(this).siblings('.delete-link').hide();
       $(this).siblings('.delete-link').show();
       $('#place-accordion')
@@ -393,54 +394,34 @@ $(document).ready ->
 # TODO: Refactor to the bone
   commissionCalc = () ->
     $(".pay-amount-one").keyup ->
-      if $(".pay-amount-two").val() is ""
-        amountTwo = 0
+      if $(".pay-amount-one").val() is ""
+        amountOne = 0
       else
-        amountTwo = $(".pay-amount-two").val()
-      amountOne = $(".pay-amount-one").val()
+        amountOne = $(".pay-amount-one").val()
       if document.getElementById("i15").checked
         percent = $("#pay-commission-yandex").val()
       else if document.getElementById("i14").checked
         percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
-      amount = parseFloat(amountOne + "." + amountTwo)
-      commission = Math.round(amount * percent) / 100
-      $("#commission").html " " + commission + " руб."
-      total = commission + amount
-      $("#total").html " " + total + " руб."
-
-    $(".pay-amount-two").keyup ->
-      if $(".pay-amount-two").val() is ""
-        amountTwo = 0
-      else
-        amountTwo = $(".pay-amount-two").val()
-      amountOne = $(".pay-amount-one").val()
-      if document.getElementById("i15").checked
-        percent = $("#pay-commission-yandex").val()
-      else if document.getElementById("i14").checked
-        percent = $("#pay-commission-web-money").val()
-      else
-        percent = $("#pay-commission").val()
-      amount = parseFloat(amountOne + "." + amountTwo)
+      amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
       $("#commission").html " " + commission + " руб."
       total = commission + amount
       $("#total").html " " + total + " руб."
 
     $("input:radio[name=\"pay[payment_type]\"]").change ->
-      if $(".pay-amount-two").val() is ""
-        amountTwo = 0
+      if $(".pay-amount-one").val() is ""
+        amountOne = 0
       else
-        amountTwo = $(".pay-amount-two").val()
-      amountOne = $(".pay-amount-one").val()
+        amountOne = $(".pay-amount-one").val()
       if $(this).attr("id") is "i15"
         percent = $("#pay-commission-yandex").val()
       else if $(this).attr("id") is "i14"
         percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
-      amount = parseFloat(amountOne + "." + amountTwo)
+      amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
       $("#commission").html " " + commission + " руб."
       total = commission + amount

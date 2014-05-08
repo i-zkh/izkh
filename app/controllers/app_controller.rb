@@ -1,7 +1,7 @@
-class MainController < ApplicationController
+class AppController < Devise::RegistrationsController
   skip_before_filter :require_current_user
   layout 'application'
-  def index
 
+  def index
   end
 end

@@ -1,45 +1,21 @@
 .navbar.navbar-default.navbar-static-top role="navigation" style="position: fixed; z-index: 10; background-color: white; width: 100%"
   .container
     .row
-      .col-md-12.hidden-xs
+      .hidden-xs
         = link_to "АйЖКХ", root_path, class: "navbar-brand" 
-        p style="padding-top: 15px;"
+        p style="padding-top: 15px; float: left"
           | Доступный платежный сервис
-          a.right_padding href="" 
-            | О проекте
-          a href="" 
-            | Помощь
-          span.left_padding
+          .pad-left= link_to "Профиль", dashboard_index_path
+          .pad-left= link_to "Аналитика", transactions_path
+          span.pad-left
             | Самара: (846) 336 54 34
-    .navbar-header
-      button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button" 
-        span.sr-only
-          | Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand.visible-xs href="" 
-        | АйЖКХ
-    .row
-      .navbar-collapse.collapse
-        ul.nav.navbar-nav.head_menu
-          li
-            = link_to "Профиль", dashboard_index_path
-          li
-            = link_to "Аналитика", transactions_path
-          / li
-          /   a href="#contact" 
-          /     | Сервисы
-        unless controller_name == 'registrations'
-          ul.nav.navbar-nav.navbar-right.head_menu
-            - if current_user
-              li.hidden-xs style=("padding-top: 12px; color: #777;margin-right: -10px") 
-                | Рады вас видеть,
-              li
-                a.dropdown-toggle data-toggle="dropdown" href="" 
-                  = current_user.first_name                
-              li
-                = link_to destroy_user_session_path
-                  | Выйти
-            
-    /! /.nav-collapse
+      .nav.navbar-nav.navbar-right
+        - if current_user
+          = current_user.email
+            |
+          = link_to destroy_user_session_path
+            |  выйти
+        - else
+          = link_to new_user_session_path
+            | Войти
+              
