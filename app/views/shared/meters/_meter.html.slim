@@ -1,0 +1,16 @@
+.meter
+  .meter-type
+    p Тип счетчика
+    p = @type
+  .metrics-form
+    = form_for :metric, remote: true do |f|
+    .form-element
+      p Было
+      p = @before
+    .form-lement
+      = f.text_field :metric
+    .form-submit
+      = f.submit "Отправить", class: "metric-submit"
+
+  .meter-controls
+  .metrics-history

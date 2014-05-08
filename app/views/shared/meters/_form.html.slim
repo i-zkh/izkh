@@ -1,0 +1,7 @@
+.meter-form
+  = form_for :meter, remote: true do |f|
+  .form-element
+    label for="meter_type" Тип счетчика
+    = f.select :type, [["Электроэнергия день", "Электроэнергия день"], ["Электроэнергия ночь, Электроэнергия ночь"], ["Холодная вода", "Холодная вода"], ["Горячая вода", "Горячая вода"]]
+  .form-submit
+    = f.submit "Добавить", class: "meter-submit"
