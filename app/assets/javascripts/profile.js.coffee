@@ -24,9 +24,12 @@ emptyDetailedService = 'Здесь будет показана информац�
 
 
 
-$(document).ready ->   
+$(document).ready ->
+  
+# Ajax'ing registration 
+  if $('#pay')[0]
+    $('#pay').find('select').select2()
 
-# Ajax'ing registration      
   $('body').on 'click', '#reg-step-one-submit', ->
     $.ajax
       url: '/users'
@@ -358,6 +361,7 @@ $(document).ready ->
     $.ajax
       url: '/services/' + id
       type: 'PUT'
+      data: $('.edit_service').serialize()
       beforeSend: ->
         $("#js-container").addClass('loading')
       dataType: 'json'
@@ -384,6 +388,22 @@ $(document).ready ->
       success: (data) ->
         $('#service_vendor_id').find("option").remove()
         $('#service_vendor_id').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'change', '#service_type_id', ->
+    $.ajax
+      url: '/by_service_type_with_pay'
+      type: 'GET'
+      dataType: 'html'
+      data: {service_type_id: $("#service_type_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#vendor_id').find("option").remove()
+        $('#vendor_id').append(data)
         $("#js-container").removeClass('loading')
       error: (error) ->
         console.log(error)
@@ -493,9 +513,54 @@ $(document).ready ->
     $('.metrics-history[data-id=' + meterId + ']').slideDown()
     $(this).hide()
 
-
 # Commission calculation
 # TODO: Refactor to the bone
+  $('body').on "change", "#vendor_id", ->
+    if $(".pay-amount-one").val() is ""
+      amountOne = 0
+    else
+      amountOne = $(".pay-amount-one").val()
+    if document.getElementById("i15").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else
+      percent = $("#vendor_id").find("option:selected").data('commission')
+    amount = parseFloat(amountOne)
+    commission = Math.round(amount * percent) / 100
+    $("#commission").html " " + commission + " руб."
+    total = commission + amount
+    $("#total").html " " + total + " руб."
+
+  $('body').on "keyup", ".pay-amount-one", ->
+    if $(".pay-amount-one").val() is ""
+      amountOne = 0
+    else
+      amountOne = $(".pay-amount-one").val()
+    if document.getElementById("i15").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else
+      percent = $("#vendor_id").find("option:selected").data('commission')
+    amount = parseFloat(amountOne)
+    commission = Math.round(amount * percent) / 100
+    $("#commission").html " " + commission + " руб."
+    total = commission + amount
+    $("#total").html " " + total + " руб."
+
+  $('body').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
+    if $(".pay-amount-one").val() is ""
+      amountOne = 0
+    else
+      amountOne = $(".pay-amount-one").val()
+    if  document.getElementById("i15").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else
+      percent = $("#vendor_id").find("option:selected").data('commission')
+    amount = parseFloat(amountOne)
+    commission = Math.round(amount * percent) / 100
+    $("#commission").html " " + commission + " руб."
+    total = commission + amount
+    $("#total").html " " + total + " руб."
+
+
   commissionCalc = () ->
     $(".pay-amount-one").keyup ->
       if $(".pay-amount-one").val() is ""
@@ -504,8 +569,6 @@ $(document).ready ->
         amountOne = $(".pay-amount-one").val()
       if document.getElementById("i15").checked
         percent = $("#pay-commission-yandex").val()
-      else if document.getElementById("i14").checked
-        percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
@@ -543,3 +606,5 @@ $(document).ready ->
   $ ->
     setTimeout updateWidgets, 30000  if document.getElementById("widget-container")?
     return
+
+  $("body").removeClass('loading')

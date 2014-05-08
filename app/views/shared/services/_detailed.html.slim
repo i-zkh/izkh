@@ -44,11 +44,12 @@ div
       input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
       input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
       input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
+      input#pay-service-id name="user_account" value="#{@service.user_account}" type="hidden"
       .t-table_w
         .t-cell style=("width: 100px") 
           label Сумма к оплате
         .t-cell
-          input.pay-amount-one name="pay[amount_1]" placeholder="" type="text" style=("width: 70px; margin: 0 10px 0 20px")
+          input.pay-amount-one name="pay[amount]" placeholder="" type="text" style=("width: 70px; margin: 0 10px 0 20px")
         .t-cell руб.
     .clearfix
       .t-table_w
@@ -58,10 +59,10 @@ div
             .custom.two
               input#i13 name="pay[payment_type]" type="radio" value="1" checked="checked"
                 label for="i13"  Банковская карта
-          p
-            .custom.two
-              input#i14 name="pay[payment_type]" type="radio" value="3"
-                label.disabled for="i14"  Web Money
+          / p
+          /   .custom.two
+          /     input#i14 name="pay[payment_type]" type="radio" value="3"
+          /       label.disabled for="i14"  Web Money
           p
             .custom.two
               input#i15 name="pay[payment_type]" type="radio" value="2"

@@ -1,7 +1,7 @@
 Iz::Application.routes.draw do
  
   devise_for :users, controllers: { registrations: "registrations" }
-  root to: 'main#index'
+  root to: 'dashboard#index'
 
   resources :dashboard, only: :index
   resources :places do
@@ -27,6 +27,7 @@ Iz::Application.routes.draw do
   post 'tutorial/off' => 'tutorial#off'
   get 'update_db' => 'update_table#update_db'
   get 'by_service_type' => 'vendors#by_service_type'
+  get 'by_service_type_with_pay' => 'vendors#by_service_type_with_pay'
 
   # Callback for PO
   post 'api/1.0/payment_success' => 'transactions#success'
@@ -37,6 +38,12 @@ Iz::Application.routes.draw do
   get 'api/1.0/payment_fail' => 'main#index'
   post 'api/1.0/payment_notify' => 'transactions#notify'
   post 'api/1.0/payment_check' => 'transactions#check'
+
+  # TEST Callback for Yandex
+  get 'api/1.0/payment_success/test' => 'main#index'
+  get 'api/1.0/payment_fail/test' => 'main#index'
+  post 'api/1.0/payment_notify/test' => 'transactions#notify'
+  post 'api/1.0/payment_check/test' => 'transactions#check'
 
   # Callback for WebMoney
   post 'api/1.0/invoice_confirmation' => 'transactions#invoice_confirmation'
