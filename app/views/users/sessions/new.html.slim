@@ -1,7 +1,7 @@
 .block
   .registration-container
     h2.title Войти в АйЖКХ
-    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do 
       .form-inputs
         .form-group-margin
           label Эл. почта
@@ -9,8 +9,8 @@
         .form-group-margin
           label Пароль
           input.form-control-reg name="user[password]" placeholder=("Пароль") type="email"
-      = f.button :submit, "Войти", class: "green-btn"
-      p
+      = submit_tag "Войти", class: "green-btn"
+      p style="margin-left: -15px"
         = link_to new_user_registration_path
           | Зарегистрируйтесь прямо сейчас!
       br/
