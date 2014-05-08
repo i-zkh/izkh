@@ -205,7 +205,7 @@
       margin-left: 15px;
   }
   .edit_services_sum {
-      border-bottom: 2px solid #4FB0DE;
+      border-bottom: 1px solid #4FB0DE;
       padding: 15px;
   }
   .edit_services_sum a {
@@ -2111,9 +2111,11 @@ disabled look for disabled choices in the results dropdown
   }
   .loading {
       opacity: .3;
+      z-index: 100;
   }
   .loading:after {
       content:"";
+      z-index: 100;
       position: absolute;
       top: 0;
       left: 0;

@@ -55,21 +55,33 @@ class TransactionsController < ApplicationController
 
   def pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
-    amount = [params[:pay][:amount_1], params[:pay][:amount_2]].join('.')
+    amount = params[:pay][:amount]
+    user_id =  current_user.id if current_user
     payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
-    service = Service.find(params[:pay][:service_id])
+    
+    if params[:pay][:service_id]
+      service = Service.find(params[:pay][:service_id])
+      vendor = service.vendor
+      place =  service.place.title
+      service_type = service.service_type.title
+    else
+      service_type = ServiceType.find(params[:service_type_id]).title
+      place, service = "", ""
+      vendor = Vendor.find(params[:vendor_id]) 
+    end
+
     if payment_type == 2
-      commission = Vendor.find(service.vendor_id).commission_yandex
+      commission = vendor.commission_yandex
       total = calculate_total(amount, commission)
-      url = "https://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{params[:pay][:user_id]}&orderNumber=#{order_id}"
+      url = "https://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}"
     elsif payment_type == 3
-      commission = Vendor.find(service.vendor_id).commission_web_money
+      commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
       url = "https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=6c2aa990-60e1-427f-9c45-75cffae4a745&LMI_PAYMENT_AMOUNT=#{total}&LMI_PAYMENT_DESC=АйЖКХ&LMI_CURRENCY=RUB&ORDER_ID=#{order_id}"
     else
       currency = "RUB"
       merchant_id = '39859'
-      commission = Vendor.find(service.vendor_id).commission
+      commission = vendor.commission
       total = calculate_total(amount, commission)
       private_security_key = '7ab9d14e-fb6b-4c78-88c2-002174a8cd88'
       po_root_url = "https://secure.payonlinesystem.com/ru/payment/"
@@ -77,7 +89,7 @@ class TransactionsController < ApplicationController
       security_key = Digest::MD5.hexdigest(security_key_string)
       url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
     end
-    Transaction.create!(amount: amount.to_f, service: Service.find(params[:pay][:service_id]).title, place: Place.find(service.place_id).title, user_id: current_user.id, commission: commission.to_f, payment_type: payment_type, order_id: order_id)
+    Transaction.create!(amount: amount.to_f, service: service, place: place, user_id: user_id, commission: commission.to_f, payment_type: payment_type, payment_info: "#{service_type};#{vendor.title};#{params[:user_account]}", order_id: order_id)
 
     respond_to do |format|
       format.js {

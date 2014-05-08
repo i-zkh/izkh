@@ -5,7 +5,7 @@ html
     = stylesheet_link_tag "main", media: "all", debug: false
     = csrf_meta_tags
     script{src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"}
-  body
+  body.loading
     = render 'shared/map'
     .wrapper
       = render 'shared/header'
