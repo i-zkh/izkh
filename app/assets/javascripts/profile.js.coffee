@@ -265,6 +265,26 @@ $(document).ready ->
     else
       false
 
+# Transaction place accordion click 
+  $('#transaction-place-accordion').on 'click', '.panel-heading', ->
+    if !$(this).hasClass('active-accordion-item')
+      $(this).siblings('.delete-link').show();
+      $(this).addClass('active-accordion-item')
+      $('#transaction-place-accordion')
+        .find('.panel-heading')
+        .not(this)
+        .removeClass('active-accordion-item')
+      id = $(this).data('id')
+      $.ajax
+        url: '/services/' + id
+        type: 'GET'
+        beforeSend: ->
+          $("#js-container").addClass('loading')
+        success: (data) ->
+          $("#js-container").removeClass('loading')
+    else
+      false
+
 # Delete place event
   $('body').on 'click', '.place-delete', ->
     id = $(this).data('id')
@@ -515,6 +535,7 @@ $(document).ready ->
     meterId = $(this).data('id')
     $('.metrics-history[data-id=' + meterId + ']').slideDown()
     $(this).hide()
+
 
 # Commission calculation
 # TODO: Refactor to the bone

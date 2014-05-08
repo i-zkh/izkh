@@ -2282,3 +2282,36 @@ span.pad-left{
 a.active {
   font-weight: 600;
 }
+
+.header-block {
+  height: 60px;
+  border-bottom: 1px solid #34aadb;
+}
+
+.header-block h3 {
+  float: left;
+  padding-left: 20px;
+}
+
+.header-block a {
+  float: left;
+  font-size: 16px;
+  margin-left: 30px;
+  margin-top: 24px;
+}
+
+.places-block {
+  border-right: 1px solid #34aadb;
+  float: left;
+  width: 202px;
+  height: 440px;
+}
+
+.places-block span {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 15px 0 10px 10px; 
+  border-bottom: 1px solid #34aadb;
+
+}
