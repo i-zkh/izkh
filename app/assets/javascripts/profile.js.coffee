@@ -79,7 +79,7 @@ $(document).ready ->
         $('#reg-step-three-info').addClass('active')
         $('.reg-head').append(data)
 
-        $("select").selectBox()
+        $("select").select2()
         $("#reg-step-three-form").validationEngine()
         $("#js-container").removeClass('loading')
       error: (error, qwe, er) ->
@@ -311,7 +311,7 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
+        $("select").select2()
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
@@ -327,7 +327,7 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
+        $("select").select2()
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
@@ -373,7 +373,7 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
 
-  # Send options to select box
+# Send options to select box
   $('body').on 'change', '#service_service_type_id', ->
     $.ajax
       url: '/by_service_type'
@@ -389,6 +389,111 @@ $(document).ready ->
       error: (error) ->
         console.log(error)
         $("#js-container").removeClass('loading')
+
+# Show meters form
+  $('body').on 'click', '.show-meters', ->
+    $.ajax
+      url: '/meters'
+      type: 'GET'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#service-index').hide()
+        $('#service-container').hide()
+        $('#place-index').hide()
+        $('#place-index').after(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '.back-to-service', ->
+    $('#service-index').show()
+    $('#service-container').show()
+    $('#place-index').show()
+    $('#meter-index').remove() 
+
+  $('body').on 'click', '.show-meter-form', ->
+    $.ajax
+      url: '/meters/new'
+      type: 'GET'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('.meter-form').append(data)
+        $('.show-meter-form').hide()
+        $('.no-meter').hide()
+        $('select').select2()
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '#submit-create-meter', ->
+    serviceId = $('#service-accordion').find('.active-accordion-item').data('id')
+    $('#meter_service_id').val(serviceId)
+    $.ajax
+      url: 'meters'
+      type: 'POST'
+      data: $('#new_meter').serialize()
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('.meters').append(data)
+        $('.meter-form').empty()
+        $('.show-meter-form').show()
+        $('.no-meter').hide()
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '.metric-submit', ->
+    meterId = $(this).data('meter-id')    
+    form = $(this).closest('#new_metric')
+    metric = form.find('#metric_metric').val()
+    $.ajax
+      url: 'metrics'
+      type: 'POST'
+      data: form.serialize()
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        form[0].reset()
+        $('.last-metric[data-id=' + meterId + ']').html(metric)
+        $('#status').show()
+        $('#status').fadeOut(4000)
+        $(".metrics[data-id=" + meterId + "]").append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '.delete-meter', ->
+    c = confirm("Действительно удалить?")
+    if c
+      meterId = $(this).data('id')
+      $.ajax
+        url: 'meters/' + meterId
+        type: 'DELETE'
+        beforeSend: ->
+          $("#js-container").addClass('loading')
+        success: (data) ->
+          $('.meter[data-id=' + meterId + ']').remove()
+          $("#js-container").removeClass('loading')
+        error: (error) ->
+          $("#js-container").removeClass('loading')
+
+
+  $('body').on 'click', '.hide-history', ->
+    $('.metric-history').slideUp()
+
+  $('body').on 'click', '.hide-history', ->
+    meterId = $(this).data('id')
+    $('.show-history').show()
+    $('.metrics-history[data-id=' + meterId + ']').slideUp()
+
+  $('body').on 'click', '.show-history', ->
+    meterId = $(this).data('id')
+    $('.metrics-history[data-id=' + meterId + ']').slideDown()
+    $(this).hide()
+
 
 # Commission calculation
 # TODO: Refactor to the bone

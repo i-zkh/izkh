@@ -1,0 +1,8 @@
+tr
+  td = @metric.created_at.strftime('%d.%m.%Y')
+  td = @metric.metric
+  td 
+    - if @metric.status.to_i == 0
+      | Не принято
+    - else
+      | Принято

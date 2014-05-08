@@ -1,7 +1,8 @@
-.meter-form
-  = form_for :meter, remote: true do |f|
-  .form-element
-    label for="meter_type" Тип счетчика
-    = f.select :type, [["Электроэнергия день", "Электроэнергия день"], ["Электроэнергия ночь, Электроэнергия ночь"], ["Холодная вода", "Холодная вода"], ["Горячая вода", "Горячая вода"]]
-  .form-submit
-    = f.submit "Добавить", class: "meter-submit"
+.meter-form-container
+  = form_for @meter, remote: true do |f|
+    .form-element
+      label for="meter_type" Тип счетчика
+      = f.select :meter_type, [["Электричество общий", "Электричество общий"],["Электричество день", "Электричество день"], ["Электричество ночь", "Электричество ночь"], ["Холодная вода", "Холодная вода"], ["Горячая вода", "Горячая вода"]]
+      = f.hidden_field :service_id, class: "meter-service-id"
+    .form-submit
+      input#submit-create-meter.btn.btn-default.btn-block.click-off type="submit" value="Сохранить" 

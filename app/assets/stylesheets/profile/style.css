@@ -2157,3 +2157,98 @@ disabled look for disabled choices in the results dropdown
 span.pad-left{
   text-decoration: none;
 }
+
+.meters {
+  overflow: auto;
+  max-height: 400px;
+}
+
+.meter-header {
+  border-bottom: 1px solid #34aadb;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.meter-header span{
+  padding: 10px;
+}
+
+.meter-container p {
+  padding: 10px;
+}
+
+.green-btn {
+  margin-left: 35%;
+  display: block;
+  border: none;
+  height: 30px;
+  background-color: #00CD66;
+  color: white;
+  width: 290px;
+  margin: 10px 30%;
+  text-decoration: none;
+  text-align: center;
+  line-height: 30px;
+  font-size: 16px;
+}
+
+.green-btn:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.meter-form-container .form-element, .meter-form-container .form-submit {
+  width: 80%;
+  padding: 10px;
+}
+
+.meter-type, .metrics-form, .meter-controls {
+  float: left;
+  padding: 10px;
+}
+
+.meter-controls {
+  margin-top: 50px;
+}
+
+.meter-type {
+  width: 20%;
+}
+.metrics-form {
+  width: 60%;
+}
+
+.metrics-form .form-element {
+  float: left;
+  width: 35%;
+}
+
+.metrics-form .form-submit {
+  float: left;
+  width: 20%;
+  margin-top: 50px;
+  padding-left: 10px;
+}
+
+.meter {
+  width: 100%;
+  clear: both;
+  padding: 10px;
+  border-top: 1px solid #34aadb;
+}
+
+.show-meter-form {
+  clear: both;
+}
+
+.metrics-history {
+  clear: both;
+}
+
+.red {
+  color: red;
+}
+
+#status {
+  font-size: 16px;
+}

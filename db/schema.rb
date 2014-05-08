@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507084405) do
+ActiveRecord::Schema.define(version: 20140508092224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "meters", force: true do |t|
     t.integer  "user_id"
-    t.string   "type"
+    t.string   "meter_type"
     t.integer  "vendor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "service_id"
   end
 
   create_table "metrics", force: true do |t|
@@ -147,6 +148,22 @@ ActiveRecord::Schema.define(version: 20140507084405) do
     t.datetime "updated_at"
     t.float    "commission_yandex"
     t.float    "commission_web_money"
+  end
+
+  create_table "widgetables", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "widget_id"
+    t.boolean  "status",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "widgets", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "sender"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   has_many :transactions, class_name: "Transaction"
   has_many :widgetables
   has_many :widgets, through: :widgetables
+  has_many :meters
 end

@@ -7,11 +7,10 @@ html
     script{src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"}
   body
     = render 'shared/map'
-    .wrapper
+    .wrapper{style="margin: 0; padding: 0"}
       = render 'shared/header'
       .container#js-container
         = yield
-    = render 'shared/footer'
 
     = include_jquery
     = javascript_include_tag 'profile'
