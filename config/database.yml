@@ -15,7 +15,7 @@ test:
 
 production:
   adapter: postgresql
-  encoding: unicode
+  encoding: utf-8
   database: iz_production
   pool: 5
   username: postgres
