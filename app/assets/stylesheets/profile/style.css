@@ -2252,3 +2252,8 @@ span.pad-left{
 #status {
   font-size: 16px;
 }
+
+#analytics {
+  width: 80%;
+  height: 500px;
+}

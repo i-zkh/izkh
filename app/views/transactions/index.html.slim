@@ -1,40 +1,18 @@
-.row
-  .col-md-9
-    .t-table.main_ob
-      .t-cell.tops.shadow_right style=("width: 250px") 
-        .title_main_ob
-          span Мои объекты
-        .panel-group#transaction-place-accordion
-          - unless @places.empty?
-              - @places.each do |place|
-                = render "shared/transactions/places/card", place: place
-          - else
-            p#no-place Вы еще не создавали объекты.
+.block#analytics
+  .header-block
+    =link_to "График", '#', class: 'show-graph click-off active'
+    =link_to "Таблица", '#', class: 'show-table click-off active'
+  .places-block
+    span Мои объекты
+    .panel-group#transaction-place-accordion
+      - unless @places.empty?
+        - @places.each do |place|
+          = render "shared/transactions/places/card", place: place
+      - else
+        p#no-place Вы еще не создавали объекты.
+  .analytics-block
 
-  
-      .t-cell.tops.left_blue
-        .title_main_ob
-          .menu_other
-            | Расходы
-            a.obj_click  График
-            a.obj_click  Таблица
-        table.table_analitic
-         tr
-          th
-           |2014 год
-          th.left_blue
-             a href=""  29 февраля 2014 -
-             a href=""  15 марта 2014   
-         tr
-          td
-            p
-              .custom
-                input#i13 name="" type="checkbox" 
-                  label for="i13"  service_title
- 
-          td.left_blue
-            =image_tag("test_img.jpg", class:'img_ob_test') 
-        table.table_analitic#table-analytic
+
 
 css:
   | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
