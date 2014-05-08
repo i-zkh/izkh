@@ -647,4 +647,4 @@ $(document).ready ->
 
 
   $("body").removeClass('loading')
-  map = new ymaps.Map("map", {center: [53.25, 50.26], zoom: 12, controls: []})
+  map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
