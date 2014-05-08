@@ -10,8 +10,9 @@
           label Пароль
           input.form-control-reg name="user[password]" placeholder=("Пароль") type="email"
       = submit_tag "Войти", class: "green-btn"
-      .text= link_to new_user_registration_path
-        | Зарегистрируйтесь прямо сейчас!
+      p style="margin-left: -15px"
+        = link_to new_user_registration_path
+          | Зарегистрируйтесь прямо сейчас!
       br/
       / a data-toggle="modal" class="close_ent" href="#myModal_rec"
       /   | Забыли пароль?
