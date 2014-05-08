@@ -1,8 +1,10 @@
 .block#analytics
+
   .header-block
     h3 Аналитика
-    =link_to "График", '#', class: 'show-graph click-off active'
-    =link_to "Таблица", '#', class: 'show-table click-off'
+    =link_to "Таблица", '#', class: 'show-table click-off active'
+    =link_to "График", '#', class: 'show-graph click-off'
+
   .places-block
     span Мои объекты
     .panel-group#transaction-place-accordion
@@ -12,8 +14,8 @@
       - else
         p#no-place Вы еще не создавали объекты.
   .analytics-block
-
-
+    .text
+      | Выберете объект
 
 css:
   | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");

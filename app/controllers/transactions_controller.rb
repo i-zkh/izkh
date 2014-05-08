@@ -53,6 +53,61 @@ class TransactionsController < ApplicationController
     render partial: 'shared/transactions/services/index', status: :ok 
   end
 
+  def graph_show
+    @month_data = {}
+    @data = []
+    ykeys = []
+    labels = []
+    prev = Date.today.month - 2
+    curr = Date.today.month - 1
+    nxt = Date.today.month
+    year = Date.today.year
+
+    @month_data[:prev_month] = I18n.t('date.month_names')[prev]
+    @month_data[:curr_month] = I18n.t('date.month_names')[curr]
+    @month_data[:next_month] = I18n.t('date.month_names')[nxt]
+    @month_data[:prev_month_sum] = 0
+    @month_data[:curr_month_sum] = 0
+    @month_data[:next_month_sum] = 0
+
+    place = Place.find(params[:id])
+
+    prev_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', prev, year, place.title)
+    prev_trans.each do |pt|
+      @month_data[:prev_month_sum] += pt.amount
+    end
+
+    curr_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', curr, year, place.title)
+    curr_trans.each do |ct|
+      @month_data[:curr_month_sum] += ct.amount
+    end
+
+    @month_data[:prev_month_sum] += (@month_data[:curr_month_sum] + @month_data[:prev_month_sum]) / 2
+    @data_prev = {"m" => Date.today - 2.month}
+    @data_curr = {"m" => Date.today - 1.month}
+    @data_next = {"m" => Date.today}
+    
+    services = place.services
+    services.each do |service|
+
+      prev_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', prev, year, place.title, service.title)
+      curr_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', curr, year, place.title, service.title)
+      
+      prev_sum = 0
+      curr_sum = 0
+      next_sum = 0
+
+      prev_service_trans.each {|st| prev_sum += st.amount}
+      curr_service_trans.each {|ct| curr_sum += ct.amount}
+      next_sum += (prev_sum + curr_sum) / 2
+      @data_prev["#{service.id}"], @data_curr["#{service.id}"], @data_next["#{service.id}"] = prev_sum, curr_sum, next_sum
+      labels << service.title
+      ykeys << service.id.to_s
+    end
+    @service_data = {element: 'graph', xkey: 'm', ykeys: ykeys, labels: labels, data: [@data_prev, @data_curr, @data_next]}
+    render json: @service_data, status: :ok
+  end
+
   def pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
     amount = params[:pay][:amount]

@@ -11,7 +11,7 @@
             | Самара: (846) 336 54 34
       .nav.navbar-nav.navbar-right
         - if current_user
-          = current_user.email
+          = current_user.first_name
             |
           = link_to destroy_user_session_path
             |  выйти

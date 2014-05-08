@@ -242,6 +242,65 @@ $(document).ready ->
     else
       false
 
+  # Analitics place accordion click
+  $('#transaction-place-accordion').on 'click', '.panel-heading', ->
+    if !$(this).hasClass('active-accordion-item')
+      $('#place-accordion .panel-heading').not(this).siblings('.delete-link').hide();
+      $(this).siblings('.delete-link').show();
+      $(this).addClass('active-accordion-item')
+      $('#transaction-place-accordion')
+        .find('.panel-heading')
+        .not(this)
+        .removeClass('active-accordion-item')
+      if $('.show-table').hasClass('active')
+        $.ajax
+          url: '/table_show'
+          type: 'GET'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html(data)
+            $("#js-container").removeClass('loading')
+      else
+        $.ajax
+          url: '/graph_show'
+          type: 'GET'
+          dataType: 'json'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html("<div id='graph'></div>")
+            console.log data
+            Morris.Line({
+              element: 'graph',
+              xkey: data.xkey,
+              ykeys: data.ykeys,
+              labels: data.labels,
+              data: data.data
+            });
+            $("#js-container").removeClass('loading')
+    else
+      false
+
+# Show graph click
+  $('#analytics').on 'click', '.show-graph', ->
+    unless $(this).hasClass('active') 
+      $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
+      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
+      $('.show-graph').addClass('active')
+      $('.show-table').removeClass('active')
+
+# Show table click
+  $('#analytics').on 'click', '.show-table', ->
+    unless $(this).hasClass('active')
+      $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
+      $(this).addClass('active')
+      $('.show-graph').removeClass('active')
+      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
+          
+
 # Service accordion click 
   $('#service-accordion').on 'click', '.panel-heading', ->
     if !$(this).hasClass('active-accordion-item')
@@ -261,26 +320,6 @@ $(document).ready ->
         success: (data) ->
           $('#service-detailed').html(data)
           commissionCalc()
-          $("#js-container").removeClass('loading')
-    else
-      false
-
-# Transaction place accordion click 
-  $('#transaction-place-accordion').on 'click', '.panel-heading', ->
-    if !$(this).hasClass('active-accordion-item')
-      $(this).siblings('.delete-link').show();
-      $(this).addClass('active-accordion-item')
-      $('#transaction-place-accordion')
-        .find('.panel-heading')
-        .not(this)
-        .removeClass('active-accordion-item')
-      id = $(this).data('id')
-      $.ajax
-        url: '/services/' + id
-        type: 'GET'
-        beforeSend: ->
-          $("#js-container").addClass('loading')
-        success: (data) ->
           $("#js-container").removeClass('loading')
     else
       false
@@ -591,33 +630,33 @@ $(document).ready ->
         amountOne = 0
       else
         amountOne = $(".pay-amount-one").val()
+
       if document.getElementById("i15").checked
         percent = $("#pay-commission-yandex").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
+
       $("#commission").html " " + commission + " руб."
       total = commission + amount
-      $("#total").html " " + total + " руб."
+      $("#total").html(" " + total + " руб.")
 
     $("input:radio[name=\"pay[payment_type]\"]").change ->
       if $(".pay-amount-one").val() is ""
         amountOne = 0
       else
         amountOne = $(".pay-amount-one").val()
+
       if $(this).attr("id") is "i15"
         percent = $("#pay-commission-yandex").val()
-      else if $(this).attr("id") is "i14"
-        percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
       $("#commission").html " " + commission + " руб."
       total = commission + amount
-      $("#total").html " " + total + " руб."
-
+      $("#total").html(" " + total + " руб.")
 
   map = new ymaps.Map("map", {center: [53.25, 50.26], zoom: 12, controls: []})
 

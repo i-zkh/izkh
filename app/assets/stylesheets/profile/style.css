@@ -2255,15 +2255,10 @@ span.pad-left{
   font-size: 16px;
 }
 
-#analytics {
-  width: 80%;
-  height: 500px;
-}
-
 #info {
   margin-left: 500px;
   width: 500px;
-  height: 306px;
+  height: 230px;
 }
 
 .info-heading {
@@ -2313,5 +2308,4 @@ a.active {
   font-size: 16px;
   padding: 15px 0 10px 10px; 
   border-bottom: 1px solid #34aadb;
-
 }
