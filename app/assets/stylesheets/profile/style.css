@@ -2254,3 +2254,26 @@ span.pad-left{
 #status {
   font-size: 16px;
 }
+
+#info {
+  margin-left: 500px;
+  width: 500px;
+  height: 306px;
+}
+
+.info-heading {
+  border-bottom: 1px solid #34aadb;
+}
+
+.info-heading h3 {
+  text-align: center;
+}
+
+.info-body p {
+  padding: 15px;
+  font-size: 14px;
+}
+
+a.active {
+  font-weight: 600;
+}

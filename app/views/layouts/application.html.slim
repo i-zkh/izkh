@@ -11,6 +11,8 @@ html
       = render 'shared/header'
       .container#js-container
         = yield
+        - unless current_user
+          = render 'shared/info_block'
 
     = include_jquery
     = javascript_include_tag 'profile'

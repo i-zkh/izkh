@@ -2,7 +2,7 @@
 class MetersController < ApplicationController
 
   def index
-    @meters = current_user.meters
+    @meters = current_user.meters.where(service_id: params[:service_id])
     render partial: 'index', locals: {meters: @meters}
   end
 
