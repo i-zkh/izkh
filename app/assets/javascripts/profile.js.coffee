@@ -1,5 +1,4 @@
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap.min
 //= require jquery.kladr.min
 //= require 'jquery-ui-1.10.4.custom'
@@ -28,7 +27,8 @@ emptyDetailedService = 'Здесь будет показана информац�
 $(document).ready ->
   
 # Ajax'ing registration 
-  $('#pay').find('select').select2() 
+  if $('#pay')[0]
+    $('#pay').find('select').select2()
 
   $('body').on 'click', '#reg-step-one-submit', ->
     $.ajax
@@ -361,6 +361,7 @@ $(document).ready ->
     $.ajax
       url: '/services/' + id
       type: 'PUT'
+      data: $('.edit_service').serialize()
       beforeSend: ->
         $("#js-container").addClass('loading')
       dataType: 'json'
