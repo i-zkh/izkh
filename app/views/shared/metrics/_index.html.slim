@@ -1,4 +1,3 @@
-hr
 span История показаний
 table.table.table-striped
   thead
@@ -6,12 +5,15 @@ table.table.table-striped
     th Показание
     th Статус
   tbody.metrics data-id="#{meter.id}"
-    - meter.metrics.each do |m|
-      tr
-        td = m.created_at.strftime('%d.%m.%Y')
-        td = m.metric
-        td 
-          - if m.status.to_i == 0
-            | Не принято
-          - else
-            | Принято
+    - if meter.last_metric
+      - meter.metrics.each do |m|
+        tr
+          td = m.created_at.strftime('%d.%m.%Y')
+          td = m.metric
+          td 
+            - if m.status.to_i == 0
+              | Не принято
+            - else
+              | Принято
+    - else
+      p.no-metric Нет введенных показаний

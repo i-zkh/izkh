@@ -411,9 +411,11 @@ $(document).ready ->
 
 # Show meters form
   $('body').on 'click', '.show-meters', ->
+    serviceId = $('#service-accordion').find('.active-accordion-item').data('id')
     $.ajax
       url: '/meters'
       type: 'GET'
+      data: {service_id: serviceId}
       beforeSend: ->
         $("#js-container").addClass('loading')
       success: (data) ->
@@ -477,6 +479,7 @@ $(document).ready ->
       success: (data) ->
         form[0].reset()
         $('.last-metric[data-id=' + meterId + ']').html(metric)
+        $('.no-metric').hide()
         $('#status').show()
         $('#status').fadeOut(4000)
         $(".metrics[data-id=" + meterId + "]").append(data)

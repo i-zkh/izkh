@@ -5,8 +5,8 @@
         = link_to "АйЖКХ", root_path, class: "navbar-brand" 
         p style="padding-top: 15px; float: left"
           | Доступный платежный сервис
-          .pad-left= link_to "Профиль", dashboard_index_path
-          .pad-left= link_to "Аналитика", transactions_path
+          .pad-left= link_to "Профиль", dashboard_index_path, class: controller_name == "dashboard" ? 'active' : ''
+          .pad-left= link_to "Аналитика", transactions_path, class: controller_name == "transactions" ? 'active' : ''
           span.pad-left
             | Самара: (846) 336 54 34
       .nav.navbar-nav.navbar-right
