@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
   has_many :meters
 
   def valid_password?(password)
-    if self.legacy_password_hash.present?
-      if ::Digest::MD5.hexdigest(password).upcase == self.legacy_password_hash
+    if self.encrypted_password.present?
+      if ::Digest::MD5.hexdigest(password).upcase == self.encrypted_password
         self.password = password
-        self.legacy_password_hash = nil
+        #self.legacy_password_hash = nil
         self.save!
         true
       else
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def reset_password!(*args)
-    self.legacy_password_hash = nil
+    #self.legacy_password_hash = nil
     super
   end
 end
