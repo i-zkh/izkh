@@ -13,8 +13,8 @@
       p style="margin-left: -15px"
         = link_to new_user_registration_path
           | Зарегистрируйтесь прямо сейчас!
-      br/
-      / a data-toggle="modal" class="close_ent" href="#myModal_rec"
-      /   | Забыли пароль?
+      p style="margin-left: -15px"
+        = link_to new_password_path(resource_name)
+          | Востановить пароль
 
 
