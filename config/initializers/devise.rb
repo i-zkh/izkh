@@ -97,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = "47cf467aa5d9bd519306c488d4c5cb25a6af983c5f9e4317e9ce80e5e03f16510ff6bba837c3fee3d9150f8186ae0ed98550bff94d2bff857305f6bedcc93d72"
+  #config.pepper = "47cf467aa5d9bd519306c488d4c5cb25a6af983c5f9e4317e9ce80e5e03f16510ff6bba837c3fee3d9150f8186ae0ed98550bff94d2bff857305f6bedcc93d72"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -255,5 +255,5 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   
    #config.secret_key = '263558bb40d3ad2d29c3c35239ee7ab571899729e7d68785ec279d06580b67569f7c6751884476858ceb7ba569c3db90d3ca7f17242cacdb266955a1f4629299'
-  config.secret_key = '5435626f0083dd0ac9d35cb92271f3642d8163df8808ea663a32435974a6e61f42dcbf9dc9a2451cf1d77ad33e3e765a584229dc81a62a9d6a9a936b59d6aa85'
+   #config.secret_key = '5435626f0083dd0ac9d35cb92271f3642d8163df8808ea663a32435974a6e61f42dcbf9dc9a2451cf1d77ad33e3e765a584229dc81a62a9d6a9a936b59d6aa85'
 end
