@@ -4,7 +4,6 @@ html
     title АйЖКХ - Доступный платежный сервис
     = stylesheet_link_tag "main", media: "all", debug: false
     = csrf_meta_tags
-    script{src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"}
   body.loading
     = render 'shared/map'
     .wrapper{style="margin: 0; padding: 0"}
@@ -14,5 +13,6 @@ html
         - unless current_user
           = render 'shared/info_block'
 
+    script{src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"}
     = include_jquery
     = javascript_include_tag 'profile'
