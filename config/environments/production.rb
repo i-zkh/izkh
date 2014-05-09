@@ -77,4 +77,14 @@ Iz::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.action_mailer.smtp_settings = {
+     :address              => "smtp.mandrillapp.com",
+     :port                 => 587,
+     :domain               => "izkh.ru",
+     :user_name            => "out@izkh.ru",
+     :password             => "odd8u9rYZFrbCorI2EvQqg",
+     :authentication       => :plain,
+     :enable_starttls_auto => false
+  }
 end
