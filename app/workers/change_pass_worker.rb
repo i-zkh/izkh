@@ -5,6 +5,6 @@ class ChangePassWorker
 
   def perform
     u = User.find(25)
-    UserNotification.change_pass(u)
+    u.send_reset_password_instructions
   end
 end
