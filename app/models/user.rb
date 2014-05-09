@@ -11,24 +11,4 @@ class User < ActiveRecord::Base
   has_many :widgetables
   has_many :widgets, through: :widgetables
   has_many :meters
-
-  def valid_password?(password)
-    if self.encrypted_password.present?
-      if ::Digest::MD5.hexdigest(password).upcase == self.encrypted_password
-        self.password = password
-        #self.legacy_password_hash = nil
-        self.save!
-        true
-      else
-        false
-      end
-    else
-      super
-    end
-  end
-
-  def reset_password!(*args)
-    #self.legacy_password_hash = nil
-    super
-  end
 end
