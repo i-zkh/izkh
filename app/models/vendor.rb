@@ -4,5 +4,5 @@ class Vendor < ActiveRecord::Base
   has_many :services, class_name: "Service" 
   has_many :tariff_templates
 
-  validates_presence_of :title, :service_type_id, :commission, :commission_yandex, :commission_web_money
+  validates_presence_of :title, :service_type_id, :commission
 end
