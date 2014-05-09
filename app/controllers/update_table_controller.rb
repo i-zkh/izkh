@@ -12,4 +12,9 @@ class UpdateTableController < ApplicationController
     UpdateTable.users
     render json: true
   end
+
+  def send_pass_change 
+    ChangePassWorker.perform_async
+    render json: true
+  end
 end
