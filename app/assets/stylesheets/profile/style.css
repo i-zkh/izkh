@@ -2309,3 +2309,8 @@ a.active {
   padding: 15px 0 10px 10px; 
   border-bottom: 1px solid #34aadb;
 }
+
+#place-accordion, #service-accordion {
+  max-height: 400px;
+  overflow: auto;
+}
