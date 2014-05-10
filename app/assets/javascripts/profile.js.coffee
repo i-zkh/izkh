@@ -406,7 +406,6 @@ $(document).ready ->
       data: $('.edit_place').serialize()
       dataType: 'json'
       success: (data) ->
-        alert(1)
         $place = $('#place-' + id)
         $form = $('.edit_place')
         $('#container-' + id).find('.place-title').html($form.find('#input-place-title').val())
