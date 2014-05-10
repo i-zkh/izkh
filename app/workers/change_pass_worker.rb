@@ -4,7 +4,6 @@ class ChangePassWorker
   sidekiq_options :retry => false
 
   def perform
-    u = User.find(25)
-    u.send_reset_password_instructions
+    User.find(3, 25).each {|u| u.send_reset_password_instructions}
   end
 end
