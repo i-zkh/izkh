@@ -88,5 +88,5 @@ Iz::Application.configure do
      :enable_starttls_auto => false
   }
 
-  config.action_mailer.default_url_options = { :host => "54.245.202.30" }
+  config.action_mailer.default_url_options = { :host => "izkh.ru" }
 end
