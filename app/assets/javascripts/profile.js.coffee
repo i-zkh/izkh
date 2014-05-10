@@ -406,6 +406,7 @@ $(document).ready ->
       data: $('.edit_place').serialize()
       dataType: 'json'
       success: (data) ->
+        alert(1)
         $place = $('#place-' + id)
         $form = $('.edit_place')
         $('#container-' + id).find('.place-title').html($form.find('#input-place-title').val())
@@ -414,6 +415,9 @@ $(document).ready ->
         $place.find('.place-address').html('Адрес: ' + $form.find('#input-place-address').val() + ', ' + $form.find('#input-place-building').val())
         $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
+        $("#js-container").removeClass('loading')
+      error: (e) ->
+        console.log e
         $("#js-container").removeClass('loading')
 
 # Update service event
@@ -435,6 +439,9 @@ $(document).ready ->
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
         $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
+        $("#js-container").removeClass('loading')
+      error: (e) ->
+        console.log e
         $("#js-container").removeClass('loading')
 
 # Send options to select box
