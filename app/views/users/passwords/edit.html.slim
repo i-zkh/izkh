@@ -12,5 +12,5 @@
             = f.input :password, label: "Новый пароль", required: true, autofocus: true
             = f.input :password_confirmation, label: "Повторите пароль", required: true
           .form-actions
-            = f.submit :submit, "Поменять пароль",  class: "btn btn-default btn-block"
+            = f.submit "Поменять пароль", class: "btn btn-default btn-block"
         = render "users/shared/links"
