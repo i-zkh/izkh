@@ -1,6 +1,7 @@
 #encoding: utf-8
 class TransactionsController < ApplicationController
   skip_before_filter :require_current_user
+  skip_before_action :verify_authenticity_token
 
   def index
     @places = current_user.places
