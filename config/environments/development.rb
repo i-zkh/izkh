@@ -22,8 +22,8 @@ Iz::Application.configure do
      :address              => "smtp.mandrillapp.com",
      :port                 => 587,
      :domain               => "izkh.ru",
-     :user_name            => "out@izkh.ru",
-     :password             => "odd8u9rYZFrbCorI2EvQqg",
+     :user_name            => "ivanova@izkh.ru",
+     :password             => "IVxMQVT5lIrZ1F-YoAvipw",
      :authentication       => :plain,
      :enable_starttls_auto => false
   }
@@ -31,7 +31,7 @@ Iz::Application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  # Raise an error on page load if there are pending migrations
+  # Raise an error on page load if there are pendin g migrations
   config.active_record.migration_error = :page_load
 
   # Debug mode disables concatenation and preprocessing of assets.
