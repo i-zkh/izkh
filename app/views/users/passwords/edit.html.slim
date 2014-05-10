@@ -4,13 +4,22 @@
       .col-md-12
         h2.title
           | Изменить пароль
-        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-          = f.error_notification
-          = f.input :reset_password_token, as: :hidden
-          = f.full_error :reset_password_token
-          .form-inputs
-            = f.input :password, label: "Новый пароль", required: true, autofocus: true
-            = f.input :password_confirmation, label: "Повторите пароль", required: true
-          .form-actions
-            = f.submit "Поменять пароль", class: "btn btn-default btn-block"
-        = render "users/shared/links"
+      .clearfix
+      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+        = f.error_notification
+        = f.input :reset_password_token, as: :hidden
+        = f.full_error :reset_password_token
+        .form-group-margin
+          .col-lg-12
+            label
+              | Новый пароль *
+            = f.input :password, label: false, required: true, autofocus: true, class: "form-control"
+          .clearfix
+        .form-group-margin
+          .col-lg-12
+            label
+              | Повторите пароль *
+            = f.input :password_confirmation, label: false, required: true, class: "form-control"
+          .clearfix
+        = f.submit "Поменять пароль", class: "btn btn-default btn-block"
+      = render "users/shared/links"
