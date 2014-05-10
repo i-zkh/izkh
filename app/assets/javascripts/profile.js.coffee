@@ -22,11 +22,13 @@ $modalContainer = $('.modal-container')
 # Empty detailed service element
 emptyDetailedService = 'Здесь будет показана информация о выбранной Вами услуге'
 
-
+ymaps.ready ->
+  map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
 $(document).ready ->
   
 # Ajax'ing registration 
+
   if $('#pay')[0]
     $('#pay').find('select').select2()
 
@@ -413,6 +415,9 @@ $(document).ready ->
         $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
+      error: (e) ->
+        console.log e
+        $("#js-container").removeClass('loading')
 
 # Update service event
   $('body').on 'click', '#submit-update-service', ->
@@ -433,6 +438,9 @@ $(document).ready ->
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
         $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
+        $("#js-container").removeClass('loading')
+      error: (e) ->
+        console.log e
         $("#js-container").removeClass('loading')
 
 # Send options to select box
@@ -647,4 +655,3 @@ $(document).ready ->
 
 
   $("body").removeClass('loading')
-  map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})

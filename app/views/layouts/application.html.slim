@@ -12,7 +12,7 @@ html
         = yield
         - unless current_user
           = render 'shared/info_block'
-
-    = include_jquery
+          
     script{src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"}
+    = include_jquery
     = javascript_include_tag 'profile'
