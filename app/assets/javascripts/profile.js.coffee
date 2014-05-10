@@ -22,11 +22,13 @@ $modalContainer = $('.modal-container')
 # Empty detailed service element
 emptyDetailedService = 'Здесь будет показана информация о выбранной Вами услуге'
 
-
+ymaps.ready ->
+  map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
 $(document).ready ->
   
 # Ajax'ing registration 
+
   if $('#pay')[0]
     $('#pay').find('select').select2()
 
@@ -647,4 +649,3 @@ $(document).ready ->
 
 
   $("body").removeClass('loading')
-  map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
