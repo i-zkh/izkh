@@ -89,4 +89,5 @@ Iz::Application.configure do
   }
 
   config.action_mailer.default_url_options = { :host => "izkh.ru" }
+  config.middleware.use ExceptionNotification::Rack, email: {sender_address: 'no-reply@izkh.ru', exception_recipients: 'development@izkh.ru'}
 end

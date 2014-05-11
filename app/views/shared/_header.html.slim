@@ -5,13 +5,15 @@
         = link_to "АйЖКХ", root_path, class: "navbar-brand" 
         p style="padding-top: 15px; float: left"
           | Доступный платежный сервис
+          .pad-left= link_to "Главная", root_path, class: controller_name == "landings" ? 'active' : ''
           - if current_user
             .pad-left= link_to "Профиль", dashboard_index_path, class: controller_name == "dashboard" ? 'active' : ''
             .pad-left= link_to "Аналитика", transactions_path, class: controller_name == "transactions" ? 'active' : ''
           - else
             .pad-left
+          .pad-left= link_to "О компании", about_index_path, class: controller_name == "about" ? 'active' : ''
           span.pad-left
-            | Самара, ул. Советской Армии 180/1, (846) 373-64-10
+            | Самара: (846) 373-64-10
       .nav.navbar-nav.navbar-right
         - if current_user
           = current_user.first_name

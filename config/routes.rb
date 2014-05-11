@@ -1,7 +1,11 @@
 Iz::Application.routes.draw do
  
   devise_for :users, controllers: { registrations: "registrations" }
-  root to: 'dashboard#index'
+  root to: 'landings#index'
+
+  resources :about, only: :index
+
+  resources :landings, only: :index
 
   resources :dashboard, only: :index
   resources :places do

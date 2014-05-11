@@ -2299,7 +2299,8 @@ a.active {
   border-right: 1px solid #34aadb;
   float: left;
   width: 202px;
-  height: 440px;
+  max-height: 440px;
+  overflow: auto;
 }
 
 .places-block span {
@@ -2313,4 +2314,26 @@ a.active {
 #place-accordion, #service-accordion {
   max-height: 400px;
   overflow: auto;
+}
+
+#about-body {
+  overflow: auto;
+  max-height: 90%;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#about {
+  height: 70%;
+  width: 80%;
+}
+
+#about-header {
+  border-bottom: 1px solid #34aadb;
+  padding-left: 20px;
+}
+
+#service-accordion .panel-title {
+  font-size: 14px;
 }
