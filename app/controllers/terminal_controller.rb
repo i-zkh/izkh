@@ -1,4 +1,5 @@
 class TerminalController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def success
     #POST success payment terminal
