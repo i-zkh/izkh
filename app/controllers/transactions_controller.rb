@@ -157,11 +157,13 @@ class TransactionsController < ApplicationController
   def success
     # Callback for successful transactions PO
     Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, 1)
+    render json: {}, status: :ok
   end
 
   def fail
     # Callback for failed transactions PO
     Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, -1)
+    render json: {}, status: :ok
   end
 
   def check
