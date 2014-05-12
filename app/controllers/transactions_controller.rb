@@ -129,7 +129,7 @@ class TransactionsController < ApplicationController
     if payment_type == 2
       commission = vendor.commission_yandex
       total = calculate_total(amount, commission)
-      url = "http://demomoney.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{recipe.total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=110148"
+      url = "http://demomoney.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=110148"
     elsif payment_type == 3
       commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
