@@ -6,7 +6,7 @@ class CraftSPaymentWorker
   def perform(service_id, recipe_id, amount, user_account = nil, tariff_template_id = nil)
     if service_id
       service = Service.find(service_id)
-      tariff_template_id = service.tariff.tariff_template_id
+      tariff_template_id = service.tariff_template_id
       user_account = service.user_account
     end
     
