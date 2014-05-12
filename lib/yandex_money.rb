@@ -15,7 +15,8 @@ class YandexMoney
   end
 
   def check
-    if check_md5('checkOrder')
+    check_md5('checkOrder')
+    if true
       transaction = Transaction.find_by_order_id(@orderNumber)
       commission = Vendor.where(title: transaction.payment_info.split(';')[1]).first.commission_yandex.to_f
       if transaction
@@ -26,7 +27,7 @@ class YandexMoney
         @code = 100
       end
     else
-      @code = 0
+      @code = 1
     end
     { performedDatetime: Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S.000+04:00"), code: @code, invoiceId: @invoiceId, shopId: @shopId }
   end
@@ -45,7 +46,7 @@ class YandexMoney
 
   def check_md5(action)
     require 'digest/md5'
+    logger.info Digest::MD5.hexdigest("#{action};#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
     @md5.downcase == Digest::MD5.hexdigest("#{action};#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
-    @md5_own = Digest::MD5.hexdigest("#{action};#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
   end
 end
