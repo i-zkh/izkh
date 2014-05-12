@@ -27,7 +27,7 @@ Iz::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true 
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -77,4 +77,17 @@ Iz::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.action_mailer.smtp_settings = {
+     :address              => "smtp.mandrillapp.com",
+     :port                 => 587,
+     :domain               => "izkh.ru",
+     :user_name            => "ivanova@izkh.ru",
+     :password             => "IVxMQVT5lIrZ1F-YoAvipw",
+     :authentication       => :plain,
+     :enable_starttls_auto => false
+  }
+
+  config.action_mailer.default_url_options = { :host => "izkh.ru" }
+  config.middleware.use ExceptionNotification::Rack, email: {sender_address: 'no-reply@izkh.ru', exception_recipients: 'development@izkh.ru'}
 end

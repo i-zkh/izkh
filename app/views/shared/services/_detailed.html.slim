@@ -1,59 +1,58 @@
-
 css:
-   @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-   @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+   @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700)
+   @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css)
 
 .title_main_ob
   .menu_other.service-title
-    | #{@service.title}
+    b.title__span #{@service.title}
+    - if @service.service_type_id.to_i == 4 || @service.service_type_id.to_i == 16 || @service.service_type_id.to_i == 1
+      = link_to "Отправить показания счетчиков", '#', class: "show-meters click-off"
 div
-  .form-group-margin
-    .edit_services_sum
+  .edit_services_sum
+    .row.border_dotted
       .t-table
         .t-cell.title_q
           label Тип услуги
         .t-cell
           .col-md-12.service-type
             | #{@service.service_type.title}
+    .row.border_dotted
       .t-table
         .t-cell.title_q
           label Поставщик
         .t-cell
           .col-md-12.vendor
             | #{@service.vendor.title}
+    .row.border_dotted
       .t-table
         .t-cell.title_q
           label Лицевой счет
         .t-cell
           .col-md-12.user-account
             | #{@service.user_account}
-      .t-table_w
-        .t-cell
-          a.service-edit.click-off data-id="#{@service.id}"
-            | Редактировать
+    .t-table_w
+      .t-cell
+        a.service-edit.click-off data-id="#{@service.id}"
+          | Редактировать
+        a.service-delete.delete-link.click-off data-id="#{@service.id}"
+          | Удалить
     .clearfix
   =form_tag(pay_transactions_path , remote: true)
   .padding.payment_box
-    .form-group-margin
-      div
-        h3 Оплата
-        input#pay-commission name="pay[commission]" value="#{@service.vendor.commission}" type="hidden"
-        input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
-        input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
-        input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
-        .t-table_w
-          .t-cell style=("width: 100px") 
-            label Сумма к оплате
-          .t-cell
-            .col-md-12
-              input#inputEmail1.form-control.pay-amount-one name="pay[amount_1]" placeholder="" type="text" /
-          .t-cell руб.
-          .t-cell
-            .col-md-12
-              input#inputEmail1.form-control.pay-amount-two name="pay[amount_2]"placeholder="" type="text" /
-          .t-cell коп.
-      .clearfix
-    .form-group-margin
+    div.clearfix
+      h3 Оплата
+      input#pay-commission name="pay[commission]" value="#{@service.vendor.commission}" type="hidden"
+      input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
+      input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
+      input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
+      input#pay-service-id name="user_account" value="#{@service.user_account}" type="hidden"
+      .t-table_w
+        .t-cell style=("width: 100px") 
+          label Сумма к оплате
+        .t-cell
+          input.pay-amount-one name="pay[amount]" placeholder="" type="text" style=("width: 70px; margin: 0 10px 0 20px")
+        .t-cell руб.
+    .clearfix
       .t-table_w
         .t-cell.tops style=("width: 120px")  Способ оплаты
         .t-cell
@@ -61,10 +60,10 @@ div
             .custom.two
               input#i13 name="pay[payment_type]" type="radio" value="1" checked="checked"
                 label for="i13"  Банковская карта
-          p
-            .custom.two
-              input#i14 name="pay[payment_type]" type="radio" value="3"
-                label.disabled for="i14"  Web Money
+          / p
+          /   .custom.two
+          /     input#i14 name="pay[payment_type]" type="radio" value="3"
+          /       label.disabled for="i14"  Web Money
           p
             .custom.two
               input#i15 name="pay[payment_type]" type="radio" value="2"
@@ -72,9 +71,9 @@ div
       .clearfix
     .clearfix
       p.sum
-        | Комиссия сервиса:
+        | Комиссия сервиса: 
         span#commission 0 руб.
       p.sum
-        | Итого к оплате:
+        | Итого к оплате: 
         span#total 0 руб.
       input.btn.btn-default.btn_green type="submit" value="Оплатить" 

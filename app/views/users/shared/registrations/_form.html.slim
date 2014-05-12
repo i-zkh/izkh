@@ -1,0 +1,107 @@
+css:
+   @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+   @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+.block
+  .registration-container
+    ul.nav.nav-tabs
+      li.active
+        a href="#reg" data-toggle="tab" Регистрация
+      li
+        a href="#pay" data-toggle="tab" Быстрая Оплата
+    .tab-content
+      #reg.tab-pane.active
+        = form_tag user_registration_path, remote: true, id: "reg-step-one-form"
+          .form-inputs
+            .form-group-margin
+              label Имя *
+              input#input-name.form-control-reg class="validate[required]" name="user[first_name]" placeholder=("Введите Ваше имя") type="text" 
+            .form-group-margin
+              label Эл. почта
+              input#input-email.form-control-reg class="validate[required,custom[email]]" name="user[email]" placeholder=("Адрес Вашей эл. почты") type="email" 
+            .form-group-margin
+              label Пароль
+              input.form-control-reg name="user[password]" placeholder=("Придумайте пароль") type="password"
+            .form-group-margin
+              label Телефон
+              input#input-phone.form-control-reg.click_tooltips.js__phone name="user[phone]" placeholder="" type="text" 
+            .form-group-margin
+              label Город
+              input.form-control-reg#input-city name="user[city]" placeholder=("Выберите город") type="text"
+            .row style=("clear: both") 
+              .checkbox
+                .custom
+                  input#offer-confirm.checkbox class="validate[required]" name="okay" type="checkbox"
+                    label for="offer-confirm"  Я принимаю условия
+                    a data-toggle="modal" href="#myModaloffer"  публичной оферты 
+          = submit_tag "Зарегистрироваться", class: "green-btn"
+
+      #pay.tab-pane
+        =form_tag(pay_transactions_path , remote: true)
+          .form-group-margin
+            label
+              | Тип услуги *
+            select id="service_type_id" name="service_type_id" tabindex="-1" title="" 
+              - ServiceType.all.each do |st| 
+                option value="#{st.id}" 
+                  = "#{st.title}"
+            .clearfix
+          .form-group-margin
+            label
+              | Поставщик *
+            select id="vendor_id" name="vendor_id" tabindex="-1" title="" 
+              option disabled="disabled"
+                  | Выберете поставщика услуг  
+              - Vendor.where(service_type_id: 1).each do |v| 
+                option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-web-money="#{v.commission_web_money}"
+                  = "#{v.title}"
+            .clearfix
+          .form-group-margin
+            label
+              | Лицевой счет *
+            =text_field_tag :user_account, "", {id: "input-service-user-account", class: "form-control"}
+            .clearfix  
+          .padding.payment_box
+            div.clearfix
+            .clearfix
+              .t-table_w style=("margin-left: -30px")
+                .t-cell style=("width: 100px") 
+                  label Сумма к оплате
+                .t-cell
+                  input.pay-amount-one.form-control name="pay[amount]" placeholder="" type="text" style=("width: 70px; margin: 0 10px 0 20px")
+                .t-cell руб.
+            .clearfix
+              .t-table_w style=("margin-left: -30px")
+                .t-cell.tops style=("width: 120px")  Способ оплаты
+                .t-cell
+                  p
+                    .custom.two
+                      input#i13.po name="pay[payment_type]" type="radio" value="1" checked="checked"
+                        label for="i13"  Банковская карта
+                  / p
+                  /   .custom.two
+                  /     input#i14.wb name="pay[payment_type]" type="radio" value="3"
+                  /       label.disabled for="i14"  Web Money
+                  p
+                    .custom.two
+                      input#i15.ya name="pay[payment_type]" type="radio" value="2"
+                        label.disabled for="i15"  Яндекс Деньги
+              .clearfix
+            .clearfix 
+              p.sum style=("margin-left: -30px")
+                | Комиссия сервиса: 
+                span#commission 0 руб.
+              p.sum style=("margin-left: -30px")
+                | Итого к оплате: 
+                span#total 0 руб.
+          = submit_tag "Оплатить", class: "green-btn"
+
+#myModaloffer.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button" 
+          | \&times;
+        .row
+          .col-md-12
+            = render 'users/shared/registrations/offer'

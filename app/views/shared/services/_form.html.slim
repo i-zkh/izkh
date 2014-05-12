@@ -29,8 +29,8 @@
             .col-lg-12
               label
                 | Поставщик *
-              =f.select(:vendor_id, Vendor.all.map {|v| [v.title, v.id]})
-            .clearfix     
+              =f.select(:vendor_id, Vendor.where(service_type_id: 1).map {|v| [v.title, v.id]})
+            .clearfix
           .form-group-margin
             .col-lg-12
               label

@@ -1,42 +1,40 @@
-.row
-  .col-md-9
-    .t-table.main_ob style="min-height: 400px"
-      .t-cell.tops.shadow_right style=("width: 250px") 
-        .title_main_ob
-          span Мои объекты
-          a#dashboard-add-place.click_plus.click-off href="#"
-            =image_tag("plus.png")
-        .panel-group#place-accordion
-          - unless @places.empty?
-              - @places.each do |place|
-                = render "shared/places/card", place: place
-          - else
-            p#no-place Вы еще не создавали объекты.
+.block#place-index
+  .title_main_ob style=("width: 200px") 
+    span Мои объекты
+    a#dashboard-add-place.click_plus.click-off href="#"
+      =image_tag("plus.png")
+  .panel-group#place-accordion
+    - unless @places.empty?
+        - @places.each do |place|
+          = render "shared/places/card", place: place
+    - else
+      p#no-place Вы не создавали объекты.
 
-      .t-cell.tops.line_blue style=("width: 150px") 
-        .title_main_ob
-          span Услуги
-          a#dashboard-add-service.click_plus.click-off href="#" style="display: none"
-            =image_tag("plus.png")
-        .panel-group#service-accordion
-          p#no-service Выберите объект
-      .t-cell.tops#service-detailed
-        .title_main_ob
-          .menu_other
-            | Выберите услугу
-        div style="min-height: 500px"
-          .form-group-margin
-            .edit_services_sum
-              | Здесь будет показана информация о выбранной Вами услуге.
+.block#service-index style=("margin-left: 230px") 
+  .title_main_ob style=("width: 200px") 
+    span Услуги
+    a#dashboard-add-service.click_plus.click-off href="#" style="display: none"
+      =image_tag("plus.png")
+  .panel-group#service-accordion
+    p#no-service Выберите объект.
+
+.block#service-container style=("margin-left: 460px") 
+  .tops#service-detailed style=("width: 400px")
+    .title_main_ob 
+      .menu_other
+        | Выберите услугу
+    div style="min-height: 210px"
+      p#no-place Здесь будет показана информация о выбранной Вами услуге.
   
-  .col-md-3.5
-    #widget-container
-      - unless @widgets.empty?
-        = render "shared/widget/widget", widgets: @widgets
-      - else
-        p#no-place Нет новых уведомлений.
+/   .col-md-3.5
+/     #widget-container
+/       - unless @widgets.empty?
+/         = render "shared/widget/widget", widgets: @widgets
+/       - else
+/         p#no-place Нет новых уведомлений.
         
 .modal-container
 
 css:
-  | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+   @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+   @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");

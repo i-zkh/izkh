@@ -1,0 +1,19 @@
+span История показаний
+table.table.table-striped
+  thead
+    th Дата
+    th Показание
+    th Статус
+  tbody.metrics data-id="#{meter.id}"
+    - if meter.last_metric
+      - meter.metrics.each do |m|
+        tr
+          td = m.created_at.strftime('%d.%m.%Y')
+          td = m.metric
+          td 
+            - if m.status.to_i == 0
+              | Не принято
+            - else
+              | Принято
+    - else
+      p.no-metric Нет введенных показаний

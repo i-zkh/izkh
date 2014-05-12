@@ -18,6 +18,7 @@ gem 'rvm-capistrano'
 gem 'httparty'
 gem 'sidekiq', '2.17.7'
 gem "capistrano-sidekiq"
+gem 'exception_notification'
 
 gem 'slim'
 gem 'html2slim'

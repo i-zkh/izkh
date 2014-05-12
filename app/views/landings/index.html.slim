@@ -1,0 +1,102 @@
+#city-panorama.header.white
+  .container
+    .logo.center
+      #logotype.center
+      p Доступный платежный сервис
+    .row
+      .center
+        h3 Самый удобный способ оплатить счета
+        p ЖКХ, интернет, домофон и многое другое
+      .col-lg-4.col-md-4.col-sm-4
+        #all-in-one.rounded.center.bordered
+        p.center.size_one Все платежи в одном месте
+      .col-lg-4.col-md-4.col-sm-4
+        #pay-form.rounded.center.bordered
+        p.center.size_one Удобная форма оплаты
+      .col-lg-4.col-md-4.col-sm-4
+        #no-hidden-commission.rounded.center.bordered
+        p.center.size_one Нет скрытых комиссий
+      #start-service.col-lg-12.col-md-12.col-sm-12
+        hr
+          .center
+            h3 Начните пользоваться сервисом
+            -unless current_user
+              = link_to "Зарегистрируйтесь", new_user_registration_path, class: "register-link btn btn-lg btn-success"
+            -else
+              = link_to "Перейти к сервису", dashboard_index_path, class: "register-link btn btn-lg btn-success"
+          -unless current_user
+            p.center
+              | или 
+              a data-toggle="modal" href="#myModal_ent" 
+                | войдите
+              |  в свой кабинет
+.how-to-use.white
+  .container
+    .row
+      .center.padding_top_one
+        h3.title Как пользоваться?
+        p.center.sub-title Все предельно просто
+      .col-lg-4.col-md-4.col-sm-4.hover_circle.zr
+        #how-register.center.rounded.view-third 
+         .span 1
+         .mask
+          .mask_box
+           span.info_t 1
+        p.center.important Зарегистрируйтесь
+      .col-lg-4.col-md-4.col-sm-4.hover_circle.on
+        #how-services.center.rounded.view-third 
+         .span 2
+         .mask.cr2
+          .mask_box
+           span.info_t 2        
+        p.center.important Подключайте услуги
+      .col-lg-4.col-md-4.col-sm-4.hover_circle.two
+        #how-pay.center.rounded.view-third 
+         .span 3
+         .mask.cr3
+          .mask_box
+           span.info_t 3        
+        p.center.important Оплачивайте счета
+.why
+  .container
+    .row
+      .center.padding_top_one
+        h3.title Почему мы?
+      .col-lg-12
+        p.important.center
+          | Нам доверяют жильцы
+          span &nbsp13002 &nbsp
+          | домов и сотрудничают 
+          span   159
+          | &nbsp организации.
+      .why-list
+        ul.margined
+          .col-lg-6.col-md-6
+            li Круглосуточная, надежная оплата без очередей
+            li Оплата картами любого банка
+            li Удобная передача показаний счетчиков
+          .col-lg-6.col-md-6
+            li Уведомление о ваших задолженностях
+            li Статистика Ваших расходов
+            li Связь с ТСЖ
+.footer.white
+  .container
+    .row
+      .col-lg-6.col-md-12.col-sm-12.col-xs-12.copyright
+        p &copy; 2014, ООО "АйЖКХ"
+      .col-lg-6.col-md-12.col-sm-12.col-xs-12.social
+        a.inline href="https://vk.com/club70082645" 
+          #social-vk
+        a.inline href="https://www.facebook.com/pages/ООО-АйЖКХ/730802226933352" 
+          #social-fb
+        a.inline href="https://twitter.com/izkh_official" 
+          #social-tw
+        .inline
+          p.social-text Рассказать о нас в социальных сетях
+
+= render "users/sessions/new"
+= render "users/passwords/new"
+
+css:
+  | @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+  | @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");

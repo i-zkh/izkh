@@ -1,5 +1,4 @@
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap.min
 //= require jquery.kladr.min
 //= require 'jquery-ui-1.10.4.custom'
@@ -23,11 +22,16 @@ $modalContainer = $('.modal-container')
 # Empty detailed service element
 emptyDetailedService = 'Здесь будет показана информация о выбранной Вами услуге'
 
+ymaps.ready ->
+  map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
+$(document).ready ->
+  
+# Ajax'ing registration 
 
-$(document).ready ->   
+  if $('#pay')[0]
+    $('#pay').find('select').select2()
 
-# Ajax'ing registration      
   $('body').on 'click', '#reg-step-one-submit', ->
     $.ajax
       url: '/users'
@@ -79,7 +83,7 @@ $(document).ready ->
         $('#reg-step-three-info').addClass('active')
         $('.reg-head').append(data)
 
-        $("select").selectBox()
+        $("select").select2()
         $("#reg-step-three-form").validationEngine()
         $("#js-container").removeClass('loading')
       error: (error, qwe, er) ->
@@ -170,7 +174,7 @@ $(document).ready ->
           parentType: $.kladr.type.city
         })
         $("#js-container").removeClass('loading')
-
+ 
 # Add serivce event
   $('#dashboard-add-service').on 'click', ->
     $.ajax
@@ -198,7 +202,7 @@ $(document).ready ->
         $('#no-place').remove()
         $('#place-accordion').append(data)
         $("#js-container").removeClass('loading')
-
+        $("#place-index").find("h4").maxlength maxChars: 6
 # Create service event
   $('body').on 'click', '#submit-create-service', ->
     $('#new_service').find('#service-place-id').val(activePlaceId)
@@ -213,12 +217,13 @@ $(document).ready ->
         $('#no-service').remove()
         $('#service-accordion').append(data)
         $("#js-container").removeClass('loading')
-
+        $("#service-index").find("h4").maxlength maxChars: 6
 # Place accordion click 
   $('#place-accordion').on 'click', '.panel-heading', ->
     if !$(this).hasClass('active-accordion-item')
       activePlaceId = $(this).data('id')
-      $(this).addClass('active-accordion-item')
+      $('.panel-heading').show()
+      $(this).hide()
       $('#place-accordion .panel-heading').not(this).siblings('.delete-link').hide();
       $(this).siblings('.delete-link').show();
       $('#place-accordion')
@@ -236,8 +241,68 @@ $(document).ready ->
           $('#service-accordion').html(data)
           $('#service-add').show()
           $("#js-container").removeClass('loading')
+          $("#service-index").find("h4").maxlength maxChars: 6
     else
       false
+
+  # Analitics place accordion click
+  $('#transaction-place-accordion').on 'click', '.panel-heading', ->
+    if !$(this).hasClass('active-accordion-item')
+      $('#place-accordion .panel-heading').not(this).siblings('.delete-link').hide();
+      $(this).siblings('.delete-link').show();
+      $(this).addClass('active-accordion-item')
+      $('#transaction-place-accordion')
+        .find('.panel-heading')
+        .not(this)
+        .removeClass('active-accordion-item')
+      if $('.show-table').hasClass('active')
+        $.ajax
+          url: '/table_show'
+          type: 'GET'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html(data)
+            $("#js-container").removeClass('loading')
+      else
+        $.ajax
+          url: '/graph_show'
+          type: 'GET'
+          dataType: 'json'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html("<div id='graph'></div>")
+            console.log data
+            Morris.Line({
+              element: 'graph',
+              xkey: data.xkey,
+              ykeys: data.ykeys,
+              labels: data.labels,
+              data: data.data
+            });
+            $("#js-container").removeClass('loading')
+    else
+      false
+
+# Show graph click
+  $('#analytics').on 'click', '.show-graph', ->
+    unless $(this).hasClass('active') 
+      $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
+      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
+      $('.show-graph').addClass('active')
+      $('.show-table').removeClass('active')
+
+# Show table click
+  $('#analytics').on 'click', '.show-table', ->
+    unless $(this).hasClass('active')
+      $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
+      $(this).addClass('active')
+      $('.show-graph').removeClass('active')
+      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
+          
 
 # Service accordion click 
   $('#service-accordion').on 'click', '.panel-heading', ->
@@ -257,8 +322,10 @@ $(document).ready ->
           $("#js-container").addClass('loading')
         success: (data) ->
           $('#service-detailed').html(data)
+          $(".title__span").maxlength maxChars: 6
           commissionCalc()
           $("#js-container").removeClass('loading')
+
     else
       false
 
@@ -282,7 +349,7 @@ $(document).ready ->
         $('.edit_services_sum').html(emptyDetailedService)
         $('.payment_box').remove()
         $("#js-container").removeClass('loading')
-
+         
 # Delete service event
   $('body').on 'click', '.service-delete', ->
     id = $(this).data('id')
@@ -298,7 +365,7 @@ $(document).ready ->
         $('.edit_services_sum').html(emptyDetailedService)
         $('.payment_box').remove()
         $("#js-container").removeClass('loading')
-
+        
 # Edit place event
   $('body').on 'click', '.place-edit', ->
     id = $(this).data('id')
@@ -310,11 +377,11 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
+        $("select").select2()
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
-        
+        $("#place-index").find("h4").maxlength maxChars: 6
 # Edit service event
   $('body').on 'click', '.service-edit', ->
     id = $(this).data('id')
@@ -326,11 +393,12 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.empty()
         $modalContainer.html(data)
-        $("select").selectBox()
+        $("select").select2()
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
-        
+        $("#service-index").find("h4").maxlength maxChars: 6
+
 # Update place event
   $('body').on 'click', '#submit-update-place', ->
     id = $(this).data('id')
@@ -351,6 +419,10 @@ $(document).ready ->
         $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
+        $("#place-index").find("h4").maxlength maxChars: 6
+      error: (e) ->
+        console.log e
+        $("#js-container").removeClass('loading')
 
 # Update service event
   $('body').on 'click', '#submit-update-service', ->
@@ -358,9 +430,9 @@ $(document).ready ->
     $.ajax
       url: '/services/' + id
       type: 'PUT'
+      data: $('.edit_service').serialize()
       beforeSend: ->
         $("#js-container").addClass('loading')
-      data: $('.edit_service').serialize()
       dataType: 'json'
       success: (data) ->
         $service = $('#service-detailed')
@@ -372,63 +444,211 @@ $(document).ready ->
         $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
+        $("#service-index").find("h4").maxlength maxChars: 6
+      error: (e) ->
+        console.log e
+        $("#js-container").removeClass('loading')
+
+# Send options to select box
+  $('body').on 'change', '#service_service_type_id', ->
+    $.ajax
+      url: '/by_service_type'
+      type: 'GET'
+      dataType: 'html'
+      data: {service_type_id: $("#service_service_type_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#service_vendor_id').find("option").remove()
+        $('#service_vendor_id').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'change', '#service_type_id', ->
+    $.ajax
+      url: '/by_service_type_with_pay'
+      type: 'GET'
+      dataType: 'html'
+      data: {service_type_id: $("#service_type_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#vendor_id').find("option").remove()
+        $('#vendor_id').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
+
+# Show meters form
+  $('body').on 'click', '.show-meters', ->
+    serviceId = $('#service-accordion').find('.active-accordion-item').data('id')
+    $.ajax
+      url: '/meters'
+      type: 'GET'
+      data: {service_id: serviceId}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#service-index').hide()
+        $('#service-container').hide()
+        $('#place-index').hide()
+        $('#place-index').after(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '.back-to-service', ->
+    $('#service-index').show()
+    $('#service-container').show()
+    $('#place-index').show()
+    $('#meter-index').remove() 
+
+  $('body').on 'click', '.show-meter-form', ->
+    $.ajax
+      url: '/meters/new'
+      type: 'GET'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('.meter-form').append(data)
+        $('.show-meter-form').hide()
+        $('.no-meter').hide()
+        $('select').select2()
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '#submit-create-meter', ->
+    serviceId = $('#service-accordion').find('.active-accordion-item').data('id')
+    $('#meter_service_id').val(serviceId)
+    $.ajax
+      url: 'meters'
+      type: 'POST'
+      data: $('#new_meter').serialize()
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('.meters').append(data)
+        $('.meter-form').empty()
+        $('.show-meter-form').show()
+        $('.no-meter').hide()
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '.metric-submit', ->
+    meterId = $(this).data('meter-id')    
+    form = $(this).closest('#new_metric')
+    metric = form.find('#metric_metric').val()
+    $.ajax
+      url: 'metrics'
+      type: 'POST'
+      data: form.serialize()
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        form[0].reset()
+        $('.last-metric[data-id=' + meterId + ']').html(metric)
+        $('.no-metric').hide()
+        $('#status').show()
+        $('#status').fadeOut(4000)
+        $(".metrics[data-id=" + meterId + "]").append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '.delete-meter', ->
+    c = confirm("Действительно удалить?")
+    if c
+      meterId = $(this).data('id')
+      $.ajax
+        url: 'meters/' + meterId
+        type: 'DELETE'
+        beforeSend: ->
+          $("#js-container").addClass('loading')
+        success: (data) ->
+          $('.meter[data-id=' + meterId + ']').remove()
+          $("#js-container").removeClass('loading')
+        error: (error) ->
+          $("#js-container").removeClass('loading')
+
+
+  $('body').on 'click', '.hide-history', ->
+    $('.metric-history').slideUp()
+
+  $('body').on 'click', '.hide-history', ->
+    meterId = $(this).data('id')
+    $('.show-history').show()
+    $('.metrics-history[data-id=' + meterId + ']').slideUp()
+
+  $('body').on 'click', '.show-history', ->
+    meterId = $(this).data('id')
+    $('.metrics-history[data-id=' + meterId + ']').slideDown()
+    $(this).hide()
+
 
 # Commission calculation
 # TODO: Refactor to the bone
+  $('#pay').on "change", "#vendor_id", ->
+    commissionQuickPay()
+
+  $('#pay').on "keyup", ".pay-amount-one", ->
+    commissionQuickPay()
+
+  $('#pay').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
+    commissionQuickPay()
+
+  commissionQuickPay = () =>
+    if $(".pay-amount-one").val() is ""
+      amountOne = 0
+    else
+      amountOne = $(".pay-amount-one").val()
+    if  document.getElementById("i15").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else
+      percent = $("#vendor_id").find("option:selected").data('commission')
+    amount = parseFloat(amountOne)
+    commission = Math.round(amount * percent) / 100
+    $("#commission").html " " + commission + " руб."
+    total = commission + amount
+    $("#total").html " " + total + " руб."  
+
   commissionCalc = () ->
     $(".pay-amount-one").keyup ->
-      if $(".pay-amount-two").val() is ""
-        amountTwo = 0
+      if $(".pay-amount-one").val() is ""
+        amountOne = 0
       else
-        amountTwo = $(".pay-amount-two").val()
-      amountOne = $(".pay-amount-one").val()
-      if document.getElementById("i15").checked
-        percent = $("#pay-commission-yandex").val()
-      else if document.getElementById("i14").checked
-        percent = $("#pay-commission-web-money").val()
-      else
-        percent = $("#pay-commission").val()
-      amount = parseFloat(amountOne + "." + amountTwo)
-      commission = Math.round(amount * percent) / 100
-      $("#commission").html " " + commission + " руб."
-      total = commission + amount
-      $("#total").html " " + total + " руб."
+        amountOne = $(".pay-amount-one").val()
 
-    $(".pay-amount-two").keyup ->
-      if $(".pay-amount-two").val() is ""
-        amountTwo = 0
-      else
-        amountTwo = $(".pay-amount-two").val()
-      amountOne = $(".pay-amount-one").val()
       if document.getElementById("i15").checked
         percent = $("#pay-commission-yandex").val()
-      else if document.getElementById("i14").checked
-        percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
-      amount = parseFloat(amountOne + "." + amountTwo)
+      amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
+
       $("#commission").html " " + commission + " руб."
       total = commission + amount
-      $("#total").html " " + total + " руб."
+      $("#total").html(" " + total + " руб.")
 
     $("input:radio[name=\"pay[payment_type]\"]").change ->
-      if $(".pay-amount-two").val() is ""
-        amountTwo = 0
+      if $(".pay-amount-one").val() is ""
+        amountOne = 0
       else
-        amountTwo = $(".pay-amount-two").val()
-      amountOne = $(".pay-amount-one").val()
+        amountOne = $(".pay-amount-one").val()
+
       if $(this).attr("id") is "i15"
         percent = $("#pay-commission-yandex").val()
-      else if $(this).attr("id") is "i14"
-        percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
-      amount = parseFloat(amountOne + "." + amountTwo)
+      amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
       $("#commission").html " " + commission + " руб."
       total = commission + amount
-      $("#total").html " " + total + " руб."
+      $("#total").html(" " + total + " руб.")
 
   # Long Polling for widgets
   updateWidgets = ->
@@ -438,3 +658,41 @@ $(document).ready ->
   $ ->
     setTimeout updateWidgets, 30000  if document.getElementById("widget-container")?
     return
+
+
+  $("body").removeClass('loading')
+    # Tabs About
+  $(".tabs__about:not(.tabs__about:eq(0))").hide()
+  $("#about-header h3:first").addClass "active"
+  $("#about-header h3").click ->
+    $("#about-header h3").removeClass "active"
+    $(".tabs__about").stop().hide()
+    index = $(this).addClass("active").index()
+    $(".tabs__about").eq(index).stop().fadeIn()
+    return
+  # создаём плагин maxlength
+  jQuery.fn.maxlength = (options) ->
+    
+    # определяем параметры по умолчанию и прописываем указанные при обращении
+    settings = jQuery.extend(
+      maxChars: 10 # максимальное колличество символов
+      leftChars: "character left" # текст в конце строки информера
+    , options)
+    
+    # выполняем плагин для каждого объекта
+    @each ->
+      # определяем объект
+      $me = $(this)
+      # определяем динамическую переменную колличества оставшихся для ввода символов
+      l = settings.maxChars
+      # определяем события на которые нужно реагировать
+      text = $me.text()
+      meL = text.length
+      console.log meL >= l
+      $me.text text.substr(0, l) + "…"  if meL >= l
+      return
+
+  $("#service-index").find("h4").maxlength maxChars: 6
+  $("#place-index").find("h4").maxlength maxChars: 6
+  $(".places-block").find("h4").maxlength maxChars: 24
+   

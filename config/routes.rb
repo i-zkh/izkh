@@ -1,7 +1,11 @@
 Iz::Application.routes.draw do
  
   devise_for :users, controllers: { registrations: "registrations" }
-  root to: 'main#index'
+  root to: 'landings#index'
+
+  resources :about, only: :index
+
+  resources :landings, only: :index
 
   resources :dashboard, only: :index
   resources :places do
@@ -11,6 +15,9 @@ Iz::Application.routes.draw do
     post :reg_create, on: :collection
     get :by_place, on: :member
   end
+
+  resources :meters, only: [:create, :destroy, :index, :new]
+  resources :metrics, only: [:create, :destroy, :new]
   
   resources :about, only: :index
   resources :feedback
@@ -20,9 +27,14 @@ Iz::Application.routes.draw do
   end
   resources :widgets, only: [:create, :update, :index]
 
+  get 'app' => 'app#index'
   post 'tutorial/off' => 'tutorial#off'
   get 'update_db' => 'update_table#update_db'
-
+  get 'by_service_type' => 'vendors#by_service_type'
+  get 'by_service_type_with_pay' => 'vendors#by_service_type_with_pay'
+  get 'table_show' => 'transactions#table_show'
+  get 'graph_show' => 'transactions#graph_show'
+  get 'send_pass_change' => 'update_table#send_pass_change'
   # Callback for PO
   post 'api/1.0/payment_success' => 'transactions#success'
   post 'api/1.0/payment_fail' => 'transactions#fail'
@@ -32,6 +44,12 @@ Iz::Application.routes.draw do
   get 'api/1.0/payment_fail' => 'main#index'
   post 'api/1.0/payment_notify' => 'transactions#notify'
   post 'api/1.0/payment_check' => 'transactions#check'
+
+  # TEST Callback for Yandex
+  get 'api/1.0/payment_success/test' => 'main#index'
+  get 'api/1.0/payment_fail/test' => 'main#index'
+  post 'api/1.0/payment_notify/test' => 'transactions#notify'
+  post 'api/1.0/payment_check/test' => 'transactions#check'
 
   # Callback for WebMoney
   post 'api/1.0/invoice_confirmation' => 'transactions#invoice_confirmation'

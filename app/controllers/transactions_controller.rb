@@ -1,6 +1,7 @@
 #encoding: utf-8
 class TransactionsController < ApplicationController
   skip_before_filter :require_current_user
+  skip_before_action :verify_authenticity_token
 
   def index
     @places = current_user.places
@@ -53,23 +54,90 @@ class TransactionsController < ApplicationController
     render partial: 'shared/transactions/services/index', status: :ok 
   end
 
+  def graph_show
+    @month_data = {}
+    @data = []
+    ykeys = []
+    labels = []
+    prev = Date.today.month - 2
+    curr = Date.today.month - 1
+    nxt = Date.today.month
+    year = Date.today.year
+
+    @month_data[:prev_month] = I18n.t('date.month_names')[prev]
+    @month_data[:curr_month] = I18n.t('date.month_names')[curr]
+    @month_data[:next_month] = I18n.t('date.month_names')[nxt]
+    @month_data[:prev_month_sum] = 0
+    @month_data[:curr_month_sum] = 0
+    @month_data[:next_month_sum] = 0
+
+    place = Place.find(params[:id])
+
+    prev_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', prev, year, place.title)
+    prev_trans.each do |pt|
+      @month_data[:prev_month_sum] += pt.amount
+    end
+
+    curr_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', curr, year, place.title)
+    curr_trans.each do |ct|
+      @month_data[:curr_month_sum] += ct.amount
+    end
+
+    @month_data[:prev_month_sum] += (@month_data[:curr_month_sum] + @month_data[:prev_month_sum]) / 2
+    @data_prev = {"m" => Date.today - 2.month}
+    @data_curr = {"m" => Date.today - 1.month}
+    @data_next = {"m" => Date.today}
+    
+    services = place.services
+    services.each do |service|
+
+      prev_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', prev, year, place.title, service.title)
+      curr_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', curr, year, place.title, service.title)
+      
+      prev_sum = 0
+      curr_sum = 0
+      next_sum = 0
+
+      prev_service_trans.each {|st| prev_sum += st.amount}
+      curr_service_trans.each {|ct| curr_sum += ct.amount}
+      next_sum += (prev_sum + curr_sum) / 2
+      @data_prev["#{service.id}"], @data_curr["#{service.id}"], @data_next["#{service.id}"] = prev_sum, curr_sum, next_sum
+      labels << service.title
+      ykeys << service.id.to_s
+    end
+    @service_data = {element: 'graph', xkey: 'm', ykeys: ykeys, labels: labels, data: [@data_prev, @data_curr, @data_next]}
+    render json: @service_data, status: :ok
+  end
+
   def pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
-    amount = [params[:pay][:amount_1], params[:pay][:amount_2]].join('.')
+    amount = params[:pay][:amount]
+    user_id =  current_user.id if current_user
     payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
-    service = Service.find(params[:pay][:service_id])
+    
+    if params[:pay][:service_id]
+      service = Service.find(params[:pay][:service_id])
+      vendor = service.vendor
+      place =  service.place.title
+      service_type = service.service_type.title
+    else
+      service_type = ServiceType.find(params[:service_type_id]).title
+      place, service = "", ""
+      vendor = Vendor.find(params[:vendor_id]) 
+    end
+
     if payment_type == 2
-      commission = Vendor.find(service.vendor_id).commission_yandex
+      commission = vendor.commission_yandex
       total = calculate_total(amount, commission)
-      url = "https://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{params[:pay][:user_id]}&orderNumber=#{order_id}"
+      url = "https://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}"
     elsif payment_type == 3
-      commission = Vendor.find(service.vendor_id).commission_web_money
+      commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
       url = "https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=6c2aa990-60e1-427f-9c45-75cffae4a745&LMI_PAYMENT_AMOUNT=#{total}&LMI_PAYMENT_DESC=АйЖКХ&LMI_CURRENCY=RUB&ORDER_ID=#{order_id}"
     else
       currency = "RUB"
       merchant_id = '39859'
-      commission = Vendor.find(service.vendor_id).commission
+      commission = vendor.commission
       total = calculate_total(amount, commission)
       private_security_key = '7ab9d14e-fb6b-4c78-88c2-002174a8cd88'
       po_root_url = "https://secure.payonlinesystem.com/ru/payment/"
@@ -77,7 +145,7 @@ class TransactionsController < ApplicationController
       security_key = Digest::MD5.hexdigest(security_key_string)
       url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
     end
-    Transaction.create!(amount: amount.to_f, service: Service.find(params[:pay][:service_id]).title, place: Place.find(service.place_id).title, user_id: current_user.id, commission: commission.to_f, payment_type: payment_type, order_id: order_id)
+    Transaction.create!(amount: amount.to_f, service: service, place: place, user_id: user_id, commission: commission.to_f, payment_type: payment_type, payment_info: "#{service_type};#{vendor.title};#{params[:user_account]}", order_id: order_id)
 
     respond_to do |format|
       format.js {
@@ -89,11 +157,13 @@ class TransactionsController < ApplicationController
   def success
     # Callback for successful transactions PO
     Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, 1)
+    render json: {}, status: :ok
   end
 
   def fail
     # Callback for failed transactions PO
     Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, -1)
+    render json: {}, status: :ok
   end
 
   def check

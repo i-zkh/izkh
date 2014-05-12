@@ -1,5 +1,7 @@
 #encoding: utf-8
 class UpdateTableController < ApplicationController
+  skip_before_filter :require_current_user
+
   def  update_db
     #UpdateDbWorker.perform_async
     UpdateTable.service_types
@@ -8,6 +10,11 @@ class UpdateTableController < ApplicationController
     UpdateTable.services
     UpdateTable.tariff_templates
     UpdateTable.users
+    render json: true
+  end
+
+  def send_pass_change 
+    ChangePassWorker.perform_async
     render json: true
   end
 end

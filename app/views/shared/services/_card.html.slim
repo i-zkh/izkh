@@ -1,6 +1,4 @@
 div.panel id="service-container-#{service.id}" data-id="#{service.id}" style="border-radius: 0; border: 0; margin: 0; position: relative;"
   .panel-heading data-toggle="collapse" data-parent="#service-accordion" data-id="#{service.id}" href="#service-#{service.id}" style="height: 40px; border-radius: 0; padding: 0; border-bottom: 1px solid #4FB0DE"
     h4.panel-title.service-title style="float:left;display: inline-block;padding-top: 10px;padding-left: 10px;"
-      | #{service.title} 
-  a.service-delete.delete-link.click-off data-id="#{service.id}" style="position: absolute;right: 10px;top: 5px; display: none;"
-    =image_tag("close_smail.png", class: 'delete-icon')
+      | #{service.title}

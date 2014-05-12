@@ -36,14 +36,13 @@
                 | Улица *
               =f.text_field(:address, id: "input-place-address", class: "form-control") 
             .clearfix       
-          .t-table 
+          .t-table style="padding: 0"
            .t-cell
              label
               | Дом *
              =f.text_field(:building, id: "input-place-building", class: "form-control") 
            .t-cell.padding_d
            .t-cell
-              
              label
               | Квартира *
              =f.text_field(:apartment, id: "input-place-apartment", class: "form-control") 

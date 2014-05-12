@@ -8,7 +8,7 @@
       background-color: #f62621;
   }
   .form-group-margin {
-      padding-bottom: 15PX;
+      padding-bottom: 15px;
       margin-left: -15px;
       margin-right: -15px;
       position: relative;
@@ -36,7 +36,8 @@
   }
   .t-table {
       display: table;
-      width: 100%
+      width: 100%;
+      padding-left: 20px;
   }
   .t-table_w {
       display: table;
@@ -182,18 +183,7 @@
   .padding {
       padding: 0px 15px 15px 15px;
   }
-  .title_main_ob {
-      font-size: 23px;
-      position: relative;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #4fb0de;
-  }
-  .title_main_ob span {
-      margin-right: 17px;
-      text-align: center;
-      display: block;
-  }
+
   .line_blue {
       border-left: 1px solid #38a8d7;
       border-right: 1px solid #38a8d7;
@@ -206,11 +196,7 @@
       -webkit-box-shadow: 3px 0px 0px 0px #d0d1d3;
       -moz-box-shadow: 3px 0px 0px 0px #d0d1d3;
   }
-  .click_plus {
-      position: absolute;
-      top: 7px;
-      right: 10px;
-  }
+  
   .menu_other {
       padding-left: 20px;
   }
@@ -225,6 +211,7 @@
   .edit_services_sum a {
       display: block;
       margin-top: 10px;
+      margin-left: 5px;
   }
   .edit_services_sum .t-table {
       margin-bottom: 5px;
@@ -237,7 +224,7 @@
   }
   .payment_box h3 {
       font-size: 21px;
-      margin: 0 0 15px 0;
+      margin: 10px 0 15px 0;
   }
   .btn_green {
       background-color: #67be61;
@@ -1068,10 +1055,17 @@
   }
   .view-fifth p {
       opacity: 0;
-      color: #333;
+      color: #333; font-weight: bold;
       margin: 20px 0 0 0;
       transition: all 0.2s linear;
   }
+  
+    .view-fifth em{
+      display: block; font-weight: normal;
+      line-height: 14px;
+      margin-bottom: 5px; margin-top: 5px;
+    }
+
   .view-fifth:hover .mask {
       transform: translateX(0px);
   }
@@ -1265,17 +1259,12 @@
   .width-limiter {
       width: 80%;
   }
-  .active-accordion-item {
-      background-color: #67be61;
-      color: white;
-  }
+ 
   /* Error handling */
   .error-text {
       color: #FF3B30;
   }
-  #no-place, #no-service {
-      padding: 15px;
-  }
+
   .badge {
       position: relative;
       -webkit-animation: animationFrames 2s linear infinite;
@@ -2129,9 +2118,11 @@ disabled look for disabled choices in the results dropdown
   }
   .loading {
       opacity: .3;
+      z-index: 100;
   }
   .loading:after {
       content:"";
+      z-index: 100;
       position: absolute;
       top: 0;
       left: 0;
@@ -2165,3 +2156,205 @@ disabled look for disabled choices in the results dropdown
           opacity: 0;
       }
   }
+
+.pad-left{
+  padding-left: 10px;
+  float: left;  
+  padding-top: 15px;
+  text-decoration: underline;
+}
+span.pad-left{
+  text-decoration: none;
+}
+
+.meters {
+  overflow: auto;
+  max-height: 400px;
+}
+
+.meter-header {
+  border-bottom: 1px solid #34aadb;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.meter-header span{
+  padding: 10px;
+}
+
+.meter-container p {
+  padding: 10px;
+}
+
+.green-btn {
+  margin-left: 35%;
+  display: block;
+  border: none;
+  height: 30px;
+  background-color: #00CD66;
+  color: white;
+  width: 290px;
+  margin: 10px 30%;
+  text-decoration: none;
+  text-align: center;
+  line-height: 30px;
+  font-size: 16px;
+}
+
+.green-btn:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.meter-form-container .form-element, .meter-form-container .form-submit {
+  width: 80%;
+  padding: 10px;
+}
+
+.meter-type, .metrics-form, .meter-controls {
+  float: left;
+  padding: 10px;
+}
+
+.meter-controls {
+  margin-top: 50px;
+}
+
+.meter-type {
+  width: 20%;
+}
+.metrics-form {
+  width: 60%;
+}
+
+.metrics-form .form-element {
+  float: left;
+  width: 35%;
+}
+
+.metrics-form .form-submit {
+  float: left;
+  width: 20%;
+  margin-top: 50px;
+  padding-left: 10px;
+}
+
+.meter {
+  width: 100%;
+  clear: both;
+  padding: 10px;
+  border-top: 1px solid #34aadb;
+}
+
+.show-meter-form {
+  clear: both;
+}
+
+.metrics-history {
+  clear: both;
+}
+
+.red {
+  color: red;
+}
+
+#status {
+  font-size: 16px;
+}
+
+#info {
+  margin-left: 500px;
+  width: 500px;
+  height: 250px;
+}
+
+.info-heading {
+  border-bottom: 1px solid #34aadb;
+}
+
+.info-heading h3 {
+  text-align: center;
+}
+
+.info-body p {
+  padding: 15px;
+  font-size: 14px;
+}
+
+a.active {
+  font-weight: 600;
+}
+
+.header-block {
+  height: 60px;
+  border-bottom: 1px solid #34aadb;
+}
+
+.header-block h3 {
+  float: left;
+  padding-left: 20px;
+}
+
+.header-block a {
+  float: left;
+  font-size: 16px;
+  margin-left: 30px;
+  margin-top: 24px;
+}
+
+.places-block {
+  border-right: 1px solid #34aadb;
+  float: left;
+  width: 202px;
+  max-height: 440px;
+  overflow: auto;
+}
+
+.places-block span {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 15px 0 10px 10px; 
+  border-bottom: 1px solid #34aadb;
+}
+
+#place-accordion, #service-accordion {
+  max-height: 400px;
+  overflow: auto;
+}
+
+#about-body {
+  overflow: auto;
+  max-height: 85%;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#about {
+  height: 70%;
+ 
+}
+#about.container{ padding-left: 0 !important;padding-right: 0 !important}
+
+#about h3{
+  display: inline-block; margin-right: 30px; cursor: pointer ;
+}
+
+#about h3.active{
+  text-decoration: underline;
+}
+
+
+#about-header {
+  border-bottom: 1px solid #34aadb;
+  padding-left: 20px;
+}
+
+#service-accordion .panel-title {
+  font-size: 14px;
+}
+
+.title__span{
+  font-weight: normal;
+}

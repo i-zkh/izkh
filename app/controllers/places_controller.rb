@@ -33,7 +33,7 @@ class PlacesController < ApplicationController
   def update
     @place = Place.find(params[:id])
     if @place.update(place_params)
-      render text: "", status: :ok
+      render json: {}, status: :ok
     else
       render partial: 'shared/errors', locals: { object: @place }, status: :error
     end

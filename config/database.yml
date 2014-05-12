@@ -4,19 +4,19 @@ development:
   database: iz_development
   pool: 5
   username: postgres
-  password:
+  password: postgres
 test:
   adapter: postgresql
   encoding: unicode
   database: iz_test
   pool: 5
   username: postgres
-  password:
+  password: postgres
 
 production:
   adapter: postgresql
-  encoding: unicode
+  encoding: utf-8
   database: iz_production
   pool: 5
   username: postgres
-  password:
+  password: postgres

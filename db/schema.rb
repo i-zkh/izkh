@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428120240) do
+ActiveRecord::Schema.define(version: 20140508104137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "meters", force: true do |t|
+    t.integer  "user_id"
+    t.string   "meter_type"
+    t.integer  "vendor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "service_id"
+  end
+
+  create_table "metrics", force: true do |t|
+    t.integer  "meter_id"
+    t.float    "metric"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "places", force: true do |t|
     t.string   "title"
@@ -91,6 +108,7 @@ ActiveRecord::Schema.define(version: 20140428120240) do
     t.datetime "updated_at"
     t.integer  "payment_type",                    default: 1
     t.integer  "order_id",              limit: 8
+    t.string   "payment_info"
   end
 
   create_table "users", force: true do |t|
