@@ -26,7 +26,7 @@ class YandexMoney
         @code = 100
       end
     else
-      @code = 1
+      @code = 0
     end
     { performedDatetime: Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S.000+04:00"), code: @code, invoiceId: @invoiceId, shopId: @shopId }
   end
@@ -46,5 +46,6 @@ class YandexMoney
   def check_md5(action)
     require 'digest/md5'
     @md5.downcase == Digest::MD5.hexdigest("#{action};#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
+    @md5_own = Digest::MD5.hexdigest("#{action};#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
   end
 end
