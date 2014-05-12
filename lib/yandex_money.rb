@@ -15,8 +15,7 @@ class YandexMoney
   end
 
   def check
-    check_md5('checkOrder')
-    if true
+    if check_md5('checkOrder')
       transaction = Transaction.find_by_order_id(@orderNumber)
       commission = Vendor.where(title: transaction.payment_info.split(';')[1]).first.commission_yandex.to_f
       if transaction

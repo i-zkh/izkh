@@ -129,7 +129,7 @@ class TransactionsController < ApplicationController
     if payment_type == 2
       commission = vendor.commission_yandex
       total = calculate_total(amount, commission)
-      url = "http://demomoney.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=110148"
+      url = "https://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}"
     elsif payment_type == 3
       commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
@@ -170,8 +170,6 @@ class TransactionsController < ApplicationController
     # CheckOrder for Yandex payment
     @check = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).check
     logger.info @check
-    logger.info params[:md5]
-
     render :template => "yandex_money/check.xml.erb", :layout => false 
   end
 

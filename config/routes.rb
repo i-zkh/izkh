@@ -34,7 +34,7 @@ Iz::Application.routes.draw do
   get 'by_service_type_with_pay' => 'vendors#by_service_type_with_pay'
   get 'table_show' => 'transactions#table_show'
   get 'graph_show' => 'transactions#graph_show'
-  get 'send_pass_change' => 'update_table#send_pass_change'
+  # get 'send_pass_change' => 'update_table#send_pass_change'
   # Callback for PO
   post 'api/1.0/payment_success' => 'transactions#success'
   post 'api/1.0/payment_fail' => 'transactions#fail'
