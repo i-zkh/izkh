@@ -4,7 +4,7 @@ class TerminalController < ApplicationController
 
   def success
     #POST success payment terminal
-    payment_history = TerminalPayment.new(params[:payment_data])
+    payment_history = TerminalPayment.new(terminal_payment_params)
     if payment_history.save
       amount = payment_history.amount
       if payment_history.vendor_id.to_i == 121
@@ -25,5 +25,9 @@ class TerminalController < ApplicationController
     # GET api/1.0/terminal/vendors
     @service_types = ServiceType.all
     render 'terminal/vendors'
+  end
+
+ def terminal_payment_params
+    request.get? ? {} : params.require(:payment_data).permit(:total, :amount, :commission, :user_account, :vendor_id, :tariff_template_id, :auth_token, :controller, :action)
   end
 end
