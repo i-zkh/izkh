@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20140513124136) do
     t.datetime "updated_at"
     t.float    "commission_yandex"
     t.float    "commission_web_money"
+    t.string   "regexp"
   end
 
   create_table "widgetables", force: true do |t|

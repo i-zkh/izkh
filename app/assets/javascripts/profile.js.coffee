@@ -218,7 +218,7 @@ $(document).ready ->
         $('#no-service').remove()
         $('#service-accordion').prepend(data)
         $("#js-container").removeClass('loading')
-        $("#service-index").find("h4").maxlength maxChars: 10
+        $("#service-index").find("h4").maxlength maxChars: 20
 
 # Place accordion click 
   $('#place-accordion').on 'click', '.panel-heading', ->
@@ -487,7 +487,7 @@ $(document).ready ->
         $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
-        $("#service-index").find("h4").maxlength maxChars: 10
+        $("#service-index").find("h4").maxlength maxChars: 20
       error: (e) ->
         console.log e
         $("#js-container").removeClass('loading')
@@ -766,7 +766,7 @@ $(document).ready ->
       $me.text text.substr(0, l) + "…"  if meL >= l
       return
 
-  $("#service-index").find("h4").maxlength maxChars: 10
+  $("#service-index").find("h4").maxlength maxChars: 20
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
    

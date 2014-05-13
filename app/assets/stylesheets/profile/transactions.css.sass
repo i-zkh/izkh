@@ -1,20 +1,28 @@
+$color_blue: #4FB0DE
+$auto: auto 
+$left_float: left
+
 #analytics 
-  width: 80%
   height: 500px
 
 .analytics-block
-  float: left
+  float: $left_float 
   width: 75%
+  overflow: $auto
   .text 
     padding: 20px
 
 .places-block
-  float: left
+  float: $left_float
   width: 24%
-  border-right: 1px solid #4FB0DE
+  border-right: 1px solid $color_blue
   z-index: 1100
+  overflow: $auto
   .panel-group
     width: 100%
 
 .cell
   width: 20%
+
+#graph p
+  padding: 10px
