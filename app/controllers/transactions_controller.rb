@@ -24,12 +24,12 @@ class TransactionsController < ApplicationController
 
     place = Place.find(params[:id])
 
-    prev_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', prev, year, place.title)
+    prev_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', prev, year, place.id)
     prev_trans.each do |pt|
       @month_data[:prev_month_sum] += pt.amount
     end
 
-    curr_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', curr, year, place.title)
+    curr_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', curr, year, place.id)
     curr_trans.each do |ct|
       @month_data[:curr_month_sum] += ct.amount
     end
@@ -39,8 +39,8 @@ class TransactionsController < ApplicationController
     services = place.services
 
     services.each do |service|
-      prev_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', prev, year, place.title, service.title)
-      curr_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', curr, year, place.title, service.title)
+      prev_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and service = ? and status = 1', prev, year, service.id)
+      curr_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and service = ? and status = 1', curr, year, service.id)
       
       prev_sum = 0
       curr_sum = 0
@@ -73,12 +73,12 @@ class TransactionsController < ApplicationController
 
     place = Place.find(params[:id])
 
-    prev_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', prev, year, place.title)
+    prev_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', prev, year, place.id)
     prev_trans.each do |pt|
       @month_data[:prev_month_sum] += pt.amount
     end
 
-    curr_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', curr, year, place.title)
+    curr_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and status = 1', curr, year, place.id)
     curr_trans.each do |ct|
       @month_data[:curr_month_sum] += ct.amount
     end
@@ -91,8 +91,8 @@ class TransactionsController < ApplicationController
     services = place.services
     services.each do |service|
 
-      prev_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', prev, year, place.title, service.title)
-      curr_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and place = ? and service = ? and status = 1', curr, year, place.title, service.title)
+      prev_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and service = ? and status = 1', prev, year, service.id)
+      curr_service_trans = current_user.transactions.where('extract(month from created_at) = ? and extract(year from created_at) = ? and service = ? and status = 1', curr, year, service.id)
       
       prev_sum = 0
       curr_sum = 0

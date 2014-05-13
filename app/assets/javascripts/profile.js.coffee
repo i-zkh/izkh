@@ -766,7 +766,7 @@ $(document).ready ->
       $me.text text.substr(0, l) + "…"  if meL >= l
       return
 
-  $("#service-index").find("h4").maxlength maxChars: 10
+  $("#service-index").find("h4").maxlength maxChars: 20
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
    
