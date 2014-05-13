@@ -5,15 +5,15 @@ div.panel{id="container-#{place.id}" style="border-radius: 0; border: 0; margin:
   
   div{id="place-#{place.id}" class="panel-collapse collapse" style="border-bottom: 1px solid #34aadb; border-top: 1px solid #34aadb"}
     .panel-body
-      h4 #{place.title}
+      h4.place-title #{place.title}
       label Тип:
-      p #{place.place_type}
+      p.place-type #{place.place_type}
       label Город:
-      p #{place.city}
+      p.place-city #{place.city}
       label Адрес:
-      p #{place.address}, #{place.building}
+      p.place-address #{place.address}, #{place.building}
       label Квартира:
-      p #{place.apartment}
+      p.place-apartment #{place.apartment}
       br
         a.place-edit.click-off data-id="#{place.id}"
           | Редактировать

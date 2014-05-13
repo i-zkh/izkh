@@ -29,9 +29,6 @@
             .col-lg-12
               label
                 | Поставщик *
-<<<<<<< HEAD
-              =f.select(:vendor_id, Vendor.where(service_type_id: 1).map {|v| [v.title, v.id]})
-=======
               =f.select(:vendor_id, Vendor.where(service_type_id: 1).map {|v| [v.title, v.id]}, {:include_blank => ""})
             .clearfix
           .form-group-margin
@@ -39,7 +36,6 @@
               label
                 | Тариф *
               =f.select(:tariff_template_id, TariffTemplate.where(vendor_id: 1).map {|v| [v.title, v.id]}, {:include_blank => ""})
->>>>>>> master
             .clearfix
           .form-group-margin
             .col-lg-12

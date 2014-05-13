@@ -1055,8 +1055,8 @@
   }
   .view-fifth p {
       opacity: 0;
-      color: #333; font-weight: bold;
-      margin: 20px 0 0 0;
+      /*color: #333; font-weight: bold; */
+      margin: 70px 0 0 0;
       transition: all 0.2s linear;
   }
   

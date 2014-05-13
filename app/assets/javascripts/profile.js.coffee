@@ -200,9 +200,10 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-place').remove()
-        $('#place-accordion').append(data)
+        $('#place-accordion').prepend(data)
         $("#js-container").removeClass('loading')
-        $("#place-index").find("h4").maxlength maxChars: 6
+        $("#place-index").find("h4").maxlength maxChars: 10
+
 # Create service event
   $('body').on 'click', '#submit-create-service', ->
     $('#new_service').find('#service-place-id').val(activePlaceId)
@@ -215,9 +216,10 @@ $(document).ready ->
       success: (data) ->
         $modalContainer.find('.modal').modal('hide')
         $('#no-service').remove()
-        $('#service-accordion').append(data)
+        $('#service-accordion').prepend(data)
         $("#js-container").removeClass('loading')
-        $("#service-index").find("h4").maxlength maxChars: 6
+        $("#service-index").find("h4").maxlength maxChars: 10
+
 # Place accordion click 
   $('#place-accordion').on 'click', '.panel-heading', ->
     if !$(this).hasClass('active-accordion-item')
@@ -241,7 +243,7 @@ $(document).ready ->
           $('#service-accordion').html(data)
           $('#service-add').show()
           $("#js-container").removeClass('loading')
-          $("#service-index").find("h4").maxlength maxChars: 6
+          $("#service-index").find("h4").maxlength maxChars: 10
     else
       false
 
@@ -276,13 +278,16 @@ $(document).ready ->
           success: (data) -> 
             $('.analytics-block').html("<div id='graph'></div>")
             console.log data
-            Morris.Line({
-              element: 'graph',
-              xkey: data.xkey,
-              ykeys: data.ykeys,
-              labels: data.labels,
-              data: data.data
-            });
+            if data.ykeys.length
+              Morris.Line({
+                element: 'graph',
+                xkey: data.xkey,
+                ykeys: data.ykeys,
+                labels: data.labels,
+                data: data.data
+              });
+            else
+              $('#graph').html('<p>У объекта нет подключенных услуг</p>')
             $("#js-container").removeClass('loading')
     else
       false
@@ -363,10 +368,9 @@ $(document).ready ->
           $("#js-container").addClass('loading')
         success: (data) ->
           $('#service-detailed').html(data)
-          $(".title__span").maxlength maxChars: 6
+          $(".title__span").maxlength maxChars: 10
           commissionCalc()
           $("#js-container").removeClass('loading')
-
     else
       false
 
@@ -422,7 +426,6 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
-        $("#place-index").find("h4").maxlength maxChars: 6
 # Edit service event
   $('body').on 'click', '.service-edit', ->
     id = $(this).data('id')
@@ -438,7 +441,6 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
-        $("#service-index").find("h4").maxlength maxChars: 6
 
 # Update place event
   $('body').on 'click', '#submit-update-place', ->
@@ -454,13 +456,13 @@ $(document).ready ->
         $place = $('#place-' + id)
         $form = $('.edit_place')
         $('#container-' + id).find('.place-title').html($form.find('#input-place-title').val())
-        $place.find('.place-city').html('Город: ' + $form.find('#input-place-city').val())
-        $place.find('.place-type').html('Тип: ' + $form.find('#place_place_type').val())
-        $place.find('.place-address').html('Адрес: ' + $form.find('#input-place-address').val() + ', ' + $form.find('#input-place-building').val())
-        $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
+        $place.find('.place-city').html($form.find('#input-place-city').val())
+        $place.find('.place-type').html($form.find('#place_place_type').val())
+        $place.find('.place-address').html($form.find('#input-place-address').val() + ', ' + $form.find('#input-place-building').val())
+        $place.find('.place-apartment').html($form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
-        $("#place-index").find("h4").maxlength maxChars: 6
+        $("#place-index").find("h4").maxlength maxChars: 10
       error: (e) ->
         console.log e
         $("#js-container").removeClass('loading')
@@ -485,7 +487,7 @@ $(document).ready ->
         $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
-        $("#service-index").find("h4").maxlength maxChars: 6
+        $("#service-index").find("h4").maxlength maxChars: 10
       error: (e) ->
         console.log e
         $("#js-container").removeClass('loading')
@@ -632,21 +634,21 @@ $(document).ready ->
         error: (error) ->
           $("#js-container").removeClass('loading')
 
-  $('body').on 'click', '.service-container', ->
-    serviceId = $(this).data('id')    
-    $.ajax
-      url: '/get_amount'
-      type: 'GET'
-      data: {id: serviceId}
-      beforeSend: ->
-        $("#js-container").addClass('loading')
-      success: (data) ->
-        console.log(data)
-        $('#amount').empty()
-        $('#amount').append(data)
-        $("#js-container").removeClass('loading')
-      error: (error) ->
-        $("#js-container").removeClass('loading')
+  # $('body').on 'click', '.service-container', ->
+  #   serviceId = $(this).data('id')    
+  #   $.ajax
+  #     url: '/get_amount'
+  #     type: 'GET'
+  #     data: {id: serviceId}
+  #     beforeSend: ->
+  #       $("#js-container").addClass('loading')
+  #     success: (data) ->
+  #       console.log(data)
+  #       $('#amount').empty()
+  #       $('#amount').append(data)
+  #       $("#js-container").removeClass('loading')
+  #     error: (error) ->
+  #       $("#js-container").removeClass('loading')
 
   $('body').on 'click', '.hide-history', ->
     $('.metric-history').slideUp()
@@ -764,7 +766,7 @@ $(document).ready ->
       $me.text text.substr(0, l) + "…"  if meL >= l
       return
 
-  $("#service-index").find("h4").maxlength maxChars: 6
-  $("#place-index").find("h4").maxlength maxChars: 6
+  $("#service-index").find("h4").maxlength maxChars: 10
+  $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
    
