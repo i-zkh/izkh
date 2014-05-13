@@ -37,6 +37,7 @@ div
         a.service-delete.delete-link.click-off data-id="#{@service.id}"
           | Удалить
     .clearfix
+    #amount
   =form_tag(pay_transactions_path , remote: true)
   .padding.payment_box
     div.clearfix

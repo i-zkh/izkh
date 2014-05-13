@@ -156,7 +156,21 @@ class TransactionsController < ApplicationController
 
   def success
     # Callback for successful transactions PO
-    Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, 1)
+    transaction = Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, 1)
+    service_id = transaction.service
+    amount = transaction.amount
+    if service_id != 0
+      service = Service.find(service_id)
+      if service && service.vendor_id.to_i == 121
+        GtPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
+      #elsif service && service.vendor_id.to_i == 16
+        #JtPaymentWorker.perform_async(params[:user_id])
+      elsif service && service.vendor_id.to_i == 135
+        SlPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount) 
+      elsif service && service.vendor_id.to_i == 165
+        CraftSPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
+      end
+      
     render json: {}, status: :ok
   end
 

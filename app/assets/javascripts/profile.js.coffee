@@ -287,11 +287,53 @@ $(document).ready ->
     else
       false
 
+  # Analitics place accordion click
+  $('#transaction-place-accordion').on 'click', '.panel-heading', ->
+    if !$(this).hasClass('active-accordion-item')
+      $('#place-accordion .panel-heading').not(this).siblings('.delete-link').hide();
+      $(this).siblings('.delete-link').show();
+      $(this).addClass('active-accordion-item')
+      $('#transaction-place-accordion')
+        .find('.panel-heading')
+        .not(this)
+        .removeClass('active-accordion-item')
+      if $('.show-table').hasClass('active')
+        $.ajax
+          url: '/table_show'
+          type: 'GET'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html(data)
+            $("#js-container").removeClass('loading')
+      else
+        $.ajax
+          url: '/graph_show'
+          type: 'GET'
+          dataType: 'json'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html("<div id='graph'></div>")
+            console.log data
+            Morris.Line({
+              element: 'graph',
+              xkey: data.xkey,
+              ykeys: data.ykeys,
+              labels: data.labels,
+              data: data.data
+            });
+            $("#js-container").removeClass('loading')
+    else
+      false
+
 # Show graph click
   $('#analytics').on 'click', '.show-graph', ->
     unless $(this).hasClass('active') 
       $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
-      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
+      $('.analytics-block').html("<div class='text'>Выберите объект</div>")
       $('.show-graph').addClass('active')
       $('.show-table').removeClass('active')
 
@@ -301,8 +343,7 @@ $(document).ready ->
       $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
       $(this).addClass('active')
       $('.show-graph').removeClass('active')
-      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
-          
+      $('.analytics-block').html("<div class='text'>Выберите объект</div>")
 
 # Service accordion click 
   $('#service-accordion').on 'click', '.panel-heading', ->
@@ -482,6 +523,22 @@ $(document).ready ->
         console.log(error)
         $("#js-container").removeClass('loading')
 
+  $('body').on 'change', '#service_vendor_id', ->
+    $.ajax
+      url: '/tariff_template'
+      type: 'GET'
+      dataType: 'html'
+      data: {vendor_id: $("#service_vendor_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#service_tariff_template_id').find("option").remove()
+        $('#service_tariff_template_id').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
+
 # Show meters form
   $('body').on 'click', '.show-meters', ->
     serviceId = $('#service-accordion').find('.active-accordion-item').data('id')
@@ -575,6 +632,21 @@ $(document).ready ->
         error: (error) ->
           $("#js-container").removeClass('loading')
 
+  $('body').on 'click', '.service-container', ->
+    serviceId = $(this).data('id')    
+    $.ajax
+      url: '/get_amount'
+      type: 'GET'
+      data: {id: serviceId}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        console.log(data)
+        $('#amount').empty()
+        $('#amount').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        $("#js-container").removeClass('loading')
 
   $('body').on 'click', '.hide-history', ->
     $('.metric-history').slideUp()
