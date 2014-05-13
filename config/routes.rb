@@ -64,4 +64,12 @@ Iz::Application.routes.draw do
   get 'api/1.0/terminal/vendors' => 'terminal#vendors'
   post 'api/1.0/terminal/payment/success' => 'terminal#success'
 
+
+  # Report
+  get 'api/1.0/report_daily' => 'report#index_daily'
+  get 'api/1.0/report_from_to' => 'report#index_from_to'
+  get 'api/1.0/report_hourly' => 'report#index_hourly'
+  get 'api/1.0/report_monthly' => 'report#index_monthly_by_vendor'
+  get 'api/1.0/report_vendors' => 'report#vendors_with_transactions'
+
 end
