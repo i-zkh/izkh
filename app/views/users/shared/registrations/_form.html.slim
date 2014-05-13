@@ -51,7 +51,7 @@ css:
               | Поставщик *
             select id="vendor_id" name="vendor_id" tabindex="-1" title="" 
               option disabled="disabled"
-                  | Выберете поставщика услуг  
+                  | Выберите поставщика услуг  
               - Vendor.where(service_type_id: 1).each do |v| 
                 option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-web-money="#{v.commission_web_money}"
                   = "#{v.title}"

@@ -290,7 +290,7 @@ $(document).ready ->
   $('#analytics').on 'click', '.show-graph', ->
     unless $(this).hasClass('active') 
       $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
-      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
+      $('.analytics-block').html("<div class='text'>Выберите объект</div>")
       $('.show-graph').addClass('active')
       $('.show-table').removeClass('active')
 
@@ -300,7 +300,7 @@ $(document).ready ->
       $('#transaction-place-accordion').find('.panel-heading').removeClass('active-accordion-item')
       $(this).addClass('active')
       $('.show-graph').removeClass('active')
-      $('.analytics-block').html("<div class='text'>Выберете объект</div>")
+      $('.analytics-block').html("<div class='text'>Выберите объект</div>")
           
 
 # Service accordion click 
