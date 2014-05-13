@@ -61,7 +61,7 @@ class ReportData
             payment_type: ph.payment_type
           }
         end
-    terminal = TerminalPayment.where("vendor_id = ? AND created_at >= ? AND created_at < ?", vendor_id, @from, @to)
+    terminal = TerminalPayment.where("vendor_id = ? AND extract(month from created_at) = ?", vendor_id.to_i, month.to_i)
     [payment_histories, terminal]
   end
 
