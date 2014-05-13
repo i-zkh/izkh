@@ -1,3 +1,4 @@
+# encoding: utf-8
 class BillingController < ApplicationController
 
   def get_amount
