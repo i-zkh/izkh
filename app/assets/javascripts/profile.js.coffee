@@ -174,7 +174,7 @@ $(document).ready ->
           parentType: $.kladr.type.city
         })
         $("#js-container").removeClass('loading')
-
+ 
 # Add serivce event
   $('#dashboard-add-service').on 'click', ->
     $.ajax
@@ -202,7 +202,7 @@ $(document).ready ->
         $('#no-place').remove()
         $('#place-accordion').append(data)
         $("#js-container").removeClass('loading')
-
+        $("#place-index").find("h4").maxlength maxChars: 6
 # Create service event
   $('body').on 'click', '#submit-create-service', ->
     $('#new_service').find('#service-place-id').val(activePlaceId)
@@ -217,7 +217,7 @@ $(document).ready ->
         $('#no-service').remove()
         $('#service-accordion').append(data)
         $("#js-container").removeClass('loading')
-
+        $("#service-index").find("h4").maxlength maxChars: 6
 # Place accordion click 
   $('#place-accordion').on 'click', '.panel-heading', ->
     if !$(this).hasClass('active-accordion-item')
@@ -241,6 +241,49 @@ $(document).ready ->
           $('#service-accordion').html(data)
           $('#service-add').show()
           $("#js-container").removeClass('loading')
+          $("#service-index").find("h4").maxlength maxChars: 6
+    else
+      false
+
+  # Analitics place accordion click
+  $('#transaction-place-accordion').on 'click', '.panel-heading', ->
+    if !$(this).hasClass('active-accordion-item')
+      $('#place-accordion .panel-heading').not(this).siblings('.delete-link').hide();
+      $(this).siblings('.delete-link').show();
+      $(this).addClass('active-accordion-item')
+      $('#transaction-place-accordion')
+        .find('.panel-heading')
+        .not(this)
+        .removeClass('active-accordion-item')
+      if $('.show-table').hasClass('active')
+        $.ajax
+          url: '/table_show'
+          type: 'GET'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html(data)
+            $("#js-container").removeClass('loading')
+      else
+        $.ajax
+          url: '/graph_show'
+          type: 'GET'
+          dataType: 'json'
+          data: { id: $(this).data('id')}
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) -> 
+            $('.analytics-block').html("<div id='graph'></div>")
+            console.log data
+            Morris.Line({
+              element: 'graph',
+              xkey: data.xkey,
+              ykeys: data.ykeys,
+              labels: data.labels,
+              data: data.data
+            });
+            $("#js-container").removeClass('loading')
     else
       false
 
@@ -301,7 +344,6 @@ $(document).ready ->
       $(this).addClass('active')
       $('.show-graph').removeClass('active')
       $('.analytics-block').html("<div class='text'>Выберите объект</div>")
-          
 
 # Service accordion click 
   $('#service-accordion').on 'click', '.panel-heading', ->
@@ -321,8 +363,10 @@ $(document).ready ->
           $("#js-container").addClass('loading')
         success: (data) ->
           $('#service-detailed').html(data)
+          $(".title__span").maxlength maxChars: 6
           commissionCalc()
           $("#js-container").removeClass('loading')
+
     else
       false
 
@@ -346,7 +390,7 @@ $(document).ready ->
         $('.edit_services_sum').html(emptyDetailedService)
         $('.payment_box').remove()
         $("#js-container").removeClass('loading')
-
+         
 # Delete service event
   $('body').on 'click', '.service-delete', ->
     id = $(this).data('id')
@@ -362,7 +406,7 @@ $(document).ready ->
         $('.edit_services_sum').html(emptyDetailedService)
         $('.payment_box').remove()
         $("#js-container").removeClass('loading')
-
+        
 # Edit place event
   $('body').on 'click', '.place-edit', ->
     id = $(this).data('id')
@@ -378,7 +422,7 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
-        
+        $("#place-index").find("h4").maxlength maxChars: 6
 # Edit service event
   $('body').on 'click', '.service-edit', ->
     id = $(this).data('id')
@@ -394,7 +438,8 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('show')
         $("select").select2()
         $("#js-container").removeClass('loading')
-        
+        $("#service-index").find("h4").maxlength maxChars: 6
+
 # Update place event
   $('body').on 'click', '#submit-update-place', ->
     id = $(this).data('id')
@@ -415,6 +460,7 @@ $(document).ready ->
         $place.find('.place-apartment').html('Квартира: ' + $form.find('#input-place-apartment').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
+        $("#place-index").find("h4").maxlength maxChars: 6
       error: (e) ->
         console.log e
         $("#js-container").removeClass('loading')
@@ -439,6 +485,7 @@ $(document).ready ->
         $('.menu_other').html($form.find('#input-service-title').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
+        $("#service-index").find("h4").maxlength maxChars: 6
       error: (e) ->
         console.log e
         $("#js-container").removeClass('loading')
@@ -601,7 +648,6 @@ $(document).ready ->
       error: (error) ->
         $("#js-container").removeClass('loading')
 
-
   $('body').on 'click', '.hide-history', ->
     $('.metric-history').slideUp()
 
@@ -687,3 +733,38 @@ $(document).ready ->
 
 
   $("body").removeClass('loading')
+    # Tabs About
+  $(".tabs__about:not(.tabs__about:eq(0))").hide()
+  $("#about-header h3:first").addClass "active"
+  $("#about-header h3").click ->
+    $("#about-header h3").removeClass "active"
+    $(".tabs__about").stop().hide()
+    index = $(this).addClass("active").index()
+    $(".tabs__about").eq(index).stop().fadeIn()
+    return
+  # создаём плагин maxlength
+  jQuery.fn.maxlength = (options) ->
+    
+    # определяем параметры по умолчанию и прописываем указанные при обращении
+    settings = jQuery.extend(
+      maxChars: 10 # максимальное колличество символов
+      leftChars: "character left" # текст в конце строки информера
+    , options)
+    
+    # выполняем плагин для каждого объекта
+    @each ->
+      # определяем объект
+      $me = $(this)
+      # определяем динамическую переменную колличества оставшихся для ввода символов
+      l = settings.maxChars
+      # определяем события на которые нужно реагировать
+      text = $me.text()
+      meL = text.length
+      console.log meL >= l
+      $me.text text.substr(0, l) + "…"  if meL >= l
+      return
+
+  $("#service-index").find("h4").maxlength maxChars: 6
+  $("#place-index").find("h4").maxlength maxChars: 6
+  $(".places-block").find("h4").maxlength maxChars: 24
+   

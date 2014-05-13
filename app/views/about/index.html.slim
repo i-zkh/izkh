@@ -1,8 +1,9 @@
-.block#about
+.block.container#about
   #about-header
     h3 О компании
+    h3 О команде
   #about-body
-    table#table-info.table.table-striped.table-hover
+    table#table-info.table.table-striped.table-hover.tabs__about
       tbody
         tr
           td
@@ -81,3 +82,53 @@
             p ФИО Директора
           td
             p Карпенко Роман Николаевич
+    table#table-info2.table.table-striped.table-hover.tabs__about
+      tbody
+        tr
+          td
+           .view.view-fifth
+            =image_tag("and.jpg")
+            .mask
+             p
+              | Андрей Васильев
+              em Основатель сервиса
+           .view.view-fifth
+            =image_tag("roma.jpg")
+            .mask
+             p 
+              | Роман Карпенко
+              em Директор
+           .view.view-fifth
+            =image_tag("nik.jpg")
+            .mask
+             p
+              | Никита Мамонов
+              em Руководитель группы разработки        
+ 
+           .view.view-fifth
+            =image_tag("alya.jpg")
+            .mask
+             p
+              | Алевтина Юсова
+              em Руководитель группы по работе с клиентами
+              em Менеджер по сопровождению корпоративных клиентов
+              em Менеджер по работе с клиентами
+           .view.view-fifth
+            =image_tag("volskay.jpg")
+            .mask
+             p
+              | Карина Вольская
+              em Менеджер по работе с клиентами     
+ 
+           .view.view-fifth
+            =image_tag("koneva.jpg")
+            .mask
+             p
+              | Татьяна Конева
+              em Менеджер по работе с клиентами  
+           .view.view-fifth
+            =image_tag("frol.jpg")
+            .mask
+             p 
+              | Анна Фролова
+              em Менеджер по сопровождению корпоративных клиентов

@@ -170,7 +170,7 @@ class TransactionsController < ApplicationController
       elsif service && service.vendor_id.to_i == 165
         CraftSPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
       end
-
+      
     render json: {}, status: :ok
   end
 

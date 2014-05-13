@@ -4,7 +4,7 @@ css:
 
 .title_main_ob
   .menu_other.service-title
-    | #{@service.title}
+    b.title__span #{@service.title}
     - if @service.service_type_id.to_i == 4 || @service.service_type_id.to_i == 16 || @service.service_type_id.to_i == 1
       = link_to "Отправить показания счетчиков", '#', class: "show-meters click-off"
 div
