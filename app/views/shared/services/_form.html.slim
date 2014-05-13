@@ -23,13 +23,19 @@
             .col-lg-12
               label
                 | Тип услуги *
-              =f.select(:service_type_id, ServiceType.all.map {|st| [st.title, st.id]})
+              =f.select(:service_type_id, ServiceType.all.map {|st| [st.title, st.id]}, {include_blank: ""})
             .clearfix
           .form-group-margin
             .col-lg-12
               label
                 | Поставщик *
-              =f.select(:vendor_id, Vendor.where(service_type_id: 1).map {|v| [v.title, v.id]})
+              =f.select(:vendor_id, Vendor.where(service_type_id: 1).map {|v| [v.title, v.id]}, {:include_blank => ""})
+            .clearfix
+          .form-group-margin
+            .col-lg-12
+              label
+                | Тариф *
+              =f.select(:tariff_template_id, TariffTemplate.where(vendor_id: 1).map {|v| [v.title, v.id]}, {:include_blank => ""})
             .clearfix
           .form-group-margin
             .col-lg-12
@@ -42,5 +48,4 @@
           - if @service.id
             input#submit-update-service.btn.btn-default.btn-block.click-off type="submit" value="Сохранить" data-id="#{@service.id}"
           - else
-            input#submit-create-service.btn.btn-default.btn-block.click-off type="submit" value="Создать" 
-
+            input#submit-create-service.btn.btn-default.btn-block.click-off type="submit" value="Создать"
