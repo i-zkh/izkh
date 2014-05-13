@@ -1,8 +1,4 @@
-body {
-    background-color: rgb(210,50,98);
-  
-}
-
+ 
 .bordered {
   border: 1px solid white;
 }
@@ -110,7 +106,7 @@ span {
 
 .how-to-use {
   min-height: 350px;
-  /*background: -webkit-linear-gradient(top, #5AD427 0%,#A4E786 100%);*/
+ 
   background-color: #70a5bb;
   padding-bottom: 30px;
 }
