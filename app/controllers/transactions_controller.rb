@@ -156,7 +156,8 @@ class TransactionsController < ApplicationController
 
   def success
     # Callback for successful transactions PO
-    transaction = Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, 1)
+    transaction = Transaction.find_by_order_id(params[:OrderId].to_i)
+    transaction.update_attribute(:status, 1)
     service_id = transaction.service
     amount = transaction.amount
     if service_id != 0
