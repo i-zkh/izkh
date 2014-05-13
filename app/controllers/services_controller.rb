@@ -60,6 +60,6 @@ class ServicesController < ApplicationController
   protected
 
   def service_params
-    request.get? ? {} : params.require(:service).permit(:title, :place_id, :user_account, :vendor_id, :service_type_id)
+    request.get? ? {} : params.require(:service).permit(:title, :place_id, :user_account, :vendor_id, :service_type_id, :tariff_template_id)
   end
 end

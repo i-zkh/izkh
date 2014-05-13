@@ -1,3 +1,4 @@
+# encoding: utf-8
 class BillingController < ApplicationController
 
   def get_amount
@@ -10,7 +11,7 @@ class BillingController < ApplicationController
                 Integration.jtcom(current_user.id)
               end
     if amount
-      render :text => "<p>Задолжность: #{amount}</p>".html_safe
+      render :text => "<p>Баланс: #{amount}</p>".html_safe
     else
        render :text => ""
     end

@@ -38,6 +38,7 @@ Iz::Application.routes.draw do
   get 'get_amount' => 'billing#get_amount'
   
   # get 'send_pass_change' => 'update_table#send_pass_change'
+
   # Callback for PO
   post 'api/1.0/payment_success' => 'transactions#success'
   post 'api/1.0/payment_fail' => 'transactions#fail'

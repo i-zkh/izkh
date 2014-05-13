@@ -1055,10 +1055,17 @@
   }
   .view-fifth p {
       opacity: 0;
-      color: #333;
-      margin: 20px 0 0 0;
+      /*color: #333; font-weight: bold; */
+      margin: 70px 0 0 0;
       transition: all 0.2s linear;
   }
+  
+    .view-fifth em{
+      display: block; font-weight: normal;
+      line-height: 14px;
+      margin-bottom: 5px; margin-top: 5px;
+    }
+
   .view-fifth:hover .mask {
       transform: translateX(0px);
   }
@@ -2318,7 +2325,7 @@ a.active {
 
 #about-body {
   overflow: auto;
-  max-height: 90%;
+  max-height: 85%;
   padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -2326,8 +2333,18 @@ a.active {
 
 #about {
   height: 70%;
-  width: 80%;
+ 
 }
+#about.container{ padding-left: 0 !important;padding-right: 0 !important}
+
+#about h3{
+  display: inline-block; margin-right: 30px; cursor: pointer ;
+}
+
+#about h3.active{
+  text-decoration: underline;
+}
+
 
 #about-header {
   border-bottom: 1px solid #34aadb;
@@ -2336,4 +2353,8 @@ a.active {
 
 #service-accordion .panel-title {
   font-size: 14px;
+}
+
+.title__span{
+  font-weight: normal;
 }

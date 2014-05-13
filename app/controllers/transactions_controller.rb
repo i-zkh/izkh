@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @places = current_user.places
+    @places = current_user.places.order("created_at desc")
   end
 
   def table_show
@@ -171,7 +171,7 @@ class TransactionsController < ApplicationController
       elsif service && service.vendor_id.to_i == 165
         CraftSPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
       end
-
+    end
     render json: {}, status: :ok
   end
 

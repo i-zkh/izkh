@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
   def index
-    @place = Place.all
+    @place = Place.all.order('created_at desc')
   end
 
   def show
@@ -53,7 +53,7 @@ class PlacesController < ApplicationController
   protected
 
   def place_params
-    request.get? ? {} : params.require(:place).permit(:title, :city, :address, :place_type, :apartment, :building)
+    request.get? ? {} : params.require(:place).permit(:title, :city, :address, :place_type, :apartment, :building, :user_id)
   end
 
 end
