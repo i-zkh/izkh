@@ -32,8 +32,11 @@ Iz::Application.routes.draw do
   get 'update_db' => 'update_table#update_db'
   get 'by_service_type' => 'vendors#by_service_type'
   get 'by_service_type_with_pay' => 'vendors#by_service_type_with_pay'
+  get 'tariff_template' => 'services#tariff_template'
   get 'table_show' => 'transactions#table_show'
   get 'graph_show' => 'transactions#graph_show'
+  get 'get_amount' => 'billing#get_amount'
+  
   # get 'send_pass_change' => 'update_table#send_pass_change'
   # Callback for PO
   post 'api/1.0/payment_success' => 'transactions#success'

@@ -47,6 +47,11 @@ class ServicesController < ApplicationController
     end
   end
 
+  def tariff_template
+    @tariff_template = TariffTemplate.where(vendor_id: params[:vendor_id].to_i)
+    render partial: 'shared/services/options_tariff_template', locals: {object: @tariff_template}
+  end
+
   def destroy
     Service.find(params[:id]).delete
     render json: {}, status: :ok
