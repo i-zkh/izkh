@@ -118,7 +118,7 @@ class TransactionsController < ApplicationController
     if params[:pay][:service_id]
       service = Service.find(params[:pay][:service_id])
       vendor = service.vendor
-      place =  service.place.title
+      place =  service.place.id
       service_type = service.service_type.title
     else
       service_type = ServiceType.find(params[:service_type_id]).title
@@ -145,7 +145,7 @@ class TransactionsController < ApplicationController
       security_key = Digest::MD5.hexdigest(security_key_string)
       url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
     end
-    Transaction.create!(amount: amount.to_f, service: service, place: place, user_id: user_id, commission: commission.to_f, payment_type: payment_type, payment_info: "#{service_type};#{vendor.title};#{params[:user_account]}", order_id: order_id)
+    Transaction.create!(amount: amount.to_f, service: service, place: place, user_id: user_id, commission: commission.to_f, payment_type: payment_type, payment_info: "#{service_type};#{vendor.title};#{params[:user_account]}", order_id: order_id, vendor_id: vendor.id)
 
     respond_to do |format|
       format.js {

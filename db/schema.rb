@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513083819) do
+ActiveRecord::Schema.define(version: 20140513124136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,18 +72,6 @@ ActiveRecord::Schema.define(version: 20140513083819) do
     t.datetime "updated_at"
   end
 
-  create_table "tariffs", force: true do |t|
-    t.string   "title"
-    t.integer  "tariff_template_id"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.boolean  "has_readings"
-    t.integer  "service_type_id"
-    t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "terminal_payments", force: true do |t|
     t.float    "total"
     t.float    "amount"
@@ -110,6 +98,7 @@ ActiveRecord::Schema.define(version: 20140513083819) do
     t.integer  "payment_type",                    default: 1
     t.integer  "order_id",              limit: 8
     t.string   "payment_info"
+    t.integer  "vendor_id"
   end
 
   create_table "users", force: true do |t|
