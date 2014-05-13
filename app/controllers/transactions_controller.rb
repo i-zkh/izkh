@@ -117,7 +117,7 @@ class TransactionsController < ApplicationController
     
     if params[:pay][:service_id]
       service = Service.find(params[:pay][:service_id])
-      vendor = service.vendor
+      vendor = Vendor.find(service.vendor_id.to_i) 
       place =  service.place.id
       service_type = service.service_type.title
     else

@@ -51,7 +51,7 @@ class ReportData
   end
 
   def self.index_by_vendor(vendor_id, month)
-    p payment_histories = Transaction.where("status = 1 AND extract(month from created_at) = ? AND vendor_id = ?", month.to_i, vendor_id.to_i).map do |ph|
+    payment_histories = Transaction.where("status = 1 AND extract(month from created_at) = ? AND vendor_id = ?", month.to_i, vendor_id.to_i).map do |ph|
           {
             amount: ph.amount,
             commission: ph.commission,
@@ -61,7 +61,6 @@ class ReportData
             payment_type: ph.payment_type
           }
         end
-        .reject {|ph| !ph}
     terminal = TerminalPayment.where("vendor_id = ? AND created_at >= ? AND created_at < ?", vendor_id, @from, @to)
     [payment_histories, terminal]
   end
