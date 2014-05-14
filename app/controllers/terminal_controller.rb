@@ -4,15 +4,16 @@ class TerminalController < ApplicationController
 
   def success
     #POST success payment terminal
-    payment_history = TerminalPayment.new(terminal_payment_params)
+    vendor = Vendor.find(params[:payment_data][:vendor_id].to_i)
+    payment_history = Transaction.create!(amount: params[:payment_data][:amount].to_f, commission: params[:payment_data][:commission].to_f, payment_type: 5, payment_info: "5;#{params[:payment_data][:user_account]};;#{params[:payment_data][:amount].to_f};#{params[:payment_data][:commission]};#{vendor.title};#{TariffTemplate.find(params[:payment_data][:tariff_template_id].to_i).title};#{Time.now.strftime("%d.%m.%y")}", vendor_id: vendor.id, status: 1)
     if payment_history.save
       amount = payment_history.amount
       if payment_history.vendor_id.to_i == 121
-        GtPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, payment_history.user_account)
+        GtPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account])
       elsif payment_history.vendor_id.to_i == 135
-        SlPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, payment_history.user_account) 
+        SlPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account]) 
       elsif payment_history.vendor_id.to_i == 165
-        CraftSPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, payment_history.user_account, payment_history.tariff_template_id)
+        CraftSPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account], payment_history.tariff_template_id)
       end
 
       render json: {status: "success"}, status: 200
@@ -28,6 +29,6 @@ class TerminalController < ApplicationController
   end
 
  def terminal_payment_params
-    request.get? ? {} : params.require(:payment_data).permit(:total, :amount, :commission, :user_account, :vendor_id, :tariff_template_id, :auth_token, :controller, :action)
+    request.get? ? {} : params.require(:payment_data).permit(:total, :amount, :commission, :user_account, :vendor_id, :tariff_template_id)
   end
 end

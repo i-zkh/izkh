@@ -118,11 +118,13 @@ class TransactionsController < ApplicationController
     if params[:pay][:service_id]
       service = Service.find(params[:pay][:service_id])
       vendor = Vendor.find(service.vendor_id.to_i) 
-      place =  service.place.id
+      place =  service.place
+      place_id =  place.id
       service_type = service.service_type.title
+      address = "#{place.city} #{place.address} #{place.building}, #{place.apartment}"
     else
       service_type = ServiceType.find(params[:service_type_id]).title
-      place, service = "", ""
+      place_id, service, address = "", "", ""
       vendor = Vendor.find(params[:vendor_id]) 
     end
 
@@ -145,7 +147,7 @@ class TransactionsController < ApplicationController
       security_key = Digest::MD5.hexdigest(security_key_string)
       url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
     end
-    Transaction.create!(amount: amount.to_f, service: service, place: place, user_id: user_id, commission: commission.to_f, payment_type: payment_type, payment_info: "#{service_type};#{vendor.title};#{params[:user_account]}", order_id: order_id, vendor_id: vendor.id)
+    Transaction.create!(amount: amount.to_f, service: service, place: place_id, user_id: user_id, commission: (total.to_f-amount.to_f).round(2), payment_type: payment_type, payment_info: "#{payment_type};#{params[:user_account]};#{address};#{amount};#{(total.to_f-amount.to_f).round(2)};#{vendor.title};#{service_type};#{Time.now.strftime('%d.%M.%Y')}", order_id: order_id, vendor_id: vendor.id)
 
     respond_to do |format|
       format.js {
@@ -219,6 +221,6 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    request.get? ? {} : params.require(:pay).permit(:amount_1, :amount_2, :commission, :error, :status, :user_id, :service_id, :place_id, :multiple, :included_transactions, :payment_type, :order_id)
+    request.get? ? {} : params.require(:pay).permit(:amount, :commission, :error, :status, :user_id, :service_id, :place_id, :multiple, :included_transactions, :payment_type, :order_id)
   end
 end
