@@ -18,6 +18,6 @@ class ReportController < ApplicationController
     # renders json:
     # payload: [{user_account, amount, date, address, vendor_id}]
     payload = ReportData.index_by_vendor(params[:vendor_id], params[:month])
-    render json: {payment_history: payload.first}
+    render json: {payload: payload.first}
   end
 end
