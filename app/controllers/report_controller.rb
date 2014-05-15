@@ -8,7 +8,7 @@ class ReportController < ApplicationController
     # renders json:
     # payload: [{user_account, amount, date, address, vendor_id}]
     payload = ReportData.new(params[:from], params[:to])
-    render json: {payload: payload.index.first, terminal: payload.index.last}
+    render json: {payload: payload.index.first}
   end
 
   def index_monthly_by_vendor
