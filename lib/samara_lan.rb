@@ -1,3 +1,4 @@
+#encoding: utf-8
 class SamaraLan
   def initialize(number, order_id=nil, amount=nil)
     @root_url = "https://psys.samaralan.ru:8081/"
