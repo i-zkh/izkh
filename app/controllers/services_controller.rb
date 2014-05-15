@@ -57,6 +57,18 @@ class ServicesController < ApplicationController
     render json: {}, status: :ok
   end
 
+  def index
+  # GET api/1.0/servicetypes
+  @service_types = Service.all
+  render 'shared/services/index'
+  end
+
+  def create_types
+  # POST api/1.0/servicetype
+  @service_type = Service.create!(params[:service_type])
+  render 'shared/services/show'
+  end
+
   protected
 
   def service_params

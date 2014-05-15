@@ -21,6 +21,7 @@ Iz::Application.routes.draw do
   
   resources :about, only: :index
   resources :feedback
+  resources :vendors
 
   resources :transactions do
     post 'pay', on: :collection
@@ -36,7 +37,11 @@ Iz::Application.routes.draw do
   get 'table_show' => 'transactions#table_show'
   get 'graph_show' => 'transactions#graph_show'
   get 'get_amount' => 'billing#get_amount'
-  
+
+  # Service Type
+  get 'api/1.0/servicetypes' => 'services#index'
+  post 'api/1.0/servicetype' => 'services#create_types'
+
   # get 'send_pass_change' => 'update_table#send_pass_change'
 
   # Callback for PO
@@ -66,7 +71,7 @@ Iz::Application.routes.draw do
 
 
   # Report
-  get 'api/1.0/report_daily' => 'report#index_daily'
+  get 'api/1.0/index_with_vendor_id' => 'report#index_with_vendor_id'
   get 'api/1.0/report_from_to' => 'report#index_from_to'
   get 'api/1.0/report_hourly' => 'report#index_hourly'
   get 'api/1.0/report_monthly' => 'report#index_monthly_by_vendor'
