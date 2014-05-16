@@ -18,13 +18,13 @@ class VendorsController < ApplicationController
 
   def index
   # GET api/1.0/servicetypes
-  @service_types = Service.all
+  @service_types = ServiceType.all
   render 'shared/services/index'
   end
 
   def create_types
   # POST api/1.0/servicetype
-  @service_type = Service.create!(params[:service_type])
+  @service_type = ServiceType.create!(params[:service_type])
   render 'shared/services/show'
   end
 
