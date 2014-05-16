@@ -1,5 +1,7 @@
 class VendorsController < ApplicationController
   skip_before_filter :require_current_user
+  skip_before_action :verify_authenticity_token
+  
   def by_service_type
     @vendors = Vendor.where(service_type_id: params[:service_type_id]).map {|v| [v.title, v.id]}
     render partial: 'shared/vendors/options', locals: {object: @vendors}
