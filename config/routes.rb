@@ -39,8 +39,8 @@ Iz::Application.routes.draw do
   get 'get_amount' => 'billing#get_amount'
 
   # Service Type
-  get 'api/1.0/servicetypes' => 'services#index'
-  post 'api/1.0/servicetype' => 'services#create_types'
+  get 'api/1.0/servicetypes' => 'vendors#index'
+  post 'api/1.0/servicetype' => 'vendors#create_types'
 
   # get 'send_pass_change' => 'update_table#send_pass_change'
 
