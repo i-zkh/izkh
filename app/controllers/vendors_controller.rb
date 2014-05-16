@@ -1,7 +1,7 @@
 class VendorsController < ApplicationController
   skip_before_filter :require_current_user
   skip_before_action :verify_authenticity_token
-  
+
   def by_service_type
     @vendors = Vendor.where(service_type_id: params[:service_type_id]).map {|v| [v.title, v.id]}
     render partial: 'shared/vendors/options', locals: {object: @vendors}
@@ -15,7 +15,7 @@ class VendorsController < ApplicationController
   def create
     # POST api/1.0/vendor
     @vendor = Vendor.create!(vendor_params)
-    render 'shared/vendor/show'
+    render json: true
   end
 
   def index
@@ -28,6 +28,10 @@ class VendorsController < ApplicationController
   # POST api/1.0/servicetype
   @service_type = ServiceType.create!(service_type_params)
   render 'shared/services/show'
+  end
+
+  def tariff_template
+  # POST api/1.0/tariff_template
   end
 
   def service_type_params
