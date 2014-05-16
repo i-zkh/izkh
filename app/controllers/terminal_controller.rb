@@ -5,7 +5,7 @@ class TerminalController < ApplicationController
   def success
     #POST success payment terminal
     vendor = Vendor.find(params[:payment_data][:vendor_id].to_i)
-    payment_history = Transaction.create!(amount: params[:payment_data][:amount].to_f, commission: params[:payment_data][:commission].to_f, payment_type: 5, payment_info: "5;#{params[:payment_data][:user_account]};;#{params[:payment_data][:amount].to_f};#{params[:payment_data][:commission]};#{vendor.title};#{TariffTemplate.find(params[:payment_data][:tariff_template_id].to_i).title};#{Time.now.strftime("%d.%m.%y")}", vendor_id: vendor.id, status: 1)
+    payment_history = Transaction.new(amount: params[:payment_data][:amount].to_f, commission: params[:payment_data][:commission].to_f, payment_type: 5, payment_info: "5;#{params[:payment_data][:user_account]};;#{params[:payment_data][:amount].to_f};#{params[:payment_data][:commission]};#{vendor.title};#{TariffTemplate.find(params[:payment_data][:tariff_template_id].to_i).title};#{Time.now.strftime("%d.%m.%y")}", vendor_id: vendor.id, status: 1)
     if payment_history.save
       amount = payment_history.amount
       if payment_history.vendor_id.to_i == 121
