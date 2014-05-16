@@ -12,7 +12,7 @@ class VendorsController < ApplicationController
 
   def create
     # POST api/1.0/vendor
-    @vendor = Vendor.create!(params[:vendor])
+    @vendor = Vendor.create!(vendor_params)
     render 'shared/vendor/show'
   end
 
@@ -24,8 +24,15 @@ class VendorsController < ApplicationController
 
   def create_types
   # POST api/1.0/servicetype
-  @service_type = ServiceType.create!(params[:service_type])
+  @service_type = ServiceType.create!(service_type_params)
   render 'shared/services/show'
   end
 
+  def service_type_params
+    request.get? ? {} : params.require(:service_type).permit(:title)
+  end
+
+  def vendor_params
+    request.get? ? {} : params.require(:vendor).permit(:title, :service_type_id, :commission)
+  end
 end
