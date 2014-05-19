@@ -160,19 +160,17 @@ class TransactionsController < ApplicationController
     # Callback for successful transactions PO
     transaction = Transaction.find_by_order_id(params[:OrderId].to_i)
     transaction.update_attribute(:status, 1)
-    service_id = transaction.service
+    vendor_id = transaction.vendor_id
     amount = transaction.amount
-    if service_id != 0
-      service = Service.find(service_id)
-      if service && service.vendor_id.to_i == 121
-        GtPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
-      #elsif service && service.vendor_id.to_i == 16
-        #JtPaymentWorker.perform_async(params[:user_id])
-      elsif service && service.vendor_id.to_i == 135
-        SlPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount) 
-      elsif service && service.vendor_id.to_i == 165
-        CraftSPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
-      end
+    user_account = transaction.payment_info.split(';')[1]
+    if vendor_id == 121
+      GtPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account)
+    #elsif service && service.vendor_id.to_i == 16
+      #JtPaymentWorker.perform_async(params[:user_id])
+    elsif vendor_id == 135
+      SlPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account) 
+    elsif vendor_id == 165
+      CraftSPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account)
     end
     render json: {}, status: :ok
   end
