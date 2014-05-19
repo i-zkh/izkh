@@ -9,11 +9,11 @@ class TerminalController < ApplicationController
     if payment_history.save
       amount = payment_history.amount
       if payment_history.vendor_id.to_i == 121
-        GtPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account])
+        GtPaymentWorker.perform_async(DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account])
       elsif payment_history.vendor_id.to_i == 135
-        SlPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account]) 
+        SlPaymentWorker.perform_async(DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account]) 
       elsif payment_history.vendor_id.to_i == 165
-        CraftSPaymentWorker.perform_async(nil, DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account], payment_history.tariff_template_id)
+        CraftSPaymentWorker.perform_async(DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account], payment_history.tariff_template_id)
       end
 
       render json: {status: "success"}, status: 200
