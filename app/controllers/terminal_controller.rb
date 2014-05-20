@@ -13,7 +13,7 @@ class TerminalController < ApplicationController
       elsif payment_history.vendor_id.to_i == 135
         SlPaymentWorker.perform_async(DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account]) 
       elsif payment_history.vendor_id.to_i == 165
-        CraftSPaymentWorker.perform_async(DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account], payment_history.tariff_template_id)
+        CraftSPaymentWorker.perform_async(DateTime.now.to_time.to_i, amount, params[:payment_data][:user_account], params[:payment_data][:tariff_template_id])
       end
 
       render json: {status: "success"}, status: 200
