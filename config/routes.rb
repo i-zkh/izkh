@@ -54,6 +54,7 @@ Iz::Application.routes.draw do
   get 'api/1.0/payment_fail' => 'dashboard#index'
   post 'api/1.0/payment_notify' => 'transactions#notify'
   post 'api/1.0/payment_check' => 'transactions#check'
+  post 'api/1.0/yandex_success' => 'yandex#success'
 
   # TEST Callback for Yandex
   get 'api/1.0/payment_success/test' => 'dashboard#index'
