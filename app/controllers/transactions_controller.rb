@@ -131,12 +131,11 @@ class TransactionsController < ApplicationController
     if payment_type == 2
       commission = vendor.commission_yandex
       total = calculate_total(amount, commission)
-      url = "http://money.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}"
-      # url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=110148&paymentType=AC"
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}"
     elsif payment_type == 3
       commission = vendor.commission_ya_card
       total = calculate_total(amount, commission)
-      url = "http://money.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=AC"
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=AC"
     elsif payment_type == 4
       commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
