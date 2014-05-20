@@ -186,6 +186,8 @@ class TransactionsController < ApplicationController
     # CheckOrder for Yandex payment
     @check = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).check
     logger.info @check
+    @info = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).hash_pass
+    logger.info @info
     render :template => "yandex_money/check.xml.erb", :layout => false 
   end
 

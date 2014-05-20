@@ -31,7 +31,7 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.new(service_params.merge!(user_id: current_user.id))
-    if @service.save      
+    if @service.save
       render partial: 'shared/services/card', locals: {service: @service}, status: :ok
     else
       render partial: 'shared/errors', locals: { object: @service }, status: :error
