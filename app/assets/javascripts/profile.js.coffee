@@ -699,6 +699,8 @@ $(document).ready ->
 
       if document.getElementById("i15").checked
         percent = $("#pay-commission-yandex").val()
+      else if document.getElementById("i14").checked
+        percent = $("#pay-commission-ya-card").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
@@ -716,6 +718,8 @@ $(document).ready ->
 
       if $(this).attr("id") is "i15"
         percent = $("#pay-commission-yandex").val()
+      else if $(this).attr("id") is "i14"
+        percent = $("#pay-commission-ya-card").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)

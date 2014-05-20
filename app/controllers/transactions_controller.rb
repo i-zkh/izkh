@@ -131,9 +131,13 @@ class TransactionsController < ApplicationController
     if payment_type == 2
       commission = vendor.commission_yandex
       total = calculate_total(amount, commission)
-      url = "http://demomoney.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=110148"
+      url = "http://demomoney.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}"
       # url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=110148&paymentType=AC"
     elsif payment_type == 3
+      commission = vendor.commission_ya_card
+      total = calculate_total(amount, commission)
+      url = "http://demomoney.yandex.ru/eshop.xml?scid=51361&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=AC"
+    elsif payment_type == 4
       commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
       url = "https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=6c2aa990-60e1-427f-9c45-75cffae4a745&LMI_PAYMENT_AMOUNT=#{total}&LMI_PAYMENT_DESC=АйЖКХ&LMI_CURRENCY=RUB&ORDER_ID=#{order_id}"
@@ -186,8 +190,6 @@ class TransactionsController < ApplicationController
     # CheckOrder for Yandex payment
     @check = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).check
     logger.info @check
-    @info = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).hash_pass
-    logger.info @info
     render :template => "yandex_money/check.xml.erb", :layout => false 
   end
 
