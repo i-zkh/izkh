@@ -682,6 +682,8 @@ $(document).ready ->
       amountOne = $(".pay-amount-one").val()
     if  document.getElementById("i15").checked
       percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else if  document.getElementById("i14").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-ya-card')
     else
       percent = $("#vendor_id").find("option:selected").data('commission')
     amount = parseFloat(amountOne)

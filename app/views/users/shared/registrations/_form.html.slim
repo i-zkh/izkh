@@ -53,7 +53,7 @@ css:
               option disabled="disabled"
                 | Выберите поставщика услуг  
               - Vendor.where(service_type_id: 1).each do |v| 
-                option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-web-money="#{v.commission_web_money}"
+                option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-ya-card="#{v.commission_ya_card}" data-commission-web-money="#{v.commission_web_money}"
                   = "#{v.title}"
             .clearfix
           .form-group-margin
@@ -78,10 +78,10 @@ css:
                     .custom.two
                       input#i13.po name="pay[payment_type]" type="radio" value="1" checked="checked"
                         label for="i13"  Банковская карта
-                  / p
-                  /   .custom.two
-                  /     input#i14.wb name="pay[payment_type]" type="radio" value="3"
-                  /       label.disabled for="i14"  Web Money
+                  p
+                    .custom.two
+                      input#i14.wb name="pay[payment_type]" type="radio" value="3"
+                        label.disabled for="i14"  Яндекс Карты
                   p
                     .custom.two
                       input#i15.ya name="pay[payment_type]" type="radio" value="2"
