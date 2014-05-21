@@ -112,12 +112,12 @@ class TransactionsController < ApplicationController
   def pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
     amount = params[:pay][:amount]
-    user_id =  current_user.id if current_user
+    user_id = current_user.nil? ? 0 : current_user.id
     payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
     
     if params[:pay][:service_id]
-      service = Service.find(params[:pay][:service_id])
-      vendor = Vendor.find(service.vendor_id.to_i) 
+      service = Service.find(params[:pay][:service_id].to_i)
+      vendor = Vendor.find(service.vendor_id) 
       place =  service.place
       place_id =  place.id
       service_type = service.service_type.title

@@ -17,9 +17,13 @@ class YandexMoney
   def check
     if check_md5('checkOrder')
       transaction = Transaction.find_by_order_id(@orderNumber)
-      commission = Vendor.find(transaction.vendor_id).commission_yandex.to_f
+      commission =  if transaction.payment_type == 2
+                      Vendor.find(transaction.vendor_id).commission_ya_card
+                    elsif transaction.payment_type ==3
+                      Vendor.find(transaction.vendor_id).commission_yandex
+                    end
       if transaction
-        amount = (@orderSumAmount.to_f*100/(commission+100)).round(2)
+        amount = (@orderSumAmount.to_f*commission/(100+commission)).round(2)
         transaction.update_attributes(amount: amount, commission: @orderSumAmount.to_f - amount)
         @code = 0
       else
