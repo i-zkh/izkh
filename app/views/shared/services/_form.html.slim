@@ -35,7 +35,7 @@
             .col-lg-12
               label
                 | Тариф *
-              =f.select(:tariff_template_id, TariffTemplate.where(vendor_id: 1).map {|v| [v.title, v.id]}, {:include_blank => ""})
+              =f.select(:tariff_template_id, [])
             .clearfix
           .form-group-margin
             .col-lg-12

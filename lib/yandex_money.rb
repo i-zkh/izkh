@@ -23,7 +23,7 @@ class YandexMoney
                       Vendor.find(transaction.vendor_id).commission_yandex
                     end
       if transaction
-        amount = (@orderSumAmount.to_f*100/(100+commission)).round(2)
+        amount = ((@orderSumAmount.to_f*100/(100+commission))*100).ceil/100.0
         transaction.update_attributes(amount: amount, commission: @orderSumAmount.to_f - amount)
         @code = 0
       else
