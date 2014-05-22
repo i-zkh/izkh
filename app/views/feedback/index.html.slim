@@ -1,9 +1,49 @@
+css:
+   @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+   @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
 h2 Обратная связь
 br
 .row#feedback-container
-  = form_for(:feedback, class: "col-md-6", remote: true) do |f|
-   = f.text_field(:subject)
-   = f.text_field(:message)
-   =f.submit("Отправить", class: "btn btn-default")
+ 
   
 
+a.ol_href data-toggle="modal" href="#myModal_feedback" 
+ | Обратная связь
+
+ /! Modal
+#myModal_feedback.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;  
+        .row
+          .col-md-12
+            h2.title
+              | Обратная связь
+            .info.margin_top
+              | Нам важно Ваше мнение
+        = form_tag user_registration_path, remote: true, id: "feedback-form" 
+          .form-inputs
+              label Тема *
+              input.form-control-all class="validate[required]" name="" placeholder=("") type="text" 
+          .form-inputs
+              label Сообщение *
+              textarea.form-control-all class="validate[required]" name="" placeholder=("") type="text" 
+          div#hidden_block
+             p
+               | Что Вы думаете о новой версии сервиса?
+             p
+              .custom.two
+               input#like.po name="pay[payment_type]" type="radio" value="1" checked="checked"
+                label for="like"  Нравится
+             p
+              .custom.two
+               input#not-like.po name="pay[payment_type]" type="radio" value="1" checked="checked"
+                label for="not-like"  Старый был лучше
+             p
+              .custom.two
+               input#not-know.po name="pay[payment_type]" type="radio" value="1" checked="checked"
+                label for="not-know"  Пока не знаю                                          
+          = submit_tag "Отправить", class: "btn btn-block green-btn"
+ 

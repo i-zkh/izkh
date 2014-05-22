@@ -285,7 +285,7 @@
       height: 0!important;
       border-bottom:none !important
   }
-  #myModal_rec .close, #myModal_ent .close, #myModalservices .close, #myModalobject .close, #myModaloffer .close {
+  #myModal_rec .close, #myModal_ent .close, #myModalservices .close, #myModalobject .close, #myModaloffer .close, #myModal_feedback .close {
       float: right;
       font-size: 21px;
       font-weight: bold;
@@ -296,7 +296,7 @@
       opacity: 1;
       text-indent: -9999px;
   }
-  #myModal_rec button.close, #myModal_ent button.close, #myModalservices button.close, #myModalobject button.close, #myModaloffer button.close {
+  #myModal_rec button.close, #myModal_ent button.close, #myModalservices button.close, #myModalobject button.close, #myModaloffer button.close, #myModal_feedback button.close{
       padding: 0;
       background: url('../assets/close.png') no-repeat;
       cursor: pointer;
@@ -305,7 +305,7 @@
       height: 34px;
       -webkit-appearance: none;
   }
-  #myModal_rec .title, #myModal_ent .title, #myModalservices .title, #myModalobject .title, #myModaloffer .title {
+  #myModal_rec .title, #myModal_ent .title, #myModalservices .title, #myModalobject .title, #myModaloffer .title, #myModal_feedback .title{
       margin-top: -30px;
       margin-bottom: 10px;
   }
@@ -313,11 +313,12 @@
       width: 600px;
       margin: 30px auto;
   }
-  #myModal_rec .modal-dialog.forma_enter, #myModal_ent .modal-dialog.forma_enter, #myModalservices .modal-dialog.forma_enter, #myModalobject .modal-dialog.forma_enter {
+  #myModal_rec .modal-dialog.forma_enter, #myModal_ent .modal-dialog.forma_enter, #myModalservices .modal-dialog.forma_enter, #myModalobject .modal-dialog.forma_enter, 
+  #myModal_feedback  .modal-dialog.forma_enter{
       width: 400px;
       margin: 30px auto;
   }
-  #myModal_rec .modal-header, #myModal_ent .modal-header, #myModalservices .modal-header, #myModalobject .modal-header, #myModaloffer .modal-header {
+  #myModal_rec .modal-header, #myModal_ent .modal-header, #myModalservices .modal-header, #myModalobject .modal-header, #myModaloffer .modal-header, #myModal_feedback .modal-header {
       padding:20px;
       border: 1px solid #8ec6e7;
       min-height: 16.42857143px;
@@ -824,6 +825,9 @@
       color: #fff;
       text-align: center
   }
+
+   .info.margin_top{ margin-top: -10px;}
+
   .view a.info {
       display: inline-block;
       text-decoration: none;
@@ -1971,8 +1975,8 @@
       height: 30px;
       background-color: #00CD66;
       color: white;
-      width: 290px;
-      margin: 10px 30%;
+ 
+      margin: 0px 0 10px 0;
       text-decoration: none;
       text-align: center;
       line-height: 30px;
@@ -2109,3 +2113,32 @@
   .title__span {
       font-weight: normal;
   }
+
+.ol_href{
+  z-index: 99;position: relative;
+}
+
+.form-control-all{
+   border: 2px solid #B5B5B5;
+    color: #3D3D3F;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 15px;
+    height: 35px;
+    padding: 5px;
+    width: 100%;
+} 
+
+.form-inputs{    position: relative !important;}
+
+#myModal_feedback .formError .formErrorContent {
+    color: #FF0000;
+    font-size: 11px;
+    position: absolute; left: 80px;
+    width: 150px !important;
+}
+
+textarea.form-control-all{
+  resize: none;
+  height: 225px;
+}

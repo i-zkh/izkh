@@ -26,7 +26,7 @@ ymaps.ready ->
   map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
 $(document).ready ->
-  
+
 # Ajax'ing registration 
 
   if $('#pay')[0]
@@ -769,4 +769,4 @@ $(document).ready ->
   $("#service-index").find("h4").maxlength maxChars: 20
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
-   
+  $("#feedback-form").validationEngine();
