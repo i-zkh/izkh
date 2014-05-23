@@ -15,7 +15,7 @@ class VendorsController < ApplicationController
   def create
     # POST api/1.0/vendor
     @vendor = Vendor.create!(vendor_params)
-    render json: true
+    render json: @vendor.id
   end
 
   def index
