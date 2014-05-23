@@ -2142,3 +2142,10 @@ textarea.form-control-all{
   resize: none;
   height: 225px;
 }
+
+.terminal-box{
+  width: 320px;box-shadow: 0 0 10px #ccc; position: absolute;z-index: 99; background-color: #fff; padding: 15px;
+}
+
+.terminal-box h3{ margin-top: 0; }
+#search_list{ padding: 0; list-style: none; overflow: auto; max-height: 400px;}

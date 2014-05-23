@@ -8,7 +8,7 @@
 //= require 'jquery.maskedinput.min'
 //= require 'jquery.validationEngine.js'
 //= require 'jquery.validationEngine-en.js'
-
+//= require 'jquery.fastLiveFilter.js'
 # KLADR credentials
 kladrToken = '5322ef24dba5c7d326000045'
 kladrKey = '60d44104d6e5192dcdc610c10ff4b2100ece9604'
@@ -776,3 +776,4 @@ $(document).ready ->
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
   $("#feedback-form").validationEngine();
+  $("#search_input").fastLiveFilter "#search_list"
