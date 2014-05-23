@@ -682,6 +682,8 @@ $(document).ready ->
       amountOne = $(".pay-amount-one").val()
     if  document.getElementById("i15").checked
       percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else if  document.getElementById("i14").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-ya-card')
     else
       percent = $("#vendor_id").find("option:selected").data('commission')
     amount = parseFloat(amountOne)
@@ -699,6 +701,8 @@ $(document).ready ->
 
       if document.getElementById("i15").checked
         percent = $("#pay-commission-yandex").val()
+      else if document.getElementById("i14").checked
+        percent = $("#pay-commission-ya-card").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
@@ -716,6 +720,8 @@ $(document).ready ->
 
       if $(this).attr("id") is "i15"
         percent = $("#pay-commission-yandex").val()
+      else if $(this).attr("id") is "i14"
+        percent = $("#pay-commission-ya-card").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)

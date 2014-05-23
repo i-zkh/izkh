@@ -6,9 +6,9 @@ class ReportController < ApplicationController
     # fetches all transactions in [from..to] period
     # params: from, to
     # renders json:
-    # payload: [{user_account, amount, date, address, vendor_id}]
+    # payload: [{user_account, amount, date, address}]
     payload = ReportData.new(params[:from], params[:to])
-    render json: {payload: payload.index.first, terminal: payload.index.last}
+    render json: {payload: payload.index.first}
   end
 
   def index_monthly_by_vendor
@@ -18,6 +18,16 @@ class ReportController < ApplicationController
     # renders json:
     # payload: [{user_account, amount, date, address, vendor_id}]
     payload = ReportData.index_by_vendor(params[:vendor_id], params[:month])
-    render json: {payment_history: payload.first, terminal: payload.last}
+    render json: {payload: payload.first}
+  end
+
+  def index_with_vendor_id
+    # GET api/1.0/index_with_vendor_id
+    # fetches all transactions for given month and vendor_id
+    # params: from, to
+    # renders json:
+    # payload: [{user_account, amount, date, address, vendor_id}]
+    payload = ReportData.new(params[:from], params[:to])
+    render json: {payload: payload.index_with_vendor_id.first}
   end
 end

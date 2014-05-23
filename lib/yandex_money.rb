@@ -17,9 +17,13 @@ class YandexMoney
   def check
     if check_md5('checkOrder')
       transaction = Transaction.find_by_order_id(@orderNumber)
-      commission = Vendor.where(title: transaction.payment_info.split(';')[1]).first.commission_yandex.to_f
+      commission =  if transaction.payment_type == 2
+                      Vendor.find(transaction.vendor_id).commission_ya_card
+                    elsif transaction.payment_type ==3
+                      Vendor.find(transaction.vendor_id).commission_yandex
+                    end
       if transaction
-        amount = (@orderSumAmount.to_f*100/(commission+100)).round(2)
+        amount = ((@orderSumAmount.to_f*100/(100+commission))*100).ceil/100.0
         transaction.update_attributes(amount: amount, commission: @orderSumAmount.to_f - amount)
         @code = 0
       else
@@ -45,7 +49,6 @@ class YandexMoney
 
   def check_md5(action)
     require 'digest/md5'
-    logger.info Digest::MD5.hexdigest("#{action};#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
     @md5.downcase == Digest::MD5.hexdigest("#{action};#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
   end
 end

@@ -44,6 +44,7 @@ div
       h3 Оплата
       input#pay-commission name="pay[commission]" value="#{@service.vendor.commission}" type="hidden"
       input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
+      input#pay-commission-ya-card name="pay[commission_ya_card]" value="#{@service.vendor.commission_ya_card}" type="hidden"
       input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
       input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
       input#pay-service-id name="user_account" value="#{@service.user_account}" type="hidden"
@@ -61,10 +62,10 @@ div
             .custom.two
               input#i13 name="pay[payment_type]" type="radio" value="1" checked="checked"
                 label for="i13"  Банковская карта
-          / p
-          /   .custom.two
-          /     input#i14 name="pay[payment_type]" type="radio" value="3"
-          /       label.disabled for="i14"  Web Money
+          p
+            .custom.two
+              input#i14 name="pay[payment_type]" type="radio" value="3"
+                label.disabled for="i14"  Яндекс Карты
           p
             .custom.two
               input#i15 name="pay[payment_type]" type="radio" value="2"

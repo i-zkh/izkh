@@ -112,25 +112,31 @@ class TransactionsController < ApplicationController
   def pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
     amount = params[:pay][:amount]
-    user_id =  current_user.id if current_user
+    user_id = current_user.nil? ? 0 : current_user.id
     payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
     
     if params[:pay][:service_id]
-      service = Service.find(params[:pay][:service_id])
-      vendor = Vendor.find(service.vendor_id.to_i) 
-      place =  service.place.id
+      service = Service.find(params[:pay][:service_id].to_i)
+      vendor = Vendor.find(service.vendor_id) 
+      place =  service.place
+      place_id =  place.id
       service_type = service.service_type.title
+      address = "#{place.city} #{place.address} #{place.building}, #{place.apartment}"
     else
       service_type = ServiceType.find(params[:service_type_id]).title
-      place, service = "", ""
+      place_id, service, address = "", "", ""
       vendor = Vendor.find(params[:vendor_id]) 
     end
 
     if payment_type == 2
       commission = vendor.commission_yandex
       total = calculate_total(amount, commission)
-      url = "https://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}"
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}"
     elsif payment_type == 3
+      commission = vendor.commission_ya_card
+      total = calculate_total(amount, commission)
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=AC"
+    elsif payment_type == 4
       commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
       url = "https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=6c2aa990-60e1-427f-9c45-75cffae4a745&LMI_PAYMENT_AMOUNT=#{total}&LMI_PAYMENT_DESC=АйЖКХ&LMI_CURRENCY=RUB&ORDER_ID=#{order_id}"
@@ -145,7 +151,7 @@ class TransactionsController < ApplicationController
       security_key = Digest::MD5.hexdigest(security_key_string)
       url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
     end
-    Transaction.create!(amount: amount.to_f, service: service, place: place, user_id: user_id, commission: commission.to_f, payment_type: payment_type, payment_info: "#{service_type};#{vendor.title};#{params[:user_account]}", order_id: order_id, vendor_id: vendor.id)
+    Transaction.create!(amount: amount.to_f, service: service, place: place_id, user_id: user_id, commission: (total.to_f-amount.to_f).round(2), payment_type: payment_type, payment_info: "#{payment_type};#{params[:user_account]};#{address};#{amount};#{(total.to_f-amount.to_f).round(2)};#{vendor.title};#{service_type};#{Time.now.strftime('%d.%m.%y')}", order_id: order_id, vendor_id: vendor.id)
 
     respond_to do |format|
       format.js {
@@ -158,19 +164,17 @@ class TransactionsController < ApplicationController
     # Callback for successful transactions PO
     transaction = Transaction.find_by_order_id(params[:OrderId].to_i)
     transaction.update_attribute(:status, 1)
-    service_id = transaction.service
+    vendor_id = transaction.vendor_id
     amount = transaction.amount
-    if service_id != 0
-      service = Service.find(service_id)
-      if service && service.vendor_id.to_i == 121
-        GtPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
-      #elsif service && service.vendor_id.to_i == 16
-        #JtPaymentWorker.perform_async(params[:user_id])
-      elsif service && service.vendor_id.to_i == 135
-        SlPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount) 
-      elsif service && service.vendor_id.to_i == 165
-        CraftSPaymentWorker.perform_async(service_id, params[:OrderId].to_i, amount)
-      end
+    user_account = transaction.payment_info.split(';')[1]
+    if vendor_id == 121
+      GtPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account)
+    #elsif service && service.vendor_id.to_i == 16
+      #JtPaymentWorker.perform_async(params[:user_id])
+    elsif vendor_id == 135
+      SlPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account) 
+    elsif vendor_id == 165
+      CraftSPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account)
     end
     render json: {}, status: :ok
   end
@@ -219,6 +223,6 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    request.get? ? {} : params.require(:pay).permit(:amount_1, :amount_2, :commission, :error, :status, :user_id, :service_id, :place_id, :multiple, :included_transactions, :payment_type, :order_id)
+    request.get? ? {} : params.require(:pay).permit(:amount, :commission, :error, :status, :user_id, :service_id, :place_id, :multiple, :included_transactions, :payment_type, :order_id)
   end
 end
