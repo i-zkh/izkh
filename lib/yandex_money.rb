@@ -32,7 +32,7 @@ class YandexMoney
     else
       @code = 1
     end
-    { performedDatetime: Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S.000+04:00"), code: @code, invoiceId: @invoiceId, shopId: @shopId }
+    { performedDatetime: Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S.000+04:00"), code: 0, invoiceId: @invoiceId, shopId: @shopId }
   end
 
   def notify
