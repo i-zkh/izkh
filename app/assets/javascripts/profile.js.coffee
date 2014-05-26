@@ -26,7 +26,6 @@ ymaps.ready ->
   map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
 $(document).ready ->
-  
 # Ajax'ing registration 
 
   if $('#pay')[0]
@@ -696,6 +695,23 @@ $(document).ready ->
   $('#pay').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
     commissionQuickPay()
 
+  commissionDeltaPay = () =>
+    if $(".pay-amount-one").val() is ""
+      amountOne = 0
+    else
+      amountOne = $(".pay-amount-one").val()
+    if  document.getElementById("i15").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else if  document.getElementById("i14").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-ya-card')
+    else
+      percent = $("#vendor_id").find("option:selected").data('commission')
+    amount = parseFloat(amountOne)
+    commission = Math.round(amount * percent) / 100
+    $("#commission").html " " + commission + " руб."
+    total = commission + amount
+    $("#total").html " " + total + " руб."
+
   commissionQuickPay = () =>
     if $(".pay-amount-one").val() is ""
       amountOne = 0
@@ -711,7 +727,7 @@ $(document).ready ->
     commission = Math.round(amount * percent) / 100
     $("#commission").html " " + commission + " руб."
     total = commission + amount
-    $("#total").html " " + total + " руб."  
+    $("#total").html " " + total + " руб."
 
   commissionCalc = () ->
     $(".pay-amount-one").keyup ->
