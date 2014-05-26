@@ -59,7 +59,8 @@ css:
           .form-group-margin
             label
               | Лицевой счет *
-            =text_field_tag :user_account, "", {id: "input-service-user-account", class: "form-control"}
+              input#input-service-user-account.form-control.click_tooltips.js__user_account name="user_account" placeholder="" type="text" style=("width: 295px")
+              .info-account
             .clearfix  
           .padding.payment_box
             div.clearfix

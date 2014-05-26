@@ -120,6 +120,27 @@ $(document).ready ->
 # Masking for phone input
   $(".js__phone").mask("+7 (999) 999-99-99")
 
+#  Mask for "Царьград"
+  $.mask.definitions['п'] = "[ГЦМгцм]"
+  $.mask.definitions['в'] = "[ГЦСИгцси]"
+  $.mask.definitions['т'] = "[ОДГодг]" 
+
+  $('body').on 'change', '#vendor_id', ->
+    $(".js__user_account").unmask();
+    $('.info-account').empty()
+    if $('#vendor_id').val() == "134"
+      $(".js__user_account").mask("пвт-9999")
+      $('.info-account').empty()
+      $('.info-account').append('<p>Возможные префиксы: ГСО, ЦГД, ЦЦГ, МИГ</p><p>Пример: ГСО-1234</p>')
+
+  $('body').on 'change', '#service_vendor_id', ->
+    $(".js__user_account").unmask();
+    $('.info-account').empty()
+    if $('#service_vendor_id').val() == "134"
+      $('.info-account').empty()
+      $('.info-account').append('<p>Возможные префиксы: ГСО, ЦГД, ЦЦГ, МИГ</p><p>Пример: ГСО-1234</p>')
+      $(".js__user_account").mask("пвт-9999")
+
 # Show/Hide password
   $('input#show-pass[type="checkbox"]').change ->
     if this.checked

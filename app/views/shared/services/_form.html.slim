@@ -41,7 +41,8 @@
             .col-lg-12
               label
                 | Лицевой счет *
-              =f.text_field(:user_account, id: "input-service-user-account", class: "form-control")
+              input.form-control.click_tooltips.js__user_account name="user_account" placeholder="" type="text"
+              .info-account
             .clearfix       
           p
             .error-container
