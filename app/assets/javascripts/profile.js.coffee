@@ -26,7 +26,7 @@ ymaps.ready ->
   map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
 $(document).ready ->
-
+  
 # Ajax'ing registration 
 
   if $('#pay')[0]
@@ -696,6 +696,23 @@ $(document).ready ->
   $('#pay').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
     commissionQuickPay()
 
+  commissionDeltaPay = () =>
+    if $(".pay-amount-one").val() is ""
+      amountOne = 0
+    else
+      amountOne = $(".pay-amount-one").val()
+    if  document.getElementById("i15").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
+    else if  document.getElementById("i14").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-ya-card')
+    else
+      percent = $("#vendor_id").find("option:selected").data('commission')
+    amount = parseFloat(amountOne)
+    commission = Math.round(amount * percent) / 100
+    $("#commission").html " " + commission + " руб."
+    total = commission + amount
+    $("#total").html " " + total + " руб."
+
   commissionQuickPay = () =>
     if $(".pay-amount-one").val() is ""
       amountOne = 0
@@ -711,7 +728,7 @@ $(document).ready ->
     commission = Math.round(amount * percent) / 100
     $("#commission").html " " + commission + " руб."
     total = commission + amount
-    $("#total").html " " + total + " руб."  
+    $("#total").html " " + total + " руб."
 
   commissionCalc = () ->
     $(".pay-amount-one").keyup ->
@@ -797,4 +814,31 @@ $(document).ready ->
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
   $("#feedback-form").validationEngine();
+
+  $(".tutorial", this).find(".close_tutorial").click ->
+    $(".tutorial").remove()
+    return
+
+  $(".tutorial:eq(0)").css display: "block"
+  current_tutorial = 0
+  $(".next_tutorial").click ->
+    $(".tutorial").stop().fadeOut()
+    current_tutorial++
+    current_tutorial = 0  if current_tutorial > $(".tutorial").size() - 1
+    
+    $(".tutorial").eq(current_tutorial).stop().fadeIn()
+    return
+
+  $(".close_ent").click ->
+    $("#myModal_ent").modal "hide"
+    return
+
+  $(".close_tutorial").click ->
+    $(".black_over").find(".container").animate
+      top: "-9999px"
+    , 1500
+    $(".black_over").stop().fadeOut()
+    return
+
   $("#search_input").fastLiveFilter "#search_list"
+  $("#search-form").fastLiveFilter "#search_result" 

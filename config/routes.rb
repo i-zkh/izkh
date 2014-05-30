@@ -71,6 +71,8 @@ Iz::Application.routes.draw do
   get 'api/1.0/terminal/vendors' => 'terminal#vendors'
   post 'api/1.0/terminal/payment/success' => 'terminal#success'
 
+  # DELTA
+  get 'delta_payment' => "delta_payment#pay"
 
   # Report
   get 'api/1.0/index_with_vendor_id' => 'report#index_with_vendor_id'

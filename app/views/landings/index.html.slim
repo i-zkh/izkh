@@ -27,8 +27,7 @@
           -unless current_user
             p.center
               | или 
-              a data-toggle="modal" href="#myModal_ent" 
-                | войдите
+              = link_to "войдите", dashboard_index_path
               |  в свой кабинет
 .how-to-use.white
   .container

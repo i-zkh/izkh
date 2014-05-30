@@ -285,7 +285,7 @@
       height: 0!important;
       border-bottom:none !important
   }
-  #myModal_rec .close, #myModal_ent .close, #myModalservices .close, #myModalobject .close, #myModaloffer .close, #myModal_feedback .close {
+  #myModal_rec .close, #myModal_ent .close, #myModalservices .close, #myModalobject .close, #myModaloffer .close, #myModal_feedback .close, #myModal_search .close{
       float: right;
       font-size: 21px;
       font-weight: bold;
@@ -296,7 +296,9 @@
       opacity: 1;
       text-indent: -9999px;
   }
-  #myModal_rec button.close, #myModal_ent button.close, #myModalservices button.close, #myModalobject button.close, #myModaloffer button.close, #myModal_feedback button.close{
+  #myModal_rec button.close, #myModal_ent button.close, #myModalservices button.close, #myModalobject button.close, #myModaloffer button.close, #myModal_feedback button.close,
+  #myModal_search button.close
+  {
       padding: 0;
       background: url('../assets/close.png') no-repeat;
       cursor: pointer;
@@ -305,7 +307,7 @@
       height: 34px;
       -webkit-appearance: none;
   }
-  #myModal_rec .title, #myModal_ent .title, #myModalservices .title, #myModalobject .title, #myModaloffer .title, #myModal_feedback .title{
+  #myModal_rec .title, #myModal_ent .title, #myModalservices .title, #myModalobject .title, #myModaloffer .title, #myModal_feedback .title, #myModal_search .title{
       margin-top: -30px;
       margin-bottom: 10px;
   }
@@ -314,11 +316,11 @@
       margin: 30px auto;
   }
   #myModal_rec .modal-dialog.forma_enter, #myModal_ent .modal-dialog.forma_enter, #myModalservices .modal-dialog.forma_enter, #myModalobject .modal-dialog.forma_enter, 
-  #myModal_feedback  .modal-dialog.forma_enter{
+  #myModal_feedback  .modal-dialog.forma_enter,#myModal_search .modal-dialog.forma_enter {
       width: 400px;
       margin: 30px auto;
   }
-  #myModal_rec .modal-header, #myModal_ent .modal-header, #myModalservices .modal-header, #myModalobject .modal-header, #myModaloffer .modal-header, #myModal_feedback .modal-header {
+  #myModal_rec .modal-header, #myModal_ent .modal-header, #myModalservices .modal-header, #myModalobject .modal-header, #myModaloffer .modal-header, #myModal_feedback .modal-header, #myModal_search .modal-header {
       padding:20px;
       border: 1px solid #8ec6e7;
       min-height: 16.42857143px;
@@ -340,22 +342,22 @@
       top: -9999px;
   }
   .tutorial {
-      right: -190px;
-      top: -20px;
-      padding: 10px;
-      width: 200px;
-      height: 100px;
+      right: 0px;
+      top: 0px;
+      padding: 10px 15px 15px 15px;
+    width: 330px;
+    display: none;
       border: 1px solid #34AADC;
       background: #ffffff;
       z-index: 999;
-      display: none;
+     
       position: absolute;
   }
   .close_tutorial {
       background: url('../assets/close2.png') no-repeat;
       cursor: pointer;
       position: absolute;
-      right: 5px;
+      right: 10px;
       top: 5px;
       width: 23px;
       height: 24px;
@@ -382,6 +384,13 @@
       border-width: 11px;
       margin-top: -11px;
   }
+
+
+  .tutorial_content{
+    padding-bottom: 10px;
+    padding-right: 10px; 
+  }
+
   .tooltips {
       right: -190px;
       top: -20px;
@@ -1979,9 +1988,11 @@
       margin: 0px 0 10px 0;
       text-decoration: none;
       text-align: center;
-      line-height: 30px;
+      line-height: 16px;
       font-size: 16px;
   }
+.green-btn.margin{ margin-bottom: 0;  } 
+
   .green-btn:hover {
       text-decoration: none;
       color: white;
@@ -2144,8 +2155,33 @@ textarea.form-control-all{
 }
 
 .terminal-box{
-  width: 320px;box-shadow: 0 0 10px #ccc; position: absolute;z-index: 99; background-color: #fff; padding: 15px;
+  width: 320px;box-shadow: 0 0 10px #ccc; position: relative;z-index: 99; background-color: #fff; padding: 15px;
 }
 
 .terminal-box h3{ margin-top: 0; }
 #search_list{ padding: 0; list-style: none; overflow: auto; max-height: 400px;}
+.arrow_box { position: relative; background: #fff; border: 1px solid #32a8d9; } 
+.arrow_box:after, .arrow_box:before { right: 100%; top: 50%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+.arrow_box:after { border-color: rgba(255, 255, 255, 0); border-right-color: #fff; border-width: 10px; margin-top: -10px; } 
+.arrow_box:before { border-color: rgba(50, 168, 217, 0); border-right-color: #32a8d9; border-width: 11px; margin-top: -11px; }
+
+#search_result li{
+  padding-bottom: 10px;
+  display: block;position: relative;
+margin-bottom: 10px; border-bottom: 1px solid #4b4a4b;
+
+}
+#search_result{height:300px !important;
+   overflow: auto !important;list-style: none; clear: both; padding: 0 !important;  display: block; position: relative;
+}
+#search_result li:last-child{ border-bottom: none; margin-bottom: 0px;padding-bottom: 0px !important;}
+
+#search_result .persons p{ margin-bottom: 5px;}
+
+.tops.search{
+  z-index: 99;
+}
+
+.over_padding{
+  padding: 0px 10px 0px 20px;
+}

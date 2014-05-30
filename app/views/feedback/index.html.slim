@@ -46,6 +46,110 @@ a.ol_href data-toggle="modal" href="#myModal_feedback"
                input#not-know.po name="pay[payment_type]" type="radio" value="1" checked="checked"
                 label for="not-know"  Пока не знаю                                          
           = submit_tag "Отправить", class: "btn btn-block green-btn"
+ 
+.block style=("margin-left: 890px") 
+ .tops style=("width: 270px")
+  .title_main_ob 
+   .menu_other
+    | Мой участковый
+  div style="padding-top:10px"
+   p.over_padding
+    | Заиров Азамат Наильевич
+    br 8 (906) 123-45-67 
+   p.over_padding
+    | ОВД Кировского р-на
+    br ул. Кирова, 435
+   p.over_padding
+    a.ol_href data-toggle="modal" href="#myModal_search" 
+     | Найти другого      
+
+
+
+ /! Modal
+#myModal_search.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;  
+        .row
+          .col-md-12
+            h2.title
+              | Поиск участкового
+            .info.margin_top
+              | Найдите участкового по ФИО или адресу
+        = form_tag user_registration_path, remote: true, id: "feedback-form" 
+          .form-inputs
+              label ФИО / Адрес
+              input#search-form.form-control-all class="" name="" placeholder=("") type="text" 
+              h4
+               | Результаты поиска
+          ul#search_result 
+
+           li
+             h5
+              p Заиров Азамат Наильевич
+              p 8 (906) 123-45-67
+              p ОВД Кировского р-на
+              p ул. Кирова, 435 
+           li
+             h5
+              p Багитов Азамат Наильевич
+              p 8 (906) 123-45-67
+              p ОВД Кировского р-на
+              p ул. Кирова, 435 
+           li
+             h5
+              p Пижамов Азамат Наильевич
+              p 8 (906) 123-45-67
+              p ОВД Кировского р-на
+              p ул. Кирова, 435                                               
+           li
+             h5
+              p Бишкеков Азамат Наильевич
+              p 8 (906) 123-45-67
+              p ОВД Кировского р-на
+              p ул. Кирова, 435 
+           li
+             h5
+              p Котейкин Азамат Наильевич
+              p 8 (906) 123-45-67
+              p ОВД Кировского р-на
+              p ул. Кирова, 435 
+           li
+             h5
+              p Сковородкин Азамат Наильевич
+              p 8 (906) 123-45-67
+              p ОВД Кировского р-на
+              p ул. Кирова, 435 
+
+.tutorial
+  .tutorial_content В разделе “Мои объекты” отображаются объекты недвижимости созданные Вами. После создания Вы сможете подключить к ним услуги и оплатить счета.
+  .close_tutorial
+  
+  table width="100%"
+   tr
+    td
+      .custom
+        input#hide_tut type="checkbox" 
+          label for="hide_tut"  Больше не показывать
+    td   
+      .next_tutorial.btn.btn-block.green-btn.margin Продолжить
+.tutorial
+  .tutorial_content В разделе “Услуги” отображаются подключенные Вами сервисы поставщиков услуг. Выбрав нужный из списка, Вы увидете подробную информацию о сервисе и сможете произвести оплату.
+
+  .close_tutorial
+  
+  table width="100%"
+   tr
+    td
+      .custom
+        input#hide_tut2 type="checkbox" 
+          label for="hide_tut2"  Больше не показывать
+    td   
+      .next_tutorial.btn.btn-block.green-btn.margin Продолжить
+
+
+
 div.terminal-box
  h3 Адреса терминалов
  .form-inputs
