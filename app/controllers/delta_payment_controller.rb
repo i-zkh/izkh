@@ -4,10 +4,8 @@ class DeltaPaymentController < ApplicationController
 
   def pay
     response = HTTParty.get( "http://cabinet.izkh.ru/delta_payment?key=#{params[:key]}").parsed_response["payment"]
-    response.each do |r| 
-      @installation_payment = r['installation_payment']
-      @service_payment = r['service_payment'] 
-      @amount = @installation_payment + @service_payment
-    end
+    @installation_payment = response['installation_payment'].to_i
+    @service_payment = response['service_payment'].to_i
+    @amount = @installation_payment + @service_payment
   end
 end

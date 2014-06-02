@@ -114,7 +114,7 @@ class TransactionsController < ApplicationController
     amount = params[:pay][:amount]
     user_id = current_user.nil? ? 0 : current_user.id
     payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
-    key = params[:key] ? ";" + params[:key] : ""
+    key = params[:key].nil? ? "" : ";" + params[:key]
     if params[:pay][:service_id]
       service = Service.find(params[:pay][:service_id].to_i)
       vendor = Vendor.find(service.vendor_id) 
