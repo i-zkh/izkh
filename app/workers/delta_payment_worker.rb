@@ -1,5 +1,5 @@
 # encoding: utf-8
-class GtPaymentWorker
+class DeltaPaymentWorker
   include Sidekiq::Worker
   sidekiq_options :retry => false
 
