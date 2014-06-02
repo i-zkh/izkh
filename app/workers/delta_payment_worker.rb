@@ -15,7 +15,7 @@ class GtPaymentWorker
       :from_name=> "АйЖКХ",  
       :text=>"Оплата услуг компании DELTA",  
       :to=>[{
-          :email=> iva.anastya@gmail.com,
+          :email=> "iva.anastya@gmail.com",
       }],  
       :html=>
         "<html><h3>Заявка на оплату услуг компании DELTA</h3>
