@@ -123,7 +123,7 @@ class TransactionsController < ApplicationController
       service_type = service.service_type.title
       address = "#{place.city} #{place.address} #{place.building}, #{place.apartment}"
     else
-      place_id, service, address = "", "", "", ""
+      place_id, service, address, service_type = "", "", "", ""
       service_type = ServiceType.find(params[:service_type_id]).title if params[:service_type_id]
       vendor = Vendor.find(params[:vendor_id])
     end
