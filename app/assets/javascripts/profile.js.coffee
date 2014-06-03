@@ -8,7 +8,7 @@
 //= require 'jquery.maskedinput.min'
 //= require 'jquery.validationEngine.js'
 //= require 'jquery.validationEngine-en.js'
-
+//= require 'jquery.fastLiveFilter.js'
 # KLADR credentials
 kladrToken = '5322ef24dba5c7d326000045'
 kladrKey = '60d44104d6e5192dcdc610c10ff4b2100ece9604'
@@ -26,6 +26,7 @@ ymaps.ready ->
   map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
 $(document).ready ->
+  
 # Ajax'ing registration 
 
   if $('#pay')[0]
@@ -812,4 +813,32 @@ $(document).ready ->
   $("#service-index").find("h4").maxlength maxChars: 20
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
-   
+  $("#feedback-form").validationEngine();
+
+  $(".tutorial", this).find(".close_tutorial").click ->
+    $(".tutorial").remove()
+    return
+
+  $(".tutorial:eq(0)").css display: "block"
+  current_tutorial = 0
+  $(".next_tutorial").click ->
+    $(".tutorial").stop().fadeOut()
+    current_tutorial++
+    current_tutorial = 0  if current_tutorial > $(".tutorial").size() - 1
+    
+    $(".tutorial").eq(current_tutorial).stop().fadeIn()
+    return
+
+  $(".close_ent").click ->
+    $("#myModal_ent").modal "hide"
+    return
+
+  $(".close_tutorial").click ->
+    $(".black_over").find(".container").animate
+      top: "-9999px"
+    , 1500
+    $(".black_over").stop().fadeOut()
+    return
+
+  $("#search_input").fastLiveFilter "#search_list"
+  $("#search-form").fastLiveFilter "#search_result" 
