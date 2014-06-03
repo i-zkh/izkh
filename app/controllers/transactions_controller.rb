@@ -114,7 +114,7 @@ class TransactionsController < ApplicationController
     amount = params[:pay][:amount]
     user_id = current_user.nil? ? 0 : current_user.id
     payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
-    
+    key = params[:key].nil? ? "" : ";" + params[:key]
     if params[:pay][:service_id]
       service = Service.find(params[:pay][:service_id].to_i)
       vendor = Vendor.find(service.vendor_id) 
@@ -123,7 +123,7 @@ class TransactionsController < ApplicationController
       service_type = service.service_type.title
       address = "#{place.city} #{place.address} #{place.building}, #{place.apartment}"
     else
-      place_id, service, address = "", "", "", ""
+      place_id, service, address, service_type = "", "", "", ""
       service_type = ServiceType.find(params[:service_type_id]).title if params[:service_type_id]
       vendor = Vendor.find(params[:vendor_id])
     end
@@ -151,7 +151,7 @@ class TransactionsController < ApplicationController
       security_key = Digest::MD5.hexdigest(security_key_string)
       url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
     end
-    Transaction.create!(amount: amount.to_f, service: service, place: place_id, user_id: user_id, commission: (total.to_f-amount.to_f).round(2), payment_type: payment_type, payment_info: "#{payment_type};#{params[:user_account]};#{address};#{amount};#{(total.to_f-amount.to_f).round(2)};#{vendor.title};#{service_type};#{Time.now.strftime('%d.%m.%y')}", order_id: order_id, vendor_id: vendor.id)
+    Transaction.create!(amount: amount.to_f, service: service, place: place_id, user_id: user_id, commission: (total.to_f-amount.to_f).round(2), payment_type: payment_type, payment_info: "#{payment_type};#{params[:user_account]};#{address};#{amount};#{(total.to_f-amount.to_f).round(2)};#{vendor.title};#{service_type};#{Time.now.strftime('%d.%m.%y')}#{key}", order_id: order_id, vendor_id: vendor.id)
 
     respond_to do |format|
       format.js {
@@ -175,6 +175,8 @@ class TransactionsController < ApplicationController
       SlPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account) 
     elsif vendor_id == 165
       CraftSPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account)
+    elsif vendor_id == 20
+      DeltaPaymentWorker.perform_async(transaction.payment_info.split(';')[-1])
     end
     render json: {}, status: :ok
   end

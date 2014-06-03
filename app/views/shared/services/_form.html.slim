@@ -35,13 +35,13 @@
             .col-lg-12
               label
                 | Тариф *
-              =f.select(:tariff_template_id, [])
+              =f.select(:tariff_template_id, [], {})
             .clearfix
           .form-group-margin
             .col-lg-12
               label
                 | Лицевой счет *
-              input.form-control.click_tooltips.js__user_account name="user_account" placeholder="" type="text"
+              input.form-control.click_tooltips.js__user_account name="service[user_account]" placeholder="" type="text"
               .info-account
             .clearfix       
           p

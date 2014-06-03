@@ -9,6 +9,7 @@
         .t-cell= @service_payment
       input.pay-amount-one.form-control name="pay[amount]" placeholder="" type="hidden" value=@amount style=("width: 70px; margin: 0 10px 0 20px")
       input.pay-amount-one.form-control name="vendor_id" placeholder="" type="hidden" value=20 style=("width: 70px; margin: 0 10px 0 20px")
+      input name="key" placeholder="" type="hidden" value="#{params[:key]}" style=("width: 70px; margin: 0 10px 0 20px")
 
       .t-table_w style="margin-left: -10px"
         .t-cell.tops style=("width: 120px")  Способ оплаты
