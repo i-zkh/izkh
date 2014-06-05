@@ -671,6 +671,23 @@ $(document).ready ->
   #     error: (error) ->
   #       $("#js-container").removeClass('loading')
 
+  # $('.feedback-container').on 'click', '.feedback-button', ->
+  #   $.ajax
+  #     url: '/user_feedbacks'
+  #     type: 'POST'
+  #     dataType: 'html'
+  #     beforeSend: ->
+  #       $("#js-container").addClass('loading')
+  #     success: (data) ->
+  #       alert(true)
+  #       $('#feedback_topic').val('')
+  #       # $('textarea').val('')
+  #       # $('#feedback-error').append(data)
+  #       $("#js-container").removeClass('loading')
+  #     error: (error) ->
+  #       console.log(error)
+  #       $("#js-container").removeClass('loading')
+
   $('body').on 'click', '.hide-history', ->
     $('.metric-history').slideUp()
 

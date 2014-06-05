@@ -21,6 +21,7 @@ Iz::Application.routes.draw do
   
   resources :about, only: :index
   resources :feedback
+  resources :user_feedbacks
   resources :vendors
 
   resources :transactions do

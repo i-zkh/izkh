@@ -45,6 +45,11 @@ class YandexMoney
     { performedDatetime: Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S.000+04:00"), code: @code, invoiceId: @invoiceId, shopId: @shopId }
   end
 
+  def md5_hash
+    require 'digest/md5'
+    Digest::MD5.hexdigest("checkOrder;#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
+  end
+
   private
 
   def check_md5(action)
