@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603131653) do
+ActiveRecord::Schema.define(version: 20140610103433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,8 @@ ActiveRecord::Schema.define(version: 20140603131653) do
     t.string   "regexp"
     t.integer  "shop_article_id"
     t.float    "commission_ya_card"
+    t.boolean  "filter"
+    t.boolean  "billing"
   end
 
   create_table "widgetables", force: true do |t|

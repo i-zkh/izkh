@@ -49,7 +49,7 @@ css:
           .form-group-margin
             label
               | Поставщик *
-            select id="vendor_id" name="vendor_id" tabindex="-1" title="" 
+            select id="vendor_id" name="pay[vendor_id]" tabindex="-1" title="" 
               option disabled="disabled"
                 | Выберите поставщика услуг  
               - Vendor.where(service_type_id: 1).each do |v| 

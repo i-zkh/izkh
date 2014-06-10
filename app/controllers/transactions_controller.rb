@@ -112,30 +112,22 @@ class TransactionsController < ApplicationController
 
   def pay
     Transaction.create!(@payment_data)
-    if @payment_type == 2
-      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}"
-    elsif @payment_type == 3
-      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=AC"
-    elsif @payment_type == 4
-      url = "https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=6c2aa990-60e1-427f-9c45-75cffae4a745&LMI_PAYMENT_AMOUNT=#{total}&LMI_PAYMENT_DESC=АйЖКХ&LMI_CURRENCY=RUB&ORDER_ID=#{order_id}"
+    case @payment_data[:payment_type].to_i
+    when 2
+      processor = YandexProcessor.new(@total, @user_id, @order_id, @shop_article_id, :money)
+    when 3
+      processor = YandexProcessor.new(@total, @user_id, @order_id, @shop_article_id, :card)
     else
-      currency = "RUB"
-      merchant_id = '39859'
-      commission = vendor.commission
-      total = calculate_total(amount, commission)
-      private_security_key = '7ab9d14e-fb6b-4c78-88c2-002174a8cd88'
-      po_root_url = "https://secure.payonlinesystem.com/ru/payment/"
-      security_key_string ="MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&PrivateSecurityKey=#{private_security_key}"
-      security_key = Digest::MD5.hexdigest(security_key_string)
-      url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
-    end
-    
-    respond_to do |format|
-      format.js {
-         render js: "window.location.replace('#{url}');"
-      }
+      processor = PayOnlineProcessor.new(@total, @user_id, @order_id)
     end
 
+    pp = PaymentProcessor.new(processor)
+
+    respond_to do |format|
+      format.js {
+        render js: "window.location.replace('#{pp.pay}');"
+      }
+    end
   end
 
   def old_pay
@@ -267,6 +259,7 @@ class TransactionsController < ApplicationController
     @order_id = Time.now.strftime('%Y%M%d%H%M%S')
     @user_id = current_user.nil? ? 0 : current_user.id
     @payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
+    @shop_article_id = @vendor.shop_article_id
     key = params[:key].nil? ? "" : params[:key]
     date = Time.now.strftime('%d.%m.%y')
     commission = get_commission(@payment_type, @vendor)
