@@ -13,6 +13,9 @@ class YandexMoney
     @code = 1000
     @shopPassword = "Sum0Zozilock8Qzhsoli"
   end
+  # Digest::MD5.hexdigest("checkOrder;#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
+  # Digest::MD5.hexdigest("checkOrder;1.00;643;1001;15196;2000155351370;25;Sum0Zozilock8Qzhsoli")
+
 
   def check
     if check_md5('checkOrder')

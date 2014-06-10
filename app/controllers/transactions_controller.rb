@@ -110,7 +110,7 @@ class TransactionsController < ApplicationController
     render json: @service_data, status: :ok
   end
 
-  def pay
+  def pay_new
     Transaction.create!(@payment_data)
     case @payment_data[:payment_type].to_i
     when 2
@@ -130,7 +130,7 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def old_pay
+  def pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
     amount = params[:pay][:amount]
     user_id = current_user.nil? ? 0 : current_user.id
@@ -210,8 +210,12 @@ class TransactionsController < ApplicationController
 
   def check
     # CheckOrder for Yandex payment
-    @check = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).check
-    logger.info @check
+    @check = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId])
+    logger.info @check.check
+    logger.info "--------------------------------------------------------------------------------------------------------------------------------------------------------"
+    logger.info "checkOrder;#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}" 
+    logger.info @check.md5_hash
+
     render :template => "yandex_money/check.xml.erb", :layout => false 
   end
 
