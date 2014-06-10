@@ -2,7 +2,7 @@
 class TransactionsController < ApplicationController
   skip_before_filter :require_current_user
   skip_before_action :verify_authenticity_token
-  before_filter :prepare_payment_data, only: [:pay]
+  before_filter :prepare_payment_data, only: [:pay_new]
 
   def index
     @places = current_user.places.order("created_at desc")
