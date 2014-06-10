@@ -111,6 +111,23 @@ class TransactionsController < ApplicationController
 
   def pay_new
     Transaction.create!(@payment_data)
+    case @payment_data[:payment_type].to_i
+    when 2
+      processor = YandexProcessor.new(@total, @user_id, @order_id, @shop_article_id, :money)
+    when 3
+      processor = YandexProcessor.new(@total, @user_id, @order_id, @shop_article_id, :card)
+    else
+      processor = PayOnlineProcessor.new(@total, @user_id, @order_id)
+    end
+
+    pp = PaymentProcessor.new(processor)
+
+    respond_to do |format|
+      format.js {
+        render js: "window.location.replace('#{pp.pay}');"
+      }
+    end
+    
   end
 
   def pay

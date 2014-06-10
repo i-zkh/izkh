@@ -1,5 +1,7 @@
 class YandexProcessor < PaymentProcessor
 
+  PAY_URL = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196"
+
   def initialize(total, user_id, order_id, shop_article_id, type)
     @total = total
     @user_id = user_id
@@ -21,9 +23,7 @@ class YandexProcessor < PaymentProcessor
   def check(params)
   end
 
-private
-
-  PAY_URL = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196"
+protected
 
   def request_params
     params = "Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}"    
