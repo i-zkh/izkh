@@ -2,6 +2,7 @@
 class TransactionsController < ApplicationController
   skip_before_filter :require_current_user
   skip_before_action :verify_authenticity_token
+  before_filter :prepare_payment_data, only: [:pay]
 
   def index
     @places = current_user.places.order("created_at desc")
@@ -109,11 +110,35 @@ class TransactionsController < ApplicationController
     render json: @service_data, status: :ok
   end
 
-  def pay_new
+  def pay
     Transaction.create!(@payment_data)
+    if @payment_type == 2
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}"
+    elsif @payment_type == 3
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=AC"
+    elsif @payment_type == 4
+      url = "https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=6c2aa990-60e1-427f-9c45-75cffae4a745&LMI_PAYMENT_AMOUNT=#{total}&LMI_PAYMENT_DESC=АйЖКХ&LMI_CURRENCY=RUB&ORDER_ID=#{order_id}"
+    else
+      currency = "RUB"
+      merchant_id = '39859'
+      commission = vendor.commission
+      total = calculate_total(amount, commission)
+      private_security_key = '7ab9d14e-fb6b-4c78-88c2-002174a8cd88'
+      po_root_url = "https://secure.payonlinesystem.com/ru/payment/"
+      security_key_string ="MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&PrivateSecurityKey=#{private_security_key}"
+      security_key = Digest::MD5.hexdigest(security_key_string)
+      url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
+    end
+    
+    respond_to do |format|
+      format.js {
+         render js: "window.location.replace('#{url}');"
+      }
+    end
+
   end
 
-  def pay
+  def old_pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
     amount = params[:pay][:amount]
     user_id = current_user.nil? ? 0 : current_user.id
@@ -225,32 +250,53 @@ class TransactionsController < ApplicationController
   protected
 
   def prepare_payment_data
-    amount = params[:pay][:amount]
-    service = Service.find(params[:pay][:service_id].to_i)
 
-    @total = calculate_total(amount, commission)
+    if params[:pay][:service_id]
+      service = Service.find(params[:pay][:service_id].to_i)
+      place =  service.place
+      place_id =  place.id
+      service_type = service.service_type.title
+      address = "#{place.city} #{place.address} #{place.building}, #{place.apartment}"
+    else
+      place_id, service, address, service_type = "", "", "", ""
+      service_type = ServiceType.find(params[:service_type_id]).title if params[:service_type_id]
+    end
 
+    amount = params[:pay][:amount].to_f
+    @vendor = Vendor.find(params[:pay][:vendor_id])
     @order_id = Time.now.strftime('%Y%M%d%H%M%S')
     @user_id = current_user.nil? ? 0 : current_user.id
     @payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
-
     key = params[:key].nil? ? "" : params[:key]
     date = Time.now.strftime('%d.%m.%y')
-
-    payment_info = [payment_type, params[:user_account], address, amount, commission, vendor_title, service_type, date, key].join(';')
+    commission = get_commission(@payment_type, @vendor)
+    @total = calculate_total(amount, commission)
+    payment_info = [@payment_type, params[:user_account], address, amount, commission, @vendor.title, service_type, date, key].join(';')
 
     @payment_data = { 
-      amount: amount.to_f, 
+      amount: amount, 
       service: service, 
       place: place_id, 
-      user_id: user_id, 
+      user_id: @user_id, 
       commission: commission, 
-      payment_type: payment_type, 
+      payment_type: @payment_type, 
       payment_info: payment_info, 
-      order_id: order_id, 
-      vendor_id: vendor.id
+      order_id: @order_id, 
+      vendor_id: @vendor.id
     }
 
+  end
+
+  def get_commission(payment_type, vendor)
+    commission =  if payment_type == 2
+                    vendor.commission_yandex
+                  elsif payment_type == 3
+                    vendor.commission_ya_card
+                  elsif payment_type == 4
+                    vendor.commission_web_money
+                  else
+                    vendor.commission
+                  end
   end
 
   def calculate_total(amount, commission)

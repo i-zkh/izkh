@@ -21,6 +21,9 @@ class YandexProcessor < PaymentProcessor
   def check(params)
   end
 
+  def notify(params)
+  end
+
 private
 
   PAY_URL = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196"

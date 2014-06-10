@@ -26,7 +26,26 @@ ymaps.ready ->
   map = new ymaps.Map("map", {center: [53.22, 50.12], zoom: 12, controls: []})
 
 $(document).ready ->
-  
+
+  $('body').on 'change', '#search_input', ->
+    $.ajax
+      url: '/terminal'
+      type: 'GET'
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      dataType: 'html'
+      success: (data) ->
+        $('.reg-step-2').remove()
+        $('#reg-step-two-info').removeClass('active')
+        $('#reg-step-three-info').addClass('active')
+        $('.reg-head').append(data)
+        $("select").select2()
+        $("#reg-step-three-form").validationEngine()
+        $("#js-container").removeClass('loading')
+      error: (error, qwe, er) ->
+        console.log(er)
+        $("#js-container").removeClass('loading')
+
 # Ajax'ing registration 
 
   if $('#pay')[0]
