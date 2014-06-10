@@ -5,7 +5,7 @@ class YandexMoney
     @md5 = md5
     @orderNumber = orderNumber.to_i
     @customerNumber = customerNumber.to_i
-    @orderSumAmount = orderSumAmount.to_f
+    @orderSumAmount = format(orderSumAmount)
     @orderSumCurrencyPaycash = orderSumCurrencyPaycash
     @orderSumBankPaycash = orderSumBankPaycash
     @invoiceId = invoiceId
@@ -13,10 +13,7 @@ class YandexMoney
     @code = 1000
     @shopPassword = "Sum0Zozilock8Qzhsoli"
   end
-  # Digest::MD5.hexdigest("checkOrder;#{@orderSumAmount};#{@orderSumCurrencyPaycash};#{@orderSumBankPaycash};#{@shopId};#{@invoiceId};#{@customerNumber};#{@shopPassword}")
-  # Digest::MD5.hexdigest("checkOrder;1.00;643;1001;15196;2000155351370;25;Sum0Zozilock8Qzhsoli")
-
-
+  
   def check
     if check_md5('checkOrder')
       transaction = Transaction.find_by_order_id(@orderNumber)
@@ -58,6 +55,15 @@ class YandexMoney
   end
 
   private
+
+  def format(float)
+    # Formats float value to 'xxx.xx', returns string
+    float.to_s =~ /\d+.(\d+)/
+    unless $1 =~ /\d\d/
+      float = float.to_s + '0'
+    end
+    float.to_s
+  end
 
   def check_md5(action)
     require 'digest/md5'
