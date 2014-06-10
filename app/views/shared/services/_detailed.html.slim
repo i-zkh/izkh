@@ -47,7 +47,8 @@ div
       input#pay-commission-ya-card name="pay[commission_ya_card]" value="#{@service.vendor.commission_ya_card}" type="hidden"
       input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
       input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
-      input#pay-service-id name="user_account" value="#{@service.user_account}" type="hidden"
+      input#pay-vendor-id name="pay[vendor_id]" value="#{@service.vendor.id}" type="hidden"
+      input#pay-user-account name="user_account" value="#{@service.user_account}" type="hidden"
       .t-table_w
         .t-cell style=("width: 100px") 
           label Сумма к оплате

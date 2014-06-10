@@ -109,6 +109,10 @@ class TransactionsController < ApplicationController
     render json: @service_data, status: :ok
   end
 
+  def pay_new
+    Transaction.create!(@payment_data)
+  end
+
   def pay
     order_id = Time.now.strftime('%Y%M%d%H%M%S')
     amount = params[:pay][:amount]
@@ -219,6 +223,35 @@ class TransactionsController < ApplicationController
   end
 
   protected
+
+  def prepare_payment_data
+    amount = params[:pay][:amount]
+    service = Service.find(params[:pay][:service_id].to_i)
+
+    @total = calculate_total(amount, commission)
+
+    @order_id = Time.now.strftime('%Y%M%d%H%M%S')
+    @user_id = current_user.nil? ? 0 : current_user.id
+    @payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
+
+    key = params[:key].nil? ? "" : params[:key]
+    date = Time.now.strftime('%d.%m.%y')
+
+    payment_info = [payment_type, params[:user_account], address, amount, commission, vendor_title, service_type, date, key].join(';')
+
+    @payment_data = { 
+      amount: amount.to_f, 
+      service: service, 
+      place: place_id, 
+      user_id: user_id, 
+      commission: commission, 
+      payment_type: payment_type, 
+      payment_info: payment_info, 
+      order_id: order_id, 
+      vendor_id: vendor.id
+    }
+
+  end
 
   def calculate_total(amount, commission)
     sprintf('%.2f', ((amount.to_f*(commission + 100))/100).round(2))
