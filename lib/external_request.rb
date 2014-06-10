@@ -3,10 +3,7 @@ class ExternalRequest
   require 'net/https'
 
   def initialize(url, ssl=false, data=nil, cert_name=nil)
-
     @uri = URI.parse(url)
-    puts "!!!uri: #{@uri}"
-    puts "!!!url: #{url}"
     @ssl = ssl
     @data = data if data
     @cert_name = cert_name if cert_name
