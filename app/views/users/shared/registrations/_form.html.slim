@@ -75,14 +75,14 @@ css:
               .t-table_w style=("margin-left: -30px")
                 .t-cell.tops style=("width: 120px")  Способ оплаты
                 .t-cell
+                  / p
+                  /   .custom.two
+                  /     input#i13.po name="pay[payment_type]" type="radio" value="1" checked="checked"
+                  /       label for="i13"  Банковская карта
                   p
                     .custom.two
-                      input#i13.po name="pay[payment_type]" type="radio" value="1" checked="checked"
-                        label for="i13"  Банковская карта
-                  p
-                    .custom.two
-                      input#i14.wb name="pay[payment_type]" type="radio" value="3"
-                        label.disabled for="i14"  Яндекс Карты
+                      input#i14.wb name="pay[payment_type]" type="radio" value="3" checked="checked"
+                        label.disabled for="i14"  Банковская карта
                   p
                     .custom.two
                       input#i15.ya name="pay[payment_type]" type="radio" value="2"

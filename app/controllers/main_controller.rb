@@ -6,5 +6,6 @@ class MainController < ApplicationController
   end
 
   def terminal
+    
   end
 end
