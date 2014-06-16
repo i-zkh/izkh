@@ -17,6 +17,17 @@ class SamaraLan
     Crack::XML.parse(er.get)
   end
 
+  def pay_response
+    er_check = ExternalRequest.new(check_url, true)
+    id = get_response(er_check.get)
+    if id
+      er_pay = ExternalRequest.new(pay_url(id.to_s), true)
+      Crack::XML.parse(er_pay.get)
+    else
+      nil
+    end
+  end
+
   def pay
     er_check = ExternalRequest.new(check_url, true)
     id = get_response(er_check.get)
