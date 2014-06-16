@@ -13,7 +13,18 @@
             .pad-left= link_to "Оплата через терминалы", terminal_path, class: controller_name == "feedback" ? 'active' : ''
           - else
             .pad-left
-          .pad-left= link_to "О компании", about_index_path, class: controller_name == "about" ? 'active' : ''
+          .pad-left.hover 
+            | Информация
+            span.caret
+            ul
+             li
+              a href="/about" О компании
+             li
+              a href="" Оплата через терминалы
+             li
+              a href="" Оферта
+             li 
+              a href="" Тарифы АйЖКХ       
           span.pad-left
             | Самара: (846) 373-64-10
       .nav.navbar-nav.navbar-right
