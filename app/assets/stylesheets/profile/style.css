@@ -2218,3 +2218,8 @@ margin-bottom: 10px; border-bottom: 1px solid #4b4a4b;
   padding: 0px 10px 0px 20px;
 }
 
+.сommission-block {
+  height: 400px;
+  overflow: auto;
+}
+
