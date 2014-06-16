@@ -1957,8 +1957,40 @@
       padding-left: 10px;
       float: left;
       padding-top: 15px;
-      text-decoration: underline;
   }
+
+
+.pad-left a{ text-decoration: underline;}
+
+.pad-left.hover{
+  cursor: pointer;color: #428BCA; text-decoration: underline;
+}
+
+
+
+
+
+.pad-left.hover ul{
+ position: absolute; background: #fff; padding: 5px 10px 10px 10px;border-radius: 5px; display: none;
+}
+
+.pad-left.hover ul li a{
+  text-decoration: none;
+}
+
+.pad-left.hover ul li a:hover{ text-decoration: underline;}
+.pad-left.hover ul li{
+  list-style: none; padding: 0; 
+}
+.pad-left.hover:hover{color: #2A6496;}
+.pad-left.hover:hover > ul{
+display: block;
+}
+
+
+
+
+
   span.pad-left {
       text-decoration: none;
   }
@@ -2185,3 +2217,4 @@ margin-bottom: 10px; border-bottom: 1px solid #4b4a4b;
 .over_padding{
   padding: 0px 10px 0px 20px;
 }
+
