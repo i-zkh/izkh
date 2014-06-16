@@ -52,6 +52,7 @@ protected
       if response["ok_pay_step2"]["quest_result"] && response["ok_pay_step2"]["quest_result"].to_i < 0
         nil
       else
+        p response
         response
       end
     else
