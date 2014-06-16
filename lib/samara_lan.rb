@@ -12,6 +12,11 @@ class SamaraLan
     get_response(er.get)
   end
 
+  def check_response
+    er = ExternalRequest.new(check_url, true)
+    Crack::XML.parse(er.get)
+  end
+
   def pay
     er_check = ExternalRequest.new(check_url, true)
     id = get_response(er_check.get)

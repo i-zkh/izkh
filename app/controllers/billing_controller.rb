@@ -19,6 +19,6 @@ class BillingController < ApplicationController
 
   def check_sl
     sl = SamaraLan.new(params[:user_account])
-    render text: sl.check
+    render text: sl.check_response
   end
 end
