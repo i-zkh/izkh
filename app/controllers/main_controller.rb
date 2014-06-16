@@ -4,4 +4,8 @@ class MainController < ApplicationController
   def index
 
   end
+
+  def terminal
+    
+  end
 end

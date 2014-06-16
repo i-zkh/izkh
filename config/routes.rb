@@ -21,6 +21,7 @@ Iz::Application.routes.draw do
   
   resources :about, only: :index
   resources :feedback
+  resources :user_feedbacks
   resources :vendors
 
   resources :transactions do
@@ -37,7 +38,7 @@ Iz::Application.routes.draw do
   get 'table_show' => 'transactions#table_show'
   get 'graph_show' => 'transactions#graph_show'
   get 'get_amount' => 'billing#get_amount'
-
+  get 'terminal' => 'main#terminal'
   # Service Type
   get 'api/1.0/servicetypes' => 'vendors#index'
   post 'api/1.0/servicetype' => 'vendors#create_types'

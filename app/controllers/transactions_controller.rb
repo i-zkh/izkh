@@ -2,6 +2,7 @@
 class TransactionsController < ApplicationController
   skip_before_filter :require_current_user
   skip_before_action :verify_authenticity_token
+  before_filter :prepare_payment_data, only: [:pay_new]
 
   def index
     @places = current_user.places.order("created_at desc")
@@ -107,6 +108,26 @@ class TransactionsController < ApplicationController
     end
     @service_data = {element: 'graph', xkey: 'm', ykeys: ykeys, labels: labels, data: [@data_prev, @data_curr, @data_next]}
     render json: @service_data, status: :ok
+  end
+
+  def pay_new
+    Transaction.create!(@payment_data)
+    case @payment_data[:payment_type].to_i
+    when 2
+      processor = YandexProcessor.new(@total, @user_id, @order_id, @shop_article_id, :money)
+    when 3
+      processor = YandexProcessor.new(@total, @user_id, @order_id, @shop_article_id, :card)
+    else
+      processor = PayOnlineProcessor.new(@total, @user_id, @order_id)
+    end
+
+    pp = PaymentProcessor.new(processor)
+
+    respond_to do |format|
+      format.js {
+        render js: "window.location.replace('#{pp.pay}');"
+      }
+    end
   end
 
   def pay
@@ -219,6 +240,57 @@ class TransactionsController < ApplicationController
   end
 
   protected
+
+  def prepare_payment_data
+
+    if params[:pay][:service_id]
+      service = Service.find(params[:pay][:service_id].to_i)
+      place =  service.place
+      place_id =  place.id
+      service_type = service.service_type.title
+      address = "#{place.city} #{place.address} #{place.building}, #{place.apartment}"
+    else
+      place_id, service, address, service_type = "", "", "", ""
+      service_type = ServiceType.find(params[:service_type_id]).title if params[:service_type_id]
+    end
+
+    amount = params[:pay][:amount].to_f
+    @vendor = Vendor.find(params[:pay][:vendor_id])
+    @order_id = Time.now.strftime('%Y%M%d%H%M%S')
+    @user_id = current_user.nil? ? 0 : current_user.id
+    @payment_type = params[:pay][:payment_type].nil? ? 1 : params[:pay][:payment_type].to_i
+    @shop_article_id = @vendor.shop_article_id
+    key = params[:key].nil? ? "" : params[:key]
+    date = Time.now.strftime('%d.%m.%y')
+    commission = get_commission(@payment_type, @vendor)
+    @total = calculate_total(amount, commission)
+    payment_info = [@payment_type, params[:user_account], address, amount, commission, @vendor.title, service_type, date, key].join(';')
+
+    @payment_data = { 
+      amount: amount, 
+      service: service, 
+      place: place_id, 
+      user_id: @user_id, 
+      commission: commission, 
+      payment_type: @payment_type, 
+      payment_info: payment_info, 
+      order_id: @order_id, 
+      vendor_id: @vendor.id
+    }
+
+  end
+
+  def get_commission(payment_type, vendor)
+    commission =  if payment_type == 2
+                    vendor.commission_yandex
+                  elsif payment_type == 3
+                    vendor.commission_ya_card
+                  elsif payment_type == 4
+                    vendor.commission_web_money
+                  else
+                    vendor.commission
+                  end
+  end
 
   def calculate_total(amount, commission)
     sprintf('%.2f', ((amount.to_f*(commission + 100))/100).round(2))

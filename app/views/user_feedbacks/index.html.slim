@@ -1,0 +1,141 @@
+/css:
+/   @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+/   @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+br
+br
+.modal-dialog.forma_enter.feedback-container
+  .modal-content
+    .modal-header 
+      .row
+        .col-md-12
+          h2.title
+            | Обратная связь
+          br
+          .info.margin_top
+            | Нам важно Ваше мнение
+          .error-text#feedback_error
+      = form_for UserFeedback.new, remote: true do |f|
+        .form-inputs
+          label Тема *
+          =f.text_field(:topic, id: "feedback_topic", class: "form-control-all validate[required]")
+        .form-inputs
+          label Обращение *
+          =f.text_area(:body , class: "form-control-all validate[required]")
+        - if @show
+          div#hidden_block
+            p
+              | Что Вы думаете о новой версии сервиса?
+            p
+             .custom.two
+              input#like.po name="feedback[new_version]" type="radio" value="like" checked="checked"
+               label for="like" Нравится
+            p
+             .custom.two
+              input#not-like.po name="feedback[new_version]" type="radio" value="not-like" checked="checked"
+               label for="not-like" Старый был лучше
+            p
+             .custom.two
+              input#not-know.po name="feedback[new_version]" type="radio" value="not-know" checked="checked"
+               label for="not-know" Пока не знаю
+        input.feedback-button.btn.green-btn.btn-block.click_off type="submit" value="Отправить"
+ 
+/ .block style=("margin-left: 890px") 
+/  .tops style=("width: 270px")
+/   .title_main_ob 
+/    .menu_other
+/     | Мой участковый
+/   div style="padding-top:10px"
+/    p.over_padding
+/     | Заиров Азамат Наильевич
+/     br 8 (906) 123-45-67 
+/    p.over_padding
+/     | ОВД Кировского р-на
+/     br ул. Кирова, 435
+/    p.over_padding
+/     a.ol_href data-toggle="modal" href="#myModal_search" 
+/      | Найти другого      
+
+
+
+/  /! Modal
+/ #myModal_search.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+/   .modal-dialog.forma_enter
+/     .modal-content
+/       .modal-header
+/         button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;  
+/         .row
+/           .col-md-12
+/             h2.title
+/               | Поиск участкового
+/             .info.margin_top
+/               | Найдите участкового по ФИО или адресу
+/         = form_tag user_registration_path, remote: true, id: "feedback-form" 
+/           .form-inputs
+/               label ФИО / Адрес
+/               input#search-form.form-control-all class="" name="" placeholder=("") type="text" 
+/               h4
+/                | Результаты поиска
+/           ul#search_result 
+
+/            li
+/              h5
+/               p Заиров Азамат Наильевич
+/               p 8 (906) 123-45-67
+/               p ОВД Кировского р-на
+/               p ул. Кирова, 435 
+/            li
+/              h5
+/               p Багитов Азамат Наильевич
+/               p 8 (906) 123-45-67
+/               p ОВД Кировского р-на
+/               p ул. Кирова, 435 
+/            li
+/              h5
+/               p Пижамов Азамат Наильевич
+/               p 8 (906) 123-45-67
+/               p ОВД Кировского р-на
+/               p ул. Кирова, 435                                               
+/            li
+/              h5
+/               p Бишкеков Азамат Наильевич
+/               p 8 (906) 123-45-67
+/               p ОВД Кировского р-на
+/               p ул. Кирова, 435 
+/            li
+/              h5
+/               p Котейкин Азамат Наильевич
+/               p 8 (906) 123-45-67
+/               p ОВД Кировского р-на
+/               p ул. Кирова, 435 
+/            li
+/              h5
+/               p Сковородкин Азамат Наильевич
+/               p 8 (906) 123-45-67
+/               p ОВД Кировского р-на
+/               p ул. Кирова, 435 
+
+/ .tutorial
+/   .tutorial_content В разделе “Мои объекты” отображаются объекты недвижимости созданные Вами. После создания Вы сможете подключить к ним услуги и оплатить счета.
+/   .close_tutorial
+  
+/   table width="100%"
+/    tr
+/     td
+/       .custom
+/         input#hide_tut type="checkbox" 
+/           label for="hide_tut"  Больше не показывать
+/     td   
+/       .next_tutorial.btn.btn-block.green-btn.margin Продолжить
+/ .tutorial
+/   .tutorial_content В разделе “Услуги” отображаются подключенные Вами сервисы поставщиков услуг. Выбрав нужный из списка, Вы увидете подробную информацию о сервисе и сможете произвести оплату.
+
+/   .close_tutorial
+  
+/   table width="100%"
+/    tr
+/     td
+/       .custom
+/         input#hide_tut2 type="checkbox" 
+/           label for="hide_tut2"  Больше не показывать
+/     td   
+/       .next_tutorial.btn.btn-block.green-btn.margin Продолжить              

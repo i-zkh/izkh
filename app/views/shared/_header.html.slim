@@ -9,6 +9,8 @@
           - if current_user
             .pad-left= link_to "Профиль", dashboard_index_path, class: controller_name == "dashboard" ? 'active' : ''
             .pad-left= link_to "Аналитика", transactions_path, class: controller_name == "transactions" ? 'active' : ''
+            .pad-left= link_to "Обратная связь", user_feedbacks_path, class: controller_name == "feedback" ? 'active' : ''
+            .pad-left= link_to "Оплата через терминалы", terminal_path, class: controller_name == "feedback" ? 'active' : ''
           - else
             .pad-left
           .pad-left= link_to "О компании", about_index_path, class: controller_name == "about" ? 'active' : ''
