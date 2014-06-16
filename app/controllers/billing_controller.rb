@@ -16,4 +16,9 @@ class BillingController < ApplicationController
        render :text => ""
     end
   end
+
+  def check_sl
+    sl = SamaraLan.new(params[:user_account])
+    render text: sl.check
+  end
 end
