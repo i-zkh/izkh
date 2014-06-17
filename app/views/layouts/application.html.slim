@@ -10,7 +10,7 @@ html
       = render 'shared/header'
       .container#js-container
         = yield
-        - unless current_user || controller_name == "about"
+        - unless current_user || controller_name == "about" || action_name == "commission"
           = render 'shared/info_block'
           
     script{src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"}

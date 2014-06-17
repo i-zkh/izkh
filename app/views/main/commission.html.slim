@@ -1,6 +1,6 @@
 .block.container#analytics
   .header-block
-    h3 Тарифы АйЖКХ
+    h3 Комиссия сервиса АйЖКХ
   
   .сommission-block
     table.table.table-striped.table-hover
@@ -10,10 +10,14 @@
             | Поставщик
           th.left_blue.cell
             p
-              | Банковские карты
+              | Банковские карты, %
           th.left_blue.cell
             p
-              | Яндекс Деньги
+              | Яндекс Деньги, %
+          th.left_blue.cell
+            p
+              | Web money, %
+
       tboby
       
         - @vendors.each do |v|
@@ -27,7 +31,10 @@
       
             td.left_blue
               p = v[:commission_yandex]
-  
+      
+            td.left_blue
+              p = v[:commission_web_money]
+
 css:
    @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
    @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
