@@ -46,6 +46,7 @@ div
       input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
       input#pay-commission-ya-card name="pay[commission_ya_card]" value="#{@service.vendor.commission_ya_card}" type="hidden"
       input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
+      input#pay-commission-ya-cash-in name="pay[commission_ya_cash_in]" value="#{@service.vendor.commission_ya_cash_in}" type="hidden"
       input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
       input#pay-vendor-id name="pay[vendor_id]" value="#{@service.vendor.id}" type="hidden"
       input#pay-user-account name="user_account" value="#{@service.user_account}" type="hidden"
@@ -55,22 +56,7 @@ div
         .t-cell
           input.pay-amount-one name="pay[amount]" placeholder="" type="text" style=("width: 70px; margin: 0 10px 0 20px")
         .t-cell руб.
-    .clearfix
-      .t-table_w
-        .t-cell.tops style=("width: 120px")  Способ оплаты
-        .t-cell
-          / p
-          /   .custom.two
-          /     input#i13 name="pay[payment_type]" type="radio" value="1" checked="checked"
-          /       label for="i13"  Банковская карта
-          p
-            .custom.two
-              input#i14 name="pay[payment_type]" type="radio" value="3" checked="checked"
-                label.disabled for="i14"  Банковская карта
-          p
-            .custom.two
-              input#i15 name="pay[payment_type]" type="radio" value="2"
-                label.disabled for="i15"  Яндекс Деньги
+      = render 'shared/vendors/payment_types'
       .clearfix
     .clearfix
       p.sum

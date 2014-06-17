@@ -157,10 +157,18 @@ class TransactionsController < ApplicationController
       commission = vendor.commission_ya_card
       total = calculate_total(amount, commission)
       url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=AC"
-    elsif payment_type == 4
+    elsif payment_type == 6
       commission = vendor.commission_web_money
       total = calculate_total(amount, commission)
-      url = "https://paymaster.ru/Payment/Init?LMI_MERCHANT_ID=6c2aa990-60e1-427f-9c45-75cffae4a745&LMI_PAYMENT_AMOUNT=#{total}&LMI_PAYMENT_DESC=АйЖКХ&LMI_CURRENCY=RUB&ORDER_ID=#{order_id}"
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=WM"
+    elsif payment_type == 4
+      p commission = vendor.commission_ya_cash_in
+      total = calculate_total(amount, commission)
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=MC"
+    elsif payment_type == 7
+      commission = vendor.commission_ya_cash_in
+      total = calculate_total(amount, commission)
+      url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=SB"
     else
       currency = "RUB"
       merchant_id = '39859'
@@ -217,11 +225,6 @@ class TransactionsController < ApplicationController
 
   def notify
     # Callback for successful transactions Yandex
-    @notify = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).notify
-    logger.info @notify
-    render :template => "yandex_money/notify.xml.erb", :layout => false
-  end
-
   def invoice_confirmation
     # Invoice Confirmation for WebMoney
     render text: WebMoney.invoice_confirmation(params[:LMI_MERCHANT_ID], params[:LMI_PAYMENT_AMOUNT], params[:ORDER_ID])
@@ -235,7 +238,12 @@ class TransactionsController < ApplicationController
 
   def failed_payment
     # Callback for failed transactions WebMoney
-    Transaction.find_by_order_id(params[:ORDER_ID].to_i).update_attribute(:status, -1)
+    Transaction.find_by_order_id(params[:ORDER_ID].to_i).updat
+    @notify = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).notify
+    logger.info @notify
+    render :template => "yandex_money/notify.xml.erb", :layout => false
+  end
+e_attribute(:status, -1)
     redirect_to root_path
   end
 

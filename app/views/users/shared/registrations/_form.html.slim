@@ -53,7 +53,7 @@ css:
               option disabled="disabled"
                 | Выберите поставщика услуг  
               - Vendor.where(service_type_id: 1).each do |v| 
-                option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-ya-card="#{v.commission_ya_card}" data-commission-web-money="#{v.commission_web_money}"
+                option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-ya-card="#{v.commission_ya_card}" data-commission-web-money="#{v.commission_web_money}" data-commission-ya-cash-in="#{v.commission_ya_cash_in}"
                   = "#{v.title}"
             .clearfix
           .form-group-margin
@@ -73,20 +73,7 @@ css:
                 .t-cell руб.
             .clearfix
               .t-table_w style=("margin-left: -30px")
-                .t-cell.tops style=("width: 120px")  Способ оплаты
-                .t-cell
-                  / p
-                  /   .custom.two
-                  /     input#i13.po name="pay[payment_type]" type="radio" value="1" checked="checked"
-                  /       label for="i13"  Банковская карта
-                  p
-                    .custom.two
-                      input#i14.wb name="pay[payment_type]" type="radio" value="3" checked="checked"
-                        label.disabled for="i14"  Банковская карта
-                  p
-                    .custom.two
-                      input#i15.ya name="pay[payment_type]" type="radio" value="2"
-                        label.disabled for="i15"  Яндекс Деньги
+                = render 'shared/vendors/payment_types'
               .clearfix
             .clearfix 
               p.sum style=("margin-left: -30px")

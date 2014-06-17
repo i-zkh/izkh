@@ -759,6 +759,10 @@ $(document).ready ->
       percent = $("#vendor_id").find("option:selected").data('commission-yandex')
     else if  document.getElementById("i14").checked
       percent = $("#vendor_id").find("option:selected").data('commission-ya-card')
+    # else if  document.getElementById("i16").checked || document.getElementById("i18").checked
+    #   percent = $("#vendor_id").find("option:selected").data('commission-ya-cash-in')
+    else if  document.getElementById("i17").checked
+      percent = $("#vendor_id").find("option:selected").data('commission-web-money')
     else
       percent = $("#vendor_id").find("option:selected").data('commission')
     amount = parseFloat(amountOne)
@@ -778,6 +782,10 @@ $(document).ready ->
         percent = $("#pay-commission-yandex").val()
       else if document.getElementById("i14").checked
         percent = $("#pay-commission-ya-card").val()
+      # else if document.getElementById("i16").checked|| document.getElementById("i18").checked
+      #   percent = $("#pay-commission-ya-cash-in").val()
+      else if document.getElementById("i17").checked
+        percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
@@ -797,6 +805,10 @@ $(document).ready ->
         percent = $("#pay-commission-yandex").val()
       else if $(this).attr("id") is "i14"
         percent = $("#pay-commission-ya-card").val()
+      # else if $(this).attr("id") is "i16" || $(this).attr("id") is "i18"
+      #   percent = $("#pay-commission-ya-cash-in").val()
+      else if $(this).attr("id") is "i17"
+        percent = $("#pay-commission-web-money").val()
       else
         percent = $("#pay-commission").val()
       amount = parseFloat(amountOne)
