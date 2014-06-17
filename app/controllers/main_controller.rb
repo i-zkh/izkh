@@ -7,4 +7,8 @@ class MainController < ApplicationController
 
   def terminal
   end
+
+  def commission
+    @vendors = Vendor.all
+  end
 end

@@ -37,7 +37,28 @@ class YandexMoney
 
   def notify
     if check_md5('paymentAviso')
-      Transaction.find_by_order_id(@orderNumber).update_attribute(:status, 1)
+      transaction = Transaction.find_by_order_id(@orderNumber)
+      commission =  if transaction.payment_type == 2
+                      Vendor.find(transaction.vendor_id).commission_ya_card
+                    elsif transaction.payment_type ==3
+                      Vendor.find(transaction.vendor_id).commission_yandex
+                    end
+      amount = ((@orderSumAmount.to_f*100/(100+commission))*100).ceil/100.0
+      user_account = transaction.payment_info.split(';')[1]
+      vendor_id = transaction.vendor_id
+      order_id = transaction.order_id
+
+      transaction.update_attribute(:status, 1)
+      
+      if vendor_id == 121
+        GtPaymentWorker.perform_async(order_id.to_i, amount, user_account)
+      elsif vendor_id == 135
+        SlPaymentWorker.perform_async(order_id.to_i, amount, user_account) 
+      elsif vendor_id == 165
+        CraftSPaymentWorker.perform_async(order_id.to_i, amount, user_account)
+      elsif vendor_id == 20
+        DeltaPaymentWorker.perform_async(transaction.payment_info.split(';')[-1])
+      end
       @code = 0
     else
       @code = 1

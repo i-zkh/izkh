@@ -12,6 +12,22 @@ class SamaraLan
     get_response(er.get)
   end
 
+  def check_response
+    er = ExternalRequest.new(check_url, true)
+    Crack::XML.parse(er.get)
+  end
+
+  def pay_response
+    er_check = ExternalRequest.new(check_url, true)
+    id = get_response(er_check.get)
+    if id
+      er_pay = ExternalRequest.new(pay_url(id.to_s), true)
+      Crack::XML.parse(er_pay.get)
+    else
+      nil
+    end
+  end
+
   def pay
     er_check = ExternalRequest.new(check_url, true)
     id = get_response(er_check.get)
@@ -47,6 +63,7 @@ protected
       if response["ok_pay_step2"]["quest_result"] && response["ok_pay_step2"]["quest_result"].to_i < 0
         nil
       else
+        p response
         response
       end
     else

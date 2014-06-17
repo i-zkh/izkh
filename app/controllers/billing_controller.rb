@@ -1,5 +1,6 @@
 # encoding: utf-8
 class BillingController < ApplicationController
+  before_filter :admin?, only: [:check_sl, :pay_sl]
 
   def get_amount
     vendor_id = Service.find(params[:id]).vendor_id
@@ -16,4 +17,20 @@ class BillingController < ApplicationController
        render :text => ""
     end
   end
+
+  def check_sl
+    sl = SamaraLan.new(params[:user_account])
+    render text: sl.check_response
+  end
+
+  def pay_sl
+    
+  end
+
+protected
+  
+  def admin?
+    current_user.is_admin?
+  end
+
 end

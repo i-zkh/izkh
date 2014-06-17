@@ -39,6 +39,9 @@ Iz::Application.routes.draw do
   get 'graph_show' => 'transactions#graph_show'
   get 'get_amount' => 'billing#get_amount'
   get 'terminal' => 'main#terminal'
+  get 'commission' => 'main#commission'
+  get 'sl_billing/:user_account' => 'billing#check_sl'
+
   # Service Type
   get 'api/1.0/servicetypes' => 'vendors#index'
   post 'api/1.0/servicetype' => 'vendors#create_types'

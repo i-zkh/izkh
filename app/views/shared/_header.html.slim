@@ -10,10 +10,18 @@
             .pad-left= link_to "Профиль", dashboard_index_path, class: controller_name == "dashboard" ? 'active' : ''
             .pad-left= link_to "Аналитика", transactions_path, class: controller_name == "transactions" ? 'active' : ''
             .pad-left= link_to "Обратная связь", user_feedbacks_path, class: controller_name == "feedback" ? 'active' : ''
-            /.pad-left= link_to "Оплачивайте через терминалы", terminal_path, class: controller_name == "feedback" ? 'active' : ''
           - else
             .pad-left
-          .pad-left= link_to "О компании", about_index_path, class: controller_name == "about" ? 'active' : ''
+          .pad-left.hover 
+            | Информация
+            span.caret
+            ul
+              li
+                = link_to "О компании", about_index_path, class: controller_name == "about" ? 'active' : ''
+              li
+                = link_to "Оплата через терминалы", terminal_path, class: action_name == "terminal" ? 'active' : ''
+              li 
+                = link_to "Тарифы АйЖКХ", commission_path, class: action_name == "commission" ? 'active' : ''
           span.pad-left
             | Самара: (846) 373-64-10
       .nav.navbar-nav.navbar-right

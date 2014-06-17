@@ -1,0 +1,33 @@
+.block.container#analytics
+  .header-block
+    h3 Тарифы АйЖКХ
+  
+  .сommission-block
+    table.table.table-striped.table-hover
+      thead.info
+        tr
+          th
+            | Поставщик
+          th.left_blue.cell
+            p
+              | Банковские карты
+          th.left_blue.cell
+            p
+              | Яндекс Деньги
+      tboby
+      
+        - @vendors.each do |v|
+          tr
+            td
+              p
+                b = v[:title]
+      
+            td.left_blue
+              p = v[:commission_ya_card]
+      
+            td.left_blue
+              p = v[:commission_yandex]
+  
+css:
+   @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+   @import url("http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
