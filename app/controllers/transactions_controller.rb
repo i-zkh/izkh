@@ -224,6 +224,10 @@ class TransactionsController < ApplicationController
   end
 
   def notify
+    @notify = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).notify
+    logger.info @notify
+    render :template => "yandex_money/notify.xml.erb", :layout => false
+  end
     # Callback for successful transactions Yandex
   def invoice_confirmation
     # Invoice Confirmation for WebMoney
@@ -238,12 +242,7 @@ class TransactionsController < ApplicationController
 
   def failed_payment
     # Callback for failed transactions WebMoney
-    Transaction.find_by_order_id(params[:ORDER_ID].to_i).updat
-    @notify = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).notify
-    logger.info @notify
-    render :template => "yandex_money/notify.xml.erb", :layout => false
-  end
-e_attribute(:status, -1)
+    Transaction.find_by_order_id(params[:ORDER_ID].to_i).update_attribute(:status, -1)
     redirect_to root_path
   end
 

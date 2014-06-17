@@ -734,23 +734,6 @@ $(document).ready ->
   $('#pay').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
     commissionQuickPay()
 
-  commissionDeltaPay = () =>
-    if $(".pay-amount-one").val() is ""
-      amountOne = 0
-    else
-      amountOne = $(".pay-amount-one").val()
-    if  document.getElementById("i15").checked
-      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
-    else if  document.getElementById("i14").checked
-      percent = $("#vendor_id").find("option:selected").data('commission-ya-card')
-    else
-      percent = $("#vendor_id").find("option:selected").data('commission')
-    amount = parseFloat(amountOne)
-    commission = Math.round(amount * percent) / 100
-    $("#commission").html " " + commission + " руб."
-    total = commission + amount
-    $("#total").html " " + total + " руб."
-
   commissionQuickPay = () =>
     if $(".pay-amount-one").val() is ""
       amountOne = 0
@@ -863,11 +846,7 @@ $(document).ready ->
   $("#service-index").find("h4").maxlength maxChars: 20
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
-  $("#feedback-form").validationEngine();
-
- 
-
-
+  $("#feedback-form").validationEngine()
 
   $(".tutorial", this).find(".close_tutorial").click ->
     $(".tutorial").remove()
