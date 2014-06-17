@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610103433) do
+ActiveRecord::Schema.define(version: 20140617091009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20140610103433) do
   create_table "vendors", force: true do |t|
     t.string   "title"
     t.integer  "service_type_id"
-    t.boolean  "send_metrics",         default: false
+    t.boolean  "send_metrics",          default: false
     t.float    "commission"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20140610103433) do
     t.float    "commission_ya_card"
     t.boolean  "filter"
     t.boolean  "billing"
+    t.float    "commission_ya_cash_in"
   end
 
   create_table "widgetables", force: true do |t|
