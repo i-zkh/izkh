@@ -7,6 +7,7 @@
 //= require 'raphael-min.js'
 //= require 'jquery.maskedinput.min'
 //= require 'jquery.validationEngine.js'
+//= require 'jquery.scrolling-parallax.js'
 //= require 'jquery.validationEngine-en.js'
 //= require 'jquery.fastLiveFilter.js'
 # KLADR credentials
@@ -851,6 +852,10 @@ $(document).ready ->
   $("#place-index").find("h4").maxlength maxChars: 10
   $(".places-block").find("h4").maxlength maxChars: 24
   $("#feedback-form").validationEngine();
+
+ 
+
+
 
   $(".tutorial", this).find(".close_tutorial").click ->
     $(".tutorial").remove()
