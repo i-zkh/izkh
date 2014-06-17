@@ -9,6 +9,6 @@ class MainController < ApplicationController
   end
 
   def commission
-    @vendors = Vendor.all.order('commission_ya_card desc')
+    @vendors = Vendor.all.order('commission_ya_card asc')
   end
 end
