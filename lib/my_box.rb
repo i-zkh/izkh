@@ -14,11 +14,8 @@ class MyBox
   end
 
   def pay
-      er_pay = ExternalRequest.new(pay_url, true)
-      response = get_response(er_pay.get)
-    else
-      nil
-    end
+    er_pay = ExternalRequest.new(pay_url, true)
+    response = get_response(er_pay.get)
   end
 
 protected
@@ -45,7 +42,7 @@ protected
       end
     else
       nil
-    end  
-    
+    end      
   end
+
 end
