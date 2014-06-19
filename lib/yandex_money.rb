@@ -19,8 +19,12 @@ class YandexMoney
       transaction = Transaction.find_by_order_id(@orderNumber)
       commission =  if transaction.payment_type == 2
                       Vendor.find(transaction.vendor_id).commission_ya_card
-                    elsif transaction.payment_type ==3
+                    elsif transaction.payment_type == 3
                       Vendor.find(transaction.vendor_id).commission_yandex
+                    elsif transaction.payment_type == 6
+                      Vendor.find(transaction.vendor_id).commission_web_money
+                    elsif transaction.payment_type == 4 || transaction.payment_type == 7
+                      Vendor.find(transaction.vendor_id).commission_ya_cash_in
                     end
       if transaction
         amount = ((@orderSumAmount.to_f*100/(100+commission))*100).ceil/100.0
