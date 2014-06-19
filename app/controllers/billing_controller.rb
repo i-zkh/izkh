@@ -23,8 +23,14 @@ class BillingController < ApplicationController
     render text: sl.check_response
   end
 
-  def pay_sl
-    
+  def check_mb
+    mb = MyBox.new(params[:type], params[:user_account])
+    render text: mb.check
+  end
+
+  def pay_mb
+    mb = MyBox.new(params[:type], params[:user_account], Time.now.strftime('%Y%M%d%H%M%S'), params[:amount])
+    render text: mb.pay
   end
 
 protected

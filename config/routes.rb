@@ -40,7 +40,10 @@ Iz::Application.routes.draw do
   get 'get_amount' => 'billing#get_amount'
   get 'terminal' => 'main#terminal'
   get 'commission' => 'main#commission'
+
   get 'sl_billing/:user_account' => 'billing#check_sl'
+  get 'mb_check/:type/:user_account' => 'billing#check_mb'
+  get 'mb_pay/:type/:user_account/:amount' => 'billing#pay_mb'
 
   # Service Type
   get 'api/1.0/servicetypes' => 'vendors#index'
