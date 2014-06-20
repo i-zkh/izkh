@@ -35,7 +35,7 @@ protected
     response = Crack::XML.parse(response)
     if response["info"]
       if response["info"]["client_name"] || response["info"]["payment_add_res"]
-        reponse["info"]
+        response["info"]
       elsif response["info"]["error_txt"]
         response["info"]["error_txt"]
       else
