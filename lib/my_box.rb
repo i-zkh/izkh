@@ -1,11 +1,12 @@
 #encoding: utf-8
 class MyBox
   def initialize(number, type, order_id=nil, amount=nil)
-    @root_url = "https://paymentsystem.mb-samara.ru/cgi-bin/pay/"
+    @root_url = "https://igkh.mb-samara.ru/cgi-bin/pay/igkh/"
+
     @number = number.to_s
     @amount = amount.to_s
     @order_id = order_id.to_s
-    @type = type
+    @type = type.to_s
   end
 
   def check
@@ -21,12 +22,12 @@ class MyBox
 protected
   
   def check_url
-    url = "payments.step1?agreement_number$i=#{@number}&agreement_type$i=#{@type}"
+    url = "payments.step1?agreement_number=#{@number}&agreement_type=#{@type}"
     "#{@root_url}#{url}"
   end
 
   def pay_url
-    url = "payment.step2?agreement_id$i=#{@number}&value$n=#{@amount}&pay_date$c=#{Time.now.strftime("%d.%m.%Y")}&pay_num$i=#{@order_id}"
+    url = "payments.step2?agreement_id=#{@number}&value=#{@amount}&pay_date=#{Time.now.strftime("%d.%m.%Y")}&pay_num=#{@order_id}"
     "#{@root_url}#{url}"
   end
 
