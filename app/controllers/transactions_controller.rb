@@ -162,7 +162,7 @@ class TransactionsController < ApplicationController
       total = calculate_total(amount, commission)
       url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=WM"
     elsif payment_type == 4
-      p commission = vendor.commission_ya_cash_in
+      commission = vendor.commission_ya_cash_in
       total = calculate_total(amount, commission)
       url = "http://money.yandex.ru/eshop.xml?scid=7072&ShopID=15196&Sum=#{total}&CustomerNumber=#{user_id}&orderNumber=#{order_id}&shopArticleId=#{vendor.shop_article_id}&paymentType=MC"
     elsif payment_type == 7
@@ -218,13 +218,13 @@ class TransactionsController < ApplicationController
 
   def check
     # CheckOrder for Yandex payment
-    @check = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).check
+    @check = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId], params[:paymentType], params[:shopSumAmount], params[:shopArticleId]).check
     logger.info @check
     render :template => "yandex_money/check.xml.erb", :layout => false 
   end
 
   def notify
-    @notify = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId]).notify
+    @notify = YandexMoney.new(params[:requestDatetime], params[:md5], params[:orderSumCurrencyPaycash], params[:orderSumBankPaycash], params[:orderNumber], params[:customerNumber], params[:orderSumAmount], params[:invoiceId], params[:paymentType], params[:shopSumAmount], params[:shopArticleId]).notify
     logger.info @notify
     render :template => "yandex_money/notify.xml.erb", :layout => false
   end
