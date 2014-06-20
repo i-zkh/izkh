@@ -14,6 +14,9 @@ div.panel{id="container-#{place.id}" style="border-radius: 0; border: 0; margin:
       p.place-address #{place.address}, #{place.building}
       label Квартира:
       p.place-apartment #{place.apartment}
+      - if place.index
+        label Индекс:
+        p.place-apartment #{place.index}
       br
         a.place-edit.click-off data-id="#{place.id}"
           | Редактировать
