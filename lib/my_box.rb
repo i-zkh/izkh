@@ -34,12 +34,12 @@ protected
   def get_response(response)
     response = Crack::XML.parse(response)
     if response["info"]
-      p response["info"]
+      logger.info response["info"]
       if response["info"]["client_name"] || response["info"]["payment_add_res"]
-        p response["info"]
+        logger.info response["info"]
         response["info"]
       elsif response["info"]["error_txt"]
-        p response["info"]
+        logger.info response["info"]
         response["info"]["error_txt"]
       else
         p "no data"
