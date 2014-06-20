@@ -4,19 +4,6 @@ class PlacesController < ApplicationController
     @place = Place.all.order('created_at desc')
   end
 
-  def test
-    @place = Place.find(22)
-    kladrToken = '5322ef24dba5c7d326000045'
-    kladrKey = '60d44104d6e5192dcdc610c10ff4b2100ece9604'
-    url = URI.encode("http://kladr-api.ru/api.php?query=#{@place.city}&contentType=city&withParent=1&limit=1&token=#{kladrToken}&key=#{kladrKey}")
-    kladr_city_id = HTTParty.get(URI.parse(url))['result'].first['id'] 
-    url = URI.encode("http://kladr-api.ru/api.php?cityId=#{kladr_city_id}&query=#{@place.address}&contentType=street&withParent=1&limit=1&token=#{kladrToken}&key=#{kladrKey}")
-    kladr_street_id = HTTParty.get(URI.parse(url))['result'].first['id']
-    url = URI.encode("http://kladr-api.ru/api.php?streetId=#{kladr_street_id}&query=#{@place.building}&contentType=building&withParent=1&limit=1&token=#{kladrToken}&key=#{kladrKey}")
-    p kladr_building_id = HTTParty.get(URI.parse(url))['result'].first['zip']
-    render json: kladr_building_id
-  end
-
   def show
     @place = Place.find(params[:id])
   end

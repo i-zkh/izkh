@@ -88,8 +88,4 @@ Iz::Application.routes.draw do
   get 'api/1.0/report_monthly' => 'report#index_monthly_by_vendor'
   get 'api/1.0/report_vendors' => 'report#vendors_with_transactions'
 
-
-
-  get 'test' => 'places#test'
-
 end
