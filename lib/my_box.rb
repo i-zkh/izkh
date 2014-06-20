@@ -27,26 +27,21 @@ protected
   end
 
   def pay_url
-    url = "payments.step2?agreement_id=#{@number}&value=#{@amount}&pay_date=#{Time.now.strftime("%d.%m.%Y")}&pay_num=#{@order_id}"
+    url = "payments.step2?agreement_number=#{@number}&agreement_type=#{@type}&value=#{@amount}&pay_date=#{Time.now.strftime("%d.%m.%Y")}&pay_num=#{@order_id}"
     "#{@root_url}#{url}"
   end
 
   def get_response(response)
     response = Crack::XML.parse(response)
     if response["info"]
-      logger.info response["info"]
       if response["info"]["client_name"] || response["info"]["payment_add_res"]
-        logger.info response["info"]
         response["info"]
       elsif response["info"]["error_txt"]
-        logger.info response["info"]
         response["info"]["error_txt"]
       else
-        p "no data"
         nil
       end
     else
-      p "no global"
       nil
     end      
   end

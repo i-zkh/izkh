@@ -1,6 +1,6 @@
 # encoding: utf-8
 class BillingController < ApplicationController
-  before_filter :admin?, only: [:check_sl, :pay_sl]
+  before_filter :admin?, only: [:check_sl, :pay_sl, :check_mb, :pay_mb]
 
   def get_amount
     vendor_id = Service.find(params[:id]).vendor_id
@@ -24,12 +24,12 @@ class BillingController < ApplicationController
   end
 
   def check_mb
-    mb = MyBox.new(params[:type], params[:user_account])
+    mb = MyBox.new(params[:user_account],params[:type])
     render text: mb.check
   end
 
   def pay_mb
-    mb = MyBox.new(params[:type], params[:user_account], Time.now.strftime('%Y%M%d%H%M%S'), params[:amount])
+    mb = MyBox.new(params[:user_account], params[:type], Time.now.strftime('%Y%M%d%H%M%S'), params[:amount])
     render text: mb.pay
   end
 
