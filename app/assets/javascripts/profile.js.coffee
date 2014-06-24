@@ -857,8 +857,6 @@ $(document).ready ->
   $(".next_tutorial").click ->
     $(".tutorial").stop().fadeOut()
     current_tutorial++
-    current_tutorial = 0  if current_tutorial > $(".tutorial").size() - 1
-    
     $(".tutorial").eq(current_tutorial).stop().fadeIn()
     return
 
@@ -872,6 +870,20 @@ $(document).ready ->
     , 1500
     $(".black_over").stop().fadeOut()
     return
+
+   $("input[type=\"checkbox\"]").change ->
+    if this.checked
+      $('.next_tutorial').addClass('close_tutorial_button')
+    else
+      $('.next_tutorial').removeClass('close_tutorial_button')
+
+  $('#js-tutorial').on "click", ".close_tutorial_button", ->
+    $.ajax
+      url: '/tutorial/off'
+      type: 'POST'
+      success: (data) ->
+        $(".tutorial").remove()
+        return
 
   $("#js_search_input").fastLiveFilter "#search_list"
   $("#search-form").fastLiveFilter "#search_result" 

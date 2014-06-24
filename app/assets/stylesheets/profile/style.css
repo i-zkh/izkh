@@ -342,16 +342,13 @@
       top: -9999px;
   }
   .tutorial {
-      right: 0px;
-      top: 0px;
       padding: 10px 15px 15px 15px;
-    width: 330px;
-    display: none;
+      width: 330px;
+      display: none;
       border: 1px solid #34AADC;
       background: #ffffff;
-      z-index: 999;
-     
-      position: absolute;
+      z-index: 999; 
+      position: fixed;
   }
   .close_tutorial {
       background: url('../assets/close2.png') no-repeat;
