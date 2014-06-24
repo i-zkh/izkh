@@ -30,7 +30,7 @@ Iz::Application.routes.draw do
   resources :widgets, only: [:create, :update, :index]
 
   get 'app' => 'app#index'
-  post 'tutorial/off' => 'tutorial#off'
+  post 'tutorial/off' => 'tutorials#off'
   get 'update_db' => 'update_table#update_db'
   get 'by_service_type' => 'vendors#by_service_type'
   get 'by_service_type_with_pay' => 'vendors#by_service_type_with_pay'
