@@ -347,7 +347,7 @@
       display: none;
       border: 1px solid #34AADC;
       background: #ffffff;
-      z-index: 999; 
+      z-index: 999;
       position: fixed;
   }
   .close_tutorial {
