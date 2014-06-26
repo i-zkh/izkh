@@ -1,0 +1,24 @@
+.block style=("margin-left: 890px") 
+ .tops style=("width: 270px")
+  .title_main_ob 
+   .menu_other
+    | Мой участковый
+  div style="padding-top:10px"
+  - if @precinct
+    p.over_padding
+      = @precinct.name + " "
+      = @precinct.middlename + " "
+      = @precinct.surname
+      br 
+        = @precinct.ovd_telnumber
+    p.over_padding
+      = @precinct.ovd
+      br
+        = @precinct.ovd_street + ", "
+        = @precinct.ovd_house
+  - else
+    p.over_padding
+      | Участковый не найден
+  p.over_padding
+    a.ol_href data-toggle="modal" href="#myModal_search" 
+      | Найти другого 

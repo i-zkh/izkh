@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620115416) do
+ActiveRecord::Schema.define(version: 20140626091144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,29 @@ ActiveRecord::Schema.define(version: 20140620115416) do
     t.string   "apartment"
     t.string   "building"
     t.integer  "index"
+  end
+
+  create_table "precinct_houses", force: true do |t|
+    t.integer "precinct_street_id"
+    t.integer "precinct_id"
+    t.string  "house"
+  end
+
+  create_table "precinct_streets", force: true do |t|
+    t.string "street"
+  end
+
+  create_table "precincts", force: true do |t|
+    t.string   "ovd"
+    t.string   "ovd_town"
+    t.string   "ovd_street"
+    t.string   "ovd_house"
+    t.string   "ovd_telnumber"
+    t.string   "surname"
+    t.string   "middlename"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "service_types", force: true do |t|

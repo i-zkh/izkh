@@ -26,6 +26,10 @@
         | Выберите услугу
     div style="min-height: 210px"
       p#no-place Здесь будет показана информация о выбранной Вами услуге.
+#js-widget-precinct
+  = render 'precinct/widget'
+= render "precinct/list_of_precincts"
+
 /   .col-md-3.5
 /     #widget-container
 /       - unless @widgets.empty?

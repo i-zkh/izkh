@@ -289,6 +289,20 @@ $(document).ready ->
     else
       false
 
+  $('#place-accordion').on 'click', '.panel-heading', ->
+    if !$(this).hasClass('active-accordion-item')
+      activePlaceId = $(this).data('id')
+      $.ajax
+        url: '/widget_precinct/' + activePlaceId
+        type: 'GET'
+        beforeSend: ->
+          $("#js-container").addClass('loading')
+        success: (data) ->
+          $('#js-widget-precinct').empty()
+          $('#js-widget-precinct').append(data)
+    else
+      false
+
   # Analitics place accordion click
   $('#transaction-place-accordion').on 'click', '.panel-heading', ->
     if !$(this).hasClass('active-accordion-item')
@@ -428,7 +442,7 @@ $(document).ready ->
       success: (data) ->
         $('#container-' + id).slideUp()
         $('#service-accordion').empty();
-        $('#service-accordion').append('<p id="no-service">Выберите объект</p>');
+        $('#service-accordion').q('<p id="no-service">Выберите объект</p>');
         
         $('#dashboard-add-service').hide()
 

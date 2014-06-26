@@ -28,7 +28,7 @@ gem 'jquery-cdn', '1.10.2' # Use jQuery 1.10.2
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'crack'
-
+gem 'roo'
 gem 'russian'
 
 group :development do
