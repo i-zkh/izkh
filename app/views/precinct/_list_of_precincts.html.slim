@@ -1,0 +1,30 @@
+#myModal_search.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog.forma_enter
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;  
+        .row
+          .col-md-12
+            h2.title
+              | Поиск участкового
+            .info.margin_top
+              | Найдите участкового по ФИО или адресу
+        = form_tag user_registration_path, remote: true, id: "feedback-form" 
+          .form-inputs
+              label ФИО / Адрес
+              input#search-form.form-control-all class="" name="" placeholder=("") type="text" 
+              h4
+               | Результаты поиска
+          ul#search_result 
+            - @precincts.each do |precinct|
+              li
+                h5
+                  p 
+                    = precinct.name + " "
+                    = precinct.middlename + " "
+                    = precinct.surname
+                  p = precinct.ovd_telnumber
+                  p = precinct.ovd
+                  p 
+                    = precinct.ovd_street + ", "
+                    = precinct.ovd_house
