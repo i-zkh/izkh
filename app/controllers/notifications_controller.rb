@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
-  
+  skip_before_filter :require_current_user
+
   def create
     @notification = Notification.new(notification_params)
     if @notification.save
@@ -9,12 +10,14 @@ class NotificationsController < ApplicationController
 
   def index
     @vendor_ids = Service.vendor_ids(current_user.id)
-    
-    logger.info @vendor_ids
-    logger.info current_user.email
 
     @notifications = Notification.last_week(@vendor_ids)
 
+    render json: @notifications
+  end
+
+  def index_by_vendor
+    @notifications = Notification.where(vendor_id: params[:id])
     render json: @notifications
   end
 

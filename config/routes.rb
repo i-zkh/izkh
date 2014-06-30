@@ -24,6 +24,7 @@ Iz::Application.routes.draw do
   resources :user_feedbacks
   resources :vendors
   resources :notifications, only: [:create, :index, :destroy] do
+    get 'by_vendor/:id' => 'notifications#index_by_vendor', on: :collection
   end
 
   resources :transactions do
