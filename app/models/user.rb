@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :widgetables
   has_many :widgets, through: :widgetables
   has_many :meters
+  has_many :notification_lists
+  has_many :notifications, through: :notification_lists
 
   def is_admin?
     self.admin

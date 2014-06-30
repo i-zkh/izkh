@@ -6,4 +6,6 @@ class Service < ActiveRecord::Base
 
   validates_presence_of :title, :place_id, :vendor_id, :service_type_id, :user_id, :user_account
   validates_uniqueness_of :title, scope: :user_id
+
+  scope :vendor_ids, ->(user_id) { select(:vendor_id).where(user_id: user_id).uniq.map {|s| s.vendor_id} }
 end

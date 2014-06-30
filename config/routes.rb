@@ -23,6 +23,8 @@ Iz::Application.routes.draw do
   resources :feedback
   resources :user_feedbacks
   resources :vendors
+  resources :notifications, only: [:create, :index, :destroy] do
+  end
 
   resources :transactions do
     post 'pay', on: :collection
