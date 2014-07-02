@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   def create
     @notification = Notification.new(notification_params)
     if @notification.save
-      NotificationListWorker.perform_async(@notification)
+      UserNotificationListWorker.perform_async(@notification.vendor_id, @notification.id)
       render json: @notification
     end
   end

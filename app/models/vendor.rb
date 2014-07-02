@@ -9,6 +9,6 @@ class Vendor < ActiveRecord::Base
   def user_ids
     user_ids = []
     self.services.each {|u_id| user_ids << u_id.user_id }
-    user_ids
+    user_ids.uniq
   end
 end
