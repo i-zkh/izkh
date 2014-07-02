@@ -1862,6 +1862,12 @@
       height: 100px;
       overflow: scroll;
   }
+  .js-precint-down {
+    margin-top: 140px;
+  }
+  .down-notification {
+    margin-top: 200px;
+  }
  
   @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 2dppx) {
       .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
@@ -1874,16 +1880,7 @@
       }
   }
  
-  #widget-container {
-      max-height: 555px;
-      overflow: scroll;
-      border: 1px solid #83c0e4;
-      width: 100%;
-      min-height: 100%;
-      height: auto !important;
-      height: 100%;
-      padding: 7%;
-  }
+
   .widget h4 {
       border-bottom: 1px solid #4FB0DE;
   }
@@ -1898,11 +1895,13 @@
   .sender:before {
       content:"от ";
   }
-  .widget .date {
-      font-size: 10px;
+  .sender .date {
+      float: right;
+      margin-right: 10px;
   }
   #remove-widget {
       float:right;
+      margin-right: 18px;
       font-size: 11px;
       cursor:pointer;
   }

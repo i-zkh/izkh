@@ -1,0 +1,21 @@
+.js-precint-down
+  .block style=("margin-left: 890px ") 
+   .tops style=("width: 270px; max-height: 330px;overflow: scroll;")
+    .title_main_ob 
+     .menu_other
+      | Уведомления
+    div style="padding-top:10px"
+    - if !@notification.empty?
+      - @notification.each do |n|
+        div id="notification-#{n.id}"
+          p.over_padding 
+            = n.notification_text
+            h6.sender.over_padding
+              = Vendor.find(n.vendor_id).title
+              .date= n.created_at.strftime("%Y-%m-%d")  
+            #remove-widget= link_to "Прочитано", notification_path(n), method: :put, remote: :true
+          br
+          hr
+    - else
+      p.over_padding
+        | Нет новых уведомлений

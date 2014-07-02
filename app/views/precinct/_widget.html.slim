@@ -5,6 +5,7 @@
     | Мой участковый
   div style="padding-top:10px"
   - if @precinct
+    #js-precinct value='true'
     p.over_padding
       = @precinct.name + " "
       = @precinct.middlename + " "

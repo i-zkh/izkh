@@ -4,16 +4,9 @@ class NotificationsController < ApplicationController
   def create
     @notification = Notification.new(notification_params)
     if @notification.save
+      NotificationListWorker.perform_async(@notification)
       render json: @notification
     end
-  end
-
-  def index
-    @vendor_ids = Service.vendor_ids(current_user.id)
-
-    @notifications = Notification.last_week(@vendor_ids)
-
-    render json: @notifications
   end
 
   def index_by_vendor
@@ -21,7 +14,11 @@ class NotificationsController < ApplicationController
     render json: @notifications
   end
 
-  def read
+  def update
+    current_user.notification_lists.where('notification_id = ?', params[:id]).each {|n| n.update_attribute(:read, true)}
+    respond_to do |format|
+      format.js { render :js => "$('#notification-#{params[:id]}').hide(\"slide\", { direction: \"right\" }, 1000);"}
+    end
 
   end
 

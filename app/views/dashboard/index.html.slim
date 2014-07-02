@@ -29,14 +29,9 @@
 #js-widget-precinct
   = render 'precinct/widget'
 = render "precinct/list_of_precincts"
-
-/   .col-md-3.5
-/     #widget-container
-/       - unless @widgets.empty?
-/         = render "shared/widget/widget", widgets: @widgets
-/       - else
-/         p#no-place Нет новых уведомлений.
-        
+#js-notification
+  = render "notifications/widget"
+      
 .modal-container
 
 css:

@@ -300,6 +300,10 @@ $(document).ready ->
         success: (data) ->
           $('#js-widget-precinct').empty()
           $('#js-widget-precinct').append(data)
+          if document.getElementById("js-precinct")?
+            $('.js-precint-down').addClass('down-notification')
+          else
+            $('.js-precint-down').removeClass('down-notification')
     else
       false
 
@@ -610,6 +614,8 @@ $(document).ready ->
         $('#service-index').hide()
         $('#service-container').hide()
         $('#place-index').hide()
+        $('#js-notification').hide()
+        $('#js-widget-precinct').hide()
         $('#place-index').after(data)
         $("#js-container").removeClass('loading')
       error: (error) ->
@@ -619,6 +625,8 @@ $(document).ready ->
     $('#service-index').show()
     $('#service-container').show()
     $('#place-index').show()
+    $('#js-notification').show()
+    $('#js-widget-precinct').show()
     $('#meter-index').remove() 
 
   $('body').on 'click', '.show-meter-form', ->
