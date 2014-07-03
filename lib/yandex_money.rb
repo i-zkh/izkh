@@ -21,22 +21,11 @@ class YandexMoney
     if check_md5('checkOrder')
       transaction = Transaction.find_by_order_id(@orderNumber)
       if transaction
-        commission =  if transaction.payment_type == 2
-                      Vendor.find(transaction.vendor_id).commission_ya_card
-                    elsif transaction.payment_type == 3
-                      Vendor.find(transaction.vendor_id).commission_yandex
-                    elsif transaction.payment_type == 6
-                      Vendor.find(transaction.vendor_id).commission_web_money
-                    elsif transaction.payment_type == 4 || transaction.payment_type == 7
-                      Vendor.find(transaction.vendor_id).commission_ya_cash_in
-                    end
-        amount = ((@orderSumAmount.to_f*100/(100+commission))*100).ceil/100.0
-        transaction.update_attributes(amount: amount, commission: @orderSumAmount.to_f - amount)
         @code = 0
       else
         vendor = Vendor.find_by_shop_article_id(@shopArticleId.to_i)
         commis = (@orderSumAmount.to_f - @shopSumAmount.to_f).round(2)
-        transaction = Transaction.create!(amount: @shopSumAmount, service: "", place: "", user_id: 0, commission: commis, payment_type: @payment_type, payment_info: "#{@payment_type};#{@customerNumber};;#{@shopSumAmount};#{commis};#{vendor.title};;#{Time.now.strftime('%d.%m.%y')}", order_id: @invoiceId, vendor_id: vendor.id)
+        transaction = Transaction.create!(amount: @shopSumAmount, service: "", place: "", user_id: 0, commission: commis, payment_type: @payment_type, payment_info: "#{@payment_type};#{@customerNumber};;#{@shopSumAmount};#{commis};#{vendor.title};;#{Time.now.strftime('%d.%m.%y')}", order_id: @orderNumber, vendor_id: vendor.id)
         @code = 0
       end
     else
