@@ -17,11 +17,12 @@ class ServicesController < ApplicationController
 
   def edit
     @service = Service.find(params[:id])
-    render partial: 'shared/services/form'
+    render partial: 'shared/services/form', service: @service, status: :ok
   end
 
   def update
     @service = Service.find(params[:id])
+    p @service.has_tariff?
     if @service.update(service_params)
       render json: {}, status: :ok
     else

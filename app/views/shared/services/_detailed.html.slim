@@ -3,12 +3,12 @@ css:
    @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css)
 
 .title_main_ob
-  .menu_other.service-title
-    b.title__span #{@service.title}
+  .menu_other
+    b.title__span.js-service-title #{@service.title}
     - if @service.service_type_id.to_i == 4 || @service.service_type_id.to_i == 16 || @service.service_type_id.to_i == 1
       = link_to "Отправить показания счетчиков", '#', class: "show-meters click-off"
 div
-  .edit_services_sum
+  .edit_services_sum#js-update-services
     .row.border_dotted
       .t-table
         .t-cell.title_q

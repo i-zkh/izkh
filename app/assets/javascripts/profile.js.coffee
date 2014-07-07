@@ -530,6 +530,8 @@ $(document).ready ->
 # Update service event
   $('body').on 'click', '#submit-update-service', ->
     id = $(this).data('id')
+    $service = $('#js-update-services')
+    $form = $('.edit_service')
     $.ajax
       url: '/services/' + id
       type: 'PUT'
@@ -538,13 +540,11 @@ $(document).ready ->
         $("#js-container").addClass('loading')
       dataType: 'json'
       success: (data) ->
-        $service = $('#service-detailed')
-        $form = $('.edit_service')
-        $service.find('.service-type').html($form.find('#service_service_type_id').find('option[selected]').text())
-        $service.find('.vendor').html($form.find('#service_vendor_id').find('option[selected]').text())
-        $service.find('.user-account').html($form.find('#input-service-user-account').val())
+        $service.find('.service-type').html($form.find('#s2id_service_service_type_id').text())
+        $service.find('.vendor').html($form.find('#s2id_service_vendor_id').text())
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
-        $('.menu_other').html($form.find('#input-service-title').val())
+        $('.js-service-title').html($form.find('#input-service-title').val())
+        $service.find('.user-account').html($form.find('.js__user_account').val())
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
         $("#service-index").find("h4").maxlength maxChars: 20

@@ -8,4 +8,13 @@ class Service < ActiveRecord::Base
   validates_uniqueness_of :title, scope: :user_id
 
   scope :vendor_ids, ->(user_id) { select(:vendor_id).where(user_id: user_id).uniq.map {|s| s.vendor_id} }
+
+  def has_tariff?
+    p tariff_templates = TariffTemplate.where('vendor_id = ?', self.vendor_id)
+    if tariff_templates == [] 
+      true
+    else
+      self.tariff_template_id.nil? ? false : true
+    end
+  end
 end
