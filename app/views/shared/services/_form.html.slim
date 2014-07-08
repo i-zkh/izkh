@@ -31,12 +31,12 @@
                 | Поставщик *
               =f.select :vendor_id, Vendor.where(service_type_id: @service.service_type_id).map {|v| [v.title, v.id]}, { include_blank: true }
             .clearfix
-          .form-group-margin
-            .col-lg-12
-              label
-                | Тариф *
-              =f.select :tariff_template_id, TariffTemplate.where(vendor_id: @service.vendor_id).map {|v| [v.title, v.id]}, { include_blank: true }
-            .clearfix
+          / .form-group-margin
+          /   .col-lg-12
+          /     label
+          /       | Тариф *
+          /     =f.select :tariff_template_id, TariffTemplate.where(vendor_id: @service.vendor_id).map {|v| [v.title, v.id]}, { include_blank: true }
+          /   .clearfix
           .form-group-margin
             .col-lg-12
               label

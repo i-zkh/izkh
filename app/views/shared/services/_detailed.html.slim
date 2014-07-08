@@ -30,14 +30,14 @@ div
         .t-cell
           .col-md-12.user-account
             | #{@service.user_account}
-    - if @service.tariff_template
-      .row.border_dotted
-        .t-table
-          .t-cell.title_q
-            label Тариф
-          .t-cell
-            .col-md-12.tariff_template
-              | #{@service.tariff_template.title}
+    / - if @service.tariff_template
+    /   .row.border_dotted
+    /     .t-table
+    /       .t-cell.title_q
+    /         label Тариф
+    /       .t-cell
+    /         .col-md-12.tariff_template
+    /           | #{@service.tariff_template.title}
     .t-table_w
       .t-cell
         a.service-edit.click-off data-id="#{@service.id}"

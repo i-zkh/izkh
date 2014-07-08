@@ -602,6 +602,21 @@ $(document).ready ->
         console.log(error)
         $("#js-container").removeClass('loading')
 
+  $('body').on 'change', '#vendor_id', ->
+    $.ajax
+      url: '/tariff_template'
+      type: 'GET'
+      dataType: 'html'
+      data: {vendor_id: $("#vendor_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#tariff_template_id').find("option").remove()
+        $('#tariff_template_id').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
 # Show meters form
   $('body').on 'click', '.show-meters', ->
     serviceId = $('#service-accordion').find('.active-accordion-item').data('id')

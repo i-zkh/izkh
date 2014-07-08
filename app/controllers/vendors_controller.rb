@@ -30,10 +30,6 @@ class VendorsController < ApplicationController
   render 'shared/services/show'
   end
 
-  def tariff_template
-  # POST api/1.0/tariff_template
-  end
-
   def service_type_params
     request.get? ? {} : params.require(:service_type).permit(:title)
   end
