@@ -3,6 +3,7 @@ class Service < ActiveRecord::Base
   belongs_to :service_type, class_name: "ServiceType", foreign_key: "service_type_id"
   belongs_to :user, class_name: "User", foreign_key: "user_id"
   belongs_to :vendor, class_name: "Vendor", foreign_key: "vendor_id"
+  belongs_to :tariff_template
 
   validates_presence_of :title, :place_id, :vendor_id, :service_type_id, :user_id, :user_account
   validates_uniqueness_of :title, scope: :user_id
@@ -10,7 +11,7 @@ class Service < ActiveRecord::Base
   scope :vendor_ids, ->(user_id) { select(:vendor_id).where(user_id: user_id).uniq.map {|s| s.vendor_id} }
 
   def has_tariff?
-    p tariff_templates = TariffTemplate.where('vendor_id = ?', self.vendor_id)
+    tariff_templates = TariffTemplate.where('vendor_id = ?', self.vendor_id)
     if tariff_templates == [] 
       true
     else

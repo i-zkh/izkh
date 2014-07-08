@@ -542,6 +542,7 @@ $(document).ready ->
       success: (data) ->
         $service.find('.service-type').html($form.find('#s2id_service_service_type_id').text())
         $service.find('.vendor').html($form.find('#s2id_service_vendor_id').text())
+        $service.find('.tariff_template').html($form.find('#s2id_service_tariff_template_id').text())
         $('#service-container-' + id).find('.service-title').html($form.find('#input-service-title').val())
         $('.js-service-title').html($form.find('#input-service-title').val())
         $service.find('.user-account').html($form.find('.js__user_account').val())
