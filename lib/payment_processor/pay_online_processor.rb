@@ -4,7 +4,7 @@ class PayOnlineProcessor < PaymentProcessor
   PSK = '7ab9d14e-fb6b-4c78-88c2-002174a8cd88'
   MID = '39859'
   
-  def initialize(total, order_id, user_id)
+  def initialize(total, user_id, order_id)
     @order_id = order_id
     @total = total
     @user_id = user_id
