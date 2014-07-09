@@ -37,7 +37,7 @@ css:
           = submit_tag "Зарегистрироваться", class: "green-btn"
 
       #pay.tab-pane
-        =form_tag(pay_transactions_path , remote: true)
+        =form_tag pay_transactions_path , remote: true, id: "js-pay"
           .form-group-margin
             label
               | Тип услуги *
@@ -56,15 +56,15 @@ css:
                 option value="#{v.id}" data-commission="#{v.commission}" data-commission-yandex="#{v.commission_yandex}" data-commission-ya-card="#{v.commission_ya_card}" data-commission-web-money="#{v.commission_web_money}" data-commission-ya-cash-in="#{v.commission_ya_cash_in}"
                   = "#{v.title}"
             .clearfix
-          / .form-group-margin
-          /   label
-          /     | Тариф *
-          /   select id="tariff_template_id" name="tariff_template_id" tabindex="-1" title="" 
-          /     option disabled="disabled"
-          /       | Выберите тариф
-          /       option value=""
-          /         = ""
-            / .clearfix
+          .form-group-margin
+            label
+              | Тариф *
+            select id="tariff_template_id" name="tariff_template_id" tabindex="-1" title="" 
+              option disabled="disabled"
+                | Выберите тариф
+                option value=""
+                  = ""
+            .clearfix
           .form-group-margin
             label
               | Лицевой счет *

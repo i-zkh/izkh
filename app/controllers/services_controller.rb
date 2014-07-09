@@ -23,8 +23,7 @@ class ServicesController < ApplicationController
 
   def update
     @service = Service.find(params[:id])
-    if @service.update(service_params) 
-      # && @service.has_tariff?
+    if @service.update(service_params) && @service.has_tariff?
       render json: {}, status: :ok
     else
       render partial: 'shared/errors', locals: { object: @service }, status: :error
@@ -33,8 +32,7 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.new(service_params.merge!(user_id: current_user.id))
-    if @service.save 
-      # && @service.has_tariff?
+    if @service.save && @service.has_tariff?
       @service.update_attribute(:tariff_template_id, params[:service][:tariff_template_id]) if params[:service][:tariff_template_id]
       render partial: 'shared/services/card', locals: {service: @service}, status: :ok
     else
@@ -64,6 +62,6 @@ class ServicesController < ApplicationController
   protected
 
   def service_params
-    request.get? ? {} : params.require(:service).permit(:title, :place_id, :user_account, :vendor_id, :service_type_id)
+    request.get? ? {} : params.require(:service).permit(:title, :place_id, :user_account, :vendor_id, :service_type_id, :tariff_template_id)
   end
 end

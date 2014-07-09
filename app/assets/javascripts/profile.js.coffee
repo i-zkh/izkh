@@ -563,24 +563,11 @@ $(document).ready ->
       beforeSend: ->
         $("#js-container").addClass('loading')
       success: (data) ->
+        $('.select2-chosen:eq(1)').text("")
+        $('.select2-chosen:last').text("")
         $('#service_vendor_id').find("option").remove()
+        $('#service_tariff_template_id').find("option").remove()
         $('#service_vendor_id').append(data)
-        $("#js-container").removeClass('loading')
-      error: (error) ->
-        console.log(error)
-        $("#js-container").removeClass('loading')
-
-  $('body').on 'change', '#service_type_id', ->
-    $.ajax
-      url: '/by_service_type_with_pay'
-      type: 'GET'
-      dataType: 'html'
-      data: {service_type_id: $("#service_type_id").val()}
-      beforeSend: ->
-        $("#js-container").addClass('loading')
-      success: (data) ->
-        $('#vendor_id').find("option").remove()
-        $('#vendor_id').append(data)
         $("#js-container").removeClass('loading')
       error: (error) ->
         console.log(error)
@@ -595,8 +582,28 @@ $(document).ready ->
       beforeSend: ->
         $("#js-container").addClass('loading')
       success: (data) ->
+        $('.select2-chosen:last').text("")
         $('#service_tariff_template_id').find("option").remove()
         $('#service_tariff_template_id').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
+
+  $('body').on 'change', '#service_type_id', ->
+    $.ajax
+      url: '/by_service_type_with_pay'
+      type: 'GET'
+      dataType: 'html'
+      data: {service_type_id: $("#service_type_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('.select2-chosen:eq(1)').text("")
+        $('.select2-chosen:last').text("")
+        $('#vendor_id').find("option").remove()
+        $('#tariff_template_id').find("option").remove()
+        $('#vendor_id').append(data)
         $("#js-container").removeClass('loading')
       error: (error) ->
         console.log(error)
@@ -611,12 +618,28 @@ $(document).ready ->
       beforeSend: ->
         $("#js-container").addClass('loading')
       success: (data) ->
+        $('.select2-chosen:last').text("")
         $('#tariff_template_id').find("option").remove()
         $('#tariff_template_id').append(data)
         $("#js-container").removeClass('loading')
       error: (error) ->
         console.log(error)
         $("#js-container").removeClass('loading')
+
+  $('body').on 'click', '#js-check-tariff', ->
+    $.ajax
+      url: '/check_tariff'
+      type: 'POST'
+      dataType: 'html'
+      data: {vendor_id: $("#vendor_id").val(), tariff_template_id: $('#s2id_tariff_template_id').text(), form: $('#js-pay').serialize()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
+
 # Show meters form
   $('body').on 'click', '.show-meters', ->
     serviceId = $('#service-accordion').find('.active-accordion-item').data('id')
