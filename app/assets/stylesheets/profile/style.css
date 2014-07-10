@@ -1862,7 +1862,7 @@
       height: 100px;
       overflow: scroll;
   }
-  .js-precint-down {
+  .js-precinct-down {
     margin-top: 140px;
   }
   .down-notification {
@@ -1879,7 +1879,18 @@
           background-position: 100% -21px !important;
       }
   }
- 
+
+  .precinct-position{
+    margin-left: 890px;
+    width: 270px; 
+    max-height: 330px;
+    overflow: scroll;
+  }
+
+  .notify-position{
+    margin-left: 890px;
+    width: 270px;
+  }
 
   .widget h4 {
       border-bottom: 1px solid #4FB0DE;
@@ -2217,4 +2228,38 @@ margin-bottom: 10px; border-bottom: 1px solid #4b4a4b;
 .сommission-block {
   height: 400px;
   overflow: auto;
+}
+
+@media (max-width: 1200px){
+
+  .panel-group{
+    height: 300px;
+  }
+  .container {
+    width: 945px;
+  }
+
+  .block{
+    margin-top: 100px;
+  }
+
+  .precinct-position{
+    margin: 467px 0;
+    width: 270px; 
+    max-height: 330px;
+    overflow: scroll;
+  }
+
+  .notify-position{
+    width: 270px;
+    min-height: 119px;
+    max-height: 330px;
+    margin: 328px 0 0 300px;
+  }
+
+  #service-detailed{
+    overflow: scroll;
+    height: 348px;
+  }
+
 }

@@ -300,10 +300,10 @@ $(document).ready ->
         success: (data) ->
           $('#js-widget-precinct').empty()
           $('#js-widget-precinct').append(data)
-          if document.getElementById("js-precinct")?
-            $('.js-precint-down').addClass('down-notification')
+          if document.getElementById("js-precinct") && $(window).width() >= 1200
+            $('.js-precinct-down').addClass('down-notification')
           else
-            $('.js-precint-down').removeClass('down-notification')
+            $('.js-precinct-down').removeClass('down-notification')
     else
       false
 
