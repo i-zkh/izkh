@@ -35,6 +35,6 @@ class VendorsController < ApplicationController
   end
 
   def vendor_params
-    request.get? ? {} : params.require(:vendor).permit(:title, :service_type_id, :commission, :commission_yandex, :commission_ya_card, :shop_article_id)
+    request.get? ? {} : params.require(:vendor).permit(:title, :service_type_id, :commission, :commission_yandex, :commission_ya_card, :commission_web_money, :commission_ya_cash_in, :shop_article_id)
   end
 end
