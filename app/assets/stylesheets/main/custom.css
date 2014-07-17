@@ -204,7 +204,9 @@ position:relative;
 }
 
 #social-vk {
-  background: inline('../assets/vk.png') no-repeat;
+  background-image: url(../assets/vk.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #social-tw {
