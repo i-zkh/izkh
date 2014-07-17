@@ -348,7 +348,16 @@
       border: 1px solid #34AADC;
       background: #ffffff;
       z-index: 999;
+      line-height: 1.4;
+      margin-left: 400px;
       position: fixed;
+  }
+  .welcome-tutorial{
+    margin-top: 250px;
+  }
+  .last-tutorial{
+    margin-left: 870px;
+    top: 93px;
   }
   .close_tutorial {
       background: url('../assets/close2.png') no-repeat;
@@ -1068,7 +1077,7 @@
   }
   /* Error handling */
   .error-text {
-      color: #FF3B30;
+      color: #428BCA;
   }
   .badge {
       position: relative;
@@ -2231,6 +2240,18 @@ margin-bottom: 10px; border-bottom: 1px solid #4b4a4b;
 }
 
 @media (max-width: 1200px){
+
+  body{
+    line-height: 1;
+  }
+
+  .welcome-tutorial{
+    margin: 221px 0 0 300px;
+  }
+
+  .last-tutorial{
+   margin: 7px 0 0 471px;
+  }
 
   .panel-group{
     height: 300px;

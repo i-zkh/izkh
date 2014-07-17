@@ -1,0 +1,37 @@
+br
+br
+.modal-dialog.forma_enter.feedback-container
+  .modal-content
+    .modal-header 
+      .row
+        .col-md-12
+          h2.title
+            | Обратная связь
+          br
+          .info.margin_top
+            | Нам важно Ваше мнение
+          .error-text#feedback_error
+      = form_for UserFeedback.new, remote: true do |f|
+        .form-inputs
+          label Тема *
+          =f.text_field(:topic, id: "feedback_topic", class: "form-control-all validate[required]")
+        .form-inputs
+          label Обращение *
+          =f.text_area(:body , class: "form-control-all validate[required]")
+        - if @show
+          div#hidden_block
+            p
+              | Что Вы думаете о новой версии сервиса?
+            p
+             .custom.two
+              input#like.po name="feedback[new_version]" type="radio" value="like" checked="checked"
+               label for="like" Нравится
+            p
+             .custom.two
+              input#not-like.po name="feedback[new_version]" type="radio" value="not-like" checked="checked"
+               label for="not-like" Старый был лучше
+            p
+             .custom.two
+              input#not-know.po name="feedback[new_version]" type="radio" value="not-know" checked="checked"
+               label for="not-know" Пока не знаю
+        input.feedback-button.btn.green-btn.btn-block.click_off type="submit" value="Отправить"
