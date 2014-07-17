@@ -1,5 +1,6 @@
 # encoding: utf-8
 class UserFeedbacksController < ApplicationController
+  skip_before_filter :require_current_user, only: [:index]
 
   def new
     @show = UserFeedback.where(user_id: current_user.id) == [] ? true : false
@@ -15,7 +16,12 @@ class UserFeedbacksController < ApplicationController
   end
 
   def index
-    render json: UserFeedback.all
+    @feedback = []
+    UserFeedback.where('created_at >= :days_ago', :days_ago  => Time.now - 30.days).each do |f|
+      user = User.find(f['user_id'])
+      @feedback << {topic: f['topic'], body: f['body'], new_version: f['new_version'], user_name: user.first_name, user_phone: user.phone, user_email: user.email}
+    end
+    render json: @feedback
   end
 
   protected
