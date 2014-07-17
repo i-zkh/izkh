@@ -17,9 +17,9 @@ class UserFeedbacksController < ApplicationController
 
   def index
     @feedback = []
-    UserFeedback.where('created_at >= :days_ago', :days_ago  => Time.now - 30.days).each do |f|
+    UserFeedback.where('created_at >= :days_ago', :days_ago  => Time.now - 30.days).order('created_at DESC').each do |f|
       user = User.find(f['user_id'])
-      @feedback << {topic: f['topic'], body: f['body'], new_version: f['new_version'], user_name: user.first_name, user_phone: user.phone, user_email: user.email}
+      @feedback << {topic: f['topic'], body: f['body'], new_version: f['new_version'], user_name: user.first_name, user_phone: user.phone, user_email: user.email, created_at: f['created_at'].strftime('%d.%m.%Y')}
     end
     render json: @feedback
   end
