@@ -14,7 +14,7 @@ br
       = form_for UserFeedback.new, remote: true do |f|
         .form-inputs
           label Тема *
-          =f.text_field(:topic, id: "feedback_topic", class: "form-control-all validate[required]")
+          =f.text_field(:topic, id: "feedback_topic", class: "form-control-all validate[required]", maxlength: 255)
         .form-inputs
           label Обращение *
           =f.text_area(:body , class: "form-control-all validate[required]")

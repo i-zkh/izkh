@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702082207) do
+ActiveRecord::Schema.define(version: 20140723191914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20140702082207) do
 
   create_table "user_feedbacks", force: true do |t|
     t.string   "topic"
-    t.string   "body"
+    t.text     "body"
     t.integer  "user_id"
     t.string   "new_version"
     t.datetime "created_at"
