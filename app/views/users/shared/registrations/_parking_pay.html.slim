@@ -1,0 +1,15 @@
+div.clearfix
+.clearfix
+  .t-table_w style=("margin-left: -30px;width: 300px;")
+    .t-cell style=("width: 100px") 
+      label Колличество дней
+    .t-cell
+      input name="parking_day" placeholder="" type="number" min='1' style=("width: 40px; margin: 0 10px 0 10px")
+    .t-cell style=("width: 100px") 
+      label Сумма к оплате
+    .t-cell
+      input.parking-pay.pay-amount-one.form-control name="pay[amount]" placeholder="" type="text" style=("width: 50px; margin: 0 10px 0 20px")
+    .t-cell руб.
+  .clearfix
+    .t-table_w style=("margin-left: -30px")
+      = render 'shared/vendors/payment_types'

@@ -95,4 +95,6 @@ Iz::Application.routes.draw do
   get 'api/1.0/precinct/create' => 'precinct#parse_precinct'
   get 'widget_precinct/:id' => 'precinct#widget_precinct'
 
+  get 'payment_form' => 'services#payment_form'
+
 end

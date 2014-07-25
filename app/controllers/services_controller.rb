@@ -54,6 +54,14 @@ class ServicesController < ApplicationController
     render partial: 'shared/services/options_tariff_template', locals: {object: @tariff_template}
   end
 
+  def payment_form
+    if params[:vendor_id] == '317' && params[:tariff_template_id] == '220'
+      render partial: 'users/shared/registrations/parking_pay'
+    else
+      render partial: 'users/shared/registrations/pay'
+    end
+  end
+
   def destroy
     Service.find(params[:id]).delete
     render json: {}, status: :ok

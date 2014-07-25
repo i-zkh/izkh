@@ -145,22 +145,36 @@ $(document).ready ->
   $.mask.definitions['п'] = "[ГЦМгцм]"
   $.mask.definitions['в'] = "[ГЦСИгцси]"
   $.mask.definitions['т'] = "[ОДГодг]" 
+  $.mask.definitions['*'] = "[А-Яа-я]"
 
   $('body').on 'change', '#vendor_id', ->
     $(".js__user_account").unmask();
     $('.info-account').empty()
+    $('.js-label-account').text('Лицевой счет *')
     if $('#vendor_id').val() == "134"
       $(".js__user_account").mask("пвт-9999")
       $('.info-account').empty()
       $('.info-account').append('<p>Возможные префиксы: ГСО, ЦГД, ЦЦГ, МИГ</p><p>Пример: ГСО-1234</p>')
+    else if $('#vendor_id').val() == "317"
+      $(".js__user_account").mask("*999**")
+      $('.info-account').empty()
+      $('.info-account').append('<p>Пример: x000xx</p>')
+      $('.js-label-account').text('Гос. номер автомобиля')
 
   $('body').on 'change', '#service_vendor_id', ->
     $(".js__user_account").unmask();
     $('.info-account').empty()
+    $('.js-label-account').text('Лицевой счет *')
     if $('#service_vendor_id').val() == "134"
       $('.info-account').empty()
       $('.info-account').append('<p>Возможные префиксы: ГСО, ЦГД, ЦЦГ, МИГ</p><p>Пример: ГСО-1234</p>')
       $(".js__user_account").mask("пвт-9999")
+    else if $('#service_vendor_id').val() == "317"
+      $(".js__user_account").mask("*999**")
+      $('.info-account').empty()
+      $('.info-account').append('<p>Пример: x000xx</p>')
+      $('.js-label-account').text('Гос. номер автомобиля')
+
 
 # Show/Hide password
   $('input#show-pass[type="checkbox"]').change ->
@@ -549,6 +563,16 @@ $(document).ready ->
         $modalContainer.find('.modal').modal('hide')
         $("#js-container").removeClass('loading')
         $("#service-index").find("h4").maxlength maxChars: 20
+        $.ajax
+          url: '/services/' + id
+          type: 'GET'
+          beforeSend: ->
+            $("#js-container").addClass('loading')
+          success: (data) ->
+            $('#service-detailed').html(data)
+            $(".title__span").maxlength maxChars: 10
+            commissionCalc()
+            $("#js-container").removeClass('loading')
       error: (e) ->
         console.log e
         $("#js-container").removeClass('loading')
@@ -625,6 +649,23 @@ $(document).ready ->
       error: (error) ->
         console.log(error)
         $("#js-container").removeClass('loading')
+
+  $('body').on 'change', '#tariff_template_id', ->
+    $.ajax
+      url: '/payment_form'
+      type: 'GET'
+      dataType: 'html'
+      data: {vendor_id: $("#vendor_id").val(), tariff_template_id: $("#tariff_template_id").val()}
+      beforeSend: ->
+        $("#js-container").addClass('loading')
+      success: (data) ->
+        $('#js-render-pay-form').empty()
+        $('#js-render-pay-form').append(data)
+        $("#js-container").removeClass('loading')
+      error: (error) ->
+        console.log(error)
+        $("#js-container").removeClass('loading')
+
 
   $('body').on 'click', '#js-check-tariff', ->
     $.ajax
@@ -789,10 +830,13 @@ $(document).ready ->
   $('#pay').on "change", "#vendor_id", ->
     commissionQuickPay()
 
-  $('#pay').on "keyup", ".pay-amount-one", ->
-    commissionQuickPay()
+  $('body').on "keyup", "input[name=parking_day]", ->
+    $(".parking-pay").val($('input[name=parking_day]').val()*50)
 
   $('#pay').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
+    commissionQuickPay()
+
+  $('#pay').on "keyup", ".pay-amount-one", ->
     commissionQuickPay()
 
   commissionQuickPay = () =>
