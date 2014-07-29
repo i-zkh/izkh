@@ -18,9 +18,9 @@ class MetricsController < ApplicationController
   end
 
 protected
-def metric_params
-  request.get? ? {} : params.require(:metric).permit(:meter_id, :metric)
-end
 
+  def metric_params
+    request.get? ? {} : params.require(:metric).permit(:meter_id, :metric)
+  end
 
 end

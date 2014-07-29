@@ -1903,6 +1903,7 @@ input[type=number]::-webkit-outer-spin-button
   .notify-position{
     margin-left: 890px;
     width: 270px;
+    overflow:scroll;
   }
 
   .widget h4 {
@@ -2279,6 +2280,7 @@ margin-bottom: 10px; border-bottom: 1px solid #4b4a4b;
     width: 270px;
     min-height: 119px;
     max-height: 330px;
+    overflow:scroll;
     margin: 328px 0 0 300px;
   }
 

@@ -96,5 +96,6 @@ Iz::Application.routes.draw do
   get 'widget_precinct/:id' => 'precinct#widget_precinct'
 
   get 'payment_form' => 'services#payment_form'
+  get 'penalties/show' => 'penalties#show'
 
 end
