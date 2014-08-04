@@ -1,0 +1,14 @@
+.modal-dialog.penalty-container
+  .modal-content
+    .modal-header 
+      .row
+        .col-md-12
+          h2.title
+            | Оплата штрафов ГИБДД (Федеральное Казначейство)
+          br
+          .row.border_dotted
+            - @get_penalty[2][:enum][:item].each do |enum|
+              .t-table
+                 .t-cell
+                    .col-md-12
+                      = enum

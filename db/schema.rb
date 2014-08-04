@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723191914) do
+ActiveRecord::Schema.define(version: 20140802194317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20140723191914) do
     t.integer  "order_id",              limit: 8
     t.string   "payment_info"
     t.integer  "vendor_id"
+    t.integer  "tariff_template_id"
   end
 
   create_table "user_feedbacks", force: true do |t|

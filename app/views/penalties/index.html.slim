@@ -1,0 +1,21 @@
+.modal-dialog.penalty-container
+  .modal-content
+    .modal-header 
+      .row
+        .col-md-12
+          h2.title
+            | Поиск штрафа ГИБДД
+          br
+          .error-text
+      = form_tag '/penalties/show', method: 'get' do |f|
+        / .form-inputs
+          / select id="provider_id" name="provider_id"
+          /   - @service_providers.each do |service_provider|
+          /     option data-name="#{service_provider[:name]}" value="#{service_provider[:provider_id]}" "#{service_provider[:name]}"
+        .form-inputs
+          label Номер свидетельства о регистрации ТС *
+          =text_field_tag :reg_certificate, nil, class: "form-control-all"
+        .form-inputs
+          label Номер водительского удостоверения *
+          =text_field_tag :driver_license, nil, class: "form-control-all"
+        input.feedback-button.btn.green-btn.btn-block type="submit" value="Поиск"

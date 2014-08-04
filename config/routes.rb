@@ -97,5 +97,6 @@ Iz::Application.routes.draw do
 
   get 'payment_form' => 'services#payment_form'
   get 'penalties/show' => 'penalties#show'
+  get 'penalties' => 'penalties#index'
 
 end
