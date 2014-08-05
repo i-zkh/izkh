@@ -8,7 +8,13 @@ class ServicesController < ApplicationController
 
   def show
     @service = Service.find(params[:id])
-    render partial: 'shared/services/detailed'
+    if @service.vendor_id == 10
+      method_seach = @service.tariff_template_id == 273 ? 2 : 1
+      @get_penalty = Penalty.new.get_penalty(@service.user_account, method_seach)
+      render partial: 'penalties/penalties'
+    else
+      render partial: 'shared/services/detailed'
+    end
   end
 
   def new

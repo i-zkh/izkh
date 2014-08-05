@@ -18,6 +18,10 @@
       right: 15px;
       top: -4px;
   }
+  
+.enum-box{
+  width: 230px;
+}
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button 
 {-webkit-appearance: none;

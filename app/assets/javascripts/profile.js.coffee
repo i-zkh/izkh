@@ -169,12 +169,26 @@ $(document).ready ->
       $('.info-account').empty()
       $('.info-account').append('<p>Возможные префиксы: ГСО, ЦГД, ЦЦГ, МИГ</p><p>Пример: ГСО-1234</p>')
       $(".js__user_account").mask("пвт-9999")
+    else if $('#service_vendor_id').val() == "10"
+      $('.js-label-tariff').text('Способ поиска постановления *')
+      $('.js-label-account').text('Номер свидетельства о регистрации ТС *')
     else if $('#service_vendor_id').val() == "317"
       $(".js__user_account").mask("*999**")
       $('.info-account').empty()
       $('.info-account').append('<p>Пример: x000xx</p>')
       $('.js-label-account').text('Гос. номер автомобиля')
 
+  $('body').on 'change', '#service_service_type_id', ->
+    if $('#service_service_type_id').val() == "9"
+      $('.info-account').empty()
+      $('.js-label-tariff').text('Способ поиска постановления *')
+      $('.js-label-account').text('Номер свидетельства о регистрации ТС *')
+
+  $('body').on 'change', '#service_tariff_template_id', ->
+    if $('#service_tariff_template_id').val() == "272"
+      $('.js-label-account').text('Номер свидетельства о регистрации ТС *')
+    if $('#service_tariff_template_id').val() == "273"
+      $('.js-label-account').text('Уникальный идентификатор начисления *')
 
 # Show/Hide password
   $('input#show-pass[type="checkbox"]').change ->
@@ -442,6 +456,7 @@ $(document).ready ->
           $("#js-container").addClass('loading')
         success: (data) ->
           $('#service-detailed').html(data)
+          $("select").select2()
           $(".title__span").maxlength maxChars: 10
           commissionCalc()
           $("#js-container").removeClass('loading')
@@ -570,6 +585,7 @@ $(document).ready ->
             $("#js-container").addClass('loading')
           success: (data) ->
             $('#service-detailed').html(data)
+            $("select").select2()
             $(".title__span").maxlength maxChars: 10
             commissionCalc()
             $("#js-container").removeClass('loading')

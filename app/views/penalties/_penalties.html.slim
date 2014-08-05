@@ -1,0 +1,72 @@
+css:
+   @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700)
+   @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css)
+
+.title_main_ob
+  .menu_other
+    b.title__span.js-service-title #{@service.title}
+div
+  .edit_services_sum#js-update-services
+    .row.border_dotted
+      .t-table
+        .t-cell.title_q
+          label Тип услуги
+        .t-cell
+          .col-md-12.service-type
+            | #{@service.service_type.title}
+    .row.border_dotted
+      .t-table
+        .t-cell.title_q
+          label Поставщик
+        .t-cell
+          .col-md-12.vendor
+            | #{@service.vendor.title}
+    .row.border_dotted
+      .t-table
+        .t-cell.title_q
+          label Способ поиска постановления
+        .t-cell
+          .col-md-12.tariff_template
+            | #{@service.tariff_template.title}
+    .row
+      .t-table
+        .t-cell.title_q
+          label 
+          - if @service.tariff_template.id == 273
+            | УИН
+          - else
+            | № свидельства о рег. ТС
+        .t-cell
+          .col-md-12.user-account
+            | #{@service.user_account}
+    .row.border_dotted
+      .t-table
+        .t-cell.title_q
+          a.service-delete.delete-link.click-off data-id="#{@service.id}"
+            | Удалить
+        .t-cell
+          .col-md-12
+            a.service-edit.click-off data-id="#{@service.id}"
+              | Редактировать        
+    .row
+      .t-table
+        .t-cell.title_q
+          label Штрафы:
+        .t-cell
+          .col-md-12
+            - if @get_penalty
+                select name="enum" class="enum-box"
+                  - if @get_penalty[2][:enum][:item].kind_of?(Array)
+                    - @get_penalty[2][:enum][:item].each do |enum|
+                      option value="#{enum.split('на ')[1].gsub(/руб./, "")}"
+                        = "#{enum}"
+                  - else
+                    option value=""
+                      = "#{@get_penalty[2][:enum][:item]}"
+            - else
+              | Начислений по данному запросу не обнаружено
+    #amount
+  =form_tag(pay_transactions_path, remote: true)
+  .padding.payment_box
+    = render 'shared/services/pay'
+    input.btn.btn-default.btn_green type="submit" value="Оплатить" 

@@ -4,6 +4,7 @@ class PenaltiesController < ApplicationController
   end
 
   def show
-    @get_penalty = Penalty.new.get_penalty(params[:reg_certificate], params[:driver_license])
+    @get_penalty = Penalty.new.get_penalty(params[:reg_certificate], params[:method_seach])
+    render json: @get_penalty
   end
 end

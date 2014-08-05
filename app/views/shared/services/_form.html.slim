@@ -33,7 +33,7 @@
             .clearfix
           .form-group-margin
             .col-lg-12
-              label
+              label.js-label-tariff
                 | Тариф *
               =f.select :tariff_template_id, TariffTemplate.where(vendor_id: @service.vendor_id).map {|v| [v.title, v.id]}, { include_blank: true }
             .clearfix
