@@ -1287,6 +1287,9 @@ input[type=number]::-webkit-outer-spin-button
       -webkit-transition-delay: 0.2s;
       -webkit-transform: translate(0px, 0px);
   }
+  .modal-dialog.forma_enter.feedback-container{
+      margin-top: 100px
+  }
   .padding_top_one {
       padding-top: 20px;
   }
