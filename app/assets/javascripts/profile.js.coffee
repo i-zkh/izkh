@@ -860,16 +860,9 @@ $(document).ready ->
       amountOne = 0
     else
       amountOne = $(".pay-amount-one").val()
-    if  document.getElementById("i15").checked
-      percent = $("#vendor_id").find("option:selected").data('commission-yandex')
-    else if  document.getElementById("i14").checked
-      percent = $("#vendor_id").find("option:selected").data('commission-ya-card')
-    # else if  document.getElementById("i16").checked || document.getElementById("i18").checked
-    #   percent = $("#vendor_id").find("option:selected").data('commission-ya-cash-in')
-    else if  document.getElementById("i17").checked
-      percent = $("#vendor_id").find("option:selected").data('commission-web-money')
-    else
-      percent = $("#vendor_id").find("option:selected").data('commission')
+
+    percent = $("#pay-commission-moneta").val() + $("#pay-commission").val()
+
     amount = parseFloat(amountOne)
     commission = Math.round(amount * percent) / 100
     $("#commission").html " " + commission + " руб."
@@ -883,19 +876,10 @@ $(document).ready ->
       else
         amountOne = $(".pay-amount-one").val()
 
-      if document.getElementById("i15").checked
-        percent = $("#pay-commission-yandex").val()
-      else if document.getElementById("i14").checked
-        percent = $("#pay-commission-ya-card").val()
-      # else if document.getElementById("i16").checked|| document.getElementById("i18").checked
-      #   percent = $("#pay-commission-ya-cash-in").val()
-      else if document.getElementById("i17").checked
-        percent = $("#pay-commission-web-money").val()
-      else
-        percent = $("#pay-commission").val()
+      percent = parseFloat($("#pay-commission-moneta").val()) + parseFloat($("#pay-commission").val())
+
       amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
-
       $("#commission").html " " + commission + " руб."
       total = commission + amount
       $("#total").html(" " + total + " руб.")

@@ -4,7 +4,7 @@ class Penalty
   attr_reader :client
 
   def initialize
-    @client = Savon.client(wsdl: "https://service.moneta.ru/services-providers.wsdl", wsse_auth: ["ivanova@izkh.ru", "ijkhmoneta"])
+    @client = Savon.client(wsdl: "https://service.moneta.ru/services-providers.wsdl", wsse_auth: ["ivanova@izkh.ru", "moneta147"])
   end
 
   def get_providers

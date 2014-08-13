@@ -1,10 +1,7 @@
 div.clearfix
   h3 Оплата
   input#pay-commission name="pay[commission]" value="#{@service.vendor.commission}" type="hidden"
-  input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
-  input#pay-commission-ya-card name="pay[commission_ya_card]" value="#{@service.vendor.commission_ya_card}" type="hidden"
-  input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
-  input#pay-commission-ya-cash-in name="pay[commission_ya_cash_in]" value="#{@service.vendor.commission_ya_cash_in}" type="hidden"
+  input#pay-commission-moneta name="pay[commission_moneta]" value="#{@service.vendor.commission_ya_card}" type="hidden"
   input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
   input#pay-vendor-id name="pay[vendor_id]" value="#{@service.vendor.id}" type="hidden"
   input#pay-user-account name="user_account" value="#{@service.user_account}" type="hidden"
@@ -15,8 +12,6 @@ div.clearfix
       input.pay-amount-one name="pay[amount]" placeholder="" type="number" min="50" style=("width: 70px; margin: 0 10px 0 20px")
     .t-cell руб.
   p.sum Минимальная сумма платежа 50 руб.
-  = render 'shared/vendors/payment_types'
-  .clearfix
   .clearfix
     p.sum
       | Комиссия сервиса: 
