@@ -55,7 +55,8 @@ Iz::Application.routes.draw do
   # get 'send_pass_change' => 'update_table#send_pass_change'
 
   # Callback for Moneta
-  get 'payment/success' => 'transactions#success'
+  get 'payment/success' => 'transactions#pay_success'
+  get 'payment/fail' => 'transactions#pay_fail'
 
   # Callback for PO
   post 'api/1.0/payment_success' => 'transactions#success'
