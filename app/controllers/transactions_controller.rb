@@ -210,6 +210,12 @@ class TransactionsController < ApplicationController
     render json: {}, status: :ok
   end
 
+  def pay_success
+    transaction = Transaction.find_by_order_id(params[:MNT_TRANSACTION_ID].to_i)
+    logger.info transaction
+    render text: 'SUCCESS'
+  end
+
   def fail
     # Callback for failed transactions PO
     Transaction.find_by_order_id(params[:OrderId].to_i).update_attribute(:status, -1)
