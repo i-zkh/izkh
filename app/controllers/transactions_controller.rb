@@ -219,17 +219,16 @@ class TransactionsController < ApplicationController
       amount = transaction.amount
       user_account = transaction.payment_info.split(';')[1]
       # if vendor_id == 121
-      #   GtPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account)
+      #   GtPaymentWorker.perform_async(params[:MNT_TRANSACTION_ID].to_i, amount, user_account)
       # #elsif service && service.vendor_id.to_i == 16
       #   #JtPaymentWorker.perform_async(params[:user_id])
       # elsif vendor_id == 135
-      #   SlPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account) 
+      #   SlPaymentWorker.perform_async(params[:MNT_TRANSACTION_ID].to_i, amount, user_account) 
       # elsif vendor_id == 165
-      #   CraftSPaymentWorker.perform_async(params[:OrderId].to_i, amount, user_account)
+      #   CraftSPaymentWorker.perform_async(params[:MNT_TRANSACTION_ID].to_i, amount, user_account)
       # elsif vendor_id == 20
       #   DeltaPaymentWorker.perform_async(transaction.payment_info.split(';')[-1])
       # end
-      logger.info transaction
       render text: 'SUCCESS'
     else
       render text: 'FAIL'
