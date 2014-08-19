@@ -849,6 +849,12 @@ $(document).ready ->
   $('body').on "keyup", "input[name=parking_day]", ->
     $(".parking-pay").val($('input[name=parking_day]').val()*50)
 
+  $('body').on "change", "#enum", ->
+    selectOption = $('#enum').find('option:selected')
+    $(".penalty-pay").val(parseFloat(selectOption.val()))
+    $("#uin").val(selectOption.data('uin'))
+    commissionQuickPay()
+
   $('#pay').on "change", "input:radio[name=\"pay[payment_type]\"]", ->
     commissionQuickPay()
 
@@ -861,7 +867,7 @@ $(document).ready ->
     else
       amountOne = $(".pay-amount-one").val()
 
-    percent = $("#pay-commission-moneta").val() + $("#pay-commission").val()
+    percent = parseFloat($("#pay-commission-moneta").val()) + parseFloat($("#pay-commission").val())
 
     amount = parseFloat(amountOne)
     commission = Math.round(amount * percent) / 100
@@ -877,7 +883,6 @@ $(document).ready ->
         amountOne = $(".pay-amount-one").val()
 
       percent = parseFloat($("#pay-commission-moneta").val()) + parseFloat($("#pay-commission").val())
-
       amount = parseFloat(amountOne)
       commission = Math.round(amount * percent) / 100
       $("#commission").html " " + commission + " руб."

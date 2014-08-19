@@ -7,7 +7,7 @@ class TerminalController < ApplicationController
     tariff_template = if params[:payment_data][:tariff_template_id].to_i == 0
                       "" 
                     else 
-                      p t_t = TariffTemplate.where('id = ?', params[:payment_data][:tariff_template_id].to_i).first
+                      t_t = TariffTemplate.where('id = ?', params[:payment_data][:tariff_template_id].to_i).first
                       t_t.nil? ? false : t_t.title
                     end
     vendor = Vendor.where('id = ?', params[:payment_data][:vendor_id].to_i).first

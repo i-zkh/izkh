@@ -1,22 +1,44 @@
 div.clearfix
-  h3 Оплата
+  h3 Оплата штрафов
+  .t-table_w style=("margin-top: 10px")
+    .t-cell
+      label Выберите штраф:
+    .t-cell
+      - if penalty
+          select name="enum" class="enum-box" id="enum"
+            option value='' selected='selected'
+            - if penalty[2][:enum][:item].kind_of?(Array)
+              - penalty[2][:enum][:item].each do |enum|
+                option value="#{enum.split('на ')[1].gsub(/руб./, "")}" data-uin="#{enum.split(' от ')[0].gsub(/УИН /, "")}"
+                  = "#{enum}"
+            - else
+              option value=""
+                = "#{penalty[2][:enum][:item]}"
+      - else
+        | Начислений по данному запросу не обнаружено
+  .t-table_w style=("margin-top: 10px")
+    .t-cell
+      label ФИО
+    .t-cell
+      input name="name" style=("width: 230px; margin: 0 10px 0 79px")
+  .t-table_w style=("margin-top: 10px")
+    .t-cell
+      label Телефон
+    .t-cell
+      input name="phone" style=("width: 230px; margin: 0 10px 0 53px")
   input#pay-commission name="pay[commission]" value="#{@service.vendor.commission}" type="hidden"
-  input#pay-commission-yandex name="pay[commission_yandex]" value="#{@service.vendor.commission_yandex}" type="hidden"
-  input#pay-commission-ya-card name="pay[commission_ya_card]" value="#{@service.vendor.commission_ya_card}" type="hidden"
-  input#pay-commission-web-money name="pay[commission_web_money]" value="#{@service.vendor.commission_web_money}" type="hidden"
-  input#pay-commission-ya-cash-in name="pay[commission_ya_cash_in]" value="#{@service.vendor.commission_ya_cash_in}" type="hidden"
+  input#pay-commission-moneta name="pay[commission_moneta]" value="#{@service.vendor.commission_ya_card}" type="hidden"
   input#pay-service-id name="pay[service_id]" value="#{@service.id}" type="hidden"
   input#pay-vendor-id name="pay[vendor_id]" value="#{@service.vendor.id}" type="hidden"
   input#pay-user-account name="user_account" value="#{@service.user_account}" type="hidden"
-  .t-table_w
-    .t-cell style=("width: 100px") 
+  input#uin name="uin" value="" type="hidden"
+
+  .t-table_w style=("margin-top: 10px")
+    .t-cell style=("width: 200px")
       label Сумма к оплате
     .t-cell
-      input.pay-amount-one name="pay[amount]" placeholder="" type="number" min="50" style=("width: 70px; margin: 0 10px 0 20px")
+      input.penalty-pay.pay-amount-one name="pay[amount]" placeholder="" type="number" readonly='true' style=("width: 70px; margin: 0 10px 0 20px")
     .t-cell руб.
-  p.sum Минимальная сумма платежа 50 руб.
-  = render 'shared/vendors/payment_types'
-  .clearfix
   .clearfix
     p.sum
       | Комиссия сервиса: 

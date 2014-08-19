@@ -112,7 +112,7 @@ class TransactionsController < ApplicationController
 
   def pay
     Transaction.create!(@payment_data)
-    processor = MonetaProcessor.new(@total, @user_account, @order_id, @service_type_id)
+    processor = MonetaProcessor.new(@amount, @user_account, @order_id, @service_type_id, params[:name], params[:phone], params[:uin], @vendor.id)
     pp = PaymentProcessor.new(processor)
 
     respond_to do |format|
@@ -255,7 +255,7 @@ class TransactionsController < ApplicationController
       @service_type_id = params[:service_type_id]
     end
 
-    amount            = params[:pay][:amount].to_f
+    @amount           = sprintf('%.2f', (params[:pay][:amount].to_f).round(2))
     @vendor           = Vendor.find(params[:pay][:vendor_id])
     @order_id         = Time.now.strftime('%Y%M%d%H%M%S')
     @user_id          = current_user.nil? ? 0 : current_user.id
@@ -263,13 +263,12 @@ class TransactionsController < ApplicationController
     @shop_article_id  = @vendor.shop_article_id
     key               = params[:key].nil? ? "" : params[:key]
     date              = Time.now.strftime('%d.%m.%Y')
-    @total            = calculate_total(amount, @vendor.commission)
-    commission        = (@total.to_f - amount.to_f).round(2) + calculate_moneta_commission(@total, @vendor.commission_ya_card)
+    commission        = calculate_moneta_commission(@amount, @vendor.commission_ya_card, @vendor.commission)
     @user_account     = params[:user_account]
-    payment_info      = [@payment_type, @user_account, address, amount, commission, @vendor.title, service_type, date, key].join(';')
+    payment_info      = [@payment_type, @user_account, address, @amount, commission, @vendor.title, service_type, date, key].join(';')
 
     @payment_data = { 
-        amount:       amount, 
+        amount:       @amount, 
         service:      service, 
         place:        place_id, 
         user_id:      @user_id, 
@@ -291,8 +290,8 @@ class TransactionsController < ApplicationController
     float.to_s
   end
 
-  def calculate_moneta_commission(total, commission)
-    ((total.to_f*commission)/100).round(2)
+  def calculate_moneta_commission(total, commission_moneta, commission)
+    (total.to_f*(commission+commission_moneta)/100).round(2)
   end
 
   def calculate_total(amount, commission)
