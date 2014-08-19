@@ -160,6 +160,12 @@ $(document).ready ->
       $('.info-account').empty()
       $('.info-account').append('<p>Пример: x000xx</p>')
       $('.js-label-account').text('Гос. номер автомобиля')
+    else if $('#vendor_id').val() == "20"
+      $('.info-account').empty()
+      $('.js-label-account').text('№ договора')
+    else if $('#vendor_id').val() == "19"
+      $('.info-account').empty()
+      $('.js-label-account').text('№ договора')
 
   $('body').on 'change', '#service_vendor_id', ->
     $(".js__user_account").unmask();
@@ -169,11 +175,20 @@ $(document).ready ->
       $('.info-account').empty()
       $('.info-account').append('<p>Возможные префиксы: ГСО, ЦГД, ЦЦГ, МИГ</p><p>Пример: ГСО-1234</p>')
       $(".js__user_account").mask("пвт-9999")
+    else if $('#service_vendor_id').val() == "10"
+      $('.js-label-tariff').text('Способ поиска постановления *')
+      $('.js-label-account').text('Номер свидетельства о регистрации ТС *')
     else if $('#service_vendor_id').val() == "317"
       $(".js__user_account").mask("*999**")
       $('.info-account').empty()
       $('.info-account').append('<p>Пример: x000xx</p>')
       $('.js-label-account').text('Гос. номер автомобиля')
+    else if $('#service_vendor_id').val() == "20"
+      $('.info-account').empty()
+      $('.js-label-account').text('№ договора')
+    else if $('#service_vendor_id').val() == "19"
+      $('.info-account').empty()
+      $('.js-label-account').text('№ договора')
 
 
 # Show/Hide password
