@@ -5,8 +5,10 @@ class CraftSPaymentWorker
 
   def perform(recipe_id, amount, user_account, tariff_template_id = nil) 
     amount = amount.to_f*100
-    
-    case tariff_template_id.to_i
+    transaction = Transaction.find_by_order_id(recipe_id)
+    tariff_template_id ||= Service.find(transaction.service).tariff_template_id
+
+    case tariff_template_id
     when 153
       account_type = "inet"
     when 158
