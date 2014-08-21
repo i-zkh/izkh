@@ -38,7 +38,7 @@ protected
               else 
                 [params, "CUSTOMFIELD:100=#{@user_account}"].join('&')
               end
-    p params
+    params
   end
 
   def generate_security_key(id)
