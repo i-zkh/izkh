@@ -14,8 +14,7 @@ class CraftSPaymentWorker
     when 158
       account_type = "voip"
     else
-      account_type = nil
-      raise "No account type"
+      account_type = "inet"
     end
     
     CraftS.new(user_account, DateTime.now.strftime("%Y-%m-%d %H:%M:%S"), account_type, amount, recipe_id).pay
