@@ -180,7 +180,7 @@ class TransactionsController < ApplicationController
       security_key = Digest::MD5.hexdigest(security_key_string)
       url = "#{po_root_url}?MerchantId=#{merchant_id}&OrderId=#{order_id}&Amount=#{total}&Currency=#{currency}&SecurityKey=#{security_key}&user_id=#{params[:pay][:user_id]}&ReturnURL=http%3A//localhost:8080/dashboard"
     end
-    Transaction.create!(amount: amount.to_f, service: service, place: place_id, user_id: user_id, commission: (total.to_f-amount.to_f).round(2), payment_type: payment_type, payment_info: "#{payment_type};#{params[:user_account]};#{address};#{amount};#{(total.to_f-amount.to_f).round(2)};#{vendor.title};#{service_type};#{Time.now.strftime('%d.%m.%Y')}#{key}", order_id: order_id, vendor_id: vendor.id)
+    Transaction.create!(amount: amount.to_f, service: service, place: place_id, user_id: user_id, commission: (total.to_f-amount.to_f).round(2), payment_type: payment_type, payment_info: "#{payment_type};#{params[:user_account]};#{address};#{amount};#{(total.to_f-amount.to_f).round(2)};#{vendor.title};#{service_type};#{Time.now.strftime('%d.%m.%Y')};#{key}", order_id: order_id, vendor_id: vendor.id)
 
     respond_to do |format|
       format.js {
