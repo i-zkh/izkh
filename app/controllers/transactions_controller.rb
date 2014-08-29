@@ -276,6 +276,11 @@ class TransactionsController < ApplicationController
     redirect_to root_path
   end
 
+  def receipt
+    Receipt.new('Hello')
+    render json: true
+  end
+
   protected
 
   def prepare_payment_data

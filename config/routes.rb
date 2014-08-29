@@ -40,6 +40,7 @@ Iz::Application.routes.draw do
   get 'tariff_template' => 'services#tariff_template'
   get 'table_show' => 'transactions#table_show'
   get 'graph_show' => 'transactions#graph_show'
+  get 'receipt' => 'transactions#receipt'
   get 'get_amount' => 'billing#get_amount'
   get 'terminal' => 'main#terminal'
   get 'commission' => 'main#commission'

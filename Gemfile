@@ -30,6 +30,7 @@ gem 'jquery-ui-rails'
 gem 'crack'
 gem 'roo'
 gem 'russian'
+gem 'prawn'
 gem 'savon', '~> 2.3.0'
 
 group :development do
