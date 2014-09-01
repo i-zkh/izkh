@@ -238,6 +238,15 @@ class TransactionsController < ApplicationController
     redirect_to root_path
   end
 
+  def receipt
+    #     respond_to do |format|
+    #   format.html 
+    #   format.pdf { render :layout => false}
+    # end
+    Receipt.new('2014.27.08 в 15:07', '123', '100', '2', '102', 'VISA', 'Жигули', '123123', 'uin', '100', '1234534', '5356', 'Исавно Иокал Иослвиат')
+    render json: true
+  end
+
   protected
 
   def prepare_payment_data
