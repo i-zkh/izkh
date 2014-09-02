@@ -62,8 +62,8 @@ protected
         url += "phone/#{@user_account}"
         @type = :phone
       else
-        url = nil
-        @type = nil
+        url += "phone/#{@user_account}"
+        @type = :phone
       end
     end
     puts url
