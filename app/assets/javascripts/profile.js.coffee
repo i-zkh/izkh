@@ -840,7 +840,6 @@ $(document).ready ->
     $('.metrics-history[data-id=' + meterId + ']').slideDown()
     $(this).hide()
 
-
 # Commission calculation
 # TODO: Refactor to the bone
   $('#pay').on "change", "#vendor_id", ->
